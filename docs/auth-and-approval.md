@@ -41,7 +41,9 @@ Der Benutzername wird bei der Registrierung frei gewählt, muss eindeutig sein u
 - `active` – freigeschaltet und normal nutzbar
 - `suspended` – vorübergehend gesperrt
 - `rejected` – Registrierung abgelehnt
-- `disabled` – dauerhaft deaktiviert
+- `disabled` – dauerhaft gelöscht / endgültig deaktiviert
+
+Ein Account mit Status `disabled` gilt als endgültig gelöscht. Er kann nicht wieder auf `pending`, `active`, `suspended` oder `rejected` gesetzt werden und erhält keinen Zugriff mehr auf LG Nexus. Dieser Status ist für endgültige Fälle gedacht, beispielsweise wenn ein Charakter dauerhaft ausgereist oder gelöscht wurde.
 
 Eine abgelehnte Registrierung ist nicht endgültig verloren. Ein Mitarbeiter der Stadtverwaltung mit dem entsprechenden Recht darf einen Account von `rejected` wieder auf `pending` setzen. Danach läuft die normale Prüfung und Freischaltung erneut durch.
 
