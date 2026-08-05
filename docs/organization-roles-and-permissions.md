@@ -38,11 +38,13 @@ Jede Organisation besitzt eine **feste Leitungs-/Owner-Rolle**.
 
 Diese Rolle ist systemgeschützt und kann von der Organisation nicht gelöscht werden. Sie besitzt immer sämtliche für die jeweilige Organisation verfügbaren Organisationsrechte und dient als oberste Verwaltungsrolle.
 
-Die Rechte dieser Owner-Rolle können nicht so verändert werden, dass ihr notwendige Verwaltungsrechte entzogen werden. Dadurch muss immer mindestens eine Rolle existieren, mit der die Organisation vollständig verwaltet werden kann.
+Die Rechte dieser Owner-Rolle können nicht so verändert werden, dass ihr notwendige Verwaltungsrechte entzogen werden. Die Owner-Rolle selbst bleibt damit immer als verwaltbare Systemrolle erhalten.
 
 Die Owner-Rolle darf **mehreren Mitgliedern gleichzeitig** zugewiesen werden. Eine Organisation kann damit beispielsweise mehrere gleichberechtigte Geschäftsführer, Chiefs oder Leitungsmitglieder besitzen. Alle Mitglieder mit dieser Rolle erhalten dasselbe vollständige Owner-Rechtepaket.
 
 Die Regel „genau eine Rolle pro Mitglied“ bleibt dabei bestehen: Ein Owner besitzt innerhalb dieser Organisation die Owner-Rolle als seine eine zugewiesene Rolle. Mehrere Personen dürfen jedoch dieselbe Owner-Rolle verwenden.
+
+Es gibt **keine Schutzregel für den letzten verbleibenden Owner**. Auch der letzte Owner darf seine Owner-Rolle verlieren beziehungsweise aus der Organisation entfernt werden. Dadurch kann eine Organisation vorübergehend keine Person mit zugewiesener Owner-Rolle besitzen.
 
 Die Bezeichnung der Owner-Rolle kann im Frontend je nach Organisation passend dargestellt werden, zum Beispiel `Geschäftsführer`, `Chief`, `Leitung` oder `Direktor`. Technisch bleibt sie jedoch als geschützte Owner-Rolle erkennbar und darf nicht mit einer normalen frei konfigurierbaren Rolle verwechselt werden.
 
