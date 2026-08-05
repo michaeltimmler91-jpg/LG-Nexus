@@ -101,6 +101,8 @@ Standardmäßig ist die Telefonnummer für **Niemanden** sichtbar, bis der Bürg
 
 Bei **„Nur eigene Firma / Organisation“** gilt die Freigabe für **alle aktiven Organisationen**, denen der Bürger angehört. Ist ein Bürger beispielsweise gleichzeitig Mitglied eines Unternehmens und einer staatlichen Organisation, dürfen berechtigte Mitglieder beider Organisationen die Telefonnummer sehen. Es gibt dafür keine einzelne Hauptorganisation.
 
+Die gewählte Sichtbarkeitsstufe gilt **immer**, auch gegenüber Behörden und staatlichen Stellen. Es gibt keinen pauschalen Behörden-Override. PD, Medical, Fire & Rescue, Stadtverwaltung oder andere staatliche Organisationen dürfen die im Nexus-Profil hinterlegte Telefonnummer nur sehen, wenn die vom Bürger gewählte Sichtbarkeitsstufe dies ausdrücklich erlaubt.
+
 Die Telefonnummer selbst bleibt weiterhin optional und kann vom Bürger jederzeit entfernt werden, solange sein Account `active` ist.
 
 Ein Account mit Status `disabled` gilt aus Nutzersicht als endgültig gelöscht. Er kann nicht wieder auf `pending`, `active`, `suspended` oder `rejected` gesetzt werden und erhält keinen Zugriff mehr auf LG Nexus. Dieser Status ist für endgültige Fälle gedacht, beispielsweise wenn ein Charakter dauerhaft ausgereist oder gelöscht wurde.
