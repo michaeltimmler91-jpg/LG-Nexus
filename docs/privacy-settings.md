@@ -82,6 +82,14 @@ Die Einstellung gilt **einheitlich für alle Mitglieder der jeweiligen Organisat
 
 Neue Firmen und Organisationen starten standardmäßig mit **sichtbarer Mitgliederliste**. Eine berechtigte Person der jeweiligen Organisation kann die Mitgliederliste später für die gesamte Organisation ausblenden.
 
+Ist die Mitgliederliste sichtbar, werden bei jedem aktiven Mitglied mindestens folgende Informationen angezeigt:
+
+- Vorname und Nachname
+- Nexus-ID
+- Position / Rolle innerhalb der Organisation, zum Beispiel Geschäftsführer, Mitarbeiter oder Ausbilder
+
+Telefonnummer und Nexus-Mail werden dadurch nicht automatisch sichtbar. Diese Felder richten sich weiterhin nach den persönlichen Privatsphäre-Einstellungen des jeweiligen Bürgers.
+
 Der Bürger kann die von der Organisation festgelegte Sichtbarkeit seiner Mitgliedschaft nicht selbst überschreiben. Persönliche Kontaktinformationen wie Telefonnummer und Nexus-Mail bleiben davon getrennt und unterliegen weiterhin ausschließlich den persönlichen Privatsphäre-Einstellungen des Bürgers.
 
 Die Organisationssuche darf keine versteckte Mitgliedschaft offenlegen. Ist die Zugehörigkeit eines Bürgers zu einer Organisation für den Suchenden nicht sichtbar, darf dieser Bürger auch über die Suche nach dieser Organisation nicht als Mitglied gefunden oder indirekt bestätigt werden.
