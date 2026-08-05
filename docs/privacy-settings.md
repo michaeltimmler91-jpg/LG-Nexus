@@ -51,3 +51,17 @@ Beispiel:
 - Nexus-ID: `NX-000001`
 
 Die Nexus-ID bleibt unverändert und kann vom Bürger nicht ausgeblendet oder geändert werden.
+
+## Personensuche
+
+Die Personensuche darf nach folgenden Merkmalen suchen:
+
+- Vorname und Nachname
+- Nexus-ID
+- Nexus-Mail
+
+Name und Nexus-ID sind grundsätzlich als Suchmerkmale verfügbar, sofern der Account für die jeweilige Ansicht suchbar ist.
+
+Die Nexus-Mail darf nur dann als Suchmerkmal verwendet werden, wenn der suchende Nutzer die Nexus-Mail des gesuchten Bürgers gemäß dessen aktueller Sichtbarkeitseinstellung sehen darf. Ist die Nexus-Mail für den Suchenden nicht freigegeben, darf eine Suche nach dieser Mailadresse den Bürger weder als direkten Treffer noch als indirekten Hinweis zurückgeben.
+
+Damit schützt die Privatsphäre-Einstellung nicht nur die Anzeige der Nexus-Mail, sondern auch die Auffindbarkeit über diese Mailadresse.
