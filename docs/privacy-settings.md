@@ -80,6 +80,8 @@ Die Sichtbarkeit einer Organisationsmitgliedschaft wird **nicht vom einzelnen B�
 
 Die Einstellung gilt **einheitlich für alle Mitglieder der jeweiligen Organisation**. Eine Organisation kann also ihre Mitgliederliste insgesamt sichtbar oder verborgen schalten; es gibt keine individuelle Sichtbarkeit pro Mitarbeiter.
 
+Neue Firmen und Organisationen starten standardmäßig mit **sichtbarer Mitgliederliste**. Eine berechtigte Person der jeweiligen Organisation kann die Mitgliederliste später für die gesamte Organisation ausblenden.
+
 Der Bürger kann die von der Organisation festgelegte Sichtbarkeit seiner Mitgliedschaft nicht selbst überschreiben. Persönliche Kontaktinformationen wie Telefonnummer und Nexus-Mail bleiben davon getrennt und unterliegen weiterhin ausschließlich den persönlichen Privatsphäre-Einstellungen des Bürgers.
 
 Die Organisationssuche darf keine versteckte Mitgliedschaft offenlegen. Ist die Zugehörigkeit eines Bürgers zu einer Organisation für den Suchenden nicht sichtbar, darf dieser Bürger auch über die Suche nach dieser Organisation nicht als Mitglied gefunden oder indirekt bestätigt werden.
