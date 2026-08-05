@@ -61,6 +61,21 @@ Nicht freigeschaltet sind in diesem Zustand persönliche oder geschützte Nexus-
 
 Die Oberfläche zeigt zusätzlich gut sichtbar an, dass die Registrierung noch auf Freischaltung durch die Stadtverwaltung wartet.
 
+### Eigene Registrierungsdaten während `pending` ändern
+
+Solange der Account noch den Status `pending` hat, darf der Bürger seine eigenen Registrierungsdaten selbst korrigieren:
+
+- Vorname
+- Nachname
+- Geburtsdatum
+- Telefonnummer
+
+Die Telefonnummer bleibt weiterhin optional und kann auch wieder entfernt werden.
+
+Der Benutzername bleibt davon ausgeschlossen und kann nach der Registrierung niemals geändert werden. Auch Account-Status, Nexus-ID, Nexus-Mail, Freischaltungsdaten, Ablehnungsdaten und andere geschützte Account-Felder können vom Bürger nicht verändert werden.
+
+Sobald der Account nicht mehr `pending` ist, können diese Registrierungsdaten vom Bürger nicht mehr selbst geändert werden. Spätere Korrekturen laufen dann über die dafür berechtigte Stelle.
+
 Ein Account mit Status `disabled` gilt aus Nutzersicht als endgültig gelöscht. Er kann nicht wieder auf `pending`, `active`, `suspended` oder `rejected` gesetzt werden und erhält keinen Zugriff mehr auf LG Nexus. Dieser Status ist für endgültige Fälle gedacht, beispielsweise wenn ein Charakter dauerhaft ausgereist oder gelöscht wurde.
 
 Der technische Account-Datensatz bleibt intern erhalten, damit unter anderem der bereits verwendete Benutzername dauerhaft blockiert bleibt und nicht von einem anderen Charakter übernommen werden kann.
