@@ -38,9 +38,15 @@ Jede neu angelegte Organisation erhält automatisch eine normale Standardrolle *
 
 Damit besitzt jede Organisation von Beginn an mindestens eine normale Rolle, auf die Mitglieder gesetzt werden können. Die geschützte Owner-Rolle bleibt davon getrennt.
 
+Die Standardrolle darf durch einen Owner **umbenannt** werden. Ihre Funktion als normale Rolle bleibt dabei unverändert; sie ist technisch nicht dauerhaft an den sichtbaren Namen `Mitarbeiter` gebunden.
+
+Die Standardrolle darf gelöscht werden, wenn **kein Mitglied mehr dieser Rolle zugewiesen ist** und **mindestens eine andere normale Rolle** in der Organisation vorhanden ist. Eine Organisation muss damit immer mindestens eine normale Rolle behalten.
+
 ## Rollenverwaltung
 
 Das Recht **`Rollen verwalten`** erlaubt nicht automatisch das Erstellen neuer normaler Rollen und auch nicht das Umbenennen bestehender normaler Rollen. Diese besonders weitreichenden Strukturänderungen bleiben der geschützten Owner-Ebene vorbehalten.
+
+Auch die **Berechtigungen/Rechte einer normalen Rolle dürfen ausschließlich von einem Owner geändert werden**. Das normale Recht `Rollen verwalten` reicht dafür nicht aus.
 
 Eine normale Rolle darf **nicht gelöscht werden, solange noch mindestens ein Mitglied dieser Rolle zugewiesen ist**. Vor dem Löschen müssen sämtliche betroffenen Mitglieder auf andere vorhandene Rollen gesetzt werden.
 
@@ -79,9 +85,13 @@ Die Rangstufe allein erteilt keine Verwaltungsrechte. Eine Rolle benötigt weite
 
 ## Mitgliederverwaltung
 
-Das Recht **`Mitglieder verwalten`** erlaubt **nicht**, andere Mitglieder aus der Organisation zu entfernen. Ein normales Rollenrecht soll also keinen Rauswurf anderer Mitglieder ermöglichen.
+Neue Mitglieder dürfen durch einen **Owner** oder durch ein Mitglied aufgenommen werden, dessen aktuelle Rolle ausdrücklich die Berechtigung **`Mitglieder verwalten`** besitzt.
 
-Ein normales Mitglied darf die Organisation dagegen **selbstständig verlassen**. Die eigene Mitgliedschaft kann damit ohne Freigabe durch eine Führungsperson beendet werden.
+Das Recht **`Mitglieder verwalten`** erlaubt außerdem das Bearbeiten dafür vorgesehener interner Mitgliedsdaten, zum Beispiel interner Notizen oder eines organisationsinternen Status. Es erlaubt jedoch **nicht**, andere Mitglieder aus der Organisation zu entfernen.
+
+Ein **Owner darf normale Mitglieder aus der Organisation entfernen**. Andere Owner sind davon ausdrücklich ausgenommen; für sie gelten die besonderen Owner-Schutzregeln weiter unten.
+
+Ein normales Mitglied darf die Organisation **selbstständig verlassen**. Die eigene Mitgliedschaft kann damit ohne Freigabe durch eine Führungsperson beendet werden.
 
 Änderungen an der Rolle eines Mitglieds werden dauerhaft protokolliert. Das Rollenwechsel-Protokoll enthält mindestens:
 
