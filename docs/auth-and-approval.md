@@ -43,6 +43,8 @@ Der Benutzername wird bei der Registrierung frei gewählt, muss eindeutig sein u
 - `rejected` – Registrierung abgelehnt
 - `disabled` – dauerhaft deaktiviert
 
+Eine abgelehnte Registrierung ist nicht endgültig verloren. Ein Mitarbeiter der Stadtverwaltung mit dem entsprechenden Recht darf einen Account von `rejected` wieder auf `pending` setzen. Danach läuft die normale Prüfung und Freischaltung erneut durch.
+
 ## Prüfung und Freischaltung durch die Stadtverwaltung
 
 Die Stadtverwaltung ist Betreiber von LG Nexus und übernimmt die Identitätsprüfung im RP.
