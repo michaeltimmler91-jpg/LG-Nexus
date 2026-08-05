@@ -50,7 +50,7 @@ Ein Owner darf seine **eigene Owner-Rolle freiwillig abgeben**. Dafür ist keine
 
 Bei der freiwilligen Abgabe bleibt die Person **Mitglied der Organisation**. Die Owner-Rolle wird dabei unmittelbar durch eine vorhandene normale Organisationsrolle ersetzt. Die Person verlässt die Organisation durch die Abgabe also nicht automatisch.
 
-Für den Rollenwechsel muss im Rahmen der Abgabe eine gültige normale Rolle ausgewählt beziehungsweise zugewiesen werden. Nach Abschluss gelten ausschließlich die Rechte dieser neuen normalen Rolle; die bisherigen Owner-Rechte entfallen sofort.
+Der abgebende Owner darf **selbst auswählen**, auf welche aktuell vorhandene normale Rolle der Organisation er wechseln möchte. Die geschützte Owner-Rolle steht bei dieser Auswahl nicht zur Verfügung. Nach Bestätigung wird die Owner-Rolle unmittelbar durch die ausgewählte normale Rolle ersetzt; ab diesem Zeitpunkt gelten ausschließlich deren Berechtigungen und die bisherigen Owner-Rechte entfallen sofort.
 
 Es gibt **keine Schutzregel für den letzten verbleibenden Owner**. Auch der letzte Owner darf seine eigene Owner-Rolle freiwillig abgeben. Dadurch kann eine Organisation vorübergehend keine Person mit zugewiesener Owner-Rolle besitzen.
 
