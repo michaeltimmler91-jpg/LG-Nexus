@@ -38,6 +38,8 @@ Normale Organisationsrollen besitzen zusätzlich eine **Rangstufe beziehungsweis
 
 Die Reihenfolge der normalen Rollen darf in der Organisationsverwaltung **frei per Drag & Drop geändert** werden. Beim Verschieben einer Rolle wird ihre Hierarchieposition entsprechend neu berechnet. Die neue Reihenfolge gilt anschließend für alle hierarchieabhängigen Prüfungen, insbesondere für die Vergabe von Rollen.
 
+Die Reihenfolge darf nur von Mitgliedern geändert werden, deren aktuelle Rolle ausdrücklich die Berechtigung **`Rollen verwalten`** besitzt. Ohne dieses Recht ist die Drag-&-Drop-Sortierung nur sichtbar, aber nicht veränderbar. Auch bei vorhandener Berechtigung bleibt die geschützte Owner-Rolle von der Sortierung ausgenommen.
+
 Die geschützte Owner-Rolle kann dabei nicht verschoben werden und bleibt technisch immer oberhalb aller normalen Rollen.
 
 Die Hierarchie beeinflusst insbesondere die Rollenverwaltung. Ein Mitglied kann eine Rolle nur dann an ein anderes Mitglied vergeben, wenn es das entsprechende Berechtigungsrecht besitzt **und die Zielrolle unterhalb der eigenen Rolle liegt**.
