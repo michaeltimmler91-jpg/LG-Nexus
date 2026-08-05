@@ -54,16 +54,17 @@ Für die Notfall-Zuweisung eines neuen Owners muss **kein zusätzlicher Grund an
 
 Eine dafür berechtigte Person der **Stadtverwaltung darf einem bestehenden Owner die Owner-Rolle auch wieder entziehen**. Die Einschränkung auf 0 aktive Owner gilt nur für das Einsetzen eines neuen Owners, nicht für den Entzug einer bestehenden Owner-Rolle.
 
-Jeder Notfall-Eingriff der Stadtverwaltung zur Ernennung eines neuen Owners wird dauerhaft protokolliert. Das Protokoll enthält mindestens:
+**Sowohl das Einsetzen als auch das Entziehen einer Owner-Rolle durch die Stadtverwaltung wird dauerhaft protokolliert.** Das Protokoll enthält mindestens:
 
 - die betroffene Organisation
-- die Person, die zum Owner ernannt wurde
+- die Art des Eingriffs (`Owner eingesetzt` oder `Owner entzogen`)
+- die betroffene Person
 - die Person der Stadtverwaltung, die den Eingriff durchgeführt hat
 - Datum und Uhrzeit des Eingriffs
 
-Die Protokollierung dient der Nachvollziehbarkeit und darf von normalen Organisationsmitgliedern nicht manipuliert oder gelöscht werden.
+Für diese Eingriffe muss kein zusätzlicher Freitext-Grund angegeben werden. Die Protokollierung dient der Nachvollziehbarkeit und darf von normalen Organisationsmitgliedern nicht manipuliert oder gelöscht werden.
 
-Dieser Notfallzugriff dient ausschließlich der Wiederherstellung einer handlungsfähigen Organisationsleitung. Die Stadtverwaltung wird dadurch nicht selbst Mitglied oder Owner der betroffenen Organisation.
+Dieser Notfallzugriff dient ausschließlich der Wiederherstellung beziehungsweise administrativen Korrektur der Organisationsleitung. Die Stadtverwaltung wird dadurch nicht selbst Mitglied oder Owner der betroffenen Organisation.
 
 Die Bezeichnung der Owner-Rolle kann im Frontend je nach Organisation passend dargestellt werden, zum Beispiel `Geschäftsführer`, `Chief`, `Leitung` oder `Direktor`. Technisch bleibt sie jedoch als geschützte Owner-Rolle erkennbar und darf nicht mit einer normalen frei konfigurierbaren Rolle verwechselt werden.
 
