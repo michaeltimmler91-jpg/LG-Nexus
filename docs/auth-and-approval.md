@@ -88,7 +88,20 @@ Ob und für wen die hinterlegte Telefonnummer sichtbar ist, entscheidet der Bür
 
 Die Telefonnummer darf deshalb nicht automatisch für alle Nutzer sichtbar gemacht werden. LG Nexus prüft beim Anzeigen eines Profils oder einer Kontaktdarstellung immer die vom Bürger gewählte Sichtbarkeitsstufe.
 
-Die konkreten auswählbaren Sichtbarkeitsstufen werden separat festgelegt. Unabhängig davon bleibt die Telefonnummer selbst weiterhin optional und kann vom Bürger jederzeit entfernt werden, solange sein Account `active` ist.
+Auswählbare Sichtbarkeitsstufen:
+
+- Niemand
+- Nur freigeschaltete Nexus-Bürger
+- Nur Behörden / staatliche Stellen
+- Bürger + Behörden
+- Nur eigene Firma / Organisation
+- Alle
+
+Standardmäßig ist die Telefonnummer für **Niemanden** sichtbar, bis der Bürger selbst eine andere Einstellung auswählt.
+
+Bei **„Nur eigene Firma / Organisation“** gilt die Freigabe für **alle aktiven Organisationen**, denen der Bürger angehört. Ist ein Bürger beispielsweise gleichzeitig Mitglied eines Unternehmens und einer staatlichen Organisation, dürfen berechtigte Mitglieder beider Organisationen die Telefonnummer sehen. Es gibt dafür keine einzelne Hauptorganisation.
+
+Die Telefonnummer selbst bleibt weiterhin optional und kann vom Bürger jederzeit entfernt werden, solange sein Account `active` ist.
 
 Ein Account mit Status `disabled` gilt aus Nutzersicht als endgültig gelöscht. Er kann nicht wieder auf `pending`, `active`, `suspended` oder `rejected` gesetzt werden und erhält keinen Zugriff mehr auf LG Nexus. Dieser Status ist für endgültige Fälle gedacht, beispielsweise wenn ein Charakter dauerhaft ausgereist oder gelöscht wurde.
 
