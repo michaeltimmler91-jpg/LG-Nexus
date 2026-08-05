@@ -46,6 +46,21 @@ Die technische Eindeutigkeit wird unabhängig von Groß-/Kleinschreibung geprüf
 - `rejected` – Registrierung abgelehnt
 - `disabled` – dauerhaft gelöscht / endgültig deaktiviert
 
+### Zugriff während `pending`
+
+Ein Bürger mit Status `pending` darf sich bereits anmelden und die **öffentlichen Bereiche von LG Nexus** verwenden, während die Registrierung noch von der Stadtverwaltung geprüft wird.
+
+Dazu gehören insbesondere öffentliche Inhalte wie:
+
+- Unternehmen / Business-Verzeichnis
+- Events
+- öffentliche City-Informationen und Ankündigungen
+- weitere ausdrücklich als öffentlich gekennzeichnete Bereiche
+
+Nicht freigeschaltet sind in diesem Zustand persönliche oder geschützte Nexus-Funktionen, interne Organisationsbereiche sowie Fraktionsmodule wie Medical, Police oder Fire & Rescue.
+
+Die Oberfläche zeigt zusätzlich gut sichtbar an, dass die Registrierung noch auf Freischaltung durch die Stadtverwaltung wartet.
+
 Ein Account mit Status `disabled` gilt aus Nutzersicht als endgültig gelöscht. Er kann nicht wieder auf `pending`, `active`, `suspended` oder `rejected` gesetzt werden und erhält keinen Zugriff mehr auf LG Nexus. Dieser Status ist für endgültige Fälle gedacht, beispielsweise wenn ein Charakter dauerhaft ausgereist oder gelöscht wurde.
 
 Der technische Account-Datensatz bleibt intern erhalten, damit unter anderem der bereits verwendete Benutzername dauerhaft blockiert bleibt und nicht von einem anderen Charakter übernommen werden kann.
