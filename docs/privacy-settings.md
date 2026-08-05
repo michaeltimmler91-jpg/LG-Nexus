@@ -60,6 +60,7 @@ Die Personensuche darf nach folgenden Merkmalen suchen:
 - Nexus-ID
 - Nexus-Mail
 - Telefonnummer
+- Firma / Organisation
 
 Name und Nexus-ID sind grundsätzlich als Suchmerkmale verfügbar, sofern der Account für die jeweilige Ansicht suchbar ist.
 
@@ -68,3 +69,13 @@ Die Nexus-Mail darf nur dann als Suchmerkmal verwendet werden, wenn der suchende
 Dasselbe gilt für die Telefonnummer. Der Bürger darf über seine Telefonnummer nur von Nutzern gefunden werden, die diese Telefonnummer gemäß der aktuellen Sichtbarkeitseinstellung auch sehen dürfen. Ist die Telefonnummer für den Suchenden verborgen, liefert auch eine exakte Suche nach der Nummer keinen Treffer und keinen Hinweis darauf, welchem Bürger sie gehört.
 
 Damit schützen die Privatsphäre-Einstellungen nicht nur die Anzeige von Telefonnummer und Nexus-Mail, sondern auch die Auffindbarkeit über diese Kontaktdaten.
+
+### Suche über Firma / Organisation
+
+Eine Firma oder Organisation kann ebenfalls als Suchmerkmal beziehungsweise Filter der Personensuche verwendet werden.
+
+Wird beispielsweise nach einem Unternehmen, einer Behörde oder einer anderen Organisation gesucht, darf LG Nexus die Personen anzeigen, die dort aktuell Mitglied sind und deren Mitgliedschaft für den jeweiligen Suchenden in dieser Ansicht sichtbar ist.
+
+Die Organisationssuche darf keine versteckte Mitgliedschaft offenlegen. Ist die Zugehörigkeit eines Bürgers zu einer Organisation für den Suchenden nicht sichtbar, darf dieser Bürger auch über die Suche nach dieser Organisation nicht als Mitglied gefunden oder indirekt bestätigt werden.
+
+Bei mehreren aktiven Organisationen kann ein Bürger entsprechend über jede Organisation gefunden werden, deren Zugehörigkeit für den Suchenden sichtbar ist.
