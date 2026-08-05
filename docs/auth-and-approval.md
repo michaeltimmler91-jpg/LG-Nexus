@@ -82,6 +82,14 @@ Vorname, Nachname und Geburtsdatum können nach der Freischaltung nicht mehr sel
 
 Bei `suspended`, `rejected` oder `disabled` können eigene Profildaten nicht geändert werden.
 
+### Sichtbarkeit der Telefonnummer
+
+Ob und für wen die hinterlegte Telefonnummer sichtbar ist, entscheidet der Bürger selbst über eine eigene Privatsphäre-Einstellung.
+
+Die Telefonnummer darf deshalb nicht automatisch für alle Nutzer sichtbar gemacht werden. LG Nexus prüft beim Anzeigen eines Profils oder einer Kontaktdarstellung immer die vom Bürger gewählte Sichtbarkeitsstufe.
+
+Die konkreten auswählbaren Sichtbarkeitsstufen werden separat festgelegt. Unabhängig davon bleibt die Telefonnummer selbst weiterhin optional und kann vom Bürger jederzeit entfernt werden, solange sein Account `active` ist.
+
 Ein Account mit Status `disabled` gilt aus Nutzersicht als endgültig gelöscht. Er kann nicht wieder auf `pending`, `active`, `suspended` oder `rejected` gesetzt werden und erhält keinen Zugriff mehr auf LG Nexus. Dieser Status ist für endgültige Fälle gedacht, beispielsweise wenn ein Charakter dauerhaft ausgereist oder gelöscht wurde.
 
 Der technische Account-Datensatz bleibt intern erhalten, damit unter anderem der bereits verwendete Benutzername dauerhaft blockiert bleibt und nicht von einem anderen Charakter übernommen werden kann.
