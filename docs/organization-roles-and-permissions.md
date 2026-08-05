@@ -50,7 +50,11 @@ Hat eine Organisation keinen zugewiesenen Owner mehr, darf eine dafür berechtig
 
 Dieser Notfallzugriff ist **ausschließlich dann erlaubt, wenn aktuell kein einziges aktives Mitglied der Organisation die Owner-Rolle besitzt**. Sobald mindestens ein aktiver Owner vorhanden ist, darf die Stadtverwaltung keine weitere Owner-Zuweisung vornehmen und keine bestehende Owner-Struktur überschreiben.
 
-Jeder solche Notfall-Eingriff der Stadtverwaltung wird dauerhaft protokolliert. Das Protokoll enthält mindestens:
+Für die Notfall-Zuweisung eines neuen Owners muss **kein zusätzlicher Grund angegeben werden**. Die Berechtigung der ausführenden Person und die Voraussetzung von 0 aktiven Ownern reichen für die Durchführung aus.
+
+Eine dafür berechtigte Person der **Stadtverwaltung darf einem bestehenden Owner die Owner-Rolle auch wieder entziehen**. Die Einschränkung auf 0 aktive Owner gilt nur für das Einsetzen eines neuen Owners, nicht für den Entzug einer bestehenden Owner-Rolle.
+
+Jeder Notfall-Eingriff der Stadtverwaltung zur Ernennung eines neuen Owners wird dauerhaft protokolliert. Das Protokoll enthält mindestens:
 
 - die betroffene Organisation
 - die Person, die zum Owner ernannt wurde
