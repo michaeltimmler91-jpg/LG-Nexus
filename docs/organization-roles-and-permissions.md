@@ -44,7 +44,9 @@ Die Owner-Rolle darf **mehreren Mitgliedern gleichzeitig** zugewiesen werden. Ei
 
 Die Regel „genau eine Rolle pro Mitglied“ bleibt dabei bestehen: Ein Owner besitzt innerhalb dieser Organisation die Owner-Rolle als seine eine zugewiesene Rolle. Mehrere Personen dürfen jedoch dieselbe Owner-Rolle verwenden.
 
-Es gibt **keine Schutzregel für den letzten verbleibenden Owner**. Auch der letzte Owner darf seine Owner-Rolle verlieren beziehungsweise aus der Organisation entfernt werden. Dadurch kann eine Organisation vorübergehend keine Person mit zugewiesener Owner-Rolle besitzen.
+Ein Owner darf **keinem anderen Owner** die Owner-Rolle entziehen, ihn auf eine normale Rolle zurückstufen oder ihn über die normale Organisationsverwaltung aus der Owner-Stellung entfernen. Owner sind untereinander in Bezug auf die Owner-Rolle gleichgestellt und können sich gegenseitig nicht entmachten.
+
+Es gibt **keine Schutzregel für den letzten verbleibenden Owner**. Eine Organisation kann daher grundsätzlich vorübergehend keine Person mit zugewiesener Owner-Rolle besitzen; die genaue Regel für das freiwillige Abgeben der eigenen Owner-Rolle wird separat festgelegt.
 
 Hat eine Organisation keinen zugewiesenen Owner mehr, darf eine dafür berechtigte Person der **Stadtverwaltung** im Notfall einem Mitglied dieser Organisation die geschützte Owner-Rolle zuweisen. Dadurch kann die Organisation wieder administriert werden, ohne dass die Stadtverwaltung dauerhaft Zugriff auf interne Organisationsdaten erhält.
 
