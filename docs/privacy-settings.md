@@ -38,3 +38,16 @@ Die interne Nexus-Mail wird nach erfolgreicher Freischaltung automatisch erzeugt
 Für die Nexus-Mail gelten dieselben Sichtbarkeitsstufen und dieselbe Organisationslogik wie für die Telefonnummer. Auch hier gibt es keinen automatischen Behördenzugriff.
 
 Die Sichtbarkeit der Nexus-Mail hat keinen Einfluss auf die Zustellung interner Nexus-Mails. Sie regelt ausschließlich, ob die Adresse anderen Nutzern in Profilen, Kontaktsuchen oder vergleichbaren Ansichten angezeigt werden darf.
+
+## Nexus-ID
+
+Die Nexus-ID ist **nicht privat** und besitzt keine eigene Sichtbarkeitseinstellung. Sobald ein Account freigeschaltet wurde und eine Nexus-ID erhalten hat, darf diese innerhalb von LG Nexus immer angezeigt und für die Suche verwendet werden.
+
+Die Nexus-ID dient als dauerhaft eindeutige Kennung eines Charakters. Dadurch können Nutzer auch bei identischen oder ähnlichen Namen zuverlässig unterschieden und gezielt gesucht werden.
+
+Beispiel:
+
+- Name: `Lennox Davis`
+- Nexus-ID: `NX-000001`
+
+Die Nexus-ID bleibt unverändert und kann vom Bürger nicht ausgeblendet oder geändert werden.
