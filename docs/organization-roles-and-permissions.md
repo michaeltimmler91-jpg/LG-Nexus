@@ -32,6 +32,18 @@ Mehrere parallele Rollen innerhalb derselben Organisation sind nicht vorgesehen.
 
 Ein Bürger kann weiterhin Mitglied mehrerer verschiedener Organisationen sein. In jeder dieser Organisationen besitzt er jeweils eine eigene, genau einmal zugewiesene Rolle.
 
+## Feste Leitungs-/Owner-Rolle
+
+Jede Organisation besitzt eine **feste Leitungs-/Owner-Rolle**.
+
+Diese Rolle ist systemgeschützt und kann von der Organisation nicht gelöscht werden. Sie besitzt immer sämtliche für die jeweilige Organisation verfügbaren Organisationsrechte und dient als oberste Verwaltungsrolle.
+
+Die Rechte dieser Owner-Rolle können nicht so verändert werden, dass ihr notwendige Verwaltungsrechte entzogen werden. Dadurch muss immer mindestens eine Rolle existieren, mit der die Organisation vollständig verwaltet werden kann.
+
+Die Bezeichnung der Owner-Rolle kann im Frontend je nach Organisation passend dargestellt werden, zum Beispiel `Geschäftsführer`, `Chief`, `Leitung` oder `Direktor`. Technisch bleibt sie jedoch als geschützte Owner-Rolle erkennbar und darf nicht mit einer normalen frei konfigurierbaren Rolle verwechselt werden.
+
+Normale Rollen dürfen frei erstellt, umbenannt, bearbeitet und – sofern sie nicht mehr benötigt werden – gelöscht werden. Die systemgeschützte Owner-Rolle ist davon ausgenommen.
+
 ## Sicherheitsregel
 
 Berechtigungen müssen serverseitig beziehungsweise über Supabase/RLS geprüft werden. Eine reine Ausblendung von Schaltflächen im Frontend reicht nicht aus.
