@@ -88,6 +88,8 @@ Ist die Mitgliederliste sichtbar, werden bei jedem aktiven Mitglied mindestens f
 - Nexus-ID
 - Position / Rolle innerhalb der Organisation, zum Beispiel Geschäftsführer, Mitarbeiter oder Ausbilder
 
+Die jeweilige Organisation kann ihre Positions- und Rollenbezeichnungen selbst frei festlegen. Es gibt keine stadtweit vorgegebene feste Liste. Damit können Organisationen passend zu ihrem RP eigene Bezeichnungen wie beispielsweise `Chief of Medicine`, `Azubi`, `Werkstattleiter` oder andere Titel verwenden.
+
 Telefonnummer und Nexus-Mail werden dadurch nicht automatisch sichtbar. Diese Felder richten sich weiterhin nach den persönlichen Privatsphäre-Einstellungen des jeweiligen Bürgers.
 
 Der Bürger kann die von der Organisation festgelegte Sichtbarkeit seiner Mitgliedschaft nicht selbst überschreiben. Persönliche Kontaktinformationen wie Telefonnummer und Nexus-Mail bleiben davon getrennt und unterliegen weiterhin ausschließlich den persönlichen Privatsphäre-Einstellungen des Bürgers.
