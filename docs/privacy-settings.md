@@ -76,7 +76,9 @@ Eine Firma oder Organisation kann ebenfalls als Suchmerkmal beziehungsweise Filt
 
 Wird beispielsweise nach einem Unternehmen, einer Behörde oder einer anderen Organisation gesucht, darf LG Nexus die Personen anzeigen, die dort aktuell Mitglied sind und deren Mitgliedschaft für den jeweiligen Suchenden in dieser Ansicht sichtbar ist.
 
-Die Sichtbarkeit einer Organisationsmitgliedschaft wird **nicht vom einzelnen Bürger**, sondern von der jeweiligen Firma oder Organisation festgelegt. Nur dafür berechtigte Organisationsmitglieder dürfen bestimmen, ob eine Mitgliedschaft nach außen sichtbar ist.
+Die Sichtbarkeit einer Organisationsmitgliedschaft wird **nicht vom einzelnen Bürger**, sondern von der jeweiligen Firma oder Organisation festgelegt. Nur dafür berechtigte Organisationsmitglieder dürfen bestimmen, ob die Mitgliedschaften nach außen sichtbar sind.
+
+Die Einstellung gilt **einheitlich für alle Mitglieder der jeweiligen Organisation**. Eine Organisation kann also ihre Mitgliederliste insgesamt sichtbar oder verborgen schalten; es gibt keine individuelle Sichtbarkeit pro Mitarbeiter.
 
 Der Bürger kann die von der Organisation festgelegte Sichtbarkeit seiner Mitgliedschaft nicht selbst überschreiben. Persönliche Kontaktinformationen wie Telefonnummer und Nexus-Mail bleiben davon getrennt und unterliegen weiterhin ausschließlich den persönlichen Privatsphäre-Einstellungen des Bürgers.
 
