@@ -45,6 +45,17 @@ Der Benutzername wird bei der Registrierung frei gewählt, muss eindeutig sein u
 
 Eine abgelehnte Registrierung ist nicht endgültig verloren. Ein Mitarbeiter der Stadtverwaltung mit dem entsprechenden Recht darf einen Account von `rejected` wieder auf `pending` setzen. Danach läuft die normale Prüfung und Freischaltung erneut durch.
 
+### Vorübergehende Sperre
+
+Ein Account mit Status `suspended` kann sich weiterhin anmelden, erhält jedoch keinen Zugriff auf das eigentliche Nexus-System. Stattdessen wird nur folgende Meldung angezeigt:
+
+> Dein Nexus-Zugang wurde vorübergehend gesperrt.  
+> Bitte wende dich an die Stadtverwaltung.
+
+Ein Sperrgrund wird dem Bürger nicht angezeigt.
+
+Ein berechtigter Mitarbeiter der Stadtverwaltung darf einen `suspended` Account jederzeit wieder direkt auf `active` setzen. Eine erneute Freischaltungsprüfung ist dafür nicht erforderlich.
+
 ### Ablehnung einer Registrierung
 
 Eine Registrierung darf nur mit einem angegebenen Ablehnungsgrund auf `rejected` gesetzt werden.
