@@ -27,6 +27,14 @@ Es wird **keine echte E-Mail-Adresse** verlangt.
 
 Nach der Registrierung erhält der Account den Status `pending` und wartet auf die Freischaltung durch die Stadtverwaltung.
 
+## Benutzername
+
+Der Benutzername wird bei der Registrierung frei gewählt, muss eindeutig sein und ist anschließend dauerhaft fest.
+
+- Die Stadtverwaltung kann ihn nicht ändern.
+- Der Nutzer kann ihn später nicht selbst ändern.
+- Der Benutzername bleibt unabhängig vom Charakternamen.
+
 ## Account-Status
 
 - `pending` – wartet auf Freischaltung
@@ -44,8 +52,11 @@ Solange ein Account den Status `pending` hat, darf ein Mitarbeiter der Stadtverw
 - Vorname
 - Nachname
 - Geburtsdatum
+- Telefonnummer, falls der Bürger dies wünscht
 
-Damit können Tippfehler oder Abweichungen bei der IC-Identitätsprüfung direkt berichtigt werden. Der frei gewählte Benutzername bleibt davon getrennt und wird nicht automatisch an den Charakternamen angepasst.
+Die Telefonnummer bleibt immer optional. Eine Telefonnummer ist keine Voraussetzung für die Freischaltung und darf von der Stadtverwaltung nur auf Wunsch beziehungsweise mit Zustimmung des Bürgers eingetragen oder korrigiert werden.
+
+Damit können Tippfehler oder Abweichungen bei der IC-Identitätsprüfung direkt berichtigt werden. Der frei gewählte Benutzername bleibt davon getrennt und darf nicht geändert werden.
 
 Erst nach Abschluss dieser Prüfung wird der Account freigeschaltet. Für die automatische Nexus-Mail werden die **zuletzt von der Stadtverwaltung bestätigten Namen** verwendet.
 
@@ -81,12 +92,16 @@ Der Charaktername und die Nexus-Mail sind vom Login getrennt.
 
 Es gibt keine Wiederherstellung per E-Mail.
 
-Wer sein Passwort vergessen hat, muss sich IC an die Stadtverwaltung wenden. Die spätere Verwaltungsfunktion soll ein neues Passwort setzen können; optional kann anschließend ein Passwortwechsel beim nächsten Login erzwungen werden.
+Wer sein Passwort vergessen hat, muss sich IC an die Stadtverwaltung wenden. Ein Mitarbeiter mit dem entsprechenden Recht kann ein temporäres neues Passwort setzen.
+
+Nach einem durch die Stadtverwaltung ausgelösten Passwort-Reset wird `must_change_password` gesetzt. Beim nächsten erfolgreichen Login muss der Bürger zwingend ein eigenes neues Passwort vergeben, bevor er LG Nexus normal weiterverwenden kann. Nach erfolgreichem Passwortwechsel wird die Markierung wieder entfernt.
+
+Die Stadtverwaltung kann Passwörter nicht einsehen.
 
 ## Sicherheit
 
 Nexus-ID und Nexus-Mail werden erst bei erfolgreicher Aktivierung erzeugt. Ein normaler Nutzer darf seinen eigenen Account-Status nicht ändern und kann sich damit nicht selbst freischalten.
 
-Die Korrektur von Vorname, Nachname und Geburtsdatum vor der Freischaltung wird später an ein separates Stadtverwaltungs-Recht gebunden. Dadurch bekommt nicht automatisch jeder Mitarbeiter der Stadtverwaltung diese Berechtigung.
+Die Korrektur von Vorname, Nachname, Geburtsdatum und der optionalen Telefonnummer vor der Freischaltung wird an ein separates Stadtverwaltungs-Recht gebunden. Dadurch bekommt nicht automatisch jeder Mitarbeiter der Stadtverwaltung diese Berechtigung.
 
 Die Stadtverwaltung erhält durch ihre Betreiberrolle nicht automatisch Zugriff auf sensible Inhalte anderer Module wie Medical- oder Police-Akten. Solche Rechte werden separat geregelt.
