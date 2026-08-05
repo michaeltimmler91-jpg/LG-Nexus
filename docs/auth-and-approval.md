@@ -35,9 +35,19 @@ Nach der Registrierung erhält der Account den Status `pending` und wartet auf d
 - `rejected` – Registrierung abgelehnt
 - `disabled` – dauerhaft deaktiviert
 
-## Freischaltung durch die Stadtverwaltung
+## Prüfung und Freischaltung durch die Stadtverwaltung
 
 Die Stadtverwaltung ist Betreiber von LG Nexus und übernimmt die Identitätsprüfung im RP.
+
+Solange ein Account den Status `pending` hat, darf ein Mitarbeiter der Stadtverwaltung mit dem entsprechenden Nexus-Recht vor der Freischaltung folgende Charakterdaten korrigieren:
+
+- Vorname
+- Nachname
+- Geburtsdatum
+
+Damit können Tippfehler oder Abweichungen bei der IC-Identitätsprüfung direkt berichtigt werden. Der frei gewählte Benutzername bleibt davon getrennt und wird nicht automatisch an den Charakternamen angepasst.
+
+Erst nach Abschluss dieser Prüfung wird der Account freigeschaltet. Für die automatische Nexus-Mail werden die **zuletzt von der Stadtverwaltung bestätigten Namen** verwendet.
 
 Bei der Freischaltung werden automatisch vergeben:
 
@@ -76,5 +86,7 @@ Wer sein Passwort vergessen hat, muss sich IC an die Stadtverwaltung wenden. Die
 ## Sicherheit
 
 Nexus-ID und Nexus-Mail werden erst bei erfolgreicher Aktivierung erzeugt. Ein normaler Nutzer darf seinen eigenen Account-Status nicht ändern und kann sich damit nicht selbst freischalten.
+
+Die Korrektur von Vorname, Nachname und Geburtsdatum vor der Freischaltung wird später an ein separates Stadtverwaltungs-Recht gebunden. Dadurch bekommt nicht automatisch jeder Mitarbeiter der Stadtverwaltung diese Berechtigung.
 
 Die Stadtverwaltung erhält durch ihre Betreiberrolle nicht automatisch Zugriff auf sensible Inhalte anderer Module wie Medical- oder Police-Akten. Solche Rechte werden separat geregelt.
