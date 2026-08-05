@@ -2,7 +2,7 @@
 
 ## Grundprinzip
 
-Jede Firma oder Organisation kann ihre Rollenbezeichnungen selbst frei anlegen. Beispiele sind `Geschäftsführer`, `Werkstattleiter`, `Chief of Medicine`, `Ausbilder`, `Azubi` oder beliebige andere IC-Rollen.
+Jede Firma oder Organisation kann ihre Rollenbezeichnungen grundsätzlich selbst festlegen. Beispiele sind `Geschäftsführer`, `Werkstattleiter`, `Chief of Medicine`, `Ausbilder`, `Azubi` oder beliebige andere IC-Rollen.
 
 Eine Rolle ist nicht nur ein sichtbarer Titel. An jede Rolle können konkrete Rechte und Berechtigungen innerhalb der jeweiligen Organisation gebunden werden.
 
@@ -32,6 +32,26 @@ Mehrere parallele Rollen innerhalb derselben Organisation sind nicht vorgesehen.
 
 Ein Bürger kann weiterhin Mitglied mehrerer verschiedener Organisationen sein. In jeder dieser Organisationen besitzt er jeweils eine eigene, genau einmal zugewiesene Rolle.
 
+## Standardrolle
+
+Jede neu angelegte Organisation erhält automatisch eine normale Standardrolle **`Mitarbeiter`**.
+
+Damit besitzt jede Organisation von Beginn an mindestens eine normale Rolle, auf die Mitglieder gesetzt werden können. Die geschützte Owner-Rolle bleibt davon getrennt.
+
+## Rollenverwaltung
+
+Das Recht **`Rollen verwalten`** erlaubt nicht automatisch das Erstellen neuer normaler Rollen und auch nicht das Umbenennen bestehender normaler Rollen. Diese besonders weitreichenden Strukturänderungen bleiben der geschützten Owner-Ebene vorbehalten.
+
+Eine normale Rolle darf **nicht gelöscht werden, solange noch mindestens ein Mitglied dieser Rolle zugewiesen ist**. Vor dem Löschen müssen sämtliche betroffenen Mitglieder auf andere vorhandene Rollen gesetzt werden.
+
+Das Erstellen, Umbenennen und Löschen normaler Rollen wird dauerhaft protokolliert. Das Rollen-Audit enthält mindestens:
+
+- die betroffene Organisation
+- die Aktion (`Rolle erstellt`, `Rolle umbenannt` oder `Rolle gelöscht`)
+- die betroffene Rolle beziehungsweise alten und neuen Rollennamen
+- die ausführende Person
+- Datum und Uhrzeit
+
 ## Rangstufen und Hierarchie
 
 Normale Organisationsrollen besitzen zusätzlich eine **Rangstufe beziehungsweise Hierarchieposition**. Die Organisation legt damit selbst fest, welche Rollen über oder unter anderen Rollen stehen.
@@ -57,7 +77,20 @@ Ein `Werkstattleiter` mit dem Recht `Rollen zuweisen` dürfte in diesem Beispiel
 
 Die Rangstufe allein erteilt keine Verwaltungsrechte. Eine Rolle benötigt weiterhin ausdrücklich die passende Berechtigung, beispielsweise `Rollen zuweisen` oder `Mitglieder verwalten`. Hierarchie und Berechtigungen werden gemeinsam geprüft.
 
-Die geschützte Owner-Rolle steht technisch immer oberhalb aller normalen Rollen und ist nicht Teil der frei verschiebbaren normalen Rangfolge.
+## Mitgliederverwaltung
+
+Das Recht **`Mitglieder verwalten`** erlaubt **nicht**, andere Mitglieder aus der Organisation zu entfernen. Ein normales Rollenrecht soll also keinen Rauswurf anderer Mitglieder ermöglichen.
+
+Ein normales Mitglied darf die Organisation dagegen **selbstständig verlassen**. Die eigene Mitgliedschaft kann damit ohne Freigabe durch eine Führungsperson beendet werden.
+
+Änderungen an der Rolle eines Mitglieds werden dauerhaft protokolliert. Das Rollenwechsel-Protokoll enthält mindestens:
+
+- die betroffene Organisation
+- die betroffene Person
+- die vorherige Rolle
+- die neue Rolle
+- die ausführende Person
+- Datum und Uhrzeit
 
 ## Feste Leitungs-/Owner-Rolle
 
@@ -103,13 +136,13 @@ Dieser Notfallzugriff dient ausschließlich der Wiederherstellung beziehungsweis
 
 Die Bezeichnung der Owner-Rolle kann im Frontend je nach Organisation passend dargestellt werden, zum Beispiel `Geschäftsführer`, `Chief`, `Leitung` oder `Direktor`. Technisch bleibt sie jedoch als geschützte Owner-Rolle erkennbar und darf nicht mit einer normalen frei konfigurierbaren Rolle verwechselt werden.
 
-Normale Rollen dürfen frei erstellt, umbenannt, bearbeitet und – sofern sie nicht mehr benötigt werden – gelöscht werden. Die systemgeschützte Owner-Rolle ist davon ausgenommen.
-
 ## Sicherheitsregel
 
 Berechtigungen müssen serverseitig beziehungsweise über Supabase/RLS geprüft werden. Eine reine Ausblendung von Schaltflächen im Frontend reicht nicht aus.
 
 Eine Organisation erhält durch ihre eigenen Rollen niemals automatisch Zugriff auf Daten anderer Organisationen oder geschützte Bereiche anderer Module.
+
+Protokolle zu Rollen- und Owner-Eingriffen dürfen von normalen Organisationsmitgliedern nicht manipuliert oder gelöscht werden.
 
 ## Bestehende Mitgliederdaten
 
