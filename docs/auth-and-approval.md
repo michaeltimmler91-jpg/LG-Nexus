@@ -56,7 +56,9 @@ Beispiel:
 > Deine Registrierung wurde von der Stadtverwaltung abgelehnt.  
 > Grund: Geburtsdatum stimmt nicht mit den vorgelegten Unterlagen überein.
 
-Der Ablehnungsgrund wird zusammen mit Zeitpunkt und bearbeitendem Mitarbeiter gespeichert. Wird die Registrierung später wieder auf `pending` gesetzt, kann die Stadtverwaltung den Fall erneut prüfen.
+Der Ablehnungsgrund wird zusammen mit Zeitpunkt und bearbeitendem Mitarbeiter gespeichert.
+
+Es gibt **keine Schaltfläche für eine erneute Prüfung** im Nexus. Möchte der Bürger eine erneute Prüfung, muss er persönlich IC bei der Stadtverwaltung vorsprechen. Erst dort kann ein berechtigter Mitarbeiter den Account wieder von `rejected` auf `pending` setzen.
 
 ## Prüfung und Freischaltung durch die Stadtverwaltung
 
