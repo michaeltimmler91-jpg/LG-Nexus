@@ -59,9 +59,12 @@ Die Personensuche darf nach folgenden Merkmalen suchen:
 - Vorname und Nachname
 - Nexus-ID
 - Nexus-Mail
+- Telefonnummer
 
 Name und Nexus-ID sind grundsätzlich als Suchmerkmale verfügbar, sofern der Account für die jeweilige Ansicht suchbar ist.
 
 Die Nexus-Mail darf nur dann als Suchmerkmal verwendet werden, wenn der suchende Nutzer die Nexus-Mail des gesuchten Bürgers gemäß dessen aktueller Sichtbarkeitseinstellung sehen darf. Ist die Nexus-Mail für den Suchenden nicht freigegeben, darf eine Suche nach dieser Mailadresse den Bürger weder als direkten Treffer noch als indirekten Hinweis zurückgeben.
 
-Damit schützt die Privatsphäre-Einstellung nicht nur die Anzeige der Nexus-Mail, sondern auch die Auffindbarkeit über diese Mailadresse.
+Dasselbe gilt für die Telefonnummer. Der Bürger darf über seine Telefonnummer nur von Nutzern gefunden werden, die diese Telefonnummer gemäß der aktuellen Sichtbarkeitseinstellung auch sehen dürfen. Ist die Telefonnummer für den Suchenden verborgen, liefert auch eine exakte Suche nach der Nummer keinen Treffer und keinen Hinweis darauf, welchem Bürger sie gehört.
+
+Damit schützen die Privatsphäre-Einstellungen nicht nur die Anzeige von Telefonnummer und Nexus-Mail, sondern auch die Auffindbarkeit über diese Kontaktdaten.
