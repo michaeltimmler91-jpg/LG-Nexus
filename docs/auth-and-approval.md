@@ -34,6 +34,9 @@ Der Benutzername wird bei der Registrierung frei gewählt, muss eindeutig sein u
 - Die Stadtverwaltung kann ihn nicht ändern.
 - Der Nutzer kann ihn später nicht selbst ändern.
 - Der Benutzername bleibt unabhängig vom Charakternamen.
+- Auch nach einer endgültigen Deaktivierung mit `disabled` bleibt der Benutzername dauerhaft reserviert und kann niemals erneut registriert werden.
+
+Die technische Eindeutigkeit wird unabhängig von Groß-/Kleinschreibung geprüft. Damit gelten beispielsweise `Lennox`, `lennox` und `LENNOX` als derselbe Benutzername.
 
 ## Account-Status
 
@@ -43,7 +46,9 @@ Der Benutzername wird bei der Registrierung frei gewählt, muss eindeutig sein u
 - `rejected` – Registrierung abgelehnt
 - `disabled` – dauerhaft gelöscht / endgültig deaktiviert
 
-Ein Account mit Status `disabled` gilt als endgültig gelöscht. Er kann nicht wieder auf `pending`, `active`, `suspended` oder `rejected` gesetzt werden und erhält keinen Zugriff mehr auf LG Nexus. Dieser Status ist für endgültige Fälle gedacht, beispielsweise wenn ein Charakter dauerhaft ausgereist oder gelöscht wurde.
+Ein Account mit Status `disabled` gilt aus Nutzersicht als endgültig gelöscht. Er kann nicht wieder auf `pending`, `active`, `suspended` oder `rejected` gesetzt werden und erhält keinen Zugriff mehr auf LG Nexus. Dieser Status ist für endgültige Fälle gedacht, beispielsweise wenn ein Charakter dauerhaft ausgereist oder gelöscht wurde.
+
+Der technische Account-Datensatz bleibt intern erhalten, damit unter anderem der bereits verwendete Benutzername dauerhaft blockiert bleibt und nicht von einem anderen Charakter übernommen werden kann.
 
 Eine abgelehnte Registrierung ist nicht endgültig verloren. Ein Mitarbeiter der Stadtverwaltung mit dem entsprechenden Recht darf einen Account von `rejected` wieder auf `pending` setzen. Danach läuft die normale Prüfung und Freischaltung erneut durch.
 
