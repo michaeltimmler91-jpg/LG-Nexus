@@ -50,6 +50,15 @@ Hat eine Organisation keinen zugewiesenen Owner mehr, darf eine dafür berechtig
 
 Dieser Notfallzugriff ist **ausschließlich dann erlaubt, wenn aktuell kein einziges aktives Mitglied der Organisation die Owner-Rolle besitzt**. Sobald mindestens ein aktiver Owner vorhanden ist, darf die Stadtverwaltung keine weitere Owner-Zuweisung vornehmen und keine bestehende Owner-Struktur überschreiben.
 
+Jeder solche Notfall-Eingriff der Stadtverwaltung wird dauerhaft protokolliert. Das Protokoll enthält mindestens:
+
+- die betroffene Organisation
+- die Person, die zum Owner ernannt wurde
+- die Person der Stadtverwaltung, die den Eingriff durchgeführt hat
+- Datum und Uhrzeit des Eingriffs
+
+Die Protokollierung dient der Nachvollziehbarkeit und darf von normalen Organisationsmitgliedern nicht manipuliert oder gelöscht werden.
+
 Dieser Notfallzugriff dient ausschließlich der Wiederherstellung einer handlungsfähigen Organisationsleitung. Die Stadtverwaltung wird dadurch nicht selbst Mitglied oder Owner der betroffenen Organisation.
 
 Die Bezeichnung der Owner-Rolle kann im Frontend je nach Organisation passend dargestellt werden, zum Beispiel `Geschäftsführer`, `Chief`, `Leitung` oder `Direktor`. Technisch bleibt sie jedoch als geschützte Owner-Rolle erkennbar und darf nicht mit einer normalen frei konfigurierbaren Rolle verwechselt werden.
