@@ -45,6 +45,19 @@ Der Benutzername wird bei der Registrierung frei gewählt, muss eindeutig sein u
 
 Eine abgelehnte Registrierung ist nicht endgültig verloren. Ein Mitarbeiter der Stadtverwaltung mit dem entsprechenden Recht darf einen Account von `rejected` wieder auf `pending` setzen. Danach läuft die normale Prüfung und Freischaltung erneut durch.
 
+### Ablehnung einer Registrierung
+
+Eine Registrierung darf nur mit einem angegebenen Ablehnungsgrund auf `rejected` gesetzt werden.
+
+Der Bürger kann sich weiterhin mit Benutzername und Passwort anmelden, erhält jedoch keinen Zugriff auf das eigentliche Nexus-System. Stattdessen wird eine Statusseite mit dem Ablehnungsgrund angezeigt.
+
+Beispiel:
+
+> Deine Registrierung wurde von der Stadtverwaltung abgelehnt.  
+> Grund: Geburtsdatum stimmt nicht mit den vorgelegten Unterlagen überein.
+
+Der Ablehnungsgrund wird zusammen mit Zeitpunkt und bearbeitendem Mitarbeiter gespeichert. Wird die Registrierung später wieder auf `pending` gesetzt, kann die Stadtverwaltung den Fall erneut prüfen.
+
 ## Prüfung und Freischaltung durch die Stadtverwaltung
 
 Die Stadtverwaltung ist Betreiber von LG Nexus und übernimmt die Identitätsprüfung im RP.
