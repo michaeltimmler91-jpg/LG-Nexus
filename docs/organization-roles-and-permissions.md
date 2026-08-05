@@ -32,6 +32,27 @@ Mehrere parallele Rollen innerhalb derselben Organisation sind nicht vorgesehen.
 
 Ein Bürger kann weiterhin Mitglied mehrerer verschiedener Organisationen sein. In jeder dieser Organisationen besitzt er jeweils eine eigene, genau einmal zugewiesene Rolle.
 
+## Rangstufen und Hierarchie
+
+Normale Organisationsrollen besitzen zusätzlich eine **Rangstufe beziehungsweise Hierarchieposition**. Die Organisation legt damit selbst fest, welche Rollen über oder unter anderen Rollen stehen.
+
+Die Hierarchie beeinflusst insbesondere die Rollenverwaltung. Ein Mitglied kann eine Rolle nur dann an ein anderes Mitglied vergeben, wenn es das entsprechende Berechtigungsrecht besitzt **und die Zielrolle unterhalb der eigenen Rolle liegt**.
+
+Eine gleichrangige oder höher eingestufte Rolle darf über die normale Rollenverwaltung nicht vergeben werden. Dadurch kann sich ein Mitglied nicht selbst oder andere Personen auf die eigene beziehungsweise eine höhere Hierarchiestufe hochstufen.
+
+Beispiel:
+
+1. Leitung
+2. Werkstattleiter
+3. Mitarbeiter
+4. Azubi
+
+Ein `Werkstattleiter` mit dem Recht `Rollen zuweisen` dürfte in diesem Beispiel `Mitarbeiter` oder `Azubi` vergeben, aber weder `Werkstattleiter` noch `Leitung`.
+
+Die Rangstufe allein erteilt keine Verwaltungsrechte. Eine Rolle benötigt weiterhin ausdrücklich die passende Berechtigung, beispielsweise `Rollen zuweisen` oder `Mitglieder verwalten`. Hierarchie und Berechtigungen werden gemeinsam geprüft.
+
+Die geschützte Owner-Rolle steht technisch immer oberhalb aller normalen Rollen und ist nicht Teil der frei verschiebbaren normalen Rangfolge.
+
 ## Feste Leitungs-/Owner-Rolle
 
 Jede Organisation besitzt eine **feste Leitungs-/Owner-Rolle**.
