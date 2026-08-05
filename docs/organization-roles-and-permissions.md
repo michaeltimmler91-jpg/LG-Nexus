@@ -36,6 +36,10 @@ Ein Bürger kann weiterhin Mitglied mehrerer verschiedener Organisationen sein. 
 
 Normale Organisationsrollen besitzen zusätzlich eine **Rangstufe beziehungsweise Hierarchieposition**. Die Organisation legt damit selbst fest, welche Rollen über oder unter anderen Rollen stehen.
 
+Die Reihenfolge der normalen Rollen darf in der Organisationsverwaltung **frei per Drag & Drop geändert** werden. Beim Verschieben einer Rolle wird ihre Hierarchieposition entsprechend neu berechnet. Die neue Reihenfolge gilt anschließend für alle hierarchieabhängigen Prüfungen, insbesondere für die Vergabe von Rollen.
+
+Die geschützte Owner-Rolle kann dabei nicht verschoben werden und bleibt technisch immer oberhalb aller normalen Rollen.
+
 Die Hierarchie beeinflusst insbesondere die Rollenverwaltung. Ein Mitglied kann eine Rolle nur dann an ein anderes Mitglied vergeben, wenn es das entsprechende Berechtigungsrecht besitzt **und die Zielrolle unterhalb der eigenen Rolle liegt**.
 
 Eine gleichrangige oder höher eingestufte Rolle darf über die normale Rollenverwaltung nicht vergeben werden. Dadurch kann sich ein Mitglied nicht selbst oder andere Personen auf die eigene beziehungsweise eine höhere Hierarchiestufe hochstufen.
