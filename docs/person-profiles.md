@@ -92,7 +92,9 @@ Bürger können andere Nexus-Benutzer blockieren.
 
 Aktuell gilt:
 
-- Eine Blockierung verhindert direkte Bürger-zu-Bürger-Nexus-Mails; Mails eines blockierten Benutzers werden nicht zugestellt.
+- Während einer Blockierung werden neue direkte Bürger-zu-Bürger-Nexus-Mails des blockierten Benutzers nicht zugestellt.
+- Bereits bestehende gemeinsame Mailthreads bleiben lesbar.
+- Wird die Blockierung aufgehoben, werden während der Blockzeit zurückgehaltene Mails nachträglich zugestellt.
 - Der blockierte Benutzer kann das öffentliche Profil des Blockierenden nicht mehr sehen.
 - Der blockierte Benutzer sieht öffentliche Kommentare und Bewertungen des Blockierenden nicht mehr.
 - Wenn beide Personen derselben Organisation angehören, bleiben notwendige interne Organisationskontakte weiterhin möglich.
@@ -122,7 +124,7 @@ Die Stadtverwaltung darf öffentliche Profilinhalte wie Profilbild und Bio moder
 
 Jeder Benutzer darf innerhalb von Nexus ein persönliches Farbschema auswählen.
 
-Zusätzlich kann der Benutzer gemäß dem Systemkonzept zwischen hellem und dunklem Grunddesign wählen. Persönliche Farben wirken darüber hinaus als individuelle Gestaltung/Akzente.
+Zusätzlich kann der Benutzer gemäß dem Systemkonzept zwischen hellem und dunklem Grunddesign wählen. Für neue Nutzer ist das dunkle Grunddesign Standard. Persönliche Farben wirken als Akzente für Buttons, aktive Elemente und Highlights.
 
 ## Sprache, Zeit- und Datumsformat
 
@@ -145,7 +147,7 @@ Für die spätere Umsetzung werden voraussichtlich benötigt:
 - optional Tag/Monat-only-Freigabe
 - externe Profil-Links mit Freigabestatus
 - veröffentlichte abgegebene Organisationsbewertungen
-- Benutzer-Blockierungen einschließlich direkter Mail-Zustellsperre
+- Benutzer-Blockierungen einschließlich Mail-Zurückhaltung und Nachzustellung
 - Profilmeldungen und Moderationsstatus
 - persönliche Farbschema-Einstellung
 - Hell-/Dunkelmodus
