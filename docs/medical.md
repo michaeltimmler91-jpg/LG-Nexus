@@ -76,10 +76,12 @@ PD und Justice können medizinische Berichte über einen formellen Nexus-Anfrage
 
 Für Justice-Anfragen gilt zusätzlich:
 
-- Medical sieht den konkreten Anfragegrund.
-- Bei Ablehnung durch Medical ist ein Ablehnungsgrund Pflicht.
-- Eine ausdrücklich richterlich angeordnete medizinische Freigabe darf die normale Patientenzustimmung ersetzen.
-- Diese richterliche Ausnahme erzeugt keinen pauschalen Justice-Zugriff auf die Krankenakte; freigegeben werden nur die konkret angeordneten beziehungsweise genehmigten Informationen.
+- jede Justice-Anfrage muss mit einem konkreten Justice-Verfahren verknüpft sein
+- Medical sieht den konkreten Anfragegrund
+- bei Ablehnung durch Medical ist ein Ablehnungsgrund Pflicht
+- eine ausdrücklich richterlich angeordnete medizinische Freigabe darf die normale Patientenzustimmung ersetzen
+- diese richterliche Ausnahme erzeugt keinen pauschalen Justice-Zugriff auf die Krankenakte; freigegeben werden nur die konkret angeordneten beziehungsweise genehmigten Informationen
+- der betroffene Bürger sieht nicht automatisch, dass Justice eine medizinische Anfrage gestellt hat
 
 ## Behandlungsvorlagen
 
@@ -163,7 +165,7 @@ Voraussichtlich benötigt werden:
 - Behandlungs-Timeline
 - externe Link-Anhänge
 - medizinische Freigabe-Zusammenfassungen
-- formelle PD-/Justice-Anfragen einschließlich richterlicher Ausnahme
+- formelle PD-/Justice-Anfragen einschließlich zwingender Justice-Verfahrensverknüpfung und richterlicher Ausnahme
 - Vorlagen + Versionshistorie
 - Bescheinigungen und RP-Rezepte
 - Wissensdatenbank
