@@ -1,6 +1,6 @@
 # LG Nexus – Organisationsrollen und Berechtigungen
 
-Dieses Dokument bündelt die aktuell festgelegten Regeln für Organisationsrollen, Mitgliederverwaltung, Owner, öffentliche Organisationsdarstellung und Eingriffe der Stadtverwaltung.
+Dieses Dokument bündelt die aktuell festgelegten Regeln für Organisationsrollen, Mitgliederverwaltung, Owner, öffentliche Organisationsdarstellung, Organisations-Mail, Dokumente, Ankündigungen und Eingriffe der Stadtverwaltung.
 
 ## Grundprinzip
 
@@ -175,7 +175,17 @@ Die sichtbare Bezeichnung der Owner-Rolle wird **ausschließlich von der Stadtve
 - Ein Grund ist für die Änderung nicht erforderlich.
 - Auf dem öffentlichen Organisationsprofil wird die Owner-Bezeichnung nicht als eigener Profilpunkt angezeigt.
 
-Farbe und Icon der Owner-Rolle werden von der Organisation festgelegt, jedoch nur durch einen **speziell dafür festgelegten Owner**. Änderungen an Owner-Farbe oder Owner-Icon werden nicht protokolliert. Wie dieser spezielle Owner technisch bestimmt wird, wird bei der Umsetzung noch konkretisiert.
+### Owner-Farbe und Owner-Icon
+
+Farbe und Icon der Owner-Rolle werden von der Organisation gestaltet, dürfen aber nur durch einen **speziell festgelegten Design-Owner** geändert werden.
+
+- Die Stadtverwaltung bestimmt den Design-Owner.
+- Gibt es genau einen Owner, ist dieser automatisch Design-Owner.
+- Der Design-Owner kann nicht beliebig beziehungsweise jederzeit gewechselt werden.
+- Ein Wechsel des Design-Owners wird nicht protokolliert.
+- Änderungen an Owner-Farbe oder Owner-Icon werden nicht protokolliert.
+
+Ein technischer Ausnahmeweg für den Fall, dass der festgelegte Design-Owner die Owner-Rolle verliert oder die Organisation verlässt, wird bei der Umsetzung noch konkretisiert.
 
 ### Weitere Owner ernennen
 
@@ -245,7 +255,7 @@ Dafür berechtigte Stadtverwaltungs-Personen dürfen:
 
 - die vollständige Mitgliederliste sehen, auch wenn sie öffentlich verborgen ist
 - interne Mitgliedsnotizen einsehen
-- interne Dokumente/Akten einer normalen Organisation einsehen
+- interne Dokumente/Akten einer normalen Organisation einsehen und bearbeiten
 - normale Mitglieder aus einer Organisation entfernen
 - die Liste ehemaliger Mitglieder einsehen
 
@@ -289,7 +299,7 @@ Ebenfalls nur Owner dürfen:
 - Statusmeldung ändern
 - Mitgliederliste öffentlich sichtbar/versteckt schalten
 
-Der Öffnungsstatus wird vorerst **nur manuell** gepflegt.
+Der Öffnungsstatus wird vorerst **nur manuell** gepflegt. Sollte später eine automatische Statusberechnung ergänzt werden, hat ein manueller Status Vorrang.
 
 ### Profilfelder
 
@@ -309,9 +319,91 @@ Telefon, Standorte, Logo und Banner gehören zur normalen Owner-Profilbearbeitun
 
 Profiländerungen werden protokolliert; dabei werden alte und neue Werte gespeichert. Änderungen des Öffnungsstatus oder der Mitgliederlisten-Sichtbarkeit werden dagegen nicht protokolliert.
 
-## Organisationen anlegen, freischalten und verwalten
+## Öffnungszeiten
 
-Neue Organisationen können **nur durch die Stadtverwaltung** angelegt werden. Bürger dürfen jedoch einen Gründungsantrag einreichen.
+Öffnungszeiten werden als **einfacher frei formulierbarer Text** gepflegt und nicht als vollautomatisches Zeitregelwerk.
+
+- Mehrere Öffnungsblöcke an einem Tag können im Text angegeben werden, zum Beispiel `08:00–12:00 / 14:00–18:00`.
+- Sonderöffnungszeiten für einzelne Tage oder Events sind nicht als eigene Funktion vorgesehen.
+- Eine automatische Feiertagslogik ist nicht vorgesehen.
+- Nexus berechnet daraus nicht automatisch `Jetzt geöffnet / geschlossen`.
+- Der manuelle Organisationsstatus bleibt maßgeblich.
+
+## Standorte / Filialen
+
+Organisationen dürfen mehrere Standorte beziehungsweise Filialen besitzen.
+
+Jeder Standort darf:
+
+- einen eigenen Namen besitzen
+- eigene Öffnungszeiten besitzen
+- einen eigenen Kartenmarker besitzen
+- vorübergehend deaktiviert werden
+
+Es gibt einen festgelegten **Hauptstandort**.
+
+Standorte besitzen **keine eigene öffentliche Telefonnummer**; verwendet wird die zentrale Telefonnummer der Organisation.
+
+## Organisations-Nexus-Mail
+
+Jede Organisation erhält automatisch eine Nexus-Mailadresse, die aus dem Organisationsnamen erzeugt wird.
+
+Die Organisation besitzt einen **gemeinsamen Posteingang**.
+
+- Das Lesen eingehender Organisations-Mails wird über ein eigenes Rollenrecht `Organisations-Mail lesen` gesteuert.
+- Als Organisation antworten beziehungsweise neue Organisations-Mails senden dürfen **nur Owner**.
+- Mails können intern einem Mitarbeiter zugewiesen werden.
+- Eine Organisations-Mail kann den Status `neu`, `in Bearbeitung` oder `erledigt` besitzen.
+- Mails dürfen intern kommentiert werden.
+
+Noch offen ist ausschließlich die Darstellungsfrage, ob beziehungsweise für wen sichtbar ist, **welcher konkrete Mitarbeiter eine Organisations-Mail tatsächlich geschrieben hat**.
+
+## Allgemeiner interner Dokumentenbereich
+
+Jede Organisation besitzt einen allgemeinen internen Dokumentenbereich.
+
+- Eine Ordnerstruktur ist möglich.
+- Ordner dürfen durch Rollen mit dem eigenen Recht `Dokumente verwalten` erstellt und verwaltet werden.
+- Einzelne Dokumente können nur für bestimmte Rollen sichtbar sein.
+- Dokumente können als `nur lesen` oder `bearbeitbar` freigegeben werden.
+- Der Ersteller eines Dokuments wird gespeichert.
+- Der letzte Bearbeiter wird gespeichert.
+- Dokumente besitzen einen Versionsverlauf.
+- Gelöschte Dokumente landen für **14 Tage** im Papierkorb und können in dieser Zeit wiederhergestellt werden; danach erfolgt die endgültige Löschung.
+- Dafür berechtigte Stadtverwaltungs-Personen dürfen allgemeine interne Dokumente normaler Organisationen ansehen **und bearbeiten**.
+
+Fachlich besonders geschützte Aktenbereiche, etwa Medical-/Police-/Justice-Daten, können später abweichende und strengere Regeln erhalten.
+
+## Interne Ankündigungen
+
+Organisationen können interne Ankündigungen erstellen.
+
+- Das Erstellen erfolgt über ein eigenes Rollenrecht.
+- Ankündigungen können gezielt an bestimmte Rollen gerichtet werden.
+- Ankündigungen können als `wichtig` markiert werden.
+- Wichtige Ankündigungen müssen vom Empfänger als gelesen bestätigt werden.
+- Berechtigte Personen können sehen, wer eine Ankündigung gelesen beziehungsweise bestätigt hat.
+
+## Organisationsgründung / Gründungsanträge
+
+Neue Organisationen können **nur durch die Stadtverwaltung** angelegt werden. Jeder aktive Bürger darf jedoch einen Gründungsantrag stellen.
+
+Ein Gründungsantrag muss enthalten:
+
+- gewünschten Organisationsnamen
+- Beschreibung beziehungsweise Konzept
+- gewünschten Organisationstyp
+- mindestens einen gewünschten zukünftigen Owner
+
+Es dürfen auch mehrere gewünschte Owner angegeben werden.
+
+Die Stadtverwaltung darf einen Antrag ablehnen. Bei einer Ablehnung ist ein **Ablehnungsgrund Pflicht**. Ein abgelehnter Antrag darf später erneut gestellt werden.
+
+Der Antragsteller erhält bei Annahme oder Ablehnung eine Nexus-Benachrichtigung.
+
+Die Angabe eines gewünschten zukünftigen Owners im Antrag bedeutet nicht, dass beim technischen Anlegen sofort ein Owner zugewiesen werden muss. Eine neu angelegte Organisation darf weiterhin zunächst 0 Owner besitzen.
+
+### Freischaltung und Organisationstyp
 
 - Eine neu angelegte Organisation muss durch die Stadtverwaltung freigeschaltet werden, bevor sie öffentlich ist.
 - Beim Anlegen muss nicht sofort ein erster Owner festgelegt werden.
@@ -374,6 +466,7 @@ Nicht protokolliert werden insbesondere:
 - reine Drag-&-Drop-Hierarchieänderungen
 - Rollenfarbe/Icon/Beschreibung
 - Owner-Farbe/Icon
+- Wechsel des Design-Owners
 - Öffnungsstatus
 - öffentliche Mitgliederlisten-Sichtbarkeit
 - Bearbeitung/Löschung interner Mitgliedsnotizen
@@ -434,6 +527,11 @@ Voraussichtlich benötigt werden:
 - Mitgliedsstatus aktiv/inaktiv
 - interne Mitgliedsnotizen
 - Ehemaligen-Historie
+- Organisationsgründungsanträge
+- Organisationsstandorte
+- Organisations-Mailpostfach und Mailstatus
+- allgemeiner Dokumentenbereich mit Ordnern, Berechtigungen, Versionen und Papierkorb
+- interne Ankündigungen und Lesebestätigungen
 - Audit-/Protokolltabellen
 - serverseitige/RLS-gesicherte Owner- und Stadtverwaltungsaktionen
 
