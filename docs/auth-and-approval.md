@@ -120,6 +120,8 @@ Ein Account mit Status `suspended` kann sich weiterhin anmelden, erhält jedoch 
 
 Ein Sperrgrund wird dem Bürger nicht angezeigt.
 
+Beim Suspendieren ist intern ein Grund Pflicht.
+
 Ein berechtigter Mitarbeiter der Stadtverwaltung darf einen `suspended` Account jederzeit wieder direkt auf `active` setzen. Eine erneute Freischaltungsprüfung ist dafür nicht erforderlich.
 
 ### Ablehnung einer Registrierung
@@ -173,6 +175,17 @@ Existiert dieselbe Mailadresse bereits, wird automatisch hochgezählt:
 
 Die Nexus-Mail ist ausschließlich für das interne Mailsystem von LG Nexus gedacht und wird **nicht** als Login-Adresse oder zur Passwort-Wiederherstellung verwendet.
 
+## Rollenrechte für Account-Aktionen
+
+Für die Stadtverwaltung werden Account-Aktionen getrennt berechtigt:
+
+- `Accounts freischalten`
+- eigenes Recht für Suspendieren/Reaktivieren
+- `Passwort zurücksetzen`
+- Recht für endgültiges Deaktivieren (`disabled`)
+
+Das endgültige `disabled` benötigt zusätzlich das **Vier-Augen-Prinzip**: zwei dafür berechtigte Verwaltungsmitarbeiter müssen die endgültige Deaktivierung bestätigen.
+
 ## Login
 
 Der Nutzer meldet sich mit folgendem an:
@@ -186,11 +199,42 @@ Der Charaktername und die Nexus-Mail sind vom Login getrennt.
 
 Es gibt keine Wiederherstellung per E-Mail.
 
-Wer sein Passwort vergessen hat, muss sich IC an die Stadtverwaltung wenden. Ein Mitarbeiter mit dem entsprechenden Recht kann ein temporäres neues Passwort setzen.
+Wer sein Passwort vergessen hat, muss sich IC an die Stadtverwaltung wenden. Ein Mitarbeiter mit dem Rollenrecht `Passwort zurücksetzen` kann ein temporäres neues Passwort setzen.
 
 Nach einem durch die Stadtverwaltung ausgelösten Passwort-Reset wird `must_change_password` gesetzt. Beim nächsten erfolgreichen Login muss der Bürger zwingend ein eigenes neues Passwort vergeben, bevor er LG Nexus normal weiterverwenden kann. Nach erfolgreichem Passwortwechsel wird die Markierung wieder entfernt.
 
 Die Stadtverwaltung kann Passwörter nicht einsehen.
+
+Passwort-Reset-Aktionen werden **6 Monate** intern protokolliert.
+
+## Sitzungs- und Login-Sicherheit
+
+Eine normale Nexus-Sitzung läuft nach **4 Stunden Inaktivität** ab.
+
+Mit `angemeldet bleiben` kann eine Sitzung maximal **90 Tage** erhalten bleiben.
+
+Benutzer können ihre eigenen aktiven Geräte/Sitzungen sehen und andere Sitzungen aus der Ferne beenden.
+
+Für sensible persönliche Sicherheitsaktionen wird eine erneute Passwortbestätigung verlangt, mindestens für:
+
+- Passwortänderungen
+- Privatsphäre-Einstellungen
+- Sitzungsverwaltung
+- persönliche Sicherheitsaktionen
+
+Bei einer Anmeldung auf einem unbekannten Gerät erhält der Bürger eine Nexus-Benachrichtigung. Auffällige oder neue Anmeldungen können eine zusätzliche Sicherheitsprüfung auslösen.
+
+Eine Zwei-Faktor-Authentifizierung ist derzeit **nicht vorgesehen**.
+
+## Login-Schutz
+
+Erfolgreiche und fehlgeschlagene Login-Versuche werden als Sicherheitsereignisse für **30 Tage** gespeichert.
+
+Nexus verwendet gegen Login-Missbrauch:
+
+- Rate Limiting
+- CAPTCHA/Anti-Bot-Schritt nach mehreren Fehlversuchen
+- temporäre Login-Sperre nach sehr vielen Fehlversuchen
 
 ## Sicherheit
 
@@ -199,3 +243,5 @@ Nexus-ID und Nexus-Mail werden erst bei erfolgreicher Aktivierung erzeugt. Ein n
 Die Korrektur von Vorname, Nachname, Geburtsdatum und der optionalen Telefonnummer vor der Freischaltung wird an ein separates Stadtverwaltungs-Recht gebunden. Dadurch bekommt nicht automatisch jeder Mitarbeiter der Stadtverwaltung diese Berechtigung.
 
 Die Stadtverwaltung erhält durch ihre Betreiberrolle nicht automatisch Zugriff auf sensible Inhalte anderer Module wie Medical- oder Police-Akten. Solche Rechte werden separat geregelt.
+
+Die Stadtverwaltung darf normale Geräte-/Sitzungsdetails eines Bürgers nicht einsehen. Bei einem Sicherheitsfall kann eine dafür berechtigte Funktion jedoch alle aktiven Sitzungen eines Bürgers beenden.
