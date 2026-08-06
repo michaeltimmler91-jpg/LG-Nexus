@@ -1,449 +1,440 @@
 # LG Nexus – Organisationsrollen und Berechtigungen
 
+Dieses Dokument bündelt die aktuell festgelegten Regeln für Organisationsrollen, Mitgliederverwaltung, Owner, öffentliche Organisationsdarstellung und Eingriffe der Stadtverwaltung.
+
 ## Grundprinzip
 
-Jede Firma oder Organisation kann ihre normalen Rollen grundsätzlich selbst gestalten. Beispiele sind `Werkstattleiter`, `Chief of Medicine`, `Ausbilder`, `Azubi` oder beliebige andere IC-Rollen.
+- Ein Mitglied besitzt innerhalb derselben Organisation **genau eine Rolle gleichzeitig**.
+- Ein Bürger kann Mitglied mehrerer Organisationen sein und besitzt dort jeweils eine eigene Rolle.
+- Rollen bestehen aus sichtbarer Bezeichnung, Hierarchieposition und einem Rechtepaket.
+- Berechtigungen werden serverseitig beziehungsweise über Supabase/RLS geprüft; UI-Ausblendungen allein reichen nicht.
+- Normale Organisationsrechte geben niemals automatisch Zugriff auf Daten anderer Organisationen.
 
-Eine Rolle ist nicht nur ein sichtbarer Titel. An jede Rolle können konkrete Rechte und Berechtigungen innerhalb der jeweiligen Organisation gebunden werden.
+## Normale Rollen
 
-Beispiele für mögliche Rechte:
+Normale Rollen können von der Organisation frei gestaltet werden. Sie besitzen:
 
-- Mitglieder verwalten
-- Rollen verwalten
-- Rollen zuweisen
-- interne Dokumente ansehen
-- interne Dokumente bearbeiten
-- Akten oder organisationsspezifische Daten bearbeiten
-- Vorlagen verwalten
-- Ausbildungsinhalte verwalten
+- einen innerhalb der Organisation eindeutigen Namen
+- eine optionale Kurzbeschreibung
+- eine optionale Farbe
+- ein optionales Icon aus der festen Nexus-Iconbibliothek
+- eine Hierarchieposition
+- ein organisations-/modulabhängiges Rechtepaket
 
-Welche Berechtigungen angeboten werden, hängt vom jeweiligen Organisationsmodul ab. Medical, Police, Fire & Rescue, Unternehmen und andere Bereiche dürfen unterschiedliche Berechtigungsschlüssel besitzen.
+Zwei normale Rollen derselben Organisation dürfen nicht denselben Namen besitzen. Eine maximale Anzahl normaler Rollen gibt es nicht.
 
-Das öffentliche Organisationsprofil, der Öffnungsstatus und die öffentliche Sichtbarkeit der Mitgliederliste werden nicht über frei vergebbare normale Rollenrechte verwaltet, sondern ausschließlich durch Owner.
+### Standardrolle
 
-## Rollen pro Mitglied
+Jede neue Organisation erhält zunächst die normale Rolle `Mitarbeiter` als Standardrolle.
 
-Ein Mitglied besitzt innerhalb derselben Organisation **genau eine Rolle gleichzeitig**.
+- Es muss jederzeit genau eine aktive normale Standardrolle geben.
+- Nur ein Owner darf festlegen, welche normale Rolle Standardrolle ist.
+- Neue und erneut aufgenommene Mitglieder erhalten automatisch die aktuelle Standardrolle.
+- Vor einem Wechsel zeigt das Frontend eine Bestätigung wie `Neue Mitglieder erhalten künftig Rolle X.`
+- Der Wechsel der Standardrolle wird nicht protokolliert.
+- Die Standardrolle darf umbenannt werden.
+- Soll die Standardrolle gelöscht oder deaktiviert werden, muss vorher eine andere aktive normale Rolle als Standardrolle gewählt werden.
 
-Die zugewiesene Rolle bestimmt sowohl den sichtbaren Rollentitel als auch das zugehörige Rechtepaket. Soll sich die Funktion eines Mitarbeiters ändern, wird seine bisherige Rolle durch eine andere Rolle ersetzt.
+### Rollen erstellen, bearbeiten und löschen
 
-Mehrere parallele Rollen innerhalb derselben Organisation sind nicht vorgesehen. Ein Bürger kann jedoch Mitglied mehrerer verschiedener Organisationen sein und besitzt in jeder Organisation jeweils eine eigene Rolle.
+Das normale Recht `Rollen verwalten` reicht **nicht** zum Erstellen, Umbenennen oder Löschen normaler Rollen und auch nicht zum Ändern ihrer Berechtigungen. Diese Strukturänderungen bleiben Ownern vorbehalten.
 
-## Darstellung normaler Rollen
+Eine normale Rolle darf nur gelöscht werden, wenn:
 
-Normale Rollen dürfen folgende zusätzliche Darstellungsdaten besitzen:
+- ihr kein Mitglied mehr zugewiesen ist und
+- mindestens eine andere normale Rolle bestehen bleibt.
 
-- eindeutiger Rollenname innerhalb der Organisation
-- optionale Kurzbeschreibung
-- optionale Rollenfarbe
-- optionales Rollen-Icon aus der festen Nexus-Iconbibliothek
+Vor dem Löschen ist eine Sicherheitsbestätigung erforderlich.
 
-Zwei normale Rollen derselben Organisation dürfen **nicht denselben Namen** besitzen.
+### Rollen duplizieren
 
-Es gibt **keine maximale Anzahl normaler Rollen** pro Organisation.
+Owner dürfen Rollen duplizieren. Beim Duplizieren werden **nur die Berechtigungen** übernommen. Name, Beschreibung, Farbe und Icon werden nicht automatisch kopiert und können separat festgelegt werden.
 
-## Standardrolle
+### Rollen deaktivieren
 
-Jede neu angelegte Organisation erhält automatisch eine normale Standardrolle **`Mitarbeiter`**.
+Owner dürfen normale Rollen deaktivieren und später reaktivieren.
 
-Die Organisation darf später festlegen, **welche vorhandene normale Rolle die aktuelle Standardrolle** für neue Mitglieder ist. Diese Auswahl darf ausschließlich durch einen Owner geändert werden. Es muss jederzeit genau eine gültige normale Standardrolle festgelegt sein.
+- Mitglieder dürfen nicht auf einer deaktivierten Rolle verbleiben.
+- Eine deaktivierte Rolle darf nicht neu zugewiesen werden.
+- Vor der Deaktivierung müssen alle Mitglieder auf aktive Rollen wechseln.
+- Die deaktivierte Rolle bleibt in der Rollenverwaltung sichtbar.
+- Ihr Name bleibt reserviert und kann nicht von einer anderen Rolle verwendet werden.
+- Ein Owner darf eine deaktivierte Rolle umbenennen.
+- Eine deaktivierte, unbenutzte Rolle darf gelöscht werden.
+- Nach Reaktivierung wird die Rolle **ganz unten** in die normale Hierarchie eingeordnet.
+- Aktivierung und Deaktivierung werden protokolliert.
 
-Beim Wechsel der Standardrolle zeigt das Frontend vor dem Speichern eine Bestätigung an, zum Beispiel: `Neue Mitglieder erhalten künftig die Rolle X.`
+### Rollenrechte
 
-Der Wechsel der Standardrolle wird **nicht protokolliert**.
+Rollenrechte werden im Editor nach Modulen/Themen gruppiert, zum Beispiel `Allgemein`, `Medical`, `Ausbildung`, `Akten` oder `Verwaltung`.
 
-Die Standardrolle darf durch einen Owner umbenannt werden. Ihre technische Funktion als Standardrolle hängt nicht am sichtbaren Namen `Mitarbeiter`.
+- Änderungen von Rollenrechten wirken **sofort** für alle Mitglieder dieser Rolle.
+- Vor dem Speichern geänderter Rollenrechte ist eine Bestätigung erforderlich.
+- Beim Aktivieren weitreichender Rechte wie `Mitglieder verwalten` oder `Rollen verwalten` zeigt das Frontend eine zusätzliche Warnung.
+- Änderungen an Rollenfarbe, Rollen-Icon oder Rollenbeschreibung werden nicht protokolliert.
 
-Soll die aktuell festgelegte Standardrolle gelöscht oder deaktiviert werden, muss **zuerst eine andere vorhandene aktive normale Rolle als neue Standardrolle ausgewählt** werden. Eine automatische Ersatzauswahl durch das System erfolgt nicht.
+## Hierarchie und Rollenvergabe
 
-Eine normale Rolle darf nur gelöscht werden, wenn ihr **kein Mitglied mehr zugewiesen** ist und mindestens eine andere normale Rolle bestehen bleibt.
+Die Owner-Rolle steht technisch immer oberhalb aller normalen Rollen und ist nicht verschiebbar.
 
-Neu aufgenommene und erneut aufgenommene ehemalige Mitglieder erhalten automatisch die aktuell festgelegte Standardrolle.
+Normale Rollen können per Drag & Drop sortiert werden. Dafür ist `Rollen verwalten` nötig.
 
-## Rollenverwaltung
-
-Das Recht **`Rollen verwalten`** erlaubt nicht automatisch das Erstellen oder Umbenennen normaler Rollen. Das Erstellen, Umbenennen und Löschen normaler Rollen sowie das Ändern ihrer konkreten Berechtigungen bleibt der geschützten Owner-Ebene vorbehalten.
-
-Vor dem Löschen einer normalen Rolle muss eine ausdrückliche Bestätigung im Frontend erfolgen.
-
-Ein Owner darf eine vorhandene normale Rolle **duplizieren**. Dabei werden die Berechtigungen der Ausgangsrolle übernommen; Name, Beschreibung, Farbe und Icon können anschließend angepasst werden.
-
-Ein Owner darf eine normale Rolle außerdem **deaktivieren**, ohne sie zu löschen. Eine deaktivierte Rolle darf weder Mitgliedern neu zugewiesen werden noch weiterhin von Mitgliedern belegt sein. Vor der Deaktivierung müssen daher alle Mitglieder auf andere aktive Rollen gesetzt werden. Eine deaktivierte Rolle kann später wieder aktiviert werden.
-
-Die Bearbeitung von Rollenberechtigungen wird im Frontend nach Modulen beziehungsweise Themenbereichen gruppiert, zum Beispiel `Allgemein`, `Medical`, `Ausbildung`, `Akten` oder `Verwaltung`.
-
-Das Erstellen, Umbenennen und Löschen normaler Rollen wird protokolliert. Das Rollen-Audit enthält mindestens:
-
-- Organisation
-- Aktion
-- betroffene Rolle beziehungsweise alten und neuen Rollennamen
-- ausführende Person
-- Datum und Uhrzeit
-
-Änderungen an konkreten Rollenberechtigungen, reine Änderungen der Rollenreihenfolge, Wechsel der Standardrolle sowie Aktivierung/Deaktivierung normaler Rollen werden nicht zusätzlich protokolliert, solange später nichts anderes festgelegt wird.
-
-## Rangstufen und Hierarchie
-
-Normale Organisationsrollen besitzen zusätzlich eine **Rangstufe beziehungsweise Hierarchieposition**. Die Organisation legt damit fest, welche normalen Rollen über oder unter anderen Rollen stehen.
-
-Die Reihenfolge darf per Drag & Drop geändert werden. Dafür benötigt die ausführende Person ausdrücklich die Berechtigung **`Rollen verwalten`**.
-
-Die geschützte Owner-Rolle kann nicht verschoben werden und steht technisch immer oberhalb aller normalen Rollen.
-
-Für normale Rollen mit `Rollen verwalten` gelten zusätzlich folgende Grenzen:
+Für ein normales Mitglied mit `Rollen verwalten` gilt:
 
 - die eigene Rolle darf nicht verschoben werden
 - Rollen oberhalb der eigenen Rolle dürfen nicht verschoben werden
 - Rollen unterhalb der eigenen Rolle dürfen frei untereinander sortiert werden
 
-Ein Owner darf die gesamte normale Rollenhierarchie verwalten.
+Owner dürfen die gesamte normale Hierarchie verwalten.
 
-Eine Rolle darf einem anderen Mitglied nur zugewiesen werden, wenn die ausführende Person die Berechtigung **`Rollen zuweisen`** besitzt und die Zielrolle unterhalb ihrer eigenen Hierarchiestufe liegt.
-
-Zusätzlich gilt für normale Rollen mit `Rollen zuweisen`:
+Für `Rollen zuweisen` gilt:
 
 - die eigene Rolle darf nicht selbst geändert werden
-- die Rolle eines Mitglieds mit gleicher oder höherer Rangstufe darf nicht geändert werden
-- Mitglieder unterhalb der eigenen Rangstufe dürfen auf andere Rollen unterhalb der eigenen Rangstufe hoch- oder herabgestuft werden
+- die Rolle eines gleichrangigen oder höherrangigen Mitglieds darf nicht geändert werden
+- Zielrollen müssen unterhalb der eigenen Rolle liegen
+- Mitglieder unterhalb der eigenen Stufe dürfen innerhalb dieses Bereichs hoch- oder herabgestuft werden
 
-Ein Owner darf jedem normalen Mitglied **jede beliebige aktive normale Rolle** zuweisen, unabhängig von der normalen Hierarchie.
+Owner dürfen jedem normalen Mitglied jede beliebige **aktive** normale Rolle geben, unabhängig von der Hierarchie.
 
-Die Rangstufe allein verleiht keine Rechte. Hierarchie und konkrete Rollenberechtigungen werden gemeinsam geprüft.
+## Mitglieder aufnehmen und entfernen
 
-## Mitgliederverwaltung
+Neue Mitglieder dürfen durch Owner oder Rollen mit `Mitglieder verwalten` aufgenommen werden.
 
-Neue Mitglieder dürfen durch einen Owner oder durch ein Mitglied aufgenommen werden, dessen Rolle ausdrücklich die Berechtigung **`Mitglieder verwalten`** besitzt.
+- Die Aufnahme erfolgt sofort, ohne Bestätigung des neuen Mitglieds.
+- Neue Mitglieder erhalten automatisch die Standardrolle.
+- Ein Nicht-Owner mit `Mitglieder verwalten` darf aufnehmen, wenn die Standardrolle unterhalb seiner eigenen Hierarchiestufe liegt.
+- Ehemalige Mitglieder können später erneut aufgenommen werden.
+- Eine Rückkehr erfolgt immer als neue Aufnahme; eine vorherige Entfernung kann nicht einfach rückgängig gemacht werden.
+- Es gibt keine maximale Mitgliederzahl.
 
-Die Aufnahme erfolgt **sofort und ohne vorherige Bestätigung oder Einladung** durch die aufzunehmende Person. Nach erfolgreicher Aufnahme ist die Mitgliedschaft unmittelbar aktiv und die aktuelle Standardrolle wird automatisch zugewiesen.
+### Mitglieder entfernen
 
-Ein Nicht-Owner mit `Mitglieder verwalten` darf eine Aufnahme nur durchführen, wenn die aktuelle Standardrolle **unterhalb seiner eigenen Hierarchiestufe** liegt. Ein Owner ist von dieser Einschränkung ausgenommen.
+- Nur Owner dürfen über die normale Organisationsverwaltung andere normale Mitglieder entfernen.
+- Vor der Entfernung ist eine Sicherheitsbestätigung erforderlich.
+- Ein optionaler Freitext-Grund ist möglich.
+- Ist ein Grund vorhanden, wird er der entfernten Person angezeigt.
+- Ein Entfernungsgrund kann später nicht verändert werden.
+- Owner können andere Owner nicht entfernen.
 
-`Mitglieder verwalten` erlaubt außerdem das Bearbeiten dafür vorgesehener interner Mitgliedsdaten. Dieses Recht erlaubt jedoch **nicht**, andere Mitglieder aus der Organisation zu entfernen.
+Ein Mitglied darf selbst austreten, auch wenn es inaktiv/beurlaubt ist. Vor dem Austritt ist eine Bestätigung erforderlich. Beim freiwilligen Austritt kann optional ein eigener Grund angegeben werden.
 
-Ein Owner darf normale Mitglieder aus der Organisation entfernen. Andere Owner sind davon ausgenommen und können über die normale Organisationsverwaltung nicht entfernt oder zurückgestuft werden.
+## Interne Mitgliedsdaten und Notizen
 
-Beim Entfernen eines normalen Mitglieds darf ein Owner optional einen Freitext-Grund angeben. Wenn ein Grund angegeben wurde, wird er dem entfernten Mitglied in seiner Nexus-Benachrichtigung angezeigt.
+Owner und Rollen mit `Mitglieder verwalten` dürfen interne Mitgliedsnotizen sehen. Das betroffene Mitglied selbst sieht seine eigenen internen Notizen nicht.
 
-Ein normales Mitglied darf die Organisation selbstständig verlassen. Dies gilt auch, wenn das Mitglied `inaktiv/beurlaubt` ist.
+Für normale Rollen mit `Mitglieder verwalten` gilt zusätzlich: Interne Mitgliedsdaten dürfen nur bei Mitgliedern **unterhalb der eigenen Hierarchiestufe** bearbeitet werden.
 
-Vor dem freiwilligen Austritt muss im Frontend eine Bestätigung erfolgen.
+Notizen:
 
-Ehemalige Mitglieder dürfen später erneut aufgenommen werden; dabei gelten dieselben Aufnahmeregeln wie bei einer erstmaligen Aufnahme.
-
-Es gibt **keine maximale Mitgliederzahl** pro Organisation.
-
-## Interne Mitgliedsnotizen
-
-Interne Mitgliedsnotizen dürfen von Ownern und Rollen mit **`Mitglieder verwalten`** eingesehen werden.
-
-Das betroffene Mitglied selbst darf seine eigenen internen Mitgliedsnotizen **nicht** sehen.
-
-Eine Person mit `Mitglieder verwalten` darf neue interne Notizen anlegen. Eine bestehende Notiz darf anschließend nur von
-
-- der Person, die diese Notiz erstellt hat, oder
-- einem Owner
-
-bearbeitet oder gelöscht werden.
-
-Änderungen und Löschungen interner Mitgliedsnotizen werden **nicht protokolliert**.
-
-Wird ein ehemaliges Mitglied später erneut aufgenommen, werden vorhandene frühere interne Mitgliedsnotizen dieser Person wieder sichtbar.
-
-## Protokollierung von Mitgliedschaft und Rollenwechseln
-
-Aufnahmen und das Ende einer Mitgliedschaft werden protokolliert. Das Mitgliedschafts-Audit enthält mindestens:
-
-- Organisation
-- betroffene Person
-- Aktion (`Mitglied aufgenommen`, `Mitglied selbst ausgetreten` oder `Mitglied entfernt`)
-- ausführende Person
-- Datum und Uhrzeit
-- bei Entfernung optional den angegebenen Grund
-
-Änderungen an der Rolle eines Mitglieds werden ebenfalls protokolliert. Das Rollenwechsel-Protokoll enthält mindestens:
-
-- Organisation
-- betroffene Person
-- vorherige Rolle
-- neue Rolle
-- ausführende Person
-- Datum und Uhrzeit
-
-Die **freiwillige Abgabe der eigenen Owner-Rolle ist ausdrücklich von dieser Rollenwechsel-Protokollierung ausgenommen** und wird nicht zusätzlich protokolliert.
-
-Das Bearbeiten des öffentlichen Organisationsprofils wird protokolliert. Dabei werden die **alten und neuen Werte** der geänderten Felder gespeichert.
-
-Nicht protokolliert werden dagegen:
-
-- Wechsel der Standardrolle
-- Änderungen konkreter Rollenberechtigungen
-- reine Änderungen der Rollenreihenfolge
-- Änderung des Öffnungsstatus `geöffnet / eingeschränkt / geschlossen`
-- Änderung der öffentlichen Sichtbarkeit der Mitgliederliste
-- Bearbeitung oder Löschung interner Mitgliedsnotizen
-
-## Aufbewahrung und Sichtbarkeit von Protokollen
-
-Alle in diesem Dokument vorgesehenen Organisations-, Rollen-, Mitgliedschafts- und Owner-Protokolle werden **6 Monate** aufbewahrt. Danach können sie automatisch gelöscht werden.
-
-Innerhalb einer Organisation dürfen die Organisations-Protokolle **nur Owner** einsehen. Es gibt dafür keine zusätzliche frei vergebbare Rollenberechtigung wie `Protokolle ansehen`.
-
-Dafür berechtigte Personen der **Stadtverwaltung** dürfen die Organisations-Protokolle ebenfalls einsehen. Dies ist nicht auf die von der jeweiligen Stadtverwaltungs-Person selbst ausgeführten Owner-Eingriffe beschränkt.
-
-Der Zugriff auf Protokolle macht die Stadtverwaltung nicht zum Mitglied der Organisation und gibt ihr keinen allgemeinen Zugriff auf sonstige interne Organisationsdaten.
-
-## Benachrichtigungen bei Mitgliedsänderungen
-
-Das betroffene aktive Mitglied erhält innerhalb von LG Nexus eine Benachrichtigung bei:
-
-- Aufnahme in eine Organisation
-- Entfernung aus einer Organisation
-- Rollenwechsel
-- Ernennung zum Owner
-- Rückkehr von `inaktiv/beurlaubt` auf aktiv
-
-Beim Wechsel auf `inaktiv/beurlaubt` erhält die betroffene Person einen unmittelbaren Statushinweis; ein optional hinterlegter Grund ist für sie sichtbar. Während der inaktiven Phase erhält sie jedoch keine weiteren persönlichen oder allgemeinen Organisations-Benachrichtigungen und keine internen Organisations-Mails.
-
-Ein optionaler Entfernungsgrund wird in der Benachrichtigung des entfernten Mitglieds angezeigt, sofern die Benachrichtigung zugestellt werden kann.
-
-Owner einer Organisation erhalten zusätzlich eine Benachrichtigung, wenn:
-
-- ein Mitglied die Organisation selbst verlässt
-- eine Person mit `Mitglieder verwalten` ein neues Mitglied aufnimmt
-- ein normales Mitglied auf `inaktiv/beurlaubt` gesetzt wird
-- ein normales Mitglied wieder auf aktiv gesetzt wird
-
-Diese wichtigen Organisations-Benachrichtigungen können vom Benutzer **nicht deaktiviert** werden.
+- dürfen von Ownern und `Mitglieder verwalten` angelegt werden
+- dürfen nur vom ursprünglichen Ersteller oder von einem Owner bearbeitet/gelöscht werden
+- Änderungen/Löschungen werden nicht protokolliert
+- bei einer späteren Wiederaufnahme werden frühere Notizen wieder sichtbar
 
 ## Inaktiv / beurlaubt
 
-Normale Mitglieder können innerhalb einer Organisation auf **`inaktiv/beurlaubt`** gesetzt werden, ohne ihre Mitgliedschaft oder Rolle zu verlieren.
+Normale Mitglieder können auf `inaktiv/beurlaubt` gesetzt werden, ohne Mitgliedschaft oder Rolle zu verlieren.
 
-Für normale Mitglieder ist ein Grund **optional**. Wenn ein Grund eingetragen wird, kann die betroffene Person diesen sehen.
+- Ein Grund ist optional.
+- Ist ein Grund vorhanden, darf die betroffene Person ihn sehen.
+- Der Grund kann später nicht bearbeitet werden.
+- Owner und Rollen mit `Mitglieder verwalten` dürfen den Grund sehen.
+- Es gibt keinen Zeitraum von/bis; der Status bleibt bis zur manuellen Änderung bestehen.
+- Owner haben eine separate Ansicht/einen Filter für inaktive Mitglieder.
+- Inaktive Mitglieder werden in der normalen öffentlichen Mitgliederliste nicht angezeigt.
+- Interne Organisationsbereiche sind vollständig gesperrt.
+- Öffentliche Organisationsseiten bleiben sichtbar.
+- Während der Inaktivität erhält das Mitglied keine allgemeinen internen Organisationsbenachrichtigungen, keine persönlichen Organisationsmeldungen und keine internen Organisations-Mails.
+- Das Setzen und Aufheben von `inaktiv/beurlaubt` wird protokolliert.
 
-Für diesen Status wird kein Zeitraum von/bis gespeichert. Er bleibt bestehen, bis er manuell wieder aufgehoben wird.
+Ein normales Mitglied darf sich selbst auf inaktiv setzen. Ein separates Anfragesystem ist nicht vorgesehen.
 
-Der Status wird in der normalen internen Mitgliederliste nicht zusätzlich sichtbar markiert. Für Owner gibt es jedoch eine separate Ansicht beziehungsweise einen Filter für inaktive Mitglieder.
+Eine normale Rolle mit `Mitglieder verwalten` darf nur Mitglieder **unterhalb der eigenen Hierarchiestufe** inaktiv setzen oder reaktivieren.
 
-Während `inaktiv/beurlaubt` bleibt die Organisation und die zugewiesene Rolle gespeichert, der Zugriff auf **interne Organisationsbereiche wird vollständig gesperrt**. Öffentliche Seiten und öffentliche Informationen der Organisation bleiben weiterhin sichtbar.
+Ein Owner darf ein inaktives normales Mitglied weiterhin entfernen. Die Rolle eines inaktiven normalen Mitglieds darf nach den normalen Hierarchieregeln geändert werden. Ein inaktives Mitglied darf nicht direkt zum Owner ernannt werden; es muss vorher wieder aktiv sein.
 
-Nach Rückkehr auf aktiv gelten wieder die normalen Rechte der gespeicherten Rolle.
+## Geschützte Owner-Rolle
 
-Das Setzen und Aufheben von `inaktiv/beurlaubt` wird protokolliert.
+Jede Organisation besitzt eine feste, systemgeschützte Owner-Rolle.
 
-Ein Owner darf **sich selbst nicht** auf `inaktiv/beurlaubt` setzen.
+- Sie kann nicht gelöscht werden.
+- Sie besitzt immer sämtliche für die Organisation verfügbaren Rechte.
+- Ihre Rechte können nicht reduziert werden.
+- Mehrere Personen dürfen gleichzeitig Owner sein.
+- Alle Owner derselben Organisation sind in Bezug auf die Owner-Rolle gleichgestellt.
+- Owner können sich gegenseitig nicht entfernen, zurückstufen oder auf inaktiv setzen.
 
-Ein Owner darf **keinen anderen Owner** auf `inaktiv/beurlaubt` setzen. Auch eine normale Rolle mit `Mitglieder verwalten` darf keinen Owner auf `inaktiv/beurlaubt` setzen.
+### Sichtbare Owner-Bezeichnung
 
-Eine dafür berechtigte Person der **Stadtverwaltung** darf einen Owner auf `inaktiv/beurlaubt` setzen und wieder aktivieren. Beim Setzen eines Owners auf inaktiv ist ein **Grund verpflichtend**. Der Eingriff wird protokolliert; der betroffene Owner und die übrigen Owner der Organisation erhalten eine Nexus-Benachrichtigung.
+Die sichtbare Bezeichnung der Owner-Rolle wird **ausschließlich von der Stadtverwaltung** als freier Text festgelegt, zum Beispiel `Geschäftsführer`, `Chief` oder `Direktor`.
 
-Ein Owner darf ein `inaktiv/beurlaubt` gesetztes normales Mitglied weiterhin aus der Organisation entfernen.
+- Alle Owner derselben Organisation verwenden dieselbe Bezeichnung.
+- Owner können die Bezeichnung nicht selbst ändern.
+- Änderungen der Bezeichnung werden protokolliert.
+- Bei einer Änderung werden die Owner der Organisation benachrichtigt.
+- Ein Grund ist für die Änderung nicht erforderlich.
+- Auf dem öffentlichen Organisationsprofil wird die Owner-Bezeichnung nicht als eigener Profilpunkt angezeigt.
 
-Die Rolle eines `inaktiv/beurlaubt` gesetzten normalen Mitglieds darf geändert werden. Für die Rollenänderung gelten dieselben Hierarchie- und Berechtigungsregeln wie sonst auch.
-
-Ein `inaktiv/beurlaubt` gesetztes Mitglied darf **nicht direkt zum Owner ernannt** werden. Vor der Owner-Ernennung muss es wieder aktiv gesetzt werden.
-
-Ein Mitglied mit Owner-Rolle zählt für die Owner-Existenzprüfung weiterhin als Owner, auch wenn sein Mitgliedsstatus `inaktiv/beurlaubt` ist. Für die Notfallregel der Stadtverwaltung ist damit die **zugewiesene Owner-Rolle** entscheidend, nicht der Aktivstatus.
-
-## Öffentliche Mitgliederliste
-
-Die öffentliche Mitgliederliste wird organisationsweit sichtbar oder verborgen geschaltet. Einzelne Mitglieder können ihre Organisationszugehörigkeit dort nicht selbst ausblenden.
-
-Ist die Mitgliederliste sichtbar:
-
-- werden nur aktive Mitglieder angezeigt
-- werden aktive Owner ganz oben angezeigt
-- werden die übrigen Mitglieder nach Rollen-Hierarchie sortiert
-- gibt es keine eigene Namenssuche innerhalb der Liste
-- werden Rollenfarbe, Rollen-Icon und Rollenbeschreibung nicht öffentlich angezeigt
-
-Ein `inaktiv/beurlaubt` gesetztes Mitglied wird öffentlich **nicht** angezeigt. Dies gilt auch für einen inaktiven Owner.
-
-Ist die Mitgliederliste verborgen, bleiben aktive Owner dennoch öffentlich sichtbar. Außerdem darf weiterhin die **Gesamtzahl der Mitglieder** angezeigt werden, ohne die verborgenen Personen offenzulegen.
-
-Ehemalige Mitglieder werden öffentlich niemals angezeigt.
-
-Die sichtbare Bezeichnung der Owner-Rolle wird auf dem öffentlichen Organisationsprofil nicht zusätzlich ausgewiesen.
-
-## Öffentliches Organisationsprofil
-
-Das öffentliche Organisationsprofil darf **nur von Ownern** bearbeitet werden.
-
-Dazu gehören insbesondere:
-
-- Beschreibung
-- Telefon
-- Standort
-- Logo
-- Banner
-
-Änderungen am öffentlichen Organisationsprofil werden mit alten und neuen Werten protokolliert.
-
-Der Öffnungsstatus `geöffnet / eingeschränkt / geschlossen` sowie eine dazugehörige Statusmeldung werden ebenfalls ausschließlich durch Owner verwaltet. Der Öffnungsstatus wird aktuell **nur manuell** geändert; eine automatische FiveM-Erkennung ist nicht vorgesehen.
-
-Änderungen des Öffnungsstatus werden nicht protokolliert.
-
-Auch das öffentliche Sichtbar-/Verstecktschalten der Mitgliederliste darf ausschließlich durch Owner erfolgen und wird nicht protokolliert.
-
-Da ausschließlich Owner diese öffentlichen Organisationsdaten ändern dürfen, ist kein zusätzliches Freigabe- oder Genehmigungsverfahren für Änderungen normaler Mitglieder vorgesehen.
-
-## Feste Leitungs-/Owner-Rolle
-
-Jede Organisation besitzt eine **feste, systemgeschützte Owner-Rolle**.
-
-Diese Rolle kann nicht gelöscht werden und besitzt immer sämtliche für die jeweilige Organisation verfügbaren Organisationsrechte. Ihre Rechte können nicht reduziert werden.
-
-Die Owner-Rolle darf mehreren Mitgliedern gleichzeitig zugewiesen werden. Alle Owner sind in Bezug auf die Owner-Rolle gleichgestellt.
-
-Die **sichtbare Bezeichnung der Owner-Rolle wird von der Stadtverwaltung festgelegt**. Owner der Organisation können diese Bezeichnung nicht selbst ändern.
-
-Alle Owner derselben Organisation verwenden immer dieselbe sichtbare Owner-Bezeichnung.
-
-Die Organisation darf für ihre Owner-Rolle eine Darstellungsfarbe und ein Icon aus der festen Nexus-Iconbibliothek festlegen. Die technische Owner-Rolle bleibt davon unberührt.
-
-Technisch bleibt die Rolle unabhängig von ihrer sichtbaren Bezeichnung, Farbe oder ihrem Icon immer als geschützte Owner-Rolle erkennbar.
-
-Ändert die Stadtverwaltung die sichtbare Owner-Bezeichnung einer Organisation, wird diese Änderung protokolliert und die Owner der Organisation werden benachrichtigt.
+Farbe und Icon der Owner-Rolle werden von der Organisation festgelegt, jedoch nur durch einen **speziell dafür festgelegten Owner**. Änderungen an Owner-Farbe oder Owner-Icon werden nicht protokolliert. Wie dieser spezielle Owner technisch bestimmt wird, wird bei der Umsetzung noch konkretisiert.
 
 ### Weitere Owner ernennen
 
-Ein bestehender Owner darf **jedes aktive normale Mitglied derselben Organisation** zu einem weiteren Owner ernennen, unabhängig davon, welche normale Rolle die Person vorher besitzt.
+Ein bestehender Owner darf jedes **aktive normale Mitglied** derselben Organisation zum weiteren Owner ernennen, unabhängig von dessen vorheriger normaler Rolle.
 
-Eine Bestätigung durch das ernannte Mitglied ist nicht erforderlich. Die Ernennung wird nach Bestätigung durch den ausführenden Owner sofort wirksam und ersetzt die bisherige normale Rolle unmittelbar durch die Owner-Rolle.
+- Die Ernennung benötigt keine Zustimmung des ernannten Mitglieds.
+- Vor der Ernennung erscheint eine deutliche Warnung, dass die Person vollständige Owner-Rechte erhält.
+- Die Ernennung wirkt sofort.
+- Eine zusätzliche interne Notiz ist nicht vorgesehen.
+- Die Ernennung wird protokolliert.
 
-Vor der Ernennung zeigt das Frontend eine deutliche Sicherheitsabfrage an, dass die betroffene Person anschließend vollständige Owner-Rechte besitzt.
+### Eigene Owner-Rolle abgeben
 
-Für eine Owner-Ernennung ist keine zusätzliche interne Notiz vorgesehen.
+Ein Owner darf seine eigene Owner-Rolle freiwillig abgeben.
 
-Jede Owner-Ernennung durch einen bestehenden Owner wird protokolliert. Das Protokoll enthält mindestens:
+- Eine Bestätigung ist erforderlich.
+- Die Person bleibt Mitglied.
+- Sie wählt selbst eine aktuell vorhandene normale Rolle.
+- Danach gelten sofort nur noch die Rechte dieser Rolle.
+- Die freiwillige Owner-Abgabe wird **nicht** protokolliert.
+- Auch der letzte Owner darf seine Rolle abgeben.
 
-- Organisation
-- betroffene Person
-- ernennender Owner
-- vorherige Rolle
-- Aktion `Owner ernannt`
-- Datum und Uhrzeit
+Ein Owner darf außerdem die Organisation direkt verlassen. Dabei wird seine Owner-Rolle automatisch aufgegeben und die Mitgliedschaft beendet. Ein optionaler Austrittsgrund ist möglich. Ist dies der letzte Owner, wird die Stadtverwaltung benachrichtigt.
 
-### Schutz zwischen Ownern
+## Organisationen ohne Owner
 
-Ein Owner darf **keinem anderen Owner** die Owner-Rolle entziehen, ihn auf eine normale Rolle zurückstufen, aus der Organisation entfernen oder auf `inaktiv/beurlaubt` setzen.
+Eine Organisation darf vorübergehend 0 Owner besitzen.
 
-### Eigene Owner-Rolle freiwillig abgeben
+- Normale Rollen und ihre bisherigen Rechte funktionieren weiter.
+- Die Organisation bleibt öffentlich sichtbar.
+- Im internen Bereich erscheint ein Hinweis, dass aktuell kein Owner vorhanden ist.
+- Die Stadtverwaltung erhält eine Übersicht über Organisationen ohne Owner.
+- Diese Organisationen werden im Stadtverwaltungs-Dashboard besonders markiert.
+- Aus dieser Übersicht kann direkt die Notfall-Owner-Zuweisung geöffnet werden.
 
-Ein Owner darf seine **eigene Owner-Rolle freiwillig abgeben**. Dafür ist keine Zustimmung eines anderen Owners oder der Stadtverwaltung erforderlich.
+## Notfall- und Verwaltungsrechte der Stadtverwaltung
 
-Vor der freiwilligen Abgabe muss eine deutliche Bestätigung im Frontend erfolgen.
+### Owner einsetzen
 
-Die Person bleibt Mitglied der Organisation und darf selbst auswählen, auf welche aktuell vorhandene aktive normale Rolle sie wechseln möchte. Die Owner-Rolle steht bei dieser Auswahl nicht zur Verfügung.
+Die Stadtverwaltung darf per Notfallfunktion einen neuen Owner einsetzen, **nur wenn aktuell überhaupt kein Mitglied die Owner-Rolle besitzt**.
 
-Nach Bestätigung gelten sofort ausschließlich die Rechte der ausgewählten normalen Rolle.
+Ein inaktiver Owner zählt weiterhin als vorhandener Owner. Ein inaktives Mitglied darf nicht zum Owner gemacht werden; es muss vorher aktiv sein.
 
-Die freiwillige Abgabe wird **nicht protokolliert**.
+Die Stadtverwaltung wird durch die Zuweisung nicht selbst Mitglied oder Owner.
 
-Es gibt keine Schutzregel für den letzten Owner. Auch der letzte Owner darf seine eigene Owner-Rolle freiwillig abgeben. Besitzt die Organisation danach keinen Owner mehr, wird die Stadtverwaltung darüber automatisch informiert.
+### Owner-Rolle entziehen
 
-### Organisation als Owner direkt verlassen
+Eine berechtigte Person der Stadtverwaltung darf einem bestehenden Owner die Owner-Rolle entziehen, auch wenn weitere Owner vorhanden sind.
 
-Ein Owner darf die Organisation auch **direkt verlassen**, ohne zuvor manuell auf eine normale Rolle zu wechseln. Dabei wird seine Owner-Rolle automatisch beendet und die Mitgliedschaft endet unmittelbar.
+- Die betroffene Person bleibt Mitglied.
+- Die Stadtverwaltung wählt die neue normale Rolle der Person aus.
+- Der Eingriff wird protokolliert.
+- Die betroffene Person und die übrigen Owner werden benachrichtigt.
 
-Der direkte Austritt benötigt wie jeder freiwillige Austritt eine ausdrückliche Bestätigung im Frontend und wird als Ende der Mitgliedschaft protokolliert.
+### Owner inaktiv/aktiv setzen
 
-Führt der Austritt dazu, dass die Organisation keinen Owner mehr besitzt, wird die Stadtverwaltung automatisch darüber informiert.
+Nur die Stadtverwaltung darf einen Owner auf `inaktiv/beurlaubt` setzen oder wieder aktivieren.
 
-## Organisation ohne Owner
+- Beim Inaktivsetzen ist ein Grund Pflicht.
+- Der Grund ist für den betroffenen Owner und die übrigen Owner sichtbar.
+- Der Eingriff wird protokolliert.
+- Betroffener Owner und übrige Owner werden benachrichtigt.
 
-Eine Organisation darf vorübergehend **0 Owner** besitzen.
+### Weitere Stadtverwaltungsrechte bei normalen Organisationen
 
-In diesem Zustand:
+Dafür berechtigte Stadtverwaltungs-Personen dürfen:
 
-- bleiben normale Mitglieder und deren bestehende Rollenrechte weiterhin nutzbar
-- bleibt die Organisation öffentlich sichtbar
-- erscheint im internen Bereich ein deutlicher Hinweis, dass aktuell kein Owner vorhanden ist
-- erscheint die Organisation in einer dafür vorgesehenen Übersicht der Stadtverwaltung
+- die vollständige Mitgliederliste sehen, auch wenn sie öffentlich verborgen ist
+- interne Mitgliedsnotizen einsehen
+- interne Dokumente/Akten einer normalen Organisation einsehen
+- normale Mitglieder aus einer Organisation entfernen
+- die Liste ehemaliger Mitglieder einsehen
 
-Die fehlende Owner-Rolle führt also nicht automatisch zu einer vollständigen Sperrung der Organisation.
+Sie dürfen dagegen nicht:
 
-## Notfall-Eingriff der Stadtverwaltung
+- normale Mitglieder direkt aufnehmen
+- normale Rollen eines Mitglieds ändern
+- normale Mitglieder über die Stadtverwaltung auf inaktiv/aktiv setzen
 
-Hat eine Organisation **überhaupt kein Mitglied mit zugewiesener Owner-Rolle**, darf eine dafür berechtigte Person der Stadtverwaltung im Notfall einem Mitglied dieser Organisation die geschützte Owner-Rolle zuweisen.
+Diese Rechte gelten für die verwaltungsseitige Organisationsaufsicht. Besondere fachlich geschützte Fraktionsmodule können später strengere, eigene Zugriffsregeln erhalten.
 
-Ein `inaktiv/beurlaubt` gesetzter Owner zählt weiterhin als vorhandener Owner. Solange mindestens ein Mitglied die Owner-Rolle besitzt, darf die Stadtverwaltung über die Notfallfunktion keinen weiteren Owner einsetzen.
+## Öffentliche Mitgliederliste
 
-Ein `inaktiv/beurlaubt` gesetztes normales Mitglied darf durch die Stadtverwaltung **nicht direkt zum Owner gemacht** werden. Es muss zuvor wieder aktiv gesetzt werden.
+Die Organisation entscheidet, ob ihre Mitgliederliste öffentlich sichtbar ist. Diese Einstellung kann **nur durch Owner** geändert werden.
 
-Für die Notfall-Zuweisung muss kein zusätzlicher Freitext-Grund angegeben werden.
+Wenn die Liste sichtbar ist:
 
-Eine dafür berechtigte Person der Stadtverwaltung darf einem bestehenden Owner die Owner-Rolle auch wieder entziehen. Die Voraussetzung von 0 Ownern gilt nur für das **Einsetzen** eines neuen Owners, nicht für den Entzug.
+- nur aktive Mitglieder werden angezeigt
+- Owner stehen ganz oben
+- danach wird nach Rollen-Hierarchie sortiert
+- öffentlich werden weder Rollenfarbe noch Rollen-Icon noch Rollenbeschreibung angezeigt
+- es gibt keine eigene Namenssuche innerhalb der Mitgliederliste
+- ein sichtbares Mitglied kann angeklickt werden, um dessen Nexus-Personenprofil zu öffnen
 
-Beim Entzug der Owner-Rolle durch die Stadtverwaltung bleibt die betroffene Person **Mitglied der Organisation**. Die Stadtverwaltung muss dabei eine vorhandene aktive normale Rolle auswählen, auf die die Person unmittelbar zurückgestuft wird.
+Wenn die Liste verborgen ist:
 
-Sowohl das Einsetzen als auch das Entziehen einer Owner-Rolle durch die Stadtverwaltung wird protokolliert. Das Protokoll enthält mindestens:
+- aktive Owner bleiben sichtbar
+- bei Ownern werden Name und Nexus-ID angezeigt
+- die exakte Anzahl aktiver Mitglieder darf angezeigt werden
+- inaktive Mitglieder zählen nicht in diese öffentliche Anzahl
 
-- Organisation
-- Art des Eingriffs (`Owner eingesetzt` oder `Owner entzogen`)
-- betroffene Person
-- ausführende Person der Stadtverwaltung
-- gegebenenfalls die nach dem Entzug ausgewählte normale Rolle
-- Datum und Uhrzeit
+Ehemalige Mitglieder werden niemals öffentlich angezeigt. Ein suspendierter/gesperrter Nexus-Account bleibt in der öffentlichen Mitgliederliste sichtbar, solange die Organisationsmitgliedschaft weiter besteht und die übrigen Sichtbarkeitsregeln erfüllt sind.
 
-Die betroffene Person wird über den Eingriff benachrichtigt. Auch die übrigen Owner der Organisation werden über entsprechende Stadtverwaltungs-Eingriffe informiert.
+## Öffentliches Organisationsprofil
 
-Die Stadtverwaltung wird durch einen solchen Eingriff nicht selbst Mitglied oder Owner der Organisation und erhält dadurch keinen dauerhaften Zugriff auf interne Organisationsdaten.
+Das öffentliche Organisationsprofil darf **nur durch Owner** bearbeitet werden. Es gibt dafür kein frei vergebbares normales Rollenrecht.
+
+Ebenfalls nur Owner dürfen:
+
+- Öffnungsstatus ändern
+- Statusmeldung ändern
+- Mitgliederliste öffentlich sichtbar/versteckt schalten
+
+Der Öffnungsstatus wird vorerst **nur manuell** gepflegt.
+
+### Profilfelder
+
+- Organisationsname: nur Stadtverwaltung änderbar
+- Kurzbezeichnung: möglich, aber nur Stadtverwaltung änderbar
+- Beschreibung: normaler unformatierter Text
+- öffentliche Telefonnummer: genau eine
+- Standorte: mehrere Standorte/Filialen möglich
+- Statusmeldung: optional, maximal 120 Zeichen
+- öffentliche Öffnungszeiten: möglich
+- öffentliche Nexus-Mailadresse: jede Organisation erhält eine
+- externe Links/Social-Media-Links: möglich
+- Logo/Banner: Upload eigener Bilder oder Auswahl aus einer Nexus-Bibliothek
+- Profilvorschau vor dem Speichern: ja
+
+Telefon, Standorte, Logo und Banner gehören zur normalen Owner-Profilbearbeitung.
+
+Profiländerungen werden protokolliert; dabei werden alte und neue Werte gespeichert. Änderungen des Öffnungsstatus oder der Mitgliederlisten-Sichtbarkeit werden dagegen nicht protokolliert.
+
+## Organisationen anlegen, freischalten und verwalten
+
+Neue Organisationen können **nur durch die Stadtverwaltung** angelegt werden. Bürger dürfen jedoch einen Gründungsantrag einreichen.
+
+- Eine neu angelegte Organisation muss durch die Stadtverwaltung freigeschaltet werden, bevor sie öffentlich ist.
+- Beim Anlegen muss nicht sofort ein erster Owner festgelegt werden.
+- Eine Organisation darf mit 0 Ownern entstehen.
+- Nur die Stadtverwaltung darf den Organisationstyp ändern.
+
+### Archivierung
+
+Die Stadtverwaltung darf Organisationen archivieren.
+
+- Archivierte Organisationen sind öffentlich nicht sichtbar.
+- Interne Organisationsbereiche sind vollständig gesperrt.
+- Eine archivierte Organisation kann später wieder aktiviert werden.
+- Die Stadtverwaltung darf eine Organisation auch endgültig löschen.
 
 ## Ehemalige Mitglieder
 
-Jede Organisation erhält eine interne Ansicht **`Ehemalige Mitglieder`**.
+Jede Organisation erhält eine interne Ansicht `Ehemalige Mitglieder`.
 
-Dort werden mindestens angezeigt:
+Dort werden angezeigt:
 
-- ehemalige Person
-- Eintrittsdatum der zuletzt beendeten Mitgliedschaft
-- Austritts- beziehungsweise Entfernungsdatum
-- letzte Rolle in der Organisation
-- optionaler Entfernungsgrund, sofern bei einer Entfernung einer angegeben wurde
+- Person
+- Eintrittsdatum
+- Austritts-/Entfernungsdatum
+- letzte Rolle
+- optionaler Entfernungsgrund
 
-Ein optionaler Entfernungsgrund ist dort nur für Owner sowie entsprechend berechtigte Personen der Stadtverwaltung sichtbar.
+Der Entfernungsgrund ist für Owner sichtbar und kann nachträglich nicht geändert werden.
 
-Die Ansicht ehemaliger Mitglieder wird **12 Monate** aufbewahrt. Danach darf der Eintrag automatisch entfernt werden.
+Weitere Regeln:
 
-Wird eine ehemalige Person erneut aufgenommen, verschwindet der bisherige Eintrag aus der Ansicht `Ehemalige Mitglieder`. Frühere Mitgliedschaftszeiträume werden dort nicht als getrennte Historie weitergeführt. Die Person erhält bei der Wiederaufnahme immer die aktuelle Standardrolle.
+- Einträge bleiben maximal **12 Monate** erhalten und werden danach automatisch entfernt.
+- Owner können diese Einträge nicht manuell löschen.
+- Stadtverwaltung darf die Liste sehen.
+- Wird die Person erneut aufgenommen, verschwindet der alte Ehemaligen-Eintrag; es werden keine getrennten historischen Mitgliedschaftszeiträume geführt.
+- Bei Wiederaufnahme gilt die aktuelle Standardrolle, nicht die frühere Rolle.
+- Frühere interne Mitgliedsnotizen werden bei Wiederaufnahme wieder sichtbar.
+- Von ehemaligen Mitgliedern erstellte interne Dokumente/Akten bleiben erhalten.
+- In diesen erhaltenen Inhalten wird der frühere Autor später nicht mit Name oder Nexus-ID angezeigt.
 
-Vorhandene frühere interne Mitgliedsnotizen werden bei einer Wiederaufnahme wieder sichtbar.
+## Protokolle / Audit
 
-Ein gespeicherter früherer Entfernungsgrund darf nachträglich **nicht geändert** werden.
+Protokolliert werden insbesondere:
 
-Owner können Einträge aus `Ehemalige Mitglieder` **nicht manuell löschen**.
+- Rollen erstellen, umbenennen und löschen
+- Rollen aktivieren/deaktivieren
+- Mitglieder aufnehmen, entfernen und freiwillige Austritte
+- Rollenwechsel
+- Owner-Ernennungen
+- Stadtverwaltungs-Eingriffe an Ownern
+- Inaktiv-/Aktiv-Wechsel
+- öffentliche Profiländerungen
+- Änderungen der sichtbaren Owner-Bezeichnung
 
-Dafür berechtigte Personen der Stadtverwaltung dürfen die Liste ehemaliger Mitglieder einsehen.
+Nicht protokolliert werden insbesondere:
 
-Von einem ehemaligen Mitglied erstellte interne Dokumente oder Akten bleiben nach dem Austritt beziehungsweise der Entfernung **erhalten**.
+- freiwillige Abgabe der eigenen Owner-Rolle
+- Wechsel der Standardrolle
+- Änderungen konkreter Rollenberechtigungen
+- reine Drag-&-Drop-Hierarchieänderungen
+- Rollenfarbe/Icon/Beschreibung
+- Owner-Farbe/Icon
+- Öffnungsstatus
+- öffentliche Mitgliederlisten-Sichtbarkeit
+- Bearbeitung/Löschung interner Mitgliedsnotizen
 
-In der späteren Anzeige dieser erhaltenen Inhalte wird der ursprüngliche Autor jedoch **nicht mit Name oder Nexus-ID sichtbar dargestellt**.
+### Inhalt und Zugriff
 
-Ehemalige Mitglieder werden niemals auf der öffentlichen Mitgliederliste angezeigt.
+Protokolle speichern je nach Ereignis mindestens Organisation, Aktion, betroffene Person/Rolle, ausführende Person, Datum/Uhrzeit sowie relevante alte/neue Werte. Neben dem Namen des Ausführenden wird dessen Nexus-ID gespeichert/angezeigt. Wird dessen Account später deaktiviert, bleibt der damalige Name im Protokoll erhalten.
+
+- Innerhalb der Organisation sehen nur Owner die Organisations-Protokolle.
+- Es gibt kein frei vergebbares Recht `Protokolle ansehen`.
+- Berechtigte Stadtverwaltungs-Personen dürfen die Organisations-Protokolle ebenfalls einsehen.
+- Protokolle bieten Suche und Filter.
+- Ein Export als CSV oder PDF ist nicht vorgesehen.
+
+Alle vorgesehenen Audit-Protokolle werden **6 Monate** aufbewahrt und danach automatisch gelöscht.
+
+## Benachrichtigungen
+
+Das betroffene aktive Mitglied erhält Nexus-Benachrichtigungen bei Aufnahme, Entfernung, Rollenwechsel und Owner-Ernennung.
+
+Owner erhalten zusätzliche Pflichtbenachrichtigungen bei wichtigen Organisationsereignissen, insbesondere:
+
+- freiwilligem Austritt eines Mitglieds
+- Aufnahme durch eine Rolle mit `Mitglieder verwalten`
+- Inaktiv-/Aktiv-Wechsel eines Mitglieds
+- Stadtverwaltungs-Eingriffen an Ownern
+- Änderung der Owner-Bezeichnung
+- Wegfall des letzten Owners (zusätzlich Stadtverwaltung)
+
+Wichtige Organisations-Benachrichtigungen können nicht deaktiviert werden.
 
 ## Sicherheitsabfragen im Frontend
 
-Folgende Aktionen benötigen vor der endgültigen Ausführung eine ausdrückliche Bestätigung:
+Eine ausdrückliche Bestätigung ist mindestens erforderlich bei:
 
-- freiwilliger Austritt aus einer Organisation
-- freiwillige Abgabe der eigenen Owner-Rolle
+- freiwilligem Austritt aus einer Organisation
+- freiwilliger Abgabe der eigenen Owner-Rolle
+- direktem Austritt eines Owners
 - Löschen einer normalen Rolle
+- Entfernen eines normalen Mitglieds durch einen Owner
 - Ernennung eines neuen Owners
 - Wechsel der Standardrolle
+- Speichern geänderter Rollenrechte
 
-Bei der Owner-Ernennung muss die Sicherheitsabfrage ausdrücklich darauf hinweisen, dass die Person danach vollständige Owner-Rechte besitzt.
+Bei der Owner-Ernennung wird ausdrücklich darauf hingewiesen, dass die Person anschließend vollständige Owner-Rechte besitzt.
 
-## Sicherheitsregel
+## Technische Zielstruktur
 
-Berechtigungen müssen serverseitig beziehungsweise über Supabase/RLS geprüft werden. Eine reine Ausblendung von Schaltflächen im Frontend reicht nicht aus.
+`organization_members.role_title` kann vorerst als sichtbarer Titel bestehen bleiben. Für die vollständige Umsetzung soll jede Organisationsmitgliedschaft später genau eine strukturierte Rollenreferenz erhalten.
 
-Eine Organisation erhält durch ihre eigenen Rollen niemals automatisch Zugriff auf Daten anderer Organisationen oder geschützte Bereiche anderer Module.
+Voraussichtlich benötigt werden:
 
-Protokolle dürfen von normalen Organisationsmitgliedern nicht manipuliert oder gelöscht werden.
+- `organization_roles`
+- Rollen-Hierarchie/Sortierposition
+- Rollenberechtigungen
+- aktive/deaktivierte Rollen
+- Standardrollen-Markierung
+- Mitgliedsstatus aktiv/inaktiv
+- interne Mitgliedsnotizen
+- Ehemaligen-Historie
+- Audit-/Protokolltabellen
+- serverseitige/RLS-gesicherte Owner- und Stadtverwaltungsaktionen
 
-## Bestehende Mitgliederdaten
-
-`organization_members.role_title` kann vorerst weiterhin den sichtbaren Rollentitel speichern.
-
-Für das vollständige Rollen- und Berechtigungssystem wird später eine eigene Rollenstruktur ergänzt. Jede Organisationsmitgliedschaft erhält genau eine Rollenreferenz; ein Many-to-Many-System zwischen Mitgliedern und Rollen ist nicht notwendig.
+Ein Many-to-Many-System zwischen Mitgliedern und Rollen ist nicht erforderlich.
