@@ -92,7 +92,7 @@ Bürger können andere Nexus-Benutzer blockieren.
 
 Aktuell gilt:
 
-- Eine Blockierung verhindert **nicht** automatisch direkte Bürger-zu-Bürger-Nexus-Mails.
+- Eine Blockierung verhindert direkte Bürger-zu-Bürger-Nexus-Mails; Mails eines blockierten Benutzers werden nicht zugestellt.
 - Der blockierte Benutzer kann das öffentliche Profil des Blockierenden nicht mehr sehen.
 - Der blockierte Benutzer sieht öffentliche Kommentare und Bewertungen des Blockierenden nicht mehr.
 - Wenn beide Personen derselben Organisation angehören, bleiben notwendige interne Organisationskontakte weiterhin möglich.
@@ -101,7 +101,7 @@ Aktuell gilt:
 - Die eigene Blockierliste ist ausschließlich für den jeweiligen Benutzer selbst sichtbar.
 - Eine Blockierung kann jederzeit wieder aufgehoben werden.
 
-Die Auswirkungen auf bestehende Mailthreads und weitere direkte Kontaktfunktionen können im Nexus-Mail-Konzept noch genauer ausgearbeitet werden.
+Die genaue Mail-Zustelllogik ist im Konzept `personal-mail.md` festgelegt.
 
 ## Profil melden und Moderation
 
@@ -122,7 +122,7 @@ Die Stadtverwaltung darf öffentliche Profilinhalte wie Profilbild und Bio moder
 
 Jeder Benutzer darf innerhalb von Nexus ein persönliches Farbschema auswählen.
 
-Die genaue Reichweite dieser Personalisierung – beispielsweise nur Akzentfarbe oder vollständiges Theme – wird noch separat festgelegt.
+Zusätzlich kann der Benutzer gemäß dem Systemkonzept zwischen hellem und dunklem Grunddesign wählen. Persönliche Farben wirken darüber hinaus als individuelle Gestaltung/Akzente.
 
 ## Sprache, Zeit- und Datumsformat
 
@@ -145,8 +145,9 @@ Für die spätere Umsetzung werden voraussichtlich benötigt:
 - optional Tag/Monat-only-Freigabe
 - externe Profil-Links mit Freigabestatus
 - veröffentlichte abgegebene Organisationsbewertungen
-- Benutzer-Blockierungen
+- Benutzer-Blockierungen einschließlich direkter Mail-Zustellsperre
 - Profilmeldungen und Moderationsstatus
 - persönliche Farbschema-Einstellung
+- Hell-/Dunkelmodus
 
 Profilbezogene Sichtbarkeitsentscheidungen müssen serverseitig durchgesetzt werden; versteckte Daten dürfen weder direkt noch über Suche/API-Nebenwege offengelegt werden.
