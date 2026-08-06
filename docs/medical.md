@@ -66,7 +66,7 @@ Für Einsätze kann eine kleine medizinische Zusammenfassung gezielt mit PD/FD g
 - Medikamente
 - Blutgruppe
 
-Für die Weitergabe medizinischer Informationen ist grundsätzlich eine Zustimmung des Patienten erforderlich, außer bei einer klar definierten Notfallregel.
+Für die Weitergabe medizinischer Informationen ist grundsätzlich eine Zustimmung des Patienten erforderlich, außer bei einer klar definierten Notfallregel oder einer ausdrücklich richterlich angeordneten Freigabe.
 
 Der Patient erhält keine automatische Nexus-Benachrichtigung, wenn medizinische Informationen gezielt an eine andere Stelle freigegeben werden.
 
@@ -74,7 +74,12 @@ Der Patient erhält keine automatische Nexus-Benachrichtigung, wenn medizinische
 
 PD und Justice können medizinische Berichte über einen formellen Nexus-Anfrageprozess anfordern.
 
-Die konkrete Prüf-/Freigabelogik wird im Justice-/Anfragemodul weiter definiert.
+Für Justice-Anfragen gilt zusätzlich:
+
+- Medical sieht den konkreten Anfragegrund.
+- Bei Ablehnung durch Medical ist ein Ablehnungsgrund Pflicht.
+- Eine ausdrücklich richterlich angeordnete medizinische Freigabe darf die normale Patientenzustimmung ersetzen.
+- Diese richterliche Ausnahme erzeugt keinen pauschalen Justice-Zugriff auf die Krankenakte; freigegeben werden nur die konkret angeordneten beziehungsweise genehmigten Informationen.
 
 ## Behandlungsvorlagen
 
@@ -158,7 +163,7 @@ Voraussichtlich benötigt werden:
 - Behandlungs-Timeline
 - externe Link-Anhänge
 - medizinische Freigabe-Zusammenfassungen
-- formelle PD-/Justice-Anfragen
+- formelle PD-/Justice-Anfragen einschließlich richterlicher Ausnahme
 - Vorlagen + Versionshistorie
 - Bescheinigungen und RP-Rezepte
 - Wissensdatenbank
