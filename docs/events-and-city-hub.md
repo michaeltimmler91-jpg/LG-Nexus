@@ -179,7 +179,8 @@ Für Kommentare gilt:
 - Personen mit `City Hub verwalten` dürfen fremde Kommentare moderieren beziehungsweise entfernen.
 - Beim Moderations-Löschen ist ein Grund Pflicht.
 - Dieser Moderationsgrund ist ausschließlich intern sichtbar und wird dem Kommentarautor nicht angezeigt.
-- Eine Bürgerfunktion zum Melden von Kommentaren ist derzeit nicht vorgesehen; damit entfällt auch eine separate Liste gemeldeter Kommentare.
+- Bürger dürfen Kommentare melden.
+- Die Stadtverwaltung besitzt eine eigene Übersicht/Liste gemeldeter Kommentare zur Moderation.
 
 ## Reaktionen
 
@@ -250,6 +251,7 @@ Für die spätere Umsetzung werden voraussichtlich benötigt:
 - News-Änderungsverlauf und Papierkorb
 - optionale und zielgruppenbegrenzbare Kommentarfunktion
 - interne Moderationsgründe
+- Kommentar-Meldungen und Moderationsübersicht für die Stadtverwaltung
 - Emoji-Reaktionen
 - Pin-/Wichtig-Markierung
 - optionale Nexus-Benachrichtigungsverteilung durch die Stadtverwaltung
