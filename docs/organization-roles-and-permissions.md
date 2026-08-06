@@ -1,580 +1,475 @@
 # LG Nexus – Organisationsrollen und Berechtigungen
 
-Dieses Dokument bündelt die aktuell festgelegten Regeln für Organisationsrollen, Mitgliederverwaltung, Owner, öffentliche Organisationsdarstellung, Organisations-Mail, Dokumente, Ankündigungen, Bewertungen, Gründungsanträge und Eingriffe der Stadtverwaltung.
+Dieses Dokument bündelt die aktuell festgelegten Regeln für Organisationsrollen, Mitgliederverwaltung, Owner, öffentliche Organisationsdarstellung, Organisations-Mail, Dokumente, Ankündigungen, Bewertungen, Stellenangebote/Bewerbungen, Gründungsanträge und Eingriffe der Stadtverwaltung.
 
 ## Grundprinzip
 
 - Ein Mitglied besitzt innerhalb derselben Organisation **genau eine Rolle gleichzeitig**.
 - Ein Bürger kann Mitglied mehrerer Organisationen sein und besitzt dort jeweils eine eigene Rolle.
-- Rollen bestehen aus sichtbarer Bezeichnung, Hierarchieposition und einem Rechtepaket.
+- Rollen bestehen aus sichtbarer Bezeichnung, Hierarchieposition und Rechtepaket.
 - Berechtigungen werden serverseitig beziehungsweise über Supabase/RLS geprüft; UI-Ausblendungen allein reichen nicht.
-- Normale Organisationsrechte geben niemals automatisch Zugriff auf Daten anderer Organisationen.
+- Organisationsrechte geben niemals automatisch Zugriff auf Daten anderer Organisationen.
 
 ## Normale Rollen
 
-Normale Rollen können von der Organisation frei gestaltet werden. Sie besitzen:
-
-- einen innerhalb der Organisation eindeutigen Namen
-- eine optionale Kurzbeschreibung
-- eine optionale Farbe
-- ein optionales Icon aus der festen Nexus-Iconbibliothek
-- eine Hierarchieposition
-- ein organisations-/modulabhängiges Rechtepaket
-
-Zwei normale Rollen derselben Organisation dürfen nicht denselben Namen besitzen. Eine maximale Anzahl normaler Rollen gibt es nicht.
+Normale Rollen können von der Organisation frei gestaltet werden und besitzen einen innerhalb der Organisation eindeutigen Namen, optionale Kurzbeschreibung, optionale Farbe, optionales Icon aus der Nexus-Iconbibliothek, Hierarchieposition und ein modulabhängiges Rechtepaket. Zwei normale Rollen dürfen nicht denselben Namen besitzen; eine maximale Rollenanzahl gibt es nicht.
 
 ### Standardrolle
 
-Jede neue Organisation erhält zunächst die normale Rolle `Mitarbeiter` als Standardrolle.
+Jede neue Organisation erhält zunächst `Mitarbeiter` als normale Standardrolle.
 
-- Es muss jederzeit genau eine aktive normale Standardrolle geben.
-- Nur ein Owner darf festlegen, welche normale Rolle Standardrolle ist.
+- Genau eine aktive normale Rolle muss Standardrolle sein.
+- Nur Owner bestimmen die Standardrolle.
 - Neue und erneut aufgenommene Mitglieder erhalten automatisch die aktuelle Standardrolle.
-- Vor einem Wechsel zeigt das Frontend eine Bestätigung wie `Neue Mitglieder erhalten künftig Rolle X.`
-- Der Wechsel der Standardrolle wird nicht protokolliert.
+- Vor einem Wechsel erscheint eine Bestätigung; der Wechsel wird nicht protokolliert.
 - Die Standardrolle darf umbenannt werden.
-- Soll die Standardrolle gelöscht oder deaktiviert werden, muss vorher eine andere aktive normale Rolle als Standardrolle gewählt werden.
+- Vor Löschen/Deaktivieren der Standardrolle muss eine andere aktive normale Rolle gewählt werden.
 
-### Rollen erstellen, bearbeiten und löschen
+### Erstellen, Duplizieren, Deaktivieren und Löschen
 
-Das normale Recht `Rollen verwalten` reicht **nicht** zum Erstellen, Umbenennen oder Löschen normaler Rollen und auch nicht zum Ändern ihrer Berechtigungen. Diese Strukturänderungen bleiben Ownern vorbehalten.
+`Rollen verwalten` reicht nicht zum Erstellen, Umbenennen, Löschen oder Ändern von Rollenrechten; diese Strukturänderungen bleiben Ownern vorbehalten.
 
-Eine normale Rolle darf nur gelöscht werden, wenn ihr kein Mitglied mehr zugewiesen ist und mindestens eine andere normale Rolle bestehen bleibt. Vor dem Löschen ist eine Sicherheitsbestätigung erforderlich.
-
-Owner dürfen Rollen duplizieren. Beim Duplizieren werden **nur die Berechtigungen** übernommen; Name, Beschreibung, Farbe und Icon werden nicht automatisch kopiert.
-
-### Rollen deaktivieren
-
-Owner dürfen normale Rollen deaktivieren und später reaktivieren.
-
-- Mitglieder dürfen nicht auf einer deaktivierten Rolle verbleiben.
-- Eine deaktivierte Rolle darf nicht neu zugewiesen werden.
-- Vor der Deaktivierung müssen alle Mitglieder auf aktive Rollen wechseln.
-- Die deaktivierte Rolle bleibt in der Rollenverwaltung sichtbar.
-- Ihr Name bleibt reserviert.
-- Ein Owner darf sie umbenennen.
-- Eine deaktivierte, unbenutzte Rolle darf gelöscht werden.
-- Nach Reaktivierung wird sie ganz unten in die normale Hierarchie eingeordnet.
-- Aktivierung und Deaktivierung werden protokolliert.
+- Eine Rolle darf nur gelöscht werden, wenn niemand mehr zugewiesen ist und mindestens eine andere normale Rolle bestehen bleibt.
+- Vor dem Löschen ist eine Sicherheitsbestätigung erforderlich.
+- Owner dürfen Rollen duplizieren; übernommen werden nur die Berechtigungen.
+- Owner dürfen Rollen deaktivieren und später reaktivieren.
+- Deaktivierte Rollen bleiben sichtbar, ihr Name bleibt reserviert, sie dürfen umbenannt und unbenutzt gelöscht werden.
+- Auf deaktivierten Rollen dürfen keine Mitglieder verbleiben und sie dürfen nicht neu zugewiesen werden.
+- Reaktivierte Rollen werden ganz unten einsortiert.
+- Aktivierung/Deaktivierung wird protokolliert.
 
 ### Rollenrechte
 
-Rollenrechte werden im Editor nach Modulen/Themen gruppiert, zum Beispiel `Allgemein`, `Medical`, `Ausbildung`, `Akten` oder `Verwaltung`.
+Rechte werden im Editor nach Modulen/Themen gruppiert, z. B. Allgemein, Medical, Ausbildung, Akten oder Verwaltung.
 
-- Änderungen wirken **sofort** für alle Mitglieder dieser Rolle.
-- Vor dem Speichern geänderter Rollenrechte ist eine Bestätigung erforderlich.
-- Beim Aktivieren weitreichender Rechte wie `Mitglieder verwalten` oder `Rollen verwalten` erscheint eine zusätzliche Warnung.
-- Änderungen an Rollenfarbe, Rollen-Icon oder Rollenbeschreibung werden nicht protokolliert.
+- Änderungen wirken sofort für alle Mitglieder der Rolle.
+- Vor dem Speichern geänderter Rechte ist eine Bestätigung erforderlich.
+- Bei weitreichenden Rechten wie `Mitglieder verwalten` oder `Rollen verwalten` erscheint zusätzlich eine Warnung.
+- Änderungen an Rollenfarbe, Icon oder Beschreibung werden nicht protokolliert.
 
 ## Hierarchie und Rollenvergabe
 
-Die Owner-Rolle steht technisch immer oberhalb aller normalen Rollen und ist nicht verschiebbar.
+Die Owner-Rolle steht technisch immer über allen normalen Rollen und ist nicht verschiebbar.
 
-Normale Rollen können per Drag & Drop sortiert werden. Dafür ist `Rollen verwalten` nötig.
-
-Für ein normales Mitglied mit `Rollen verwalten` gilt:
-
-- die eigene Rolle darf nicht verschoben werden
-- Rollen oberhalb der eigenen Rolle dürfen nicht verschoben werden
-- Rollen unterhalb der eigenen Rolle dürfen frei untereinander sortiert werden
+Normale Rollen können mit `Rollen verwalten` per Drag & Drop sortiert werden. Für normale Rollen gilt dabei:
+- eigene Rolle nicht verschiebbar
+- Rollen oberhalb der eigenen Rolle nicht verschiebbar
+- Rollen unterhalb frei sortierbar
 
 Owner dürfen die gesamte normale Hierarchie verwalten.
 
 Für `Rollen zuweisen` gilt:
+- eigene Rolle nicht selbst änderbar
+- Rolle eines gleich- oder höherrangigen Mitglieds nicht änderbar
+- Zielrolle muss unterhalb der eigenen Rolle liegen
+- Mitglieder unterhalb dürfen innerhalb dieses Bereichs hoch- oder herabgestuft werden
 
-- die eigene Rolle darf nicht selbst geändert werden
-- die Rolle eines gleichrangigen oder höherrangigen Mitglieds darf nicht geändert werden
-- Zielrollen müssen unterhalb der eigenen Rolle liegen
-- Mitglieder unterhalb der eigenen Stufe dürfen innerhalb dieses Bereichs hoch- oder herabgestuft werden
-
-Owner dürfen jedem normalen Mitglied jede beliebige **aktive** normale Rolle geben, unabhängig von der Hierarchie.
+Owner dürfen jedem normalen Mitglied jede aktive normale Rolle zuweisen.
 
 ## Mitglieder aufnehmen und entfernen
 
 Neue Mitglieder dürfen durch Owner oder Rollen mit `Mitglieder verwalten` aufgenommen werden.
 
-- Die Aufnahme erfolgt sofort, ohne Bestätigung des neuen Mitglieds.
-- Neue Mitglieder erhalten automatisch die Standardrolle.
-- Ein Nicht-Owner mit `Mitglieder verwalten` darf aufnehmen, wenn die Standardrolle unterhalb seiner eigenen Hierarchiestufe liegt.
-- Ehemalige Mitglieder können später erneut aufgenommen werden.
-- Eine Rückkehr erfolgt immer als neue Aufnahme; eine frühere Entfernung wird nicht einfach rückgängig gemacht.
-- Es gibt keine maximale Mitgliederzahl.
+- Aufnahme erfolgt sofort ohne Bestätigung des neuen Mitglieds.
+- Automatische Zuweisung der Standardrolle.
+- Nicht-Owner mit `Mitglieder verwalten` dürfen nur aufnehmen, wenn die Standardrolle unterhalb der eigenen Stufe liegt.
+- Ehemalige Mitglieder können erneut aufgenommen werden; dies ist eine neue Aufnahme und keine Rücknahme der früheren Entfernung.
+- Keine maximale Mitgliederzahl.
 
-Nur Owner dürfen normale Mitglieder entfernen. Vor der Entfernung ist eine Sicherheitsbestätigung erforderlich. Ein optionaler Freitext-Grund ist möglich, wird der entfernten Person angezeigt und kann später nicht verändert werden. Owner können andere Owner nicht entfernen.
+Nur Owner dürfen normale Mitglieder entfernen. Vorher erscheint eine Sicherheitsabfrage. Ein optionaler Grund ist möglich, wird der entfernten Person angezeigt und kann später nicht verändert werden. Owner können andere Owner nicht entfernen.
 
-Ein Mitglied darf selbst austreten, auch wenn es inaktiv/beurlaubt ist. Vor dem Austritt ist eine Bestätigung erforderlich; ein eigener Austrittsgrund ist optional.
+Ein Mitglied darf selbst austreten, auch inaktiv/beurlaubt; Bestätigung erforderlich, eigener Austrittsgrund optional.
 
 ## Interne Mitgliedsdaten und Notizen
 
-Owner und Rollen mit `Mitglieder verwalten` dürfen interne Mitgliedsnotizen sehen. Das betroffene Mitglied selbst sieht seine eigenen Notizen nicht.
+Owner und Rollen mit `Mitglieder verwalten` dürfen interne Mitgliedsnotizen sehen; das betroffene Mitglied selbst nicht. Normale Rollen mit diesem Recht dürfen interne Daten nur bei Mitgliedern unterhalb der eigenen Hierarchiestufe bearbeiten.
 
-Für normale Rollen mit `Mitglieder verwalten` gilt zusätzlich: Interne Mitgliedsdaten dürfen nur bei Mitgliedern **unterhalb der eigenen Hierarchiestufe** bearbeitet werden.
-
-Notizen dürfen von Ownern und `Mitglieder verwalten` angelegt werden. Bearbeiten oder löschen dürfen sie nur der ursprüngliche Ersteller oder ein Owner. Änderungen/Löschungen werden nicht protokolliert. Bei einer späteren Wiederaufnahme werden frühere Notizen wieder sichtbar.
+Notizen dürfen von Ownern und `Mitglieder verwalten` angelegt werden. Bearbeiten/löschen dürfen nur Ersteller oder Owner. Änderungen/Löschungen werden nicht protokolliert. Bei Wiederaufnahme werden frühere Notizen wieder sichtbar.
 
 ## Inaktiv / beurlaubt
 
 Normale Mitglieder können auf `inaktiv/beurlaubt` gesetzt werden, ohne Mitgliedschaft oder Rolle zu verlieren.
 
-- Ein Grund ist optional und für die betroffene Person sichtbar.
-- Der Grund kann später nicht bearbeitet werden.
-- Owner und Rollen mit `Mitglieder verwalten` dürfen den Grund sehen.
-- Es gibt keinen Zeitraum von/bis; der Status bleibt bis zur manuellen Änderung bestehen.
-- Owner haben eine separate Ansicht/einen Filter für inaktive Mitglieder.
-- Inaktive Mitglieder werden in der normalen öffentlichen Mitgliederliste nicht angezeigt.
-- Interne Organisationsbereiche sind vollständig gesperrt.
-- Öffentliche Organisationsseiten bleiben sichtbar.
-- Während der Inaktivität erhält das Mitglied keine allgemeinen internen Organisationsbenachrichtigungen, keine persönlichen Organisationsmeldungen und keine internen Organisations-Mails.
-- Das Setzen und Aufheben von `inaktiv/beurlaubt` wird protokolliert.
-
-Ein normales Mitglied darf sich selbst auf inaktiv setzen; ein separates Anfragesystem ist nicht vorgesehen. Eine normale Rolle mit `Mitglieder verwalten` darf nur Mitglieder unterhalb der eigenen Hierarchiestufe inaktiv setzen oder reaktivieren.
-
-Ein Owner darf ein inaktives normales Mitglied weiterhin entfernen. Die Rolle eines inaktiven normalen Mitglieds darf nach den normalen Hierarchieregeln geändert werden. Ein inaktives Mitglied darf nicht direkt zum Owner ernannt werden; es muss vorher wieder aktiv sein.
+- Grund optional, für Betroffenen sichtbar und später nicht änderbar.
+- Owner und `Mitglieder verwalten` dürfen den Grund sehen.
+- Kein Zeitraum von/bis; Status bleibt bis manueller Änderung bestehen.
+- Owner erhalten separaten Filter/Ansicht für Inaktive.
+- Inaktive Mitglieder erscheinen nicht öffentlich.
+- Interne Organisationsbereiche sind gesperrt; öffentliche Organisationsseiten bleiben sichtbar.
+- Während Inaktivität keine internen/persönlichen Organisationsbenachrichtigungen und keine internen Organisations-Mails.
+- Aktiv/Inaktiv-Wechsel werden protokolliert.
+- Normale Mitglieder dürfen sich selbst inaktiv setzen; kein Anfragesystem.
+- `Mitglieder verwalten` darf nur Mitglieder unterhalb der eigenen Stufe inaktiv/aktiv setzen.
+- Owner dürfen inaktive normale Mitglieder entfernen.
+- Rollenänderungen inaktiver normaler Mitglieder bleiben nach Hierarchieregeln möglich.
+- Inaktive Mitglieder müssen vor Owner-Ernennung aktiviert werden.
 
 ## Geschützte Owner-Rolle
 
-Jede Organisation besitzt eine feste, systemgeschützte Owner-Rolle.
+Jede Organisation besitzt eine feste systemgeschützte Owner-Rolle.
 
-- Sie kann nicht gelöscht werden.
-- Sie besitzt immer sämtliche für die Organisation verfügbaren Rechte.
-- Ihre Rechte können nicht reduziert werden.
-- Mehrere Personen dürfen gleichzeitig Owner sein.
-- Alle Owner derselben Organisation sind gleichgestellt.
-- Owner können sich gegenseitig nicht entfernen, zurückstufen oder auf inaktiv setzen.
+- nicht löschbar
+- immer sämtliche verfügbaren Organisationsrechte
+- Rechte nicht reduzierbar
+- mehrere gleichberechtigte Owner möglich
+- Owner können andere Owner nicht entfernen, zurückstufen oder inaktiv setzen
 
 ### Sichtbare Owner-Bezeichnung
 
-Die sichtbare Bezeichnung der Owner-Rolle wird ausschließlich von der Stadtverwaltung als freier Text festgelegt, zum Beispiel `Geschäftsführer`, `Chief` oder `Direktor`.
-
-- Alle Owner derselben Organisation verwenden dieselbe Bezeichnung.
-- Owner können die Bezeichnung nicht selbst ändern.
-- Änderungen werden protokolliert.
-- Owner werden bei einer Änderung benachrichtigt.
-- Ein Grund ist nicht erforderlich.
-- Auf dem öffentlichen Organisationsprofil wird die Owner-Bezeichnung nicht als eigener Profilpunkt angezeigt.
+Die Stadtverwaltung legt die sichtbare Owner-Bezeichnung als freien Text fest, z. B. Geschäftsführer, Chief oder Direktor. Alle Owner derselben Organisation verwenden dieselbe Bezeichnung. Owner können sie nicht selbst ändern. Änderungen werden protokolliert und Owner benachrichtigt; ein Grund ist nicht erforderlich. Die Bezeichnung wird nicht als eigener Punkt im öffentlichen Profil angezeigt.
 
 ### Owner-Farbe und Owner-Icon
 
-Farbe und Icon der Owner-Rolle dürfen nur durch einen speziell festgelegten Design-Owner geändert werden.
+Farbe/Icon dürfen nur durch einen speziellen Design-Owner geändert werden.
 
-- Die Stadtverwaltung bestimmt den Design-Owner.
+- Stadtverwaltung bestimmt den Design-Owner.
 - Gibt es genau einen Owner, ist dieser automatisch Design-Owner.
-- Der Design-Owner kann nicht beliebig beziehungsweise jederzeit gewechselt werden.
-- Ein Wechsel wird nicht protokolliert.
-- Änderungen an Owner-Farbe oder Owner-Icon werden nicht protokolliert.
-
-Ein technischer Ausnahmeweg für den Fall, dass der Design-Owner die Owner-Rolle verliert oder die Organisation verlässt, wird bei der Umsetzung noch konkretisiert.
+- Design-Owner kann nicht beliebig/jederzeit gewechselt werden.
+- Wechsel sowie Farb-/Iconänderungen werden nicht protokolliert.
+- Sonderfall beim Wegfall des Design-Owners ist noch technisch zu konkretisieren.
 
 ### Weitere Owner ernennen
 
-Ein bestehender Owner darf jedes **aktive normale Mitglied** derselben Organisation zum weiteren Owner ernennen, unabhängig von dessen vorheriger normaler Rolle.
-
-- Die Ernennung benötigt keine Zustimmung des ernannten Mitglieds.
-- Vor der Ernennung erscheint eine deutliche Warnung über die vollständigen Owner-Rechte.
-- Die Ernennung wirkt sofort.
-- Eine zusätzliche interne Notiz ist nicht vorgesehen.
-- Die Ernennung wird protokolliert.
+Ein bestehender Owner darf jedes **aktive normale Mitglied** zum weiteren Owner ernennen, unabhängig von dessen normaler Rolle. Keine Zustimmung des Ernannten nötig. Vorher deutliche Warnung über vollständige Owner-Rechte. Ernennung wirkt sofort und wird protokolliert; keine zusätzliche interne Notiz.
 
 ### Eigene Owner-Rolle abgeben / Organisation verlassen
 
-Ein Owner darf seine eigene Owner-Rolle freiwillig abgeben. Eine Bestätigung ist erforderlich. Die Person bleibt Mitglied und wählt selbst eine vorhandene normale Rolle. Die freiwillige Owner-Abgabe wird nicht protokolliert; auch der letzte Owner darf sie durchführen.
+Owner dürfen die eigene Owner-Rolle freiwillig abgeben. Bestätigung erforderlich; Person bleibt Mitglied und wählt selbst eine normale Rolle. Die freiwillige Abgabe wird nicht protokolliert und ist auch beim letzten Owner möglich.
 
-Ein Owner darf außerdem die Organisation direkt verlassen. Dabei wird seine Owner-Rolle automatisch aufgegeben und die Mitgliedschaft beendet. Ein optionaler Austrittsgrund ist möglich. Ist dies der letzte Owner, wird die Stadtverwaltung benachrichtigt.
+Owner dürfen die Organisation auch direkt verlassen; Owner-Rolle und Mitgliedschaft enden gleichzeitig. Austrittsgrund optional. Fällt dadurch der letzte Owner weg, wird die Stadtverwaltung benachrichtigt.
 
 ## Organisationen ohne Owner
 
-Eine Organisation darf vorübergehend 0 Owner besitzen.
+0 Owner sind vorübergehend zulässig.
 
-- Normale Rollen und ihre bisherigen Rechte funktionieren weiter.
-- Die Organisation bleibt öffentlich sichtbar.
-- Im internen Bereich erscheint ein Hinweis, dass aktuell kein Owner vorhanden ist.
-- Die Stadtverwaltung erhält eine Übersicht über Organisationen ohne Owner.
-- Diese Organisationen werden im Stadtverwaltungs-Dashboard besonders markiert.
-- Aus dieser Übersicht kann direkt die Notfall-Owner-Zuweisung geöffnet werden.
+- normale Rollen/Rechte funktionieren weiter
+- Organisation bleibt öffentlich sichtbar
+- interner Hinweis „aktuell kein Owner“
+- Stadtverwaltung sieht entsprechende Übersicht und Dashboard-Warnung
+- direkte Notfall-Owner-Zuweisung aus dieser Übersicht möglich
 
-## Notfall- und Verwaltungsrechte der Stadtverwaltung
+## Stadtverwaltung – Organisationsaufsicht
 
 ### Owner einsetzen
 
-Die Stadtverwaltung darf per Notfallfunktion einen neuen Owner einsetzen, **nur wenn aktuell überhaupt kein Mitglied die Owner-Rolle besitzt**. Ein inaktiver Owner zählt weiterhin als vorhandener Owner. Ein inaktives Mitglied darf nicht zum Owner gemacht werden; es muss vorher aktiv sein.
+Notfall-Zuweisung eines Owners nur, wenn aktuell **überhaupt kein Mitglied** die Owner-Rolle besitzt. Ein inaktiver Owner zählt weiterhin als vorhandener Owner. Inaktive Mitglieder müssen vor Ernennung aktiviert werden.
 
 ### Owner-Rolle entziehen
 
-Die Stadtverwaltung darf einem bestehenden Owner die Owner-Rolle entziehen, auch wenn weitere Owner vorhanden sind.
-
-- Die betroffene Person bleibt Mitglied.
-- Die Stadtverwaltung wählt die neue normale Rolle.
-- Der Eingriff wird protokolliert.
-- Betroffene Person und übrige Owner werden benachrichtigt.
+Stadtverwaltung darf einem Owner die Owner-Rolle entziehen, auch wenn weitere Owner existieren. Person bleibt Mitglied; Stadtverwaltung wählt eine normale Rolle. Eingriff wird protokolliert; Betroffener und übrige Owner werden benachrichtigt.
 
 ### Owner inaktiv/aktiv setzen
 
-Nur die Stadtverwaltung darf einen Owner auf `inaktiv/beurlaubt` setzen oder wieder aktivieren.
+Nur Stadtverwaltung darf Owner inaktiv/aktiv setzen. Beim Inaktivsetzen ist ein Grund Pflicht; Betroffener und übrige Owner sehen ihn. Eingriff wird protokolliert und benachrichtigt.
 
-- Beim Inaktivsetzen ist ein Grund Pflicht.
-- Der Grund ist für den betroffenen Owner und die übrigen Owner sichtbar.
-- Der Eingriff wird protokolliert.
-- Betroffener Owner und übrige Owner werden benachrichtigt.
+### Weitere Rechte bei normalen Organisationen
 
-### Weitere Stadtverwaltungsrechte bei normalen Organisationen
+Berechtigte Stadtverwaltungs-Personen dürfen:
+- vollständige Mitgliederliste sehen, auch wenn öffentlich verborgen
+- interne Mitgliedsnotizen sehen
+- allgemeine interne Dokumente ansehen, bearbeiten und neu erstellen
+- normale Mitglieder entfernen
+- ehemalige Mitglieder sehen
+- Organisations-Protokolle sehen
+- Bewerbungen sehen und bearbeiten
 
-Dafür berechtigte Stadtverwaltungs-Personen dürfen:
-
-- die vollständige Mitgliederliste sehen, auch wenn sie öffentlich verborgen ist
-- interne Mitgliedsnotizen einsehen
-- allgemeine interne Dokumente normaler Organisationen einsehen, bearbeiten und neu erstellen
-- normale Mitglieder aus einer Organisation entfernen
-- die Liste ehemaliger Mitglieder einsehen
-
-Sie dürfen dagegen nicht:
-
-- normale Mitglieder direkt aufnehmen
+Sie dürfen nicht:
+- normale Mitglieder aufnehmen
 - normale Rollen eines Mitglieds ändern
-- normale Mitglieder über die Stadtverwaltung auf inaktiv/aktiv setzen
+- normale Mitglieder über Stadtverwaltung inaktiv/aktiv setzen
 - allgemeine interne Dokumente löschen
 
-Besonders geschützte Medical-/Police-/Justice-Bereiche können strengere eigene Zugriffsregeln erhalten.
+Besonders geschützte Medical-/Police-/Justice-Bereiche können strengere Sonderregeln erhalten.
 
 ## Öffentliche Mitgliederliste
 
-Die Organisation entscheidet, ob ihre Mitgliederliste öffentlich sichtbar ist. Diese Einstellung kann **nur durch Owner** geändert werden.
+Nur Owner ändern die öffentliche Sichtbarkeit.
 
-Wenn die Liste sichtbar ist:
-
-- nur aktive Mitglieder werden angezeigt
-- Owner stehen ganz oben
-- danach wird nach Rollen-Hierarchie sortiert
-- Rollenfarbe, Rollen-Icon und Rollenbeschreibung werden öffentlich nicht angezeigt
-- es gibt keine eigene Namenssuche innerhalb der Mitgliederliste
+Wenn sichtbar:
+- nur aktive Mitglieder
+- Owner zuerst, danach Rollen-Hierarchie
+- Rollenfarbe/Icon/Beschreibung öffentlich nicht sichtbar
+- keine eigene Namenssuche
 - sichtbare Mitglieder können zum Nexus-Personenprofil geöffnet werden
 
-Wenn die Liste verborgen ist:
-
+Wenn verborgen:
 - aktive Owner bleiben sichtbar
-- bei Ownern werden Name und Nexus-ID angezeigt
-- die exakte Anzahl aktiver Mitglieder darf angezeigt werden
-- inaktive Mitglieder zählen nicht mit
+- Name + Nexus-ID der Owner
+- exakte Zahl aktiver Mitglieder darf angezeigt werden
+- Inaktive zählen nicht mit
 
-Ehemalige Mitglieder werden niemals öffentlich angezeigt. Ein suspendierter/gesperrter Nexus-Account bleibt sichtbar, solange die Organisationsmitgliedschaft und die übrigen Sichtbarkeitsregeln bestehen.
+Ehemalige Mitglieder sind nie öffentlich. Suspendierte/gesperrte Nexus-Accounts bleiben sichtbar, solange Mitgliedschaft und sonstige Sichtbarkeitsregeln bestehen.
 
 ## Öffentliches Organisationsprofil
 
-Das öffentliche Organisationsprofil darf nur durch Owner bearbeitet werden. Ebenfalls nur Owner dürfen Öffnungsstatus, Statusmeldung und öffentliche Sichtbarkeit der Mitgliederliste ändern.
+Nur Owner bearbeiten öffentliches Profil, Öffnungsstatus, Statusmeldung und Mitgliederlisten-Sichtbarkeit.
 
-### Profilfelder
+Profilfelder:
+- Organisationsname: nur Stadtverwaltung
+- Kurzbezeichnung: möglich, aber nur Stadtverwaltung
+- Beschreibung: einfacher Text
+- genau eine öffentliche Telefonnummer
+- mehrere Standorte/Filialen
+- optionale Statusmeldung, max. 120 Zeichen
+- öffentliche Öffnungszeiten
+- öffentliche Nexus-Mailadresse
+- externe Links/Social Media
+- Logo/Banner: Upload oder Nexus-Bibliothek
+- Profilvorschau vor Speichern
 
-- Organisationsname: nur Stadtverwaltung änderbar
-- Kurzbezeichnung: möglich, aber nur Stadtverwaltung änderbar
-- Beschreibung: normaler unformatierter Text
-- öffentliche Telefonnummer: genau eine
-- Standorte: mehrere Standorte/Filialen möglich
-- Statusmeldung: optional, maximal 120 Zeichen
-- öffentliche Öffnungszeiten: möglich
-- öffentliche Nexus-Mailadresse: jede Organisation erhält eine
-- externe Links/Social-Media-Links: möglich
-- Logo/Banner: eigener Upload oder Nexus-Bibliothek
-- Profilvorschau vor dem Speichern: ja
+Telefon, Standorte, Logo/Banner gehören zur Owner-Profilbearbeitung. Profiländerungen werden mit alten/neuen Werten protokolliert; Öffnungsstatus und Mitgliederlisten-Sichtbarkeit nicht.
 
-Telefon, Standorte, Logo und Banner gehören zur normalen Owner-Profilbearbeitung. Profiländerungen werden mit alten und neuen Werten protokolliert; Öffnungsstatus und Mitgliederlisten-Sichtbarkeit dagegen nicht.
+## Öffnungszeiten und Standorte
 
-## Öffnungszeiten
+Öffnungszeiten sind einfacher Freitext. Mehrere Zeitblöcke pro Tag können im Text angegeben werden. Keine Sonderöffnungszeiten-Funktion, keine Feiertagslogik und keine automatische „Jetzt geöffnet“-Berechnung. Manueller Status bleibt maßgeblich.
 
-Öffnungszeiten werden als einfacher frei formulierbarer Text gepflegt.
-
-- Mehrere Öffnungsblöcke an einem Tag sind möglich, z. B. `08:00–12:00 / 14:00–18:00`.
-- Sonderöffnungszeiten für einzelne Tage/Events sind nicht als eigene Funktion vorgesehen.
-- Keine automatische Feiertagslogik.
-- Keine automatische Berechnung von `Jetzt geöffnet / geschlossen`.
-- Der manuelle Organisationsstatus ist maßgeblich und hätte auch bei einer späteren Automatik Vorrang.
-
-## Standorte / Filialen
-
-Organisationen dürfen mehrere Standorte besitzen. Jeder Standort darf einen eigenen Namen, eigene Öffnungszeiten, einen Kartenmarker und einen Aktiv/Deaktiv-Status besitzen. Es gibt einen festgelegten Hauptstandort. Standorte besitzen keine eigene öffentliche Telefonnummer; verwendet wird die zentrale Organisationsnummer.
+Organisationen dürfen mehrere Standorte haben. Jeder Standort darf Namen, eigene Öffnungszeiten, Kartenmarker und Aktiv/Deaktiv-Status besitzen. Ein Hauptstandort wird markiert. Standorte nutzen die zentrale Organisations-Telefonnummer.
 
 ## Organisations-Nexus-Mail
 
-Jede Organisation erhält automatisch eine aus dem Organisationsnamen erzeugte Nexus-Mailadresse und einen gemeinsamen Posteingang.
+Jede Organisation erhält automatisch eine aus dem Namen erzeugte Nexus-Mailadresse und einen gemeinsamen Posteingang.
 
-### Rechte und Sichtbarkeit
+Rechte/Sichtbarkeit:
+- `Organisations-Mail lesen`: lesen, als gelesen markieren, Status ändern
+- Senden/Antworten als Organisation: nur Owner
+- intern sichtbarer tatsächlicher Verfasser; extern erscheint nur die Organisation
+- interne Kommentare sind für externen Absender unsichtbar
 
-- `Organisations-Mail lesen` erlaubt Lesen, als gelesen markieren und Status ändern.
-- Als Organisation senden oder antworten dürfen nur Owner.
-- Intern wird gespeichert, welcher konkrete Owner/Mitarbeiter eine Organisations-Mail geschrieben hat; der externe Empfänger sieht als Absender nur die Organisation.
-- Interne Kommentare im Mailthread sind **für den externen Absender nicht sichtbar**.
+Status/Priorität:
+- Status `neu`, `in Bearbeitung`, `erledigt`
+- Priorität `Niedrig`, `Normal`, `Hoch`, `Dringend`
+- wichtig-Markierung möglich
+- externer Absender darf Lesestatus sehen
 
-### Status, Zuweisung und Priorität
+Zuweisung:
+- mehrere Mitarbeiter gleichzeitig möglich
+- Owner oder Recht `Mail zuweisen`
+- zugewiesene Mitarbeiter dürfen auf erledigt setzen
+- Benachrichtigung bei Zuweisung
+- einmal gesetzte Zuweisung kann nicht geändert werden
+- Zuweisungsverlauf bleibt sichtbar
 
-Eine Mail besitzt den Status `neu`, `in Bearbeitung` oder `erledigt` und optional die Priorität `Niedrig`, `Normal`, `Hoch` oder `Dringend`.
-
-- Mails können mehreren Mitarbeitern gleichzeitig zugewiesen werden.
-- Zuweisen dürfen Owner oder Rollen mit `Mail zuweisen`.
-- Zugewiesene Mitarbeiter dürfen selbst auf `erledigt` setzen.
-- Zugewiesene Mitarbeiter erhalten eine Nexus-Benachrichtigung.
-- Eine einmal vorgenommene Zuweisung kann anschließend nicht geändert werden.
-- Der Zuweisungsverlauf bleibt sichtbar.
-- Mails können als `wichtig` markiert werden.
-- Der externe Absender darf sehen, ob seine Mail gelesen wurde.
-
-### Kommentare
-
-Jeder mit `Organisations-Mail lesen` darf interne Kommentare schreiben. Diese Kommentare sind ausschließlich intern und für den externen Absender unsichtbar.
-
-### Ordner, Labels, Suche und Entwürfe
-
-- Mail-Ordner/Labels sind gemeinsam für die ganze Organisation.
-- Nur Owner dürfen gemeinsame Ordner/Labels erstellen und verwalten.
-- Suche und Filter nach Status/Zuweisung sind vorgesehen.
-- Organisations-Mails können weitergeleitet werden.
-- Es gibt Entwürfe; alle Personen mit `Organisations-Mail lesen` dürfen die gemeinsamen Entwürfe sehen.
-- Eine separate Archiv-Funktion ist nicht vorgesehen.
-
-### Signatur, Abwesenheit und Vorlagen
-
-- Die Organisation kann eine feste Mail-Signatur hinterlegen; ändern dürfen sie nur Owner.
-- Automatische Abwesenheits-/Antwortnachrichten sind möglich.
-- Mail-Vorlagen sind vorgesehen und dürfen nur von Ownern erstellt beziehungsweise bearbeitet werden.
-
-### Anhänge und Papierkorb
-
-- Organisations-Mails unterstützen keine Dateianhänge.
-- Owner dürfen Mails löschen.
-- Gelöschte Mails landen für 30 Tage im Papierkorb.
-- Nur Owner dürfen gelöschte Mails aus dem Papierkorb wiederherstellen.
-- Danach werden sie endgültig gelöscht.
+Organisation:
+- gemeinsame Ordner/Labels, nur Owner verwalten sie
+- Suche und Status-/Zuweisungsfilter
+- Weiterleiten möglich
+- gemeinsame Entwürfe für alle mit `Organisations-Mail lesen`
+- keine separate Archiv-Funktion
+- feste Signatur, automatische Abwesenheits-/Antwortnachricht, Mail-Vorlagen; jeweils Verwaltung durch Owner
+- keine Dateianhänge
+- Owner dürfen löschen; Papierkorb 30 Tage; Wiederherstellung nur Owner
 
 ## Allgemeiner interner Dokumentenbereich
 
-Jede Organisation besitzt einen allgemeinen internen Dokumentenbereich.
-
-### Struktur und Berechtigungen
-
-- Eine Ordnerstruktur ist möglich.
-- Ordner dürfen durch Rollen mit `Dokumente verwalten` erstellt und verwaltet werden.
-- Ganze Ordner können nur für bestimmte Rollen sichtbar sein.
-- Dokumente in einem rollenbeschränkten Ordner **erben automatisch die Sichtbarkeitsberechtigungen dieses Ordners**.
-- Neue Dokumente dürfen über `Dokumente erstellen` angelegt werden.
-- Zwei Dokumente im selben Ordner dürfen nicht denselben Namen besitzen.
-- Dokumente können für mehrere Rollen gleichzeitig oder ausschließlich für Owner sichtbar sein.
-- Dokumente können als `nur lesen` oder `bearbeitbar` freigegeben werden.
-- Wird eine Rolle gelöscht, werden ihre Dokument-Freigaben automatisch entfernt.
-- Personen mit `Dokumente verwalten` dürfen Dokumente zwischen Ordnern verschieben.
-- Dokument-Favoriten sind persönlich pro Benutzer.
-- Dokumente können angepinnt/favorisiert werden und sind volltextsuchbar.
-- Eine Funktion `Dokument duplizieren` ist nicht vorgesehen.
-
-### Dokument-Vorlagen
-
-Dokument-Vorlagen sind vorgesehen. Sie dürfen ausschließlich von Ownern verwaltet werden.
-
-### Kommentare und Zusammenarbeit
-
-- Die Kommentar-Funktion ist **pro Dokument optional aktivierbar**.
-- Wenn aktiviert, können Mitglieder Kommentare schreiben.
-- @-Erwähnungen anderer Mitglieder sind möglich und erzeugen Nexus-Benachrichtigungen.
-- Mehrere Personen dürfen ein Dokument gleichzeitig bearbeiten.
-- Änderungen werden automatisch gespeichert.
-
-### Versionen
-
-- Ersteller und letzter Bearbeiter werden gespeichert.
-- Dokumente besitzen einen Versionsverlauf.
-- Jede Version zeigt Datum/Uhrzeit und Bearbeiter.
-- Eine ältere Version darf wiederhergestellt werden.
-- Beim Wiederherstellen wird die verdrängte aktuelle Fassung nicht automatisch als zusätzliche neue Version gesichert.
-
-### Dateien, Export und öffentliche Freigabe
-
-- Dokumente besitzen keine Dateianhänge.
-- Komplette Datei-Uploads wie PDF/Bild sind in diesem allgemeinen Dokumentenbereich nicht vorgesehen.
-- Ein PDF-Export interner Dokumente ist nicht vorgesehen.
-- Ein internes Dokument darf gezielt öffentlich freigegeben werden.
-
-### Löschen und Papierkorb
-
-- Nur Owner dürfen Dokumente löschen.
-- Gelöschte Dokumente landen 14 Tage im Papierkorb.
-- Nur Owner dürfen sie wiederherstellen.
-- Danach erfolgt die endgültige Löschung.
-- Löschen/Wiederherstellen wird nicht zusätzlich protokolliert.
-
-### Stadtverwaltung
-
-Berechtigte Stadtverwaltungs-Personen dürfen allgemeine interne Dokumente normaler Organisationen ansehen, bearbeiten und neu erstellen, aber nicht löschen. Stadtverwaltungs-Bearbeitungen werden im Versionsverlauf eindeutig gekennzeichnet; die Organisation erhält darüber eine Nexus-Benachrichtigung.
+- Ordnerstruktur möglich; `Dokumente verwalten` verwaltet Ordner.
+- Ganze Ordner können rollenbeschränkt sein; Dokumente darin **erben automatisch** die Ordner-Sichtbarkeit.
+- `Dokumente erstellen` erlaubt neue Dokumente.
+- Keine doppelten Dokumentnamen im selben Ordner.
+- Dokumente können mehreren Rollen oder nur Ownern sichtbar sein.
+- `nur lesen` / `bearbeitbar` möglich.
+- Bei Rollenlöschung werden entsprechende Freigaben automatisch entfernt.
+- `Dokumente verwalten` darf Dokumente verschieben.
+- Favoriten persönlich pro Nutzer; Volltextsuche vorgesehen.
+- Keine Funktion „Dokument duplizieren“.
+- Dokument-Vorlagen: nur Owner verwalten.
+- Kommentar-Funktion pro Dokument optional; @-Erwähnungen mit Nexus-Benachrichtigung.
+- Gleichzeitiges Bearbeiten mehrerer Personen und Autosave.
+- Versionsverlauf mit Datum/Bearbeiter; alte Version wiederherstellbar; verdrängte aktuelle Fassung wird dabei nicht automatisch als zusätzliche neue Version gespeichert.
+- keine Anhänge/Datei-Uploads, kein PDF-Export.
+- gezielte öffentliche Freigabe eines internen Dokuments möglich.
+- Löschen nur Owner; 14-Tage-Papierkorb; Wiederherstellung nur Owner; kein zusätzliches Audit dafür.
+- Stadtverwaltung darf ansehen, bearbeiten und neu erstellen, aber nicht löschen; ihre Bearbeitung wird im Versionsverlauf markiert und die Organisation benachrichtigt.
 
 ## Interne Ankündigungen
 
-Organisationen können interne Ankündigungen erstellen.
+- eigenes Rollenrecht zum Erstellen; jeder mit diesem Recht darf auch löschen
+- an alle oder eine/mehrere Rollen adressierbar
+- wichtig-Markierung möglich
+- wichtige Meldungen brauchen Lesebestätigung und bleiben bis dahin beim Login deutlich sichtbar
+- Berechtigte sehen Leser/Bestätigungen
+- Inaktive sehen wichtige Meldungen nicht
+- Ablaufdatum möglich; danach Archivierung
+- Archivierung 6 Monate
+- keine Anhänge/Bilder
+- keine Entwürfe, keine zeitgesteuerte Veröffentlichung
+- veröffentlichte Ankündigungen nicht nachträglich bearbeitbar
+- mehrere gleichzeitig anpinnbar
 
-- Das Erstellen erfolgt über ein eigenes Ankündigungs-Rollenrecht.
-- Jede Person mit diesem Recht darf Ankündigungen bearbeiten und löschen.
-- Ankündigungen können an alle Mitglieder oder gezielt an eine/mehrere Rollen gerichtet werden.
-- Sie können als `wichtig` markiert werden.
-- Wichtige Ankündigungen müssen bestätigt werden und werden bis zur Bestätigung beim Login deutlich angezeigt.
-- Berechtigte Personen können sehen, wer gelesen/bestätigt hat.
-- Inaktive Mitglieder sehen wichtige Ankündigungen nicht.
-- Eine Ankündigung kann ein Ablaufdatum besitzen; danach wird sie archiviert.
-- Archivierte Ankündigungen bleiben 6 Monate gespeichert.
-- Anhänge/Bilder sind nicht vorgesehen.
-- Es gibt keine Entwürfe und keine zeitgesteuerte Veröffentlichung.
-- Eine einmal veröffentlichte Ankündigung darf nicht nachträglich bearbeitet werden.
-- Mehrere Ankündigungen können gleichzeitig angepinnt werden.
+Kommentar-Funktion optional pro Ankündigung. Bei Aktivierung dürfen Mitglieder kommentieren; eigene Kommentare bearbeiten; Löschen durch Kommentar-Ersteller oder Personen mit Ankündigungsrecht.
 
-### Kommentar-Funktion bei Ankündigungen
+## Bewertungen und Favoriten
 
-Kommentare/Antworten sind optional pro Ankündigung aktivierbar.
+Bewertungen:
+- jeder aktive Nexus-Bürger darf bewerten
+- 1–5 Sterne + optionaler Text
+- eigene Bewertung bearbeitbar/löschbar
+- mehrere aktive Bewertungen desselben Bürgers zulässig
+- für den Durchschnitt zählt pro Bürger nur die **neueste aktive Bewertung**
+- Owner und aktuelle Mitarbeiter dürfen die eigene Organisation nicht bewerten
+- Owner dürfen öffentlich auf Bewertungen antworten
+- Organisation darf Bewertungen nicht selbst löschen
+- Stadtverwaltung darf unangemessene Bewertungen entfernen
+- Durchschnitt bereits auf Organisationskarte sichtbar
 
-- Ist die Funktion aktiviert, dürfen Mitglieder kommentieren.
-- Eigene Kommentare dürfen bearbeitet werden.
-- Löschen dürfen der jeweilige Kommentar-Ersteller sowie Personen mit dem Ankündigungsrecht.
-- Ist die Funktion deaktiviert, besitzt die Ankündigung keine Kommentar-/Antwortfunktion.
+Favoriten:
+- Bürger können Organisationen privat favorisieren
+- Organisation sieht nicht, wer favorisiert hat
+- `Organisation folgen` ist derzeit deaktiviert
+- falls später aktiviert, erhalten Follower Benachrichtigungen bei neuen öffentlichen Meldungen/News
 
-## Bewertungen von Organisationen
+## Stellenangebote und Bewerbungen
 
-Öffentliche Bewertungen sind vorgesehen.
+Die vollständigen Detailregeln stehen zusätzlich in `docs/jobs-and-applications.md`.
 
-- Jeder aktive Nexus-Bürger darf bewerten.
-- Bewertungssystem: 1 bis 5 Sterne.
-- Ein zusätzlicher Bewertungstext ist möglich.
-- Eigene Bewertungen dürfen später bearbeitet und gelöscht werden.
-- Pro Bürger dürfen mehrere aktive Bewertungen derselben Organisation bestehen.
-- Owner dürfen öffentlich auf Bewertungen antworten.
-- Eine Organisation darf Bewertungen nicht selbst löschen.
-- Berechtigte Stadtverwaltungs-Personen dürfen unangemessene Bewertungen entfernen.
-- Die durchschnittliche Sternebewertung wird bereits auf der Organisations-/Unternehmenskarte in der Übersicht angezeigt.
+### Stellenangebote
 
-## Favoriten
+Organisationen dürfen mehrere öffentliche Stellenangebote gleichzeitig veröffentlichen. Verwaltung erfolgt über `Stellenangebote verwalten`.
 
-Bürger können Organisationen als Favorit speichern. Favoriten sind privat; die Organisation sieht nicht, wer sie favorisiert hat.
+Ein Stellenangebot besitzt:
+- Titel
+- ausführliche Beschreibung
+- gewünschte Rolle/Position
+- optionalen Ansprechpartner
+- optionalen Standort
 
-Die separate Funktion `Organisation folgen` ist derzeit **nicht aktiviert**. Sollte sie später doch aktiviert werden, sollen Follower bei neuen öffentlichen Meldungen beziehungsweise News eine Benachrichtigung erhalten.
+Kein Ablaufdatum. Angebote können manuell pausiert und reaktiviert werden. Bewerbungszahl wird öffentlich nicht angezeigt. Öffentliche Suche, Volltextsuche und Filter nach Organisation/Branche sind vorgesehen.
 
-## Stellenangebote / Bewerbungen
+### Direktbewerbung über Nexus
 
-Organisationen dürfen öffentliche Stellenangebote einstellen.
+Aktive Bürger dürfen sich **direkt über Nexus** bewerben.
 
-- Stellenangebote werden über ein eigenes Rollenrecht `Stellenangebote verwalten` erstellt und verwaltet.
-- Bewerbungen, die über Nexus eingehen, landen in einem eigenen internen Bewerbungsbereich der Organisation.
-- Ob Bürger sich direkt über Nexus auf ein Stellenangebot bewerben können, ist noch nicht abschließend entschieden.
+Organisationen definieren pro Stelle eigene Fragen:
+- Freitext
+- Auswahl
+- Ja/Nein
+- einzelne Fragen als Pflichtfeld
+
+Automatisch übermittelt werden Name und Nexus-ID. Telefonnummer und Nexus-Mail werden nur übermittelt, wenn die persönlichen Sichtbarkeitseinstellungen dies erlauben; Bewerbungen umgehen die Privatsphäre nicht. Kein zusätzlicher allgemeiner Bewerbungstext.
+
+Der Bewerber darf die Bewerbung nach Absenden bearbeiten, solange die Organisation sie noch nicht bearbeitet hat, und darf sie zurückziehen. Während des Verfahrens sieht er den Status; abgeschlossene Bewerbungen später nicht mehr.
+
+### Bewerbungsstatus
+
+Grundstatus:
+- Neu
+- In Prüfung
+- Gespräch
+- Angenommen
+- Abgelehnt
+
+Organisationen dürfen weitere eigene Status anlegen. Statusänderungen werden nicht zusätzlich auditiert, lösen aber jeweils eine Nexus-Benachrichtigung an den Bewerber aus.
+
+Bei Ablehnung ist ein Grund optional und für den Bewerber **nicht sichtbar**.
+
+Bei Annahme erscheint `Als Mitglied aufnehmen`; Aufnahme folgt normalen Regeln und weist die aktuelle Standardrolle zu.
+
+### Interner Bewerbungsbereich
+
+- `Bewerbungen ansehen` steuert Leserechte.
+- `Bewerbungen bearbeiten` steuert Bearbeitung/Status.
+- Bewerbungen können Mitarbeitern zugewiesen werden; mehrere Bearbeiter möglich.
+- Zugewiesene Bearbeiter erhalten Benachrichtigung.
+- Interne Kommentare möglich und für Bewerber unsichtbar.
+- kein Favorisieren/Markieren
+- keine eigene Suche/Filter im internen Bewerbungsbereich und kein separater Stellenfilter
+
+Aufbewahrung:
+- abgelehnt: 6 Monate
+- angenommen: 6 Monate
+- zurückgezogen: sofort löschen
+
+Berechtigte Stadtverwaltung darf Bewerbungen ansehen und bearbeiten.
 
 ## Organisationsgründung / Gründungsanträge
 
-Neue Organisationen können nur durch die Stadtverwaltung angelegt werden. Jeder aktive Bürger darf jedoch einen Gründungsantrag stellen.
+Neue Organisationen werden nur durch Stadtverwaltung angelegt; jeder aktive Bürger darf einen Antrag stellen.
 
-Ein Antrag muss gewünschten Organisationsnamen, Beschreibung/Konzept, gewünschten Organisationstyp und mindestens einen gewünschten zukünftigen Owner enthalten. Mehrere Owner sind möglich; jede vorgeschlagene Person muss ihre Nennung bestätigen.
+Antrag enthält:
+- gewünschten Namen
+- Beschreibung/Konzept
+- gewünschten Organisationstyp
+- mindestens einen gewünschten zukünftigen Owner
 
-### Bearbeitung und Status
+Mehrere Owner möglich; jede vorgeschlagene Person muss ihre Nennung bestätigen.
 
 Status: `Entwurf`, `Eingereicht`, `In Prüfung`, `Angenommen`, `Abgelehnt`.
 
-- Antragsteller dürfen offene Anträge bearbeiten und zurückziehen.
-- Die Stadtverwaltung darf Änderungen/Ergänzungen verlangen und den Antrag zurückgeben.
-- Der vollständige Statusverlauf wird gespeichert.
-- Bei Ablehnung ist ein Grund Pflicht.
-- Abgelehnte Anträge dürfen später erneut gestellt werden.
-- Antragsteller erhalten bei Annahme/Ablehnung eine Nexus-Benachrichtigung.
-- Abgeschlossene Gründungsanträge werden 6 Monate gespeichert.
+- offene Anträge durch Antragsteller bearbeitbar/zurückziehbar
+- Stadtverwaltung darf Änderungen verlangen und Antrag zurückgeben
+- kompletter Statusverlauf wird gespeichert
+- Ablehnungsgrund Pflicht
+- erneuter Antrag nach Ablehnung möglich
+- Benachrichtigung bei Annahme/Ablehnung
+- abgeschlossene Anträge 6 Monate gespeichert
 
-Die Angabe gewünschter Owner bedeutet nicht, dass beim technischen Anlegen sofort ein Owner zugewiesen werden muss. Eine neue Organisation darf zunächst 0 Owner besitzen.
+Neue Organisation muss vor öffentlicher Sichtbarkeit freigeschaltet werden, darf zunächst 0 Owner haben und der Organisationstyp ist nur durch Stadtverwaltung änderbar.
 
-### Freischaltung, Typ und Archivierung
-
-- Neue Organisationen müssen vor öffentlicher Sichtbarkeit durch die Stadtverwaltung freigeschaltet werden.
-- Nur die Stadtverwaltung darf den Organisationstyp ändern.
-- Die Stadtverwaltung darf Organisationen archivieren.
-- Archivierte Organisationen sind öffentlich nicht sichtbar und intern vollständig gesperrt.
-- Archivierte Organisationen können reaktiviert werden.
-- Die Stadtverwaltung darf Organisationen auch endgültig löschen.
+Archivierung:
+- Stadtverwaltung darf archivieren
+- archiviert: öffentlich unsichtbar, intern vollständig gesperrt
+- Reaktivierung möglich
+- endgültiges Löschen durch Stadtverwaltung möglich
 
 ## Ehemalige Mitglieder
 
-Jede Organisation besitzt eine interne Ansicht `Ehemalige Mitglieder` mit Person, Eintrittsdatum, Austritts-/Entfernungsdatum, letzter Rolle und optionalem Entfernungsgrund.
+Interne Ansicht mit Person, Eintritt, Austritt/Entfernung, letzter Rolle und optionalem Entfernungsgrund.
 
-- Der Entfernungsgrund ist für Owner sichtbar und nicht nachträglich änderbar.
-- Einträge bleiben maximal 12 Monate und werden danach automatisch entfernt.
-- Owner können sie nicht manuell löschen.
-- Stadtverwaltung darf die Liste sehen.
-- Bei Wiederaufnahme verschwindet der alte Ehemaligen-Eintrag; getrennte historische Zeiträume werden nicht geführt.
-- Wiederaufnahme erfolgt mit aktueller Standardrolle.
-- Frühere interne Mitgliedsnotizen werden wieder sichtbar.
-- Von ehemaligen Mitgliedern erstellte interne Dokumente/Akten bleiben erhalten.
-- Der frühere Autor wird darin später nicht mit Name/Nexus-ID angezeigt.
+- Grund für Owner sichtbar und nicht nachträglich änderbar
+- Einträge max. 12 Monate, danach automatisch entfernen
+- Owner können nicht manuell löschen
+- Stadtverwaltung darf Liste sehen
+- bei Wiederaufnahme verschwindet alter Ehemaligen-Eintrag; keine getrennten historischen Zeiträume
+- Wiederaufnahme mit aktueller Standardrolle
+- frühere interne Notizen werden wieder sichtbar
+- erstellte interne Dokumente/Akten bleiben erhalten
+- früherer Autor darin später nicht mit Name/Nexus-ID sichtbar
 
 ## Protokolle / Audit
 
-Protokolliert werden insbesondere:
+Protokolliert werden insbesondere Rollen erstellen/umbenennen/löschen/aktivieren/deaktivieren, Mitgliederaufnahme/-entfernung/Austritt, Rollenwechsel, Owner-Ernennung, Stadtverwaltungs-Eingriffe an Ownern, Inaktiv/Aktiv, öffentliche Profiländerungen und Owner-Bezeichnungsänderungen.
 
-- Rollen erstellen, umbenennen, löschen, aktivieren und deaktivieren
-- Mitglieder aufnehmen, entfernen und freiwillige Austritte
-- Rollenwechsel
-- Owner-Ernennungen
-- Stadtverwaltungs-Eingriffe an Ownern
-- Inaktiv-/Aktiv-Wechsel
-- öffentliche Profiländerungen
-- Änderungen der sichtbaren Owner-Bezeichnung
+Nicht protokolliert werden insbesondere freiwillige Owner-Abgabe, Standardrollenwechsel, Rollenrechte, Drag-&-Drop-Hierarchie, Rollenfarbe/Icon/Beschreibung, Owner-Farbe/Icon, Design-Owner-Wechsel, Öffnungsstatus, Mitgliederlisten-Sichtbarkeit, Mitgliedsnotiz-Änderungen und Dokument-Löschen/Wiederherstellen sowie Bewerbungsstatusänderungen.
 
-Nicht protokolliert werden insbesondere:
+Audit enthält je nach Ereignis Organisation, Aktion, betroffene Person/Rolle, ausführende Person, Zeit und relevante alte/neue Werte. Name + Nexus-ID des Ausführenden werden gespeichert; historischer Name bleibt auch nach Account-Deaktivierung erhalten.
 
-- freiwillige Abgabe der eigenen Owner-Rolle
-- Wechsel der Standardrolle
-- Änderungen konkreter Rollenberechtigungen
-- reine Drag-&-Drop-Hierarchieänderungen
-- Rollenfarbe/Icon/Beschreibung
-- Owner-Farbe/Icon
-- Wechsel des Design-Owners
-- Öffnungsstatus
-- öffentliche Mitgliederlisten-Sichtbarkeit
-- Bearbeitung/Löschung interner Mitgliedsnotizen
-- Löschen/Wiederherstellen allgemeiner interner Dokumente
-
-Protokolle speichern je nach Ereignis Organisation, Aktion, betroffene Person/Rolle, ausführende Person, Datum/Uhrzeit und relevante alte/neue Werte. Name und Nexus-ID des Ausführenden werden gespeichert; der damalige Name bleibt auch bei später deaktiviertem Account erhalten.
-
-- Nur Owner sehen Organisations-Protokolle innerhalb der Organisation.
-- Berechtigte Stadtverwaltung darf sie ebenfalls sehen.
-- Es gibt kein frei vergebbares `Protokolle ansehen`.
-- Suche und Filter sind vorgesehen.
-- CSV-/PDF-Export ist nicht vorgesehen.
-- Audit-Protokolle werden 6 Monate aufbewahrt und danach automatisch gelöscht.
+- Organisationsintern nur Owner
+- berechtigte Stadtverwaltung ebenfalls
+- kein frei vergebbares `Protokolle ansehen`
+- Suche/Filter
+- kein CSV/PDF-Export
+- Aufbewahrung 6 Monate, danach automatische Löschung
 
 ## Benachrichtigungen
 
-Das betroffene aktive Mitglied erhält Nexus-Benachrichtigungen bei Aufnahme, Entfernung, Rollenwechsel und Owner-Ernennung.
+Aktive Betroffene erhalten Benachrichtigungen bei Aufnahme, Entfernung, Rollenwechsel und Owner-Ernennung. Owner erhalten Pflichtbenachrichtigungen insbesondere bei freiwilligem Austritt, Aufnahme durch `Mitglieder verwalten`, Inaktiv/Aktiv, Stadtverwaltungs-Eingriffen an Ownern, Owner-Bezeichnungsänderung und Wegfall des letzten Owners. Diese wichtigen Meldungen können nicht deaktiviert werden.
 
-Owner erhalten zusätzliche Pflichtbenachrichtigungen insbesondere bei freiwilligem Austritt, Aufnahme durch `Mitglieder verwalten`, Inaktiv-/Aktiv-Wechsel, Stadtverwaltungs-Eingriffen an Ownern, Änderung der Owner-Bezeichnung und Wegfall des letzten Owners. Wichtige Organisations-Benachrichtigungen können nicht deaktiviert werden.
-
-Zusätzliche Modul-Benachrichtigungen entstehen unter anderem bei Mail-Zuweisungen, @-Erwähnungen in Dokumenten und Stadtverwaltungs-Bearbeitungen allgemeiner interner Dokumente.
+Weitere Modul-Benachrichtigungen entstehen z. B. bei Mail-Zuweisungen, Dokument-@-Erwähnungen, Stadtverwaltungs-Dokumentbearbeitung, Bewerbungs-Zuweisungen und Bewerbungsstatusänderungen.
 
 ## Sicherheitsabfragen im Frontend
 
-Eine ausdrückliche Bestätigung ist mindestens erforderlich bei freiwilligem Austritt, freiwilliger Owner-Abgabe, direktem Austritt eines Owners, Löschen einer Rolle, Entfernen eines Mitglieds, Ernennung eines Owners, Wechsel der Standardrolle und Speichern geänderter Rollenrechte.
+Ausdrückliche Bestätigung mindestens bei freiwilligem Austritt, freiwilliger Owner-Abgabe, direktem Owner-Austritt, Rollenlöschung, Mitgliederentfernung, Owner-Ernennung, Standardrollenwechsel und Speichern geänderter Rollenrechte.
 
-## Offene Detailentscheidungen
+## Offene Detailentscheidung
 
-Folgende Punkte sind noch nicht eindeutig festgelegt und werden nicht geraten:
-
-- Der technische Ausnahmeweg, wenn der festgelegte Design-Owner wegfällt.
-- Ob Bürger sich direkt über Nexus auf ein öffentliches Stellenangebot bewerben können.
+Noch offen ist der technische Ausnahmeweg, wenn der festgelegte Design-Owner seine Owner-Rolle verliert oder die Organisation verlässt.
 
 ## Technische Zielstruktur
 
-`organization_members.role_title` kann vorerst als sichtbarer Titel bestehen bleiben. Für die vollständige Umsetzung soll jede Organisationsmitgliedschaft später genau eine strukturierte Rollenreferenz erhalten.
+`organization_members.role_title` kann vorerst als sichtbarer Titel bestehen bleiben. Langfristig erhält jede Organisationsmitgliedschaft genau eine strukturierte Rollenreferenz.
 
 Voraussichtlich benötigt werden unter anderem:
-
 - `organization_roles`
-- Rollen-Hierarchie/Sortierposition
-- Rollenberechtigungen
-- aktive/deaktivierte Rollen
-- Standardrollen-Markierung
-- Mitgliedsstatus aktiv/inaktiv
-- interne Mitgliedsnotizen
+- Rollen-Hierarchie/Sortierposition und Rollenberechtigungen
+- aktive/deaktivierte Rollen + Standardrollen-Markierung
+- Mitgliedsstatus und interne Mitgliedsnotizen
 - Ehemaligen-Historie
-- Organisationsgründungsanträge mit Statusverlauf und Owner-Bestätigungen
-- Organisationsstandorte
-- Organisations-Mailpostfach mit Status, Priorität, Mehrfach-Zuweisungen, Zuweisungsverlauf, Kommentaren, Labels/Ordnern, Entwürfen, Vorlagen und Papierkorb
-- allgemeiner Dokumentenbereich mit Ordnern, vererbten Rollenfreigaben, Versionen, optionalen Kommentaren, Favoriten/Suche und Papierkorb
-- interne Ankündigungen mit Zielrollen, Ablauf/Archivierung, Lesebestätigungen und optionaler Kommentar-Funktion
+- Organisationsgründungsanträge + Statusverlauf + Owner-Bestätigungen
+- Standorte
+- Organisations-Mailpostfach mit Status, Priorität, Zuweisungen, Kommentaren, Labels/Ordnern, Entwürfen, Vorlagen und Papierkorb
+- Dokumentenbereich mit Ordnern, vererbten Rollenfreigaben, Versionen, Kommentaren, Favoriten/Suche und Papierkorb
+- interne Ankündigungen mit Zielrollen, Archivierung, Lesebestätigung und optionalen Kommentaren
 - Bewertungen, Owner-Antworten und private Favoriten
-- Stellenangebote und interner Bewerbungsbereich
+- Stellenangebote, Bewerbungsfragen, Bewerbungen, Zuweisungen und interne Kommentare
 - Audit-/Protokolltabellen
 - serverseitige/RLS-gesicherte Owner- und Stadtverwaltungsaktionen
 
