@@ -40,7 +40,11 @@ Damit besitzt jede Organisation von Beginn an mindestens eine normale Rolle, auf
 
 Die Standardrolle darf durch einen Owner **umbenannt** werden. Ihre Funktion als normale Rolle bleibt dabei unverändert; sie ist technisch nicht dauerhaft an den sichtbaren Namen `Mitarbeiter` gebunden.
 
-Die Standardrolle darf gelöscht werden, wenn **kein Mitglied mehr dieser Rolle zugewiesen ist** und **mindestens eine andere normale Rolle** in der Organisation vorhanden ist. Eine Organisation muss damit immer mindestens eine normale Rolle behalten.
+Die Organisation darf festlegen, **welche ihrer vorhandenen normalen Rollen aktuell als Standardrolle** für neue Mitglieder verwendet wird. Es muss zu jedem Zeitpunkt genau eine gültige normale Standardrolle festgelegt sein.
+
+Soll die aktuell festgelegte Standardrolle gelöscht werden, muss **zuerst eine andere vorhandene normale Rolle als neue Standardrolle ausgewählt** werden. Eine automatische Auswahl durch das System erfolgt nicht.
+
+Eine normale Rolle – einschließlich einer ehemaligen Standardrolle – darf nur gelöscht werden, wenn **kein Mitglied mehr dieser Rolle zugewiesen ist** und **mindestens eine andere normale Rolle** in der Organisation vorhanden ist. Eine Organisation muss damit immer mindestens eine normale Rolle behalten.
 
 Neu aufgenommene Mitglieder erhalten **automatisch die aktuell festgelegte Standardrolle** der Organisation. Bei der Aufnahme muss daher nicht jedes Mal manuell eine Rolle ausgewählt werden.
 
@@ -91,6 +95,8 @@ Die Rangstufe allein erteilt keine Verwaltungsrechte. Eine Rolle benötigt weite
 
 Neue Mitglieder dürfen durch einen **Owner** oder durch ein Mitglied aufgenommen werden, dessen aktuelle Rolle ausdrücklich die Berechtigung **`Mitglieder verwalten`** besitzt.
 
+Die Aufnahme erfolgt **sofort und ohne vorherige Bestätigung oder Einladung durch die aufzunehmende Person**. Nach erfolgreicher Aufnahme ist die Mitgliedschaft unmittelbar aktiv und die aktuell festgelegte Standardrolle wird zugewiesen.
+
 Da neue Mitglieder automatisch die Standardrolle erhalten, darf ein Nicht-Owner mit `Mitglieder verwalten` eine Aufnahme nur durchführen, wenn die aktuelle Standardrolle **unterhalb seiner eigenen Hierarchiestufe** liegt. Ein Owner ist von dieser Einschränkung ausgenommen.
 
 Das Recht **`Mitglieder verwalten`** erlaubt außerdem das Bearbeiten dafür vorgesehener interner Mitgliedsdaten, zum Beispiel interner Notizen oder eines organisationsinternen Status. Es erlaubt jedoch **nicht**, andere Mitglieder aus der Organisation zu entfernen.
@@ -119,11 +125,27 @@ Aufnahmen und das Ende einer Mitgliedschaft werden dauerhaft protokolliert. Das 
 - die ausführende Person
 - Datum und Uhrzeit
 
+## Benachrichtigungen bei Mitgliedsänderungen
+
+Das betroffene Mitglied erhält innerhalb von LG Nexus eine Benachrichtigung bei folgenden Ereignissen:
+
+- Aufnahme in eine Organisation
+- Entfernung aus einer Organisation
+- Rollenwechsel innerhalb einer Organisation
+- Wechsel auf `inaktiv/beurlaubt`
+- Rückkehr von `inaktiv/beurlaubt` auf aktiv
+
+Eine Ernennung zum Owner gilt ebenfalls als Rollenwechsel und löst entsprechend eine Benachrichtigung aus.
+
 ## Inaktiv / beurlaubt
 
 Mitglieder können innerhalb einer Organisation auf **`inaktiv` beziehungsweise `beurlaubt`** gesetzt werden, ohne ihre Mitgliedschaft zu verlieren oder aus der Organisation entfernt zu werden.
 
 Dieser Status kann als organisationsinterner Mitgliedsstatus von einem Owner oder von einer Rolle mit der Berechtigung `Mitglieder verwalten` gesetzt beziehungsweise wieder aufgehoben werden.
+
+Für `inaktiv/beurlaubt` wird **kein Zeitraum von/bis** gespeichert oder verlangt. Der Status bleibt bestehen, bis er manuell wieder aufgehoben wird.
+
+Der Status wird in der normalen internen Mitgliederliste **nicht zusätzlich sichtbar markiert**.
 
 Während ein Mitglied auf `inaktiv/beurlaubt` steht, bleibt seine Organisation und seine zugewiesene Rolle gespeichert, der **Zugriff auf interne Organisationsbereiche wird jedoch vollständig gesperrt**. Die mit der Rolle verbundenen internen Rechte können in diesem Zustand nicht genutzt werden.
 
@@ -140,6 +162,17 @@ Die Rechte dieser Owner-Rolle können nicht so verändert werden, dass ihr notwe
 Die Owner-Rolle darf **mehreren Mitgliedern gleichzeitig** zugewiesen werden. Eine Organisation kann damit beispielsweise mehrere gleichberechtigte Geschäftsführer, Chiefs oder Leitungsmitglieder besitzen. Alle Mitglieder mit dieser Rolle erhalten dasselbe vollständige Owner-Rechtepaket.
 
 Die Regel „genau eine Rolle pro Mitglied“ bleibt dabei bestehen: Ein Owner besitzt innerhalb dieser Organisation die Owner-Rolle als seine eine zugewiesene Rolle. Mehrere Personen dürfen jedoch dieselbe Owner-Rolle verwenden.
+
+Ein bestehender Owner darf ein **normales Mitglied derselben Organisation zu einem weiteren Owner ernennen**. Die bisherige normale Rolle des betroffenen Mitglieds wird dabei unmittelbar durch die geschützte Owner-Rolle ersetzt. Die Ernennung eines weiteren Owners erfordert keine Stadtverwaltung.
+
+Jede Owner-Ernennung durch einen bestehenden Owner wird **dauerhaft protokolliert**. Das Protokoll enthält mindestens:
+
+- die betroffene Organisation
+- die betroffene Person
+- den Owner, der die Ernennung durchgeführt hat
+- die vorherige Rolle
+- die Aktion `Owner ernannt`
+- Datum und Uhrzeit
 
 Ein Owner darf **keinem anderen Owner** die Owner-Rolle entziehen, ihn auf eine normale Rolle zurückstufen oder ihn über die normale Organisationsverwaltung aus der Owner-Stellung entfernen. Owner sind untereinander in Bezug auf die Owner-Rolle gleichgestellt und können sich gegenseitig nicht entmachten.
 
