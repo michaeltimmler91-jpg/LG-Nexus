@@ -42,6 +42,8 @@ Die Standardrolle darf durch einen Owner **umbenannt** werden. Ihre Funktion als
 
 Die Standardrolle darf gelöscht werden, wenn **kein Mitglied mehr dieser Rolle zugewiesen ist** und **mindestens eine andere normale Rolle** in der Organisation vorhanden ist. Eine Organisation muss damit immer mindestens eine normale Rolle behalten.
 
+Neu aufgenommene Mitglieder erhalten **automatisch die aktuell festgelegte Standardrolle** der Organisation. Bei der Aufnahme muss daher nicht jedes Mal manuell eine Rolle ausgewählt werden.
+
 ## Rollenverwaltung
 
 Das Recht **`Rollen verwalten`** erlaubt nicht automatisch das Erstellen neuer normaler Rollen und auch nicht das Umbenennen bestehender normaler Rollen. Diese besonders weitreichenden Strukturänderungen bleiben der geschützten Owner-Ebene vorbehalten.
@@ -57,6 +59,8 @@ Das Erstellen, Umbenennen und Löschen normaler Rollen wird dauerhaft protokolli
 - die betroffene Rolle beziehungsweise alten und neuen Rollennamen
 - die ausführende Person
 - Datum und Uhrzeit
+
+Änderungen an den konkreten Berechtigungen einer normalen Rolle sowie reine Änderungen der Rollenreihenfolge werden dagegen **nicht zusätzlich protokolliert**.
 
 ## Rangstufen und Hierarchie
 
@@ -87,13 +91,26 @@ Die Rangstufe allein erteilt keine Verwaltungsrechte. Eine Rolle benötigt weite
 
 Neue Mitglieder dürfen durch einen **Owner** oder durch ein Mitglied aufgenommen werden, dessen aktuelle Rolle ausdrücklich die Berechtigung **`Mitglieder verwalten`** besitzt.
 
+Da neue Mitglieder automatisch die Standardrolle erhalten, darf ein Nicht-Owner mit `Mitglieder verwalten` eine Aufnahme nur durchführen, wenn die aktuelle Standardrolle **unterhalb seiner eigenen Hierarchiestufe** liegt. Ein Owner ist von dieser Einschränkung ausgenommen.
+
 Das Recht **`Mitglieder verwalten`** erlaubt außerdem das Bearbeiten dafür vorgesehener interner Mitgliedsdaten, zum Beispiel interner Notizen oder eines organisationsinternen Status. Es erlaubt jedoch **nicht**, andere Mitglieder aus der Organisation zu entfernen.
 
-Ein **Owner darf normale Mitglieder aus der Organisation entfernen**. Andere Owner sind davon ausdrücklich ausgenommen; für sie gelten die besonderen Owner-Schutzregeln weiter unten.
+Ein **Owner darf normale Mitglieder aus der Organisation entfernen**. Andere Owner sind davon ausdrücklich ausgenommen; für sie gelten die besonderen Owner-Schutzregeln weiter unten. Beim Entfernen eines normalen Mitglieds darf optional ein Freitext-Grund angegeben werden; ein Grund ist nicht verpflichtend.
 
 Ein normales Mitglied darf die Organisation **selbstständig verlassen**. Die eigene Mitgliedschaft kann damit ohne Freigabe durch eine Führungsperson beendet werden.
 
-Änderungen an der Rolle eines Mitglieds werden dauerhaft protokolliert. Das Rollenwechsel-Protokoll enthält mindestens:
+Ehemalige Mitglieder dürfen zu einem späteren Zeitpunkt **erneut in dieselbe Organisation aufgenommen** werden. Für die erneute Aufnahme gelten dieselben Regeln wie für jede andere Aufnahme, einschließlich der automatischen Zuweisung der aktuellen Standardrolle.
+
+Aufnahmen und das Ende einer Mitgliedschaft werden dauerhaft protokolliert. Das Mitgliedschafts-Audit enthält mindestens:
+
+- die betroffene Organisation
+- die betroffene Person
+- die Aktion (`Mitglied aufgenommen`, `Mitglied selbst ausgetreten` oder `Mitglied entfernt`)
+- die ausführende Person
+- Datum und Uhrzeit
+- bei einer Entfernung durch einen Owner optional den angegebenen Grund
+
+Änderungen an der Rolle eines Mitglieds werden ebenfalls dauerhaft protokolliert. Das Rollenwechsel-Protokoll enthält mindestens:
 
 - die betroffene Organisation
 - die betroffene Person
@@ -101,6 +118,16 @@ Ein normales Mitglied darf die Organisation **selbstständig verlassen**. Die ei
 - die neue Rolle
 - die ausführende Person
 - Datum und Uhrzeit
+
+## Inaktiv / beurlaubt
+
+Mitglieder können innerhalb einer Organisation auf **`inaktiv` beziehungsweise `beurlaubt`** gesetzt werden, ohne ihre Mitgliedschaft zu verlieren oder aus der Organisation entfernt zu werden.
+
+Dieser Status kann als organisationsinterner Mitgliedsstatus von einem Owner oder von einer Rolle mit der Berechtigung `Mitglieder verwalten` gesetzt beziehungsweise wieder aufgehoben werden.
+
+Während ein Mitglied auf `inaktiv/beurlaubt` steht, bleibt seine Organisation und seine zugewiesene Rolle gespeichert, der **Zugriff auf interne Organisationsbereiche wird jedoch vollständig gesperrt**. Die mit der Rolle verbundenen internen Rechte können in diesem Zustand nicht genutzt werden.
+
+Nach Rückkehr in den aktiven Status gilt wieder die zuvor zugewiesene Rolle mit ihren normalen Berechtigungen.
 
 ## Feste Leitungs-/Owner-Rolle
 
@@ -152,7 +179,7 @@ Berechtigungen müssen serverseitig beziehungsweise über Supabase/RLS geprüft 
 
 Eine Organisation erhält durch ihre eigenen Rollen niemals automatisch Zugriff auf Daten anderer Organisationen oder geschützte Bereiche anderer Module.
 
-Protokolle zu Rollen- und Owner-Eingriffen dürfen von normalen Organisationsmitgliedern nicht manipuliert oder gelöscht werden.
+Protokolle zu Rollen-, Mitgliedschafts- und Owner-Eingriffen dürfen von normalen Organisationsmitgliedern nicht manipuliert oder gelöscht werden.
 
 ## Bestehende Mitgliederdaten
 
