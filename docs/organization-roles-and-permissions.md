@@ -350,27 +350,86 @@ Jede Organisation erhält automatisch eine Nexus-Mailadresse, die aus dem Organi
 
 Die Organisation besitzt einen **gemeinsamen Posteingang**.
 
-- Das Lesen eingehender Organisations-Mails wird über ein eigenes Rollenrecht `Organisations-Mail lesen` gesteuert.
-- Als Organisation antworten beziehungsweise neue Organisations-Mails senden dürfen **nur Owner**.
-- Mails können intern einem Mitarbeiter zugewiesen werden.
-- Eine Organisations-Mail kann den Status `neu`, `in Bearbeitung` oder `erledigt` besitzen.
-- Mails dürfen intern kommentiert werden.
+### Rechte und Sichtbarkeit
 
-Noch offen ist ausschließlich die Darstellungsfrage, ob beziehungsweise für wen sichtbar ist, **welcher konkrete Mitarbeiter eine Organisations-Mail tatsächlich geschrieben hat**.
+- Das Lesen eingehender Organisations-Mails wird über das eigene Rollenrecht `Organisations-Mail lesen` gesteuert.
+- Wer `Organisations-Mail lesen` besitzt, darf eine Mail auch als gelesen markieren und ihren Status ändern.
+- Als Organisation antworten beziehungsweise neue Organisations-Mails senden dürfen **nur Owner**.
+- Intern wird gespeichert und angezeigt, welcher konkrete Owner beziehungsweise Mitarbeiter eine Organisations-Mail tatsächlich geschrieben hat; der externe Empfänger sieht als Absender nur die Organisation.
+
+### Status, Zuweisung und Benachrichtigungen
+
+Eine Organisations-Mail kann den Status `neu`, `in Bearbeitung` oder `erledigt` besitzen.
+
+- Mails können mehreren Mitarbeitern gleichzeitig zugewiesen werden.
+- Die Zuweisung darf durch Owner oder Rollen mit dem eigenen Recht `Mail zuweisen` vorgenommen werden.
+- Ein zugewiesener Mitarbeiter darf die Mail selbst auf `erledigt` setzen.
+- Zugewiesene Mitarbeiter erhalten eine Nexus-Benachrichtigung.
+- Eine einmal vorgenommene Zuweisung kann anschließend nicht mehr geändert werden.
+- Der Verlauf der erfolgten Zuweisungen bleibt sichtbar.
+
+### Kommentare
+
+- Jeder mit `Organisations-Mail lesen` darf Kommentare im Mailthread schreiben.
+- Diese Kommentare sind **nicht vor dem externen Absender verborgen** und können damit auch für ihn sichtbar sein; sie dürfen deshalb nicht als vertrauliche interne Notizen behandelt werden.
+
+### Organisation und Löschung
+
+- Organisations-Mails unterstützen **keine Dateianhänge**.
+- Owner dürfen Organisations-Mails löschen.
+- Gelöschte Mails landen für **30 Tage** im Mail-Papierkorb und werden danach endgültig gelöscht.
+- Das Postfach unterstützt Ordner beziehungsweise Labels.
+- Mails können durchsucht werden.
+- Es gibt Filter, insbesondere für `neu`, `zugewiesen`, `in Bearbeitung` und `erledigt`.
 
 ## Allgemeiner interner Dokumentenbereich
 
 Jede Organisation besitzt einen allgemeinen internen Dokumentenbereich.
 
+### Struktur und Berechtigungen
+
 - Eine Ordnerstruktur ist möglich.
 - Ordner dürfen durch Rollen mit dem eigenen Recht `Dokumente verwalten` erstellt und verwaltet werden.
-- Einzelne Dokumente können nur für bestimmte Rollen sichtbar sein.
+- Neue Dokumente dürfen über das eigene Rollenrecht `Dokumente erstellen` angelegt werden.
+- Einzelne Dokumente können für **mehrere bestimmte Rollen gleichzeitig** sichtbar sein.
+- Ein Dokument darf auch ausschließlich für Owner sichtbar sein.
 - Dokumente können als `nur lesen` oder `bearbeitbar` freigegeben werden.
+- Wird eine normale Rolle gelöscht, werden die zu dieser Rolle gehörenden Dokument-Freigaben automatisch entfernt.
+- Dokumente können angepinnt beziehungsweise favorisiert werden.
+- Eine Volltextsuche ist vorgesehen.
+
+### Versionen
+
 - Der Ersteller eines Dokuments wird gespeichert.
 - Der letzte Bearbeiter wird gespeichert.
 - Dokumente besitzen einen Versionsverlauf.
+- Jede Version zeigt Datum/Uhrzeit und den jeweiligen Bearbeiter.
+- Eine ältere Version darf wiederhergestellt werden.
+- Beim Wiederherstellen ersetzt die gewählte alte Version die aktuelle Fassung; die dadurch verdrängte aktuelle Fassung wird **nicht automatisch als zusätzliche neue Version** im Verlauf gesichert.
+
+### Dateien und Anhänge
+
+- Dokumente besitzen keine Dateianhänge.
+- Ein Upload kompletter Dateien wie PDF oder Bild in diesen allgemeinen Dokumentenbereich ist nicht vorgesehen.
+
+### Löschen und Papierkorb
+
+- Ein Dokument darf nur von einem Owner gelöscht werden.
 - Gelöschte Dokumente landen für **14 Tage** im Papierkorb und können in dieser Zeit wiederhergestellt werden; danach erfolgt die endgültige Löschung.
-- Dafür berechtigte Stadtverwaltungs-Personen dürfen allgemeine interne Dokumente normaler Organisationen ansehen **und bearbeiten**.
+- Aus dem Papierkorb wiederherstellen dürfen nur Owner.
+- Löschen und Wiederherstellen eines Dokuments werden nicht zusätzlich protokolliert.
+
+### Stadtverwaltung
+
+Dafür berechtigte Stadtverwaltungs-Personen dürfen allgemeine interne Dokumente normaler Organisationen:
+
+- ansehen
+- bearbeiten
+- neu erstellen
+
+Sie dürfen diese Dokumente **nicht löschen**.
+
+Bearbeitet die Stadtverwaltung ein Dokument, wird dies im Versionsverlauf eindeutig als Stadtverwaltungs-Bearbeitung ausgewiesen. Die Organisation erhält darüber eine Nexus-Benachrichtigung.
 
 Fachlich besonders geschützte Aktenbereiche, etwa Medical-/Police-/Justice-Daten, können später abweichende und strengere Regeln erhalten.
 
@@ -378,11 +437,23 @@ Fachlich besonders geschützte Aktenbereiche, etwa Medical-/Police-/Justice-Date
 
 Organisationen können interne Ankündigungen erstellen.
 
-- Das Erstellen erfolgt über ein eigenes Rollenrecht.
-- Ankündigungen können gezielt an bestimmte Rollen gerichtet werden.
+- Das Erstellen erfolgt über ein eigenes Ankündigungs-Rollenrecht.
+- Jede Person mit diesem Ankündigungs-Recht darf Ankündigungen auch bearbeiten und löschen.
+- Eine Ankündigung kann an **alle Mitglieder** oder gezielt an eine beziehungsweise mehrere Rollen gerichtet werden.
 - Ankündigungen können als `wichtig` markiert werden.
 - Wichtige Ankündigungen müssen vom Empfänger als gelesen bestätigt werden.
+- Wichtige, noch nicht bestätigte Ankündigungen werden beim Login deutlich angezeigt, bis die Bestätigung erfolgt ist.
 - Berechtigte Personen können sehen, wer eine Ankündigung gelesen beziehungsweise bestätigt hat.
+- Inaktive Mitglieder sehen wichtige Ankündigungen nicht.
+- Eine Ankündigung kann ein Ablaufdatum besitzen; nach Ablauf wird sie automatisch archiviert und nicht automatisch gelöscht.
+- Anhänge beziehungsweise Bilder in Ankündigungen sind nicht vorgesehen.
+
+### Kommentar-Funktion bei Ankündigungen
+
+Kommentare beziehungsweise Antworten sind **optional pro Ankündigung aktivierbar**.
+
+- Ist die Kommentar-Funktion aktiviert, dürfen Mitglieder auf die Ankündigung antworten beziehungsweise kommentieren.
+- Ist sie nicht aktiviert, besitzt die Ankündigung keine Kommentar-/Antwortfunktion.
 
 ## Organisationsgründung / Gründungsanträge
 
@@ -395,11 +466,31 @@ Ein Gründungsantrag muss enthalten:
 - gewünschten Organisationstyp
 - mindestens einen gewünschten zukünftigen Owner
 
-Es dürfen auch mehrere gewünschte Owner angegeben werden.
+Es dürfen auch mehrere gewünschte Owner angegeben werden. Jede als zukünftiger Owner vorgeschlagene Person muss bestätigen, dass sie im Antrag als zukünftiger Owner genannt wird.
+
+### Bearbeitung und Status
+
+Ein Gründungsantrag unterstützt die Status:
+
+- `Entwurf`
+- `Eingereicht`
+- `In Prüfung`
+- `Angenommen`
+- `Abgelehnt`
+
+Der Antragsteller darf einen noch offenen Antrag bearbeiten und zurückziehen.
+
+Die Stadtverwaltung darf vor einer Entscheidung Änderungen beziehungsweise Ergänzungen verlangen und den Antrag dafür an den Antragsteller zurückgeben.
+
+Der vollständige Verlauf des Antrags einschließlich Statusänderungen wird gespeichert.
+
+### Entscheidung
 
 Die Stadtverwaltung darf einen Antrag ablehnen. Bei einer Ablehnung ist ein **Ablehnungsgrund Pflicht**. Ein abgelehnter Antrag darf später erneut gestellt werden.
 
 Der Antragsteller erhält bei Annahme oder Ablehnung eine Nexus-Benachrichtigung.
+
+Abgeschlossene Gründungsanträge werden **6 Monate** gespeichert.
 
 Die Angabe eines gewünschten zukünftigen Owners im Antrag bedeutet nicht, dass beim technischen Anlegen sofort ein Owner zugewiesen werden muss. Eine neu angelegte Organisation darf weiterhin zunächst 0 Owner besitzen.
 
@@ -470,6 +561,7 @@ Nicht protokolliert werden insbesondere:
 - Öffnungsstatus
 - öffentliche Mitgliederlisten-Sichtbarkeit
 - Bearbeitung/Löschung interner Mitgliedsnotizen
+- Löschen/Wiederherstellen allgemeiner interner Dokumente
 
 ### Inhalt und Zugriff
 
@@ -497,6 +589,8 @@ Owner erhalten zusätzliche Pflichtbenachrichtigungen bei wichtigen Organisation
 - Wegfall des letzten Owners (zusätzlich Stadtverwaltung)
 
 Wichtige Organisations-Benachrichtigungen können nicht deaktiviert werden.
+
+Zusätzlich erzeugen die neu festgelegten Module eigene Benachrichtigungen, insbesondere bei Mail-Zuweisungen sowie bei Stadtverwaltungs-Bearbeitungen allgemeiner interner Dokumente.
 
 ## Sicherheitsabfragen im Frontend
 
@@ -527,11 +621,11 @@ Voraussichtlich benötigt werden:
 - Mitgliedsstatus aktiv/inaktiv
 - interne Mitgliedsnotizen
 - Ehemaligen-Historie
-- Organisationsgründungsanträge
+- Organisationsgründungsanträge mit Statusverlauf und Owner-Bestätigungen
 - Organisationsstandorte
-- Organisations-Mailpostfach und Mailstatus
-- allgemeiner Dokumentenbereich mit Ordnern, Berechtigungen, Versionen und Papierkorb
-- interne Ankündigungen und Lesebestätigungen
+- Organisations-Mailpostfach mit Mailstatus, Mehrfach-Zuweisungen, Zuweisungsverlauf, Kommentaren, Labels/Ordnern und Papierkorb
+- allgemeiner Dokumentenbereich mit Ordnern, Rollenfreigaben, Versionen, Favoriten/Suche und Papierkorb
+- interne Ankündigungen mit Zielrollen, Ablauf/Archivierung, Lesebestätigungen und optionaler Kommentar-Funktion
 - Audit-/Protokolltabellen
 - serverseitige/RLS-gesicherte Owner- und Stadtverwaltungsaktionen
 
