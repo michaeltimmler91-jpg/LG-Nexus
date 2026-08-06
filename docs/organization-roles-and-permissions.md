@@ -351,6 +351,7 @@ Jede Organisation besitzt einen allgemeinen internen Dokumentenbereich.
 - Eine Ordnerstruktur ist möglich.
 - Ordner dürfen durch Rollen mit `Dokumente verwalten` erstellt und verwaltet werden.
 - Ganze Ordner können nur für bestimmte Rollen sichtbar sein.
+- Dokumente in einem rollenbeschränkten Ordner **erben automatisch die Sichtbarkeitsberechtigungen dieses Ordners**.
 - Neue Dokumente dürfen über `Dokumente erstellen` angelegt werden.
 - Zwei Dokumente im selben Ordner dürfen nicht denselben Namen besitzen.
 - Dokumente können für mehrere Rollen gleichzeitig oder ausschließlich für Owner sichtbar sein.
@@ -360,8 +361,6 @@ Jede Organisation besitzt einen allgemeinen internen Dokumentenbereich.
 - Dokument-Favoriten sind persönlich pro Benutzer.
 - Dokumente können angepinnt/favorisiert werden und sind volltextsuchbar.
 - Eine Funktion `Dokument duplizieren` ist nicht vorgesehen.
-
-Die konkrete Vererbungslogik zwischen geschützten Ordnern und darin liegenden Dokumenten ist noch offen.
 
 ### Dokument-Vorlagen
 
@@ -447,7 +446,15 @@ Kommentare/Antworten sind optional pro Ankündigung aktivierbar.
 
 Bürger können Organisationen als Favorit speichern. Favoriten sind privat; die Organisation sieht nicht, wer sie favorisiert hat.
 
-Die separate Funktion `Organisation folgen` ist derzeit nicht aktiviert. Damit ist eine Benachrichtigungslogik für Follower aktuell nicht erforderlich.
+Die separate Funktion `Organisation folgen` ist derzeit **nicht aktiviert**. Sollte sie später doch aktiviert werden, sollen Follower bei neuen öffentlichen Meldungen beziehungsweise News eine Benachrichtigung erhalten.
+
+## Stellenangebote / Bewerbungen
+
+Organisationen dürfen öffentliche Stellenangebote einstellen.
+
+- Stellenangebote werden über ein eigenes Rollenrecht `Stellenangebote verwalten` erstellt und verwaltet.
+- Bewerbungen, die über Nexus eingehen, landen in einem eigenen internen Bewerbungsbereich der Organisation.
+- Ob Bürger sich direkt über Nexus auf ein Stellenangebot bewerben können, ist noch nicht abschließend entschieden.
 
 ## Organisationsgründung / Gründungsanträge
 
@@ -544,9 +551,8 @@ Eine ausdrückliche Bestätigung ist mindestens erforderlich bei freiwilligem Au
 
 Folgende Punkte sind noch nicht eindeutig festgelegt und werden nicht geraten:
 
-- Ob Dokumente in einem rollenbeschränkten Ordner dessen Berechtigung automatisch erben oder zusätzlich eigene Freigaben behalten.
 - Der technische Ausnahmeweg, wenn der festgelegte Design-Owner wegfällt.
-- Der Bereich `Stellenangebote/Bewerbungen`, da die letzten Antworten dazu nummerisch widersprüchlich beziehungsweise unvollständig waren.
+- Ob Bürger sich direkt über Nexus auf ein öffentliches Stellenangebot bewerben können.
 
 ## Technische Zielstruktur
 
@@ -565,9 +571,10 @@ Voraussichtlich benötigt werden unter anderem:
 - Organisationsgründungsanträge mit Statusverlauf und Owner-Bestätigungen
 - Organisationsstandorte
 - Organisations-Mailpostfach mit Status, Priorität, Mehrfach-Zuweisungen, Zuweisungsverlauf, Kommentaren, Labels/Ordnern, Entwürfen, Vorlagen und Papierkorb
-- allgemeiner Dokumentenbereich mit Ordnern, Rollenfreigaben, Versionen, optionalen Kommentaren, Favoriten/Suche und Papierkorb
+- allgemeiner Dokumentenbereich mit Ordnern, vererbten Rollenfreigaben, Versionen, optionalen Kommentaren, Favoriten/Suche und Papierkorb
 - interne Ankündigungen mit Zielrollen, Ablauf/Archivierung, Lesebestätigungen und optionaler Kommentar-Funktion
 - Bewertungen, Owner-Antworten und private Favoriten
+- Stellenangebote und interner Bewerbungsbereich
 - Audit-/Protokolltabellen
 - serverseitige/RLS-gesicherte Owner- und Stadtverwaltungsaktionen
 
