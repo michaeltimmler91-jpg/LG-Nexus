@@ -37,7 +37,19 @@ Die interne Nexus-Mail wird nach erfolgreicher Freischaltung automatisch erzeugt
 
 Für die Nexus-Mail gelten dieselben Sichtbarkeitsstufen und dieselbe Organisationslogik wie für die Telefonnummer. Auch hier gibt es keinen automatischen Behördenzugriff.
 
-Die Sichtbarkeit der Nexus-Mail hat keinen Einfluss auf die Zustellung interner Nexus-Mails. Sie regelt ausschließlich, ob die Adresse anderen Nutzern in Profilen, Kontaktsuchen oder vergleichbaren Ansichten angezeigt werden darf.
+Die Sichtbarkeit der Nexus-Mail regelt insbesondere:
+
+- ob die Adresse in Profilen und Suchansichten angezeigt wird
+- ob eine Suche nach der exakten Nexus-Mail einen Treffer liefern darf
+- welche Wege bei der Auswahl eines Empfängers für direkte Bürger-Mails zulässig sind
+
+Für direkte Bürger-Mail gilt zusätzlich:
+
+- Ist die Nexus-Mail für einen Absender verborgen, darf der Empfänger nicht allein über seine Nexus-ID ausgewählt werden.
+- Wird ein Empfänger auf einem zulässigen Weg ausgewählt, bleibt seine für den Absender verborgene Nexus-Mail-Adresse verborgen.
+- Eine Blockierung kann die Zustellung direkter Bürger-Mails vollständig verhindern.
+
+Die reine technische Existenz einer Nexus-Mail-Adresse darf durch Such- oder Auswahlfunktionen keine versteckten Kontaktdaten offenlegen.
 
 ## Profilbild
 
