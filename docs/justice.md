@@ -76,6 +76,14 @@ Dabei gilt:
 - Justice darf verknüpfte PD-Beweismittel nicht verändern
 - Justice arbeitet nur lesend beziehungsweise verknüpfend mit den PD-Beweisdaten
 
+Bei PD-Anträgen können der zugehörige Fall und relevante Beweismittel automatisch verknüpft werden.
+
+## Bußgeld-Einsprüche aus Police
+
+Bürger können im Police-Modul gegen ein eigenes Bußgeld Einspruch einlegen.
+
+Aus einem solchen Einspruch kann automatisch ein passender Justice-Vorgang beziehungsweise Justice-Antrag erstellt werden. Die ursprüngliche Bußgeld-Vorgangsnummer und gegebenenfalls der verknüpfte PD-Fall sollen dabei als Referenz erhalten bleiben.
+
 ## Durchsuchungs-, Haft- und weitere Befehle
 
 Justice bearbeitet PD-Anträge auf Befehle direkt im Nexus.
@@ -189,6 +197,7 @@ Voraussichtlich benötigt werden:
 - Bürger-Einreichungen mit Freigabestatus
 - strukturierte Tatbestände
 - PD-Fall- und Beweismittelverknüpfungen
+- Bußgeld-Einsprüche aus PD mit automatischer Justice-Erstellung
 - lesbare Chain-of-Custody
 - frei definierbare Befehlsarten, Pflichtfelder und PD-Antragsworkflow
 - Befehlsnummern, Ablauf und Widerruf
