@@ -10,6 +10,10 @@ Verwaltung:
 - Stellenangebote werden über das eigene Rollenrecht `Stellenangebote verwalten` erstellt und gepflegt.
 - Stellenangebote können manuell pausiert und später wieder aktiviert werden.
 - Ein Ablaufdatum ist nicht vorgesehen.
+- Ein Stellenangebot kann manuell geschlossen werden, ohne es zu löschen.
+- Geschlossene Stellenangebote verschwinden aus der öffentlichen Suche.
+- Ein Stellenangebot kann eine Anzahl verfügbarer Stellen/Plätze besitzen.
+- Je Angebot kann eingestellt werden, dass es automatisch geschlossen wird, sobald alle vorgesehenen Plätze besetzt sind.
 - Die Zahl eingegangener Bewerbungen wird öffentlich nicht angezeigt.
 - Öffentliche Suche und Filter nach Organisation beziehungsweise Branche sind vorgesehen.
 - Eine Volltextsuche über Stellenangebote ist vorgesehen.
@@ -20,6 +24,12 @@ Pflicht-/Profilfelder eines Stellenangebots:
 - gewünschte Rolle beziehungsweise Position
 - optionaler Ansprechpartner
 - optional auswählbarer Organisationsstandort
+
+### Änderungen nach ersten Bewerbungen
+
+Sobald Bewerbungen eingegangen sind, dürfen nur noch **nicht wesentliche Felder** des Stellenangebots bearbeitet werden.
+
+Bei wesentlichen Änderungen erhalten bereits vorhandene Bewerber automatisch eine Nexus-Benachrichtigung.
 
 ## Bewerben über Nexus
 
@@ -43,7 +53,18 @@ Kontaktinformationen:
 - Nexus-Mail wird ebenfalls nur übermittelt, wenn die persönliche Sichtbarkeitseinstellung dies erlaubt.
 - Die Bewerbung umgeht diese Privatsphäre-Einstellungen nicht.
 
+Mit ausdrücklicher Zustimmung des Bewerbers dürfen zusätzliche sichtbare Profildaten in die Bewerbung übernommen werden.
+
 Ein zusätzlicher allgemeiner Bewerbungstext außerhalb der organisationsspezifischen Fragen ist nicht vorgesehen.
+
+Bewerbungen dürfen externe Links als Anlagen enthalten. Pro Bewerbung sind maximal **5 externe Links** vorgesehen.
+
+## Mehrfach- und erneute Bewerbungen
+
+- Ein Bürger darf sich nicht mehrfach gleichzeitig auf dasselbe aktuell offene Stellenangebot bewerben.
+- Ein Bürger darf sich gleichzeitig auf mehrere unterschiedliche Stellenangebote derselben Organisation bewerben.
+- Nach einer Ablehnung darf sich der Bürger auf dasselbe noch offene Stellenangebot erneut bewerben, jedoch erst nach einer **Wartezeit von 14 Tagen**.
+- Nexus soll vor offensichtlich doppelten Bewerbungen desselben Bürgers warnen.
 
 ## Bearbeitung durch den Bewerber
 
@@ -83,6 +104,33 @@ Wird die Person darüber aufgenommen, gelten die normalen Organisationsregeln:
 - Aufnahme erfolgt als normale Mitgliedsaufnahme.
 - Die aktuelle Standardrolle der Organisation wird zugewiesen.
 - Das Stellenangebot bestimmt nicht automatisch eine abweichende Rolle.
+
+## Rückfragen
+
+Nach Beginn der Bearbeitung darf die Organisation zusätzliche Informationen vom Bewerber anfordern.
+
+Der Bewerber antwortet darauf direkt innerhalb der Bewerbung; ein Wechsel in eine normale Nexus-Mail ist nicht erforderlich.
+
+## Vorstellungsgespräche
+
+Aus einer Bewerbung kann direkt ein Vorstellungsgespräch als Nexus-Termin erstellt werden.
+
+- Der Termin erscheint automatisch im Kalender des Bewerbers.
+- Der Termin erscheint automatisch in den Kalendern der zuständigen Mitarbeiter.
+- Der Bewerber darf einen Alternativtermin vorschlagen.
+- Das Gesprächsergebnis kann strukturiert erfasst werden als `Geeignet`, `Nicht geeignet` oder `Zurückgestellt`.
+
+Eine zusätzliche interne Punktzahl/Bewertung für Bewerbungen ist nicht vorgesehen.
+
+Der Bewerber sieht interne Bearbeitungsinformationen beziehungsweise interne Bewertungen nicht.
+
+Interne Bewerbungs-Tags/Markierungen sind derzeit ebenfalls nicht vorgesehen.
+
+## Übertragung auf anderes Stellenangebot
+
+Eine Bewerbung darf auf ein anderes Stellenangebot derselben Organisation übertragen werden, **wenn der Bewerber zustimmt**.
+
+Der Bewerber erhält darüber automatisch eine Nexus-Benachrichtigung.
 
 ## Interner Bewerbungsbereich
 
@@ -131,11 +179,19 @@ Für Organisationsbewertungen gelten zusätzlich folgende Regeln:
 
 Voraussichtlich benötigt werden unter anderem:
 - `organization_job_postings`
+- verfügbare Plätze und Auto-Schließen
+- Status `pausiert/geschlossen`
+- Regeln für wesentliche/nicht wesentliche Änderungen nach Bewerbungseingang
 - `organization_job_application_questions`
 - `organization_job_applications`
 - `organization_job_application_answers`
+- externe Link-Anlagen
+- Wiederbewerbungs-Sperrfrist von 14 Tagen
 - `organization_job_application_assignments`
 - `organization_job_application_comments`
+- Rückfragen/Antworten innerhalb der Bewerbung
+- Vorstellungsgespräche mit Kalenderverknüpfung und strukturiertem Ergebnis
+- Bewerbungsübertragung mit Zustimmung
 - konfigurierbare zusätzliche Bewerbungsstatus pro Organisation
 - RLS/RPC für Sichtbarkeit, Bearbeitung und Aufnahme als Mitglied
 - automatische Aufbewahrungs-/Löschlogik
