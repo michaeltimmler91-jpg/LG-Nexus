@@ -1,123 +1,116 @@
 # LG Nexus – Unternehmensangebote, Kundenanfragen und Reservierungen
 
-Dieses Dokument beschreibt die festgelegten Regeln für öffentliche Angebotskataloge von Organisationen, Kundenanfragen und Reservierungen.
+Dieses Dokument beschreibt den verbindlichen Stand für öffentliche Angebotskataloge, Kundenanfragen und Reservierungen bis Frage 3410.
 
 ## Öffentlicher Angebots-/Leistungskatalog
 
-Öffentliche Organisationsprofile können einen eigenen Katalog für **Produkte und Dienstleistungen** besitzen.
+Öffentliche Organisationsprofile können einen Katalog für **Produkte und Dienstleistungen** besitzen.
 
-Jeder Katalogeintrag besitzt mindestens:
+Jeder Eintrag besitzt mindestens Titel, Beschreibung, Preisangabe und Verfügbarkeitsstatus. Die Beschreibung ist auf **3000 Zeichen** begrenzt.
 
-- Titel
-- Beschreibung
-- Preisangabe
-- Verfügbarkeitsstatus
+### Preise und Varianten
 
-### Preise
-
-Preise können flexibel dargestellt werden als:
+Preisarten:
 
 - Festpreis
 - Preisspanne
 - auf Anfrage
 - kostenlos
 
-Geldbeträge werden standardmäßig als RP-Dollar (`$`) dargestellt.
+Standardwährung ist RP-Dollar (`$`).
 
-### Kategorien und Verfügbarkeit
+Zusätzlich unterstützt Nexus:
 
-Jede Organisation darf eigene Katalogkategorien anlegen.
+- Angebotsvarianten, z. B. Basic/Premium
+- eigene Preise je Variante
+- optionale Zusatzleistungen
+- standortabhängige Preise
+- Angebots-Bundles/Pakete
+- Mindest-/Maximalbestellmengen
+- individuelle Preisangebote auf Kundenanfrage
+- Rabatt-/Aktionsangebote
+- zeitlich begrenzte Sonderaktionen
 
-Ein Angebot kann folgende Verfügbarkeitszustände verwenden:
+Eine separate interne Artikel-/Leistungsnummer ist nicht vorgesehen.
+
+### Kategorien, Verfügbarkeit und Laufzeit
+
+Organisationen dürfen eigene Kategorien anlegen.
+
+Verfügbarkeit:
 
 - Verfügbar
 - Eingeschränkt
 - Nicht verfügbar
 
-Ein Angebot darf vorübergehend ausgeblendet werden, ohne es zu löschen.
+Weitere Darstellungen:
 
-Zusätzlich kann ein Angebot einen Gültigkeitszeitraum besitzen. Nach Ablauf wird es automatisch aus der öffentlichen Darstellung ausgeblendet.
+- `ausverkauft`
+- öffentlich sichtbare sofortige Verfügbarkeit
+- öffentliche Liefer-/Wartezeithinweise
+- `nur mit Termin/Reservierung`
 
-### Bilder
+Eine allgemeine zusätzliche Auslastungsampel `frei / wenig Kapazität / ausgelastet` ist nicht vorgesehen.
 
-Angebote dürfen externe Bildlinks verwenden.
+Angebote dürfen zeitlich gültig sein und danach automatisch aus der öffentlichen Darstellung verschwinden. Entfernte/deaktivierte vertiefte Angebotsobjekte werden grundsätzlich 30 Tage im Papierkorb gehalten.
 
-Pro Angebot sind maximal **3 Bilder** vorgesehen.
+### Bilder und Standorte
 
-### Standorte
+- externe Bildlinks
+- maximal 3 Bilder pro Angebot
+- ein Angebot gilt entweder allgemein oder ist genau **einem** Organisationsstandort zugeordnet; keine gleichzeitige Mehrfach-Standortzuordnung
 
-Ein Angebot kann einer bestimmten Filiale beziehungsweise einem Organisationsstandort zugeordnet werden.
+### Suche und Favoriten
 
-### Öffentliche Suche
+Stadtweite Suche nach Produkten/Dienstleistungen mit Filtern nach Kategorie, Organisation und Öffnungsstatus sowie Sortierung nach Name, Preis und Bewertung.
 
-LG Nexus besitzt eine stadtweite öffentliche Suche nach angebotenen Produkten und Dienstleistungen.
+Organisationen dürfen Angebote hervorheben.
 
-Filter:
+Bürger können einzelne Angebote privat favorisieren. Favorisierte Angebote erscheinen in einer persönlichen Merkliste.
 
-- Kategorie
-- Organisation
-- Öffnungsstatus
-
-Sortierung:
-
-- Name
-- Preis
-- Bewertung
-
-Organisationen dürfen einzelne Angebote als `Hervorgehoben` markieren.
+Einzelne Angebote erhalten keine eigene Bewertung; bewertet wird weiterhin die Organisation.
 
 ### Verwaltung
 
-Der Katalog wird über das Rollenrecht `Angebote verwalten` gepflegt.
+Grundverwaltung über `Angebote verwalten`; vertiefte Angebotsarten können über passende eigene Rollenrechte gesteuert werden.
 
-Änderungen am Angebotskatalog werden nicht zusätzlich protokolliert.
+Bei erweiterten Angebotsfunktionen gilt grundsätzlich:
 
-Eine öffentliche Preisliste wird nicht als PDF exportiert.
+- Sichtbarkeit je Eintrag konfigurierbar
+- öffentliche Auffindbarkeit nur, wenn der Eintrag öffentlich freigegeben ist
+- Benachrichtigungen nur bei wesentlichen Änderungen
 
-## Öffentliche Organisationsgalerie
+Normale Änderungen am Basiskatalog werden nicht zusätzlich auditiert. Kein öffentlicher PDF-Preislistenexport.
 
-Ein öffentliches Organisationsprofil darf eine Bildergalerie besitzen.
+## Organisationsgalerie, Filialstatus und FAQ
 
-- Bilder werden über externe Bildlinks eingebunden.
-- Es gibt keine feste maximale Anzahl an Galeriebildern.
-- Bilder dürfen eine kurze Bildunterschrift besitzen.
-- Verwaltung erfolgt über das Rollenrecht `Galerie verwalten`.
+Öffentliche Organisationsgalerie:
 
-## Öffnungsstatus bei mehreren Filialen
+- externe Bildlinks
+- unbegrenzte Bildanzahl
+- Bildunterschriften
+- Verwaltung über `Galerie verwalten`
 
-Zusätzlich zum zentralen Organisationsstatus darf jede Filiale einen eigenen Öffnungsstatus besitzen.
+Filialen dürfen eigene Öffnungsstatus besitzen. Auf der zentralen Organisationskarte ist der **niedrigste Status aller Filialen** maßgeblich.
 
-Besucher sehen den Status jeder einzelnen Filiale.
+Kein öffentlicher `aktuell erreichbarer Ansprechpartner`.
 
-Auf der zentralen Organisationskarte ist der **niedrigste Status aller Filialen** maßgeblich. Damit wird beispielsweise eine teilweise eingeschränkte oder geschlossene Filiallage auch auf der zentralen Darstellung sichtbar.
+Öffentliche FAQ:
 
-Ein öffentlich angezeigter `aktuell erreichbarer Ansprechpartner` ist derzeit nicht vorgesehen.
+- Verwaltung über `FAQ verwalten`
+- formatierter Text/Markdown
 
-## Öffentliche FAQ
-
-Jede Organisation darf einen öffentlichen FAQ-Bereich betreiben.
-
-- Verwaltung über das Rollenrecht `FAQ verwalten`.
-- Antworten unterstützen formatierten Text beziehungsweise Markdown.
-
-Interne Profilstatistiken wie Seitenaufrufe oder Favoritenzahl sind für Owner derzeit nicht vorgesehen.
+Owner erhalten keine zusätzlichen Profilstatistiken wie Seitenaufrufe oder Favoritenzahl.
 
 # Kundenanfragen
 
-## Direkte Anfrage aus dem Organisationsprofil
+Ein Bürger kann direkt aus einem Organisationsprofil beziehungsweise aus einem konkreten Angebot eine Kunden-/Serviceanfrage starten.
 
-Ein Bürger kann direkt vom öffentlichen Organisationsprofil aus eine Service-/Kundenanfrage senden.
+Technisch ist die Anfrage ein spezialisierter Thread im Organisations-Mail-System.
 
-Technisch wird die Anfrage als **eigener Thread im Organisations-Mail-System** geführt.
+Organisationen dürfen eigene Anfragearten sowie dynamische Formularfelder definieren.
 
-Die Organisation kann:
-
-- eigene Anfragearten definieren
-- je Anfrageart eigene Formularfelder und Fragen festlegen
-
-## Status
-
-Kundenanfragen verwenden:
+Status:
 
 - Neu
 - In Bearbeitung
@@ -125,97 +118,121 @@ Kundenanfragen verwenden:
 - Erledigt
 - Abgelehnt
 
-Eine Anfrage kann mehreren Mitarbeitern gleichzeitig zugewiesen werden.
+Mehrere Mitarbeiter können gleichzeitig zugewiesen werden.
 
-## Kommentare und Kommunikation
-
-Kundenanfragen besitzen interne Kommentare.
-
-Nach aktueller Festlegung darf der anfragende Bürger diese Kommentare **sehen**. Die Bezeichnung `intern` beschreibt damit die technische Kommentarfunktion innerhalb des Anfrage-Threads, nicht eine verborgene Mitarbeiterebene.
-
-Der Bürger darf externe Links zu seiner Anfrage hinzufügen.
-
-Die Organisation kann direkt innerhalb der Anfrage offiziell antworten.
+Kommentare innerhalb des Anfrage-Threads sind nach aktueller Festlegung **für den Bürger sichtbar**. Die Organisation kann offiziell antworten, der Bürger externe Links ergänzen.
 
 Bei jeder Statusänderung erhält der Bürger eine Nexus-Benachrichtigung.
 
-## Bearbeitung durch den Bürger
+Der Bürger darf:
 
-Ein Bürger darf:
+- offene Anfrage zurückziehen
+- bis zum Bearbeitungsbeginn bearbeiten
 
-- eine noch offene Anfrage zurückziehen
-- die Anfrage nach dem Absenden noch bearbeiten, **bis die Organisation mit der Bearbeitung beginnt**
+Abgeschlossene Kundenanfragen werden 6 Monate gespeichert.
 
-Abgeschlossene Kundenanfragen werden **6 Monate** gespeichert.
+Kundenanfragen können als interne Aufgabe ins Taskboard übernommen werden.
 
 # Reservierungen und Kundentermine
 
-## Aktivierung
+## Aktivierung und Terminfenster
 
-Organisationen können über Nexus Reservierungen beziehungsweise Kundentermine anbieten.
+Organisationen entscheiden selbst, ob Reservierungen angeboten werden.
 
-Jede Organisation entscheidet selbst, ob diese Funktion aktiviert ist.
+Terminfenster werden manuell durch die Organisation angelegt, nicht automatisch aus dem Organisationskalender erzeugt.
 
-## Terminfenster
+Pro Fenster ist eine Kapazität definierbar. Bereits gebuchte Platzanzahl wird öffentlich nicht angezeigt.
 
-Verfügbare Terminfenster werden **manuell durch die Organisation** angelegt.
+Ein Angebot kann mit einer Reservierungsart verknüpft sein. Aus einem Angebot heraus kann ein Bürger direkt einen verfügbaren Termin wählen.
 
-Sie werden nicht automatisch aus dem internen Organisationskalender erzeugt.
+Je Reservierungsart können festgelegt werden:
 
-Pro Terminfenster ist die maximale Anzahl an Buchungen frei konfigurierbar.
+- zugehörige Angebote
+- maximale Buchungsweite im Voraus
+- zusätzliche Formularfragen
 
-## Buchung und Bestätigung
+Eine Mindestvorlaufzeit ist nicht vorgesehen.
 
-Eine Kundenbuchung muss durch die Organisation bestätigt werden.
+## Buchung und Status
+
+Eine Buchung benötigt Organisationsbestätigung.
+
+Interne Reservierungsstatus:
+
+- Neu
+- Bestätigt
+- In Bearbeitung
+- Erledigt
+- Storniert
+- No-Show
 
 Nach Bestätigung:
 
-- erscheint die Reservierung automatisch im persönlichen Nexus-Kalender des Bürgers
-- erscheint sie automatisch im internen Organisationskalender
-- erhält der Bürger feste Erinnerungen **24 Stunden** und **1 Stunde** vor dem Termin
+- persönlicher Kalender des Bürgers
+- interner Organisationskalender
+- Erinnerungen 24 Stunden und 1 Stunde vorher
+
+## Verschieben und Umbuchen
+
+Sowohl Bürger als auch Organisation dürfen eine Reservierung umbuchen.
+
+Verschiebt die Organisation einen Termin, wird der Bürger benachrichtigt und muss dem neuen Termin **erneut zustimmen**.
+
+Wiederkehrende Kundenreservierungen und Reservierungen mit mehreren Zeitabschnitten sind vorgesehen.
+
+Gruppen-/Veranstaltungsreservierungen sind ebenfalls vorgesehen.
+
+## Notizen
+
+Organisationen können Reservierungsnotizen führen. Nach der aktuell festgelegten Sichtbarkeit darf der Bürger diese Notizen sehen.
+
+Ein separates zusätzliches Workflow-System nur für Kunden- oder interne Reservierungsnotizen ist nicht vorgesehen.
 
 ## Stornierung
 
-Der Bürger darf eine bestätigte Reservierung selbst stornieren.
+Der Bürger darf eine bestätigte Reservierung stornieren; Grund ist Pflicht.
 
-Dabei ist ein Stornierungsgrund Pflicht.
+Die Organisation darf ebenfalls absagen und einen Grund angeben.
 
-Die Organisation darf eine Reservierung ebenfalls absagen und dabei einen Grund angeben.
+## Warteliste
 
-## Kapazität und Warteliste
+Bei ausgebuchten Terminfenstern gibt es eine Warteliste.
 
-Ist ein Terminfenster ausgebucht, wird eine Warteliste verwendet.
+Eine manuelle Änderung der Wartelisten-Priorität ist erlaubt, jedoch nur intern berechtigt und mit:
 
-Die Anzahl bereits gebuchter Plätze ist öffentlich **nicht sichtbar**.
+- Pflichtgrund
+- Protokollierung der Änderung
 
-Bei einer Buchung kann ein Bürger mehrere teilnehmende Personen als Personenanzahl angeben.
+Eine eigene Nachrück-/Annahmefrist ist nicht vorgesehen.
 
-## Nicht erschienen / No-Show
+## No-Show
 
-Die Organisation darf einen Termin nachträglich als `Nicht erschienen` markieren.
+Organisation darf `No-Show` setzen und eine interne No-Show-Historie sehen.
 
-Eine interne Historie früherer No-Shows eines Bürgers darf für die Organisation sichtbar sein.
+Eine automatische Reservierungssperre bei wiederholten No-Shows ist nicht vorgesehen.
 
-## Technische Zielstruktur
+## Aufbewahrung und Taskboard
 
-Voraussichtlich benötigt werden:
+Erledigte Reservierungen bleiben als Kerndatensatz **6 Monate** gespeichert.
 
-- Organisations-Angebote mit Typ Produkt/Dienstleistung
-- organisationsdefinierte Angebotskategorien
-- Preisart und RP-Dollar-Anzeige
-- Angebotsstatus, Sichtbarkeit und Gültigkeitszeitraum
-- bis zu drei externe Bildlinks je Angebot
-- Standortzuordnung
-- stadtweite Angebots-Suche, Filter und Sortierung
-- öffentliche Organisationsgalerie
-- filialbezogene Öffnungsstatus
-- Organisations-FAQ
-- Kundenanfragearten und dynamische Formulare
-- Kundenanfragen als spezialisierte Organisations-Mail-Threads
-- Mehrfachzuweisung, Kommentare, Status und 6-Monats-Aufbewahrung
-- manuell definierte Reservierungs-Zeitfenster
-- Kapazitäten, Wartelisten und Bestätigungsworkflow
-- Kalenderverknüpfungen und feste Reservierungserinnerungen
-- No-Show-Status und interne No-Show-Historie
+Nach Abschluss kann der Bürger automatisch zur Organisationsbewertung eingeladen werden.
 
-Alle organisationsinternen Verwaltungsrechte müssen serverseitig geprüft werden. Öffentliche Angebots-, Galerie- und Reservierungsdaten dürfen keine verborgenen Mitglieds- oder Kontaktdaten offenlegen.
+Reservierungen können als interne Aufgabe ins Taskboard übernommen werden.
+
+## Technische Leitplanken
+
+Benötigt werden insbesondere:
+
+- Angebote, Kategorien, Varianten, Zusatzleistungen, Preisarten und zeitliche Aktionen
+- standortbezogene Preise und Verfügbarkeit
+- private Angebotsfavoriten
+- Anfragearten und dynamische Formulare
+- Kundenanfragen als Mail-Threads
+- Reservierungsarten, Terminfenster, Kapazitäten und Status
+- wiederkehrende und mehrteilige Reservierungen
+- Umbuchung mit erneuter Zustimmung bei Organisationsverschiebung
+- Warteliste mit begründeter manueller Priorisierung
+- Kalender- und Taskboard-Verknüpfungen
+- 6-Monats-Aufbewahrung abgeschlossener Reservierungen
+
+Alle internen Verwaltungsrechte müssen serverseitig geprüft werden. Öffentliche Angebots- und Reservierungsdaten dürfen keine verborgenen Mitglieds- oder Kontaktdaten offenlegen.
