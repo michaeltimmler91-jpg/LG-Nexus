@@ -1,198 +1,141 @@
 # LG Nexus – Persönliche Nexus-Mail
 
-Dieses Dokument beschreibt die aktuell festgelegten Regeln für direkte Nexus-Mails zwischen einzelnen Bürgern.
+Dieses Dokument beschreibt den verbindlichen Stand direkter Bürger-Mails bis Frage 3410.
 
 ## Direkte Bürger-Mails
 
-Direkte Nexus-Mails zwischen einzelnen Bürgern sind möglich.
+Empfänger können zulässig ausgewählt werden über Name, Nexus-ID und sichtbare Nexus-Mail. Verborgene Nexus-Mailadressen bleiben verborgen und dürfen nicht durch Suche/Empfängerauswahl indirekt offengelegt werden.
 
-Empfänger können gesucht beziehungsweise ausgewählt werden über:
-
-- Name
-- Nexus-ID
-- sichtbare Nexus-Mail
-
-Ist die Nexus-Mail eines Bürgers für den Absender verborgen, darf dieser Bürger **nicht allein über seine Nexus-ID als Mail-Empfänger ausgewählt werden**.
-
-Wird ein Empfänger auf einem zulässigen Weg ausgewählt, bleibt eine für den Absender verborgene Nexus-Mail-Adresse weiterhin verborgen.
+Eine persönliche Privatsphäre-Einstellung kann **neue Direktkontakte sperren**. Bereits bestehende notwendige Organisations-/Stadt-/Systemkontakte bleiben nach ihren Sonderregeln möglich.
 
 ## Threads
 
-Antworten auf persönliche Mails werden automatisch als zusammenhängender Thread dargestellt.
+Antworten werden als Threads dargestellt.
 
-- `Allen antworten` wird unterstützt.
-- Persönliche und Organisations-Mails bleiben trotz gemeinsamem Posteingang intern getrennte Threads.
-- Ein einzelner Mail-Thread kann stummgeschaltet werden.
-- Bei einem stummgeschalteten Thread bleiben die Nachrichten normal im Postfach, erzeugen aber keine Benachrichtigungen.
+- `Allen antworten`
+- Persönliche und Organisations-Mail bleiben intern getrennte Threadarten
+- Thread kann stummgeschaltet werden; Nachrichten bleiben sichtbar, Benachrichtigungen entfallen
 
 ## Verfassen
 
-- Betreff ist Pflicht.
-- Mailtext unterstützt formatierten Text beziehungsweise Markdown.
-- Mehrere direkte Empfänger über An/Cc sind möglich.
-- BCC ist möglich.
-- Maximal **50 direkte Empfänger** pro persönlicher Mail.
-- Weiterleiten wird unterstützt.
-- Bereits gesendete Mails können nicht nachträglich bearbeitet werden.
-- Eine ungelesene persönliche Mail kann nicht zurückgerufen werden.
+- Betreff Pflicht
+- Markdown/formatierter Text
+- An/Cc/Bcc
+- maximal 50 direkte Empfänger
+- Weiterleiten
+- gesendete Mail nicht nachträglich editierbar
+- kein Rückruf ungelesener persönlicher Mail
+- maximal 5 externe Anhangslinks
+- externe Bilder können per Markdown eingebettet werden
+- Link-Vorschau möglich; externe Links mit Sicherheitshinweis
 
-Anhänge erfolgen über externe Links.
+Nicht vorgesehen:
 
-Pro Mail sind maximal **5 externe Anhangslinks** vorgesehen.
+- Mailentwürfe
+- geplantes Senden
+- Verteiler für mehr als 50 Teilnehmer
+- Kontaktgruppen
+- Antwortvorlagen
+- persönliche Signaturen
+- `vertraulich`-Kennzeichnung
 
-Externe Bilder dürfen per Markdown direkt im Mailtext eingebettet angezeigt werden.
+## Löschen
 
-Bei externen Links:
-
-- kann Nexus eine Link-Vorschau anzeigen
-- beim Öffnen erscheint ein Sicherheits-/Hinweis auf eine externe Seite
-
-## Löschen einer gesendeten Mail
-
-Löscht ein Absender eine bereits gesendete Mail, wird sie **nur aus seinem eigenen Postfach** entfernt. Beim Empfänger bleibt sie bestehen.
+Löscht der Absender eine gesendete Mail, verschwindet sie nur aus seiner eigenen Ansicht. Beim Empfänger bleibt sie erhalten.
 
 ## Lesestatus
 
-Der Absender kann sehen, ob eine direkte Bürger-Mail gelesen wurde.
+Lesebestätigungen sind standardmäßig aktiv; Empfänger kann sie bei direkten Bürger-Mails deaktivieren.
 
-Lesebestätigungen sind standardmäßig aktiviert. Der Empfänger darf sie für direkte Bürger-Mails deaktivieren.
+## Persönliche Kategorien / Labels
 
-## Entwürfe und geplantes Senden
+Jeder Bürger darf eigene Mail-Kategorien beziehungsweise Labels anlegen und bearbeiten.
 
-Persönliche Nexus-Mail besitzt derzeit **keine Entwurfsfunktion**. Entsprechend gibt es auch kein automatisches Speichern von Entwürfen.
+- mehrere Labels pro Mail möglich
+- Suche/Filter nach Labels
+- Kategorien sind persönliche Metadaten
+- keine Status-/Workflow-Historie für Kategorien nötig
 
-Zeitversetztes beziehungsweise geplantes Senden ist nicht vorgesehen.
+## Persönliche Mailregeln / Filter
 
-## Ordner und Labels
+Persönliche Filterregeln sind vorgesehen und werden vom Bürger selbst verwaltet.
 
-Jeder Bürger darf eigene persönliche Mail-Ordner beziehungsweise Labels anlegen.
+Sie sind normale Einstellungen und kein mehrstufiger Workflow.
 
-Eine Mail kann mehrere persönliche Labels gleichzeitig besitzen.
+Eine spezielle automatische Regel `immer nach Absender in Ordner X verschieben` ist derzeit nicht als eigene Standardfunktion festgelegt.
 
-Die Suche kann nach persönlichen Labels/Ordnern gefiltert werden.
+## Blockieren
 
-## Blockieren und Stummschalten
+Bei persönlicher Blockierung:
 
-Eine separate Funktion `Absender stummschalten` ist nicht vorgesehen.
+- neue direkte Bürger-Mails des Blockierten werden nicht zugestellt
+- bestehende Threads bleiben lesbar
+- nach Entblocken werden während der Blockzeit zurückgehaltene Mails nach bisheriger Regel nachgeliefert
+- notwendige Organisationskontakte und offizielle Stadt-/Systemmeldungen bleiben möglich
 
-Wird ein Bürger durch einen anderen Bürger blockiert, werden neue direkte persönliche Nexus-Mails des blockierten Benutzers während der Blockierung **nicht zugestellt**.
+Blockieren erfolgt im Profil-/Benutzerbereich, nicht direkt aus dem Thread.
 
-Bereits vorhandene gemeinsame Mailthreads bleiben weiterhin lesbar.
+## Archiv und Papierkorb
 
-Wird die Blockierung später aufgehoben, werden während der Blockzeit zurückgehaltene beziehungsweise nicht zugestellte Mails **nachträglich zugestellt**.
+- Archiv möglich
+- Papierkorb 30 Tage
+- Wiederherstellung möglich
+- volle 30 Tage Papierkorb auch kurz vor normalem Ablauf
+- archivierte Threads dauerhaft
 
-Ein Bürger kann einen anderen Benutzer nicht direkt aus einem Mailthread heraus blockieren; die Blockierfunktion bleibt im Profil-/Benutzerbereich.
+## Suche und Markierungen
 
-Diese Blockierwirkung betrifft direkte Bürger-zu-Bürger-Mail. Notwendige interne Organisationskontakte sowie offizielle Stadtverwaltungs-/Systemmeldungen bleiben von den bereits festgelegten Ausnahmen unberührt.
-
-## Archiv, Papierkorb und Wiederherstellung
-
-Persönliche Mails können archiviert werden.
-
-- Gelöschte persönliche Mails bleiben **30 Tage** im Papierkorb.
-- Der Bürger darf Mails aus dem Papierkorb wiederherstellen.
-- Auch wenn eine Mail kurz vor dem regulären Aufbewahrungsende gelöscht wird, gelten die vollen 30 Tage Papierkorb.
-- Archivierte persönliche Mails werden **dauerhaft** aufbewahrt und sind von der normalen 12-Monats-Frist ausgenommen.
-
-## Suche, Markierungen und Prioritäten
-
-Persönliche Nexus-Mail unterstützt:
-
-- Suche
-- Filter
-- Favorit-/Wichtig-Markierung
-- Prioritäten
-
-Die Mail-Suche durchsucht:
+Suche über:
 
 - Betreff
 - Inhalt
 - Absender
 - Empfänger
 
-Die Priorität einer persönlichen Mail wird als **persönliche Markierung des Empfängers** gesetzt. Der Absender setzt keine für den Empfänger sichtbare Versandpriorität.
+Zusätzlich persönliche Wichtig-Markierung und Empfänger-Priorität.
 
 ## Benachrichtigungen
 
-Jede neue persönliche Nexus-Mail löst eine normale Nexus-Benachrichtigung aus.
+Jede neue persönliche Mail löst eine normale Nexus-Benachrichtigung aus.
 
-Persönliche und Organisations-Mail verwenden dieselbe Benachrichtigungskategorie `Mail`.
+Kategorie `Mail` wird gemeinsam mit Organisations-Mail genutzt.
 
-@-Erwähnungen innerhalb eines persönlichen Mailtexts lösen keine zusätzliche Erwähnungs-Benachrichtigung aus; die normale Mail-Benachrichtigung reicht aus.
+@-Erwähnungen im Mailtext erzeugen keine zweite Erwähnungsbenachrichtigung.
 
-## Kalender und Verknüpfungen
+## Kalender
 
-Aus einer persönlichen Mail kann direkt ein persönlicher Kalendereintrag erstellt werden.
+Aus einer persönlichen Mail kann manuell ein persönlicher Kalendereintrag erstellt werden.
 
-Eine persönliche Mail wird nicht direkt mit Bewerbung, Verwaltungsantrag oder anderen Nexus-Vorgängen verknüpft.
+Keine direkte Fachvorgangs-Verknüpfung zu Bewerbung/Verwaltungsantrag usw.
 
-## Signaturen und Vorlagen
+## Gemeinsamer Posteingang
 
-Persönliche Mail-Signaturen sind nicht vorgesehen.
+Persönliche und Organisations-Mail erscheinen in einem gemeinsamen Posteingang, visuell klar durch Badge/Icon unterschieden.
 
-Persönliche Mail-Vorlagen sind nicht vorgesehen.
+Offizielle System-/Stadtnachrichten bleiben in einem getrennten Systembereich.
 
-## Darstellung in der Mail-App
-
-Persönliche Mail und Organisations-Mail werden in **einem gemeinsamen Posteingang** dargestellt.
-
-Die Mailart wird dort optisch klar über Badge beziehungsweise Icon gekennzeichnet.
-
-Offizielle System- beziehungsweise Stadtverwaltungsnachrichten werden dagegen in einem eigenen Mail-/Systembereich getrennt dargestellt.
-
-Offizielle Organisationen und die Stadtverwaltung erhalten bei Mails ein verifiziertes Absender-Badge.
+Offizielle Organisationen/Stadtverwaltung erhalten verifiziertes Absender-Badge.
 
 ## Aufbewahrung
 
-Normale persönliche Nexus-Mailthreads werden **12 Monate ab der letzten Aktivität des gesamten Threads** gespeichert.
+Normale persönliche Threads: **12 Monate ab letzter Thread-Aktivität**.
 
-Archivierte Threads sind davon ausgenommen und werden dauerhaft aufbewahrt.
+Archivierte Threads: dauerhaft.
 
-Die technische Lösch-/Papierkorbregel bleibt davon getrennt: manuell gelöschte Mails verbringen 30 Tage im Papierkorb.
+Manuell gelöschte Mails: 30 Tage Papierkorb.
 
-Ein PDF-Export persönlicher Mails/Threads ist nicht vorgesehen.
+Kein PDF-Export.
 
 ## Missbrauch melden
 
-Ein Bürger kann eine missbräuchliche direkte Nexus-Mail an die Stadtverwaltung melden.
+Missbräuchliche Mail kann an Moderation gemeldet werden. Dabei wird nur der komplette **betroffene Thread** übermittelt, nicht andere Postfachinhalte.
 
-Bei einer Meldung wird der **komplette betroffene Mail-Thread** an die zuständige Moderation übermittelt.
+Meldender sieht keinen laufenden Moderationsstatus; gemeldeter Absender wird nicht sofort über die Meldung informiert.
 
-- Andere, nicht gemeldete Mailthreads dürfen dadurch nicht eingesehen werden.
-- Die Stadtverwaltung kann bestätigte Moderationsmaßnahmen dokumentieren.
-- Der meldende Bürger sieht keinen laufenden Bearbeitungsstatus seiner Mail-Meldung.
-- Der gemeldete Absender wird nicht sofort über die Meldung informiert.
+## Spam
 
-## Spam / unbekannte Absender
+Spam-/Junk-Ordner vorhanden. Automatische Filterung unbekannter Absender ist benutzersteuerbar.
 
-Persönliche Nexus-Mail besitzt einen Spam-/Junk-Ordner.
+## Sicherheit
 
-Ob unbekannte Absender automatisch gefiltert werden, entscheidet der Benutzer selbst.
-
-## Technische Zielstruktur
-
-Voraussichtlich benötigt werden:
-
-- persönliche Mailthreads und Nachrichten
-- Empfängerauswahl mit Privatsphäreprüfung
-- An/Cc/BCC mit maximal 50 Empfängern
-- Lesestatus mit standardmäßig aktivem Empfänger-Opt-out
-- externe Links, maximal 5 pro Mail
-- Link-Vorschau und Externe-Seite-Hinweis
-- eingebettete externe Markdown-Bilder
-- persönliche Ordner und Mehrfachlabels
-- Thread-Stummschaltung
-- Blockierprüfung mit Zurückhalte-/Nachzustelllogik
-- Archiv und 30-Tage-Papierkorb
-- normale 12-Monats-Aufbewahrung nach letzter Thread-Aktivität
-- dauerhafte Aufbewahrung archivierter Threads
-- Volltextsuche und Label-/Ordnerfilter
-- Wichtig-Markierung und persönliche Empfänger-Priorität
-- gemeinsamer Posteingang mit Mailart-Badge
-- separater Systemnachrichtenbereich
-- verifizierte Organisations-/Stadt-Absender
-- Spam-/Junk-Ordner mit Benutzerfilter
-- Mail-Meldungen auf Thread-Ebene an die Stadtverwaltung
-- Kalenderaktion aus Mail
-
-Privatsphäre und Blockierungen müssen serverseitig vor Zustellung beziehungsweise Empfängerauswahl geprüft werden.
+Privatsphäre, neue-Kontakte-Sperre und Blockierungen müssen serverseitig vor Zustellung/Empfängerauswahl geprüft werden. Rate Limits für Mailversand gelten gemäß Sicherheitskonzept.
