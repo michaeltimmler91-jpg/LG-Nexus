@@ -1,6 +1,6 @@
 # LG Nexus – Medical
 
-Dieses Dokument beschreibt die festgelegten Regeln für das Medical-Modul.
+Dieses Dokument beschreibt den verbindlichen Stand des Medical-Moduls nach Auswertung bis Frage 3410.
 
 ## Patientensuche
 
@@ -13,230 +13,197 @@ Medical kann Patienten suchen nach:
 
 Es gibt keinen pauschalen Medical-Override für private Telefonnummern.
 
-## Krankenakte
+## Zentrale Krankenakte
 
-Jeder Patient besitzt genau eine zentrale Krankenakte.
-
-Einzelne Behandlungen beziehungsweise Einsätze werden als eigene Vorgänge innerhalb dieser Akte geführt und erhalten automatisch eine eindeutige Behandlungsnummer.
+Jeder Patient besitzt genau eine zentrale Krankenakte. Einzelne Behandlungen beziehungsweise Einsätze werden als eigene Vorgänge innerhalb dieser Akte geführt und erhalten automatisch eine eindeutige Behandlungsnummer.
 
 Strukturierte medizinische Stammdaten:
 
 - Diagnosen
-- Allergien
-- Medikamente
+- Allergien einschließlich Schweregrad
+- Medikamente einschließlich Dosierungsfreitext
 - Blutgruppe
 - wichtige medizinische Notfallhinweise
 - interne medizinische Warnhinweise / Flags
+- Impf-/Vorsorgeeinträge im RP
+- dokumentierte Patienteneinwilligungen
 
-Patienten dürfen diese medizinischen Stammdaten nicht selbst ergänzen oder verändern; Pflege erfolgt durch Medical.
+Patienten dürfen medizinische Stammdaten nicht selbst verändern; Pflege erfolgt durch Medical.
 
-Wichtige medizinische Notfallhinweise werden im Patientenkopf besonders hervorgehoben.
+### Verbindliche Aufbewahrungsregel
 
-Warnhinweise/Flags können:
+**In einer Krankenakte wird nichts automatisch oder endgültig gelöscht.**
 
-- ein optionales Ablaufdatum besitzen
-- die Priorität `Hinweis`, `Wichtig` oder `Kritisch` besitzen
+- medizinische Inhalte bleiben dauerhaft erhalten
+- Korrekturen erzeugen neue Versionen
+- Stornierungen bleiben sichtbar und als storniert gekennzeichnet
+- eine frühere Planung, abgeschlossene medizinische Einträge mit Sonderrecht endgültig zu löschen, ist damit aufgehoben
+- generische 6-/12-Monats-Fristen aus späteren Frageblöcken gelten nicht für Akteninhalte
 
-Setzen und Entfernen erfolgt über ein eigenes Rollenrecht. Der Ersteller eines Flags wird in der normalen Medical-Oberfläche nicht als eigenes sichtbares Feld gespeichert/angezeigt.
+## Behandlungs- und Befundvorgänge
 
-## Behandlungsvorgänge
+Neue Behandlungen dürfen nur Mitglieder mit `Behandlungen anlegen` erstellen. Offene Behandlungen dürfen nur mit `Behandlungen bearbeiten` verändert werden.
 
-Neue Behandlungen dürfen nur Mitglieder mit dem Rollenrecht `Behandlungen anlegen` erstellen.
-
-Bestehende, noch offene Behandlungen dürfen nur Mitglieder mit dem Rollenrecht `Behandlungen bearbeiten` verändern.
-
-Behandlungsstatus:
+Status:
 
 - Offen
 - Abgeschlossen
 
-Bei jeder Behandlung wird ein verantwortlicher Medic fest gespeichert. Zusätzlich können mehrere weitere Medics gleichzeitig als Behandler zugeordnet werden.
+Gespeichert werden ein verantwortlicher Medic und optional mehrere weitere Behandler.
 
-Ein abgeschlossener Behandlungsvorgang ist nicht normal weiter bearbeitbar. Änderungen erfolgen nur über Korrektur beziehungsweise neue Versionen, sodass frühere Inhalte erhalten bleiben.
-
-Medizinische Einträge können storniert werden. Dabei gilt:
-
-- Stornierungsgrund ist Pflicht.
-- Der stornierte Eintrag bleibt in der Krankenakte sichtbar und wird klar als storniert gekennzeichnet.
+Abgeschlossene Vorgänge sind nicht normal editierbar; Änderungen erfolgen über Korrektur/Version.
 
 Ein Behandlungsvorgang kann enthalten:
 
-- Körper-/Verletzungsschema zur Markierung von Verletzungen
+- Körper-/Verletzungsschema
 - chronologische Maßnahmen-/Behandlungs-Zeitleiste
 - externe Links als Anhänge
+- Diagnosen aus einem organisationsinternen Diagnosekatalog
+- OP-/Eingriffsberichte
+- strukturierte Labor-/Befundberichte
+- medizinische Nachkontrolltermine
 
-Strukturierte Vitalwerte sind derzeit nicht vorgesehen.
+Strukturierte Vitalwerte sind derzeit nicht vorgesehen. Ein eigener RTW-Transportbericht und ein separates Zielkrankenhaus-/Übergabeortfeld sind ebenfalls nicht vorgesehen.
 
-Ein eigener Transport-/RTW-Bericht ist nicht vorgesehen. Ein separates Feld für Zielkrankenhaus beziehungsweise Übergabeort ist ebenfalls nicht vorgesehen.
+## Besonders geschützte Akten
 
-## Bearbeitung und Historie
+Medical kann Sperrvermerke für besonders geschützte Akten beziehungsweise Inhalte verwenden.
 
-Jede Bearbeitung der Krankenakte besitzt einen Änderungsverlauf.
+Für die neu vertieften medizinischen Fachbereiche gilt:
 
-Korrekturen erzeugen einen neuen Versionsstand, sodass ältere Inhalte erhalten bleiben.
-
-Abgeschlossene medizinische Einträge dürfen mit einem besonderen Recht endgültig gelöscht werden.
+- normaler Medical-Modulzugriff allein reicht nicht immer aus
+- zusätzlich kann eine fall-/vorgangsbezogene Berechtigung erforderlich sein
+- Änderungen werden nachvollziehbar/versioniert
+- reine Lesezugriffe werden weiterhin nicht pauschal zusätzlich protokolliert
 
 ## Sichtbarkeit für den Patienten
 
-Ein Bürger darf seine eigene Krankenakte vollständig in Nexus einsehen.
+Ein Bürger sieht **nicht automatisch seine vollständige Krankenakte**.
 
-Neue Behandlungen lösen jedoch keine automatische Benachrichtigung an den Patienten aus.
+Medical kann einzelne Inhalte beziehungsweise geeignete Zusammenfassungen ausdrücklich für die Bürgerseite freigeben. Nur diese freigegebenen Inhalte sind im normalen Bürgerbereich sichtbar.
+
+Diese neuere Festlegung ersetzt die frühere Regel einer vollständigen automatischen Akteneinsicht.
+
+Neue Behandlungen lösen keine automatische Benachrichtigung an den Patienten aus.
 
 ## Zugriff anderer Stellen
 
 ### Police Department
 
-PD darf medizinische Akten nicht direkt einsehen. Sichtbar werden nur medizinische Zusammenfassungen, die ausdrücklich freigegeben wurden.
+PD darf medizinische Akten nicht direkt einsehen. Sichtbar werden nur ausdrücklich freigegebene medizinische Informationen.
 
 ### Fire & Rescue
 
-Fire & Rescue darf medizinische Akten ebenfalls nicht direkt einsehen. Sichtbar werden nur ausdrücklich freigegebene medizinische Zusammenfassungen.
+FD darf medizinische Akten nicht direkt einsehen. Sichtbar werden nur ausdrücklich freigegebene medizinische Informationen.
 
 ### Stadtverwaltung
 
 Die Stadtverwaltung darf medizinische Krankenakten nicht einsehen.
 
-## Medizinische Notfall-Zusammenfassung
+### Technische Systemadministration
 
-Für Einsätze kann eine kleine medizinische Zusammenfassung gezielt mit PD/FD geteilt werden:
+Technische System-Admins erhalten durch ihre Adminrolle ebenfalls **keinen automatischen fachlichen Aktenzugriff**.
+
+## Medizinische Freigaben
+
+Freigaben an andere Fraktionen/Behörden erfolgen über einen formellen Freigabe-/Anfrageprozess. Ein bloßes Rollenrecht einer anderen Organisation reicht nicht.
+
+Für Einsätze kann eine kleine medizinische Zusammenfassung gezielt geteilt werden, beispielsweise:
 
 - Allergien
 - Medikamente
 - Blutgruppe
 
-Für die Weitergabe medizinischer Informationen ist grundsätzlich eine Zustimmung des Patienten erforderlich, außer bei einer klar definierten Notfallregel oder einer ausdrücklich richterlich angeordneten Freigabe.
+Grundsätzlich ist Patientenzustimmung erforderlich, außer bei einer klar definierten Notfallregel oder ausdrücklich richterlich angeordneter Freigabe.
 
-Der Patient erhält keine automatische Nexus-Benachrichtigung, wenn medizinische Informationen gezielt an eine andere Stelle freigegeben werden.
+Der Patient erhält derzeit keine automatische Benachrichtigung über eine solche fachliche Freigabe.
 
-## Formelle Anfragen
+## Formelle PD-/Justice-Anfragen
 
-PD und Justice können medizinische Berichte über einen formellen Nexus-Anfrageprozess anfordern.
+PD und Justice können medizinische Berichte über Nexus anfordern.
 
-Für Justice-Anfragen gilt zusätzlich:
+Für Justice:
 
-- jede Justice-Anfrage muss mit einem konkreten Justice-Verfahren verknüpft sein
-- Medical sieht den konkreten Anfragegrund
-- bei Ablehnung durch Medical ist ein Ablehnungsgrund Pflicht
-- eine ausdrücklich richterlich angeordnete medizinische Freigabe darf die normale Patientenzustimmung ersetzen
-- diese richterliche Ausnahme erzeugt keinen pauschalen Justice-Zugriff auf die Krankenakte; freigegeben werden nur die konkret angeordneten beziehungsweise genehmigten Informationen
-- der betroffene Bürger sieht nicht automatisch, dass Justice eine medizinische Anfrage gestellt hat
+- konkrete Verfahrensverknüpfung Pflicht
+- Medical sieht den Anfragegrund
+- Ablehnung durch Medical benötigt einen Grund
+- richterliche Anordnung kann Patientenzustimmung für die konkret angeordneten Daten ersetzen
+- kein pauschaler Justice-Zugriff auf die Akte
+- Bürger sieht die Anfrage nicht automatisch
 
 ## Behandlungsvorlagen
 
-Medical kann Behandlungsvorlagen erstellen.
+Medical kann Behandlungsvorlagen über `Vorlagen verwalten` erstellen.
 
-Verwaltung über das Rollenrecht `Vorlagen verwalten`.
-
-Vorlagen:
-
-- besitzen einen Versionsverlauf
-- können strukturierte Felder vorbefüllen
+- Versionsverlauf
+- strukturierte Vorbefüllung möglich
 
 ## Rezepte / Verordnungen
 
-Medical kann RP-Rezepte beziehungsweise Verordnungen ausstellen.
-
 Jedes Rezept:
 
-- erhält automatisch eine eindeutige Rezeptnummer
-- besitzt die Status `Aktiv` oder `Ungültig`
-- kann ein Ablaufdatum besitzen
-- ist für den betroffenen Bürger in Nexus sichtbar, solange es nach den festgelegten Regeln sichtbar/relevant ist
-- kann über eine öffentliche Prüfnummer verifiziert werden
+- eindeutige Rezeptnummer
+- Status `Aktiv` oder `Ungültig`
+- optionales Ablaufdatum
+- öffentliche Verifikation über Prüfnummer
 
-Nach Einlösung wird ein Rezept nicht als eigener historischer Rezept-Eintrag für den Bürger weiter angezeigt.
+Der Bürger sieht aktuell relevante/freigegebene Rezepte. Nach Einlösung wird kein separater Bürger-Rezeptverlauf geführt; die medizinisch notwendige Aktenhistorie bleibt davon unberührt.
 
-## Medizinische Bescheinigungen / Krankschreibungen
+## Bescheinigungen / Krankschreibungen
 
-Medical kann Bescheinigungen und Krankschreibungen als Nexus-Dokument erzeugen.
+Medical kann Nexus-Bescheinigungen ausstellen.
 
-Jede Bescheinigung:
-
-- erhält automatisch eine eindeutige Dokumentnummer
-- besitzt strukturierte Felder für Start- und Enddatum
-- ist für den betroffenen Bürger in Nexus sichtbar
-
-Der Bürger kann eine Bescheinigung gezielt mit einer Organisation/Firma teilen. Dabei sieht die empfangende Organisation nur die notwendigen Bescheinigungsdaten, niemals automatisch die vollständige Krankenakte.
+- eindeutige Dokumentnummer
+- Start-/Enddatum
+- für den betroffenen Bürger sichtbar
+- gezielte Freigabe an ausgewählte Organisation/Firma möglich
+- Freigabe enthält nur notwendige Bescheinigungsdaten, nie automatisch die Krankenakte
 
 ## Verstorben-Markierung
 
-Medical kann einen Patienten medizinisch als verstorben kennzeichnen.
+- Setzen nur mit Bestätigung
+- Korrektur mit besonderem Recht möglich
+- beim Aufheben Grund Pflicht
 
-- Das Setzen verlangt eine ausdrückliche Bestätigung.
-- Eine fälschlich gesetzte Markierung kann mit besonderem Rollenrecht wieder aufgehoben werden.
-- Beim Aufheben ist ein Grund Pflicht.
+## Wissensdatenbank und Ausbildung
 
-## Zugriffshistorie
+Medical besitzt eine interne Wissensdatenbank mit Kategorien/Unterkategorien und Versionsverlauf. Verwaltung über `Wissensdatenbank verwalten`.
 
-Zugriffe auf Krankenakten werden nicht zusätzlich protokolliert.
+Ausbildung:
 
-Dementsprechend sieht ein Patient auch nicht, wer seine Krankenakte aufgerufen hat.
-
-## Aufbewahrung
-
-Medizinische Krankenakten werden **dauerhaft** aufbewahrt.
-
-## Wissensdatenbank
-
-Medical besitzt eine interne Wissensdatenbank mit:
-
-- Kategorien und Unterkategorien
-- Versionsverlauf je Artikel
-- Verwaltung über das Rollenrecht `Wissensdatenbank verwalten`
-
-## Ausbildung
-
-Medical besitzt Ausbildungspläne für Azubis.
-
-- Ausbildungspläne werden erst nach Freischaltung durch einen Ausbilder für den Azubi sichtbar.
-- Ein Azubi kann einem oder mehreren festen Ausbildern zugeordnet werden.
-- Ausbildungspläne zeigen Fortschritt in Prozent beziehungsweise erledigten Punkten.
-- Ausbilder dürfen zu einzelnen Ausbildungspunkten interne Notizen hinterlegen.
-- Diese Ausbildungsnotizen sind für den Azubi nicht sichtbar.
-- Es gibt Testpatienten für Ausbildungszwecke.
-- Ausbilder können Wissenstests erstellen.
-- Wissenstests werden erst nach Freigabe sichtbar.
-- Nach Abgabe kann der Ausbilder den Test wieder ausblenden.
-- Auswertung: Punktzahl + Versuchshistorie.
-- Pro Wissenstest ist immer nur **ein Versuch** erlaubt.
-- Eine Mindestpunktzahl zum Bestehen ist nicht vorgesehen.
-- Testergebnisse werden dem Azubi erst nach Freigabe durch einen Ausbilder angezeigt.
+- Ausbildungspläne erst nach Ausbilderfreigabe sichtbar
+- ein oder mehrere feste Ausbilder je Azubi
+- Fortschritt in Prozent/erledigten Punkten
+- interne Ausbildernotizen je Ausbildungspunkt; für Azubi unsichtbar
+- Testpatienten
+- anonymisierte Testfälle für Ausbildung
+- Wissenstests erst nach Freigabe sichtbar
+- nach Abgabe wieder ausblendbar
+- Punktzahl + Versuchshistorie
+- genau ein Versuch pro Test
+- keine Mindestpunktzahl zum Bestehen
+- Ergebnis erst nach Ausbilderfreigabe sichtbar
 
 ## Urlaub / Abwesenheit
 
-Medical besitzt einen Bereich für Urlaub und Abwesenheiten.
+- direkter Eintrag ohne Genehmigungsprozess
+- `von` / `bis` Pflicht
+- Grund/Kommentar optional
+- wenn Grund vorhanden, für alle Medical-Mitglieder sichtbar
+- alle Medical-Mitglieder sehen Abwesenheiten
+- bewusst kein Dienst-/Schichtplan
 
-- Eintrag direkt ohne Genehmigungsprozess.
-- Zeitraum `von` / `bis` ist Pflicht.
-- Ein Grund/Kommentar ist optional.
-- Wenn ein Grund eingetragen wurde, dürfen ihn alle Medical-Mitglieder sehen.
-- Alle Medical-Mitglieder dürfen die eingetragenen Abwesenheiten sehen.
-- Der Bereich bleibt bewusst **ohne Dienstplan-/Schichtplan-Funktion**.
+## Technische Leitplanken
 
-## Technische Zielstruktur
+Benötigt werden insbesondere:
 
-Voraussichtlich benötigt werden:
+- zentrale Akte pro Nexus-Person
+- Behandlungsnummern und Versionierung
+- Diagnosekatalog, Allergie-Schweregrade, Medikamenten-/Dosierungsdaten
+- OP-/Befund-/Vorsorgeeinträge
+- Einwilligungen und Sperrvermerke
+- fallbezogene Zusatzberechtigungen
+- formelle Freigabe-/Anfrageobjekte
+- dauerhafte Aufbewahrung medizinischer Akteninhalte
 
-- zentrale Patientenakte pro Nexus-Person
-- Behandlungsvorgänge mit Behandlungsnummer und Status Offen/Abgeschlossen
-- Rollenrechte `Behandlungen anlegen` und `Behandlungen bearbeiten`
-- verantwortlicher Medic + mehrere Behandler
-- Korrektur-/Versionslogik für abgeschlossene Behandlungen
-- Stornierung mit Pflichtgrund und sichtbarem Stornozustand
-- Diagnosen, Allergien, Medikamente, Blutgruppe, Notfallhinweise
-- medizinische Flags mit Ablaufdatum, Priorität und Rollenrecht
-- Körper-/Verletzungsschema
-- Behandlungs-Timeline
-- externe Link-Anhänge
-- medizinische Freigabe-Zusammenfassungen
-- formelle PD-/Justice-Anfragen einschließlich zwingender Justice-Verfahrensverknüpfung und richterlicher Ausnahme
-- Vorlagen + Versionshistorie
-- Rezepte mit Nummer, Gültigkeit und öffentlicher Verifikation
-- Bescheinigungen mit Dokumentnummer und gezielter Organisationsfreigabe
-- Verstorben-Markierung mit Bestätigung und Korrekturrecht
-- Wissensdatenbank
-- Ausbildungspläne, Ausbilderzuweisung, Fortschritt, interne Ausbildungsnotizen, Testpatienten, Wissenstests
-- Abwesenheitsbereich mit Pflichtzeitraum
-
-Medical-Daten müssen serverseitig besonders strikt geschützt und von allgemeinen Organisationsdaten getrennt werden.
+Medical-Daten werden serverseitig besonders strikt von normalen Organisations-, Stadtverwaltungs- und technischen Adminrechten getrennt.
