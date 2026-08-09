@@ -1,247 +1,193 @@
-# LG Nexus – Registrierung und Freischaltung
+# LG Nexus – Registrierung, Account und Identität
+
+Dieses Dokument beschreibt den verbindlichen Stand der Registrierung, Accountstatus und Identitätsverwaltung bis Frage 3410.
 
 ## Grundregel
 
 **1 Account = 1 RP-Charakter.**
 
-Der Account ist fest mit genau einem Charakter verknüpft. Ein weiterer Charakter benötigt einen eigenen Nexus-Account.
+Nicht vorgesehen:
+
+- mehrere Charaktere unter einem Login
+- Account-Übergabe an einen anderen Charakter
+- Umzug eines Charakters auf einen neuen Benutzernamen
 
 ## Registrierung
 
-Jeder Bürger darf sich selbst registrieren.
-
 Pflichtfelder:
 
-- Benutzername (frei wählbar, aber eindeutig)
+- eindeutiger Benutzername
 - Passwort
 - Passwort wiederholen
 - Vorname
 - Nachname
-- Geburtsdatum
+- RP-Geburtsdatum
 
-Optional:
+Optional: Telefonnummer.
 
-- Telefonnummer
+Keine echte E-Mail-Adresse erforderlich.
 
-Es wird **keine echte E-Mail-Adresse** verlangt.
-
-Nach der Registrierung erhält der Account den Status `pending` und wartet auf die Freischaltung durch die Stadtverwaltung.
+Nach Registrierung: `pending`.
 
 ## Benutzername
 
-Der Benutzername wird bei der Registrierung frei gewählt, muss eindeutig sein und ist anschließend dauerhaft fest.
+Der Benutzername ist nach Registrierung dauerhaft unveränderlich und unabhängig vom Charakternamen.
 
-- Die Stadtverwaltung kann ihn nicht ändern.
-- Der Nutzer kann ihn später nicht selbst ändern.
-- Der Benutzername bleibt unabhängig vom Charakternamen.
-- Auch nach einer endgültigen Deaktivierung mit `disabled` bleibt der Benutzername dauerhaft reserviert und kann niemals erneut registriert werden.
+- case-insensitive eindeutig
+- auch nach `disabled` dauerhaft reserviert
+- weder Bürger noch Stadtverwaltung ändern ihn
 
-Die technische Eindeutigkeit wird unabhängig von Groß-/Kleinschreibung geprüft. Damit gelten beispielsweise `Lennox`, `lennox` und `LENNOX` als derselbe Benutzername.
+## Accountstatus
 
-## Account-Status
+- `pending`
+- `active`
+- `suspended`
+- `rejected`
+- `disabled`
 
-- `pending` – wartet auf Freischaltung
-- `active` – freigeschaltet und normal nutzbar
-- `suspended` – vorübergehend gesperrt
-- `rejected` – Registrierung abgelehnt
-- `disabled` – dauerhaft gelöscht / endgültig deaktiviert
+`disabled` bleibt endgültig und wird nicht reaktiviert.
 
-### Zugriff während `pending`
+## Pending
 
-Ein Bürger mit Status `pending` darf sich bereits anmelden und die **öffentlichen Bereiche von LG Nexus** verwenden, während die Registrierung noch von der Stadtverwaltung geprüft wird.
+Pending-Nutzer dürfen sich anmelden und ausschließlich öffentliche Bereiche nutzen.
 
-Dazu gehören insbesondere öffentliche Inhalte wie:
-
-- Unternehmen / Business-Verzeichnis
-- Events
-- öffentliche City-Informationen und Ankündigungen
-- weitere ausdrücklich als öffentlich gekennzeichnete Bereiche
-
-Nicht freigeschaltet sind in diesem Zustand persönliche oder geschützte Nexus-Funktionen, interne Organisationsbereiche sowie Fraktionsmodule wie Medical, Police oder Fire & Rescue.
-
-Die Oberfläche zeigt zusätzlich gut sichtbar an, dass die Registrierung noch auf Freischaltung durch die Stadtverwaltung wartet.
-
-### Eigene Registrierungsdaten während `pending` ändern
-
-Solange der Account noch den Status `pending` hat, darf der Bürger seine eigenen Registrierungsdaten selbst korrigieren:
+Sie dürfen vor Freischaltung selbst korrigieren:
 
 - Vorname
 - Nachname
 - Geburtsdatum
 - Telefonnummer
 
-Die Telefonnummer bleibt weiterhin optional und kann auch wieder entfernt werden.
+Benutzername und geschützte Accountfelder bleiben unveränderlich.
 
-Der Benutzername bleibt davon ausgeschlossen und kann nach der Registrierung niemals geändert werden. Auch Account-Status, Nexus-ID, Nexus-Mail, Freischaltungsdaten, Ablehnungsdaten und andere geschützte Account-Felder können vom Bürger nicht verändert werden.
+## Freischaltung
 
-### Eigene Daten nach der Freischaltung
+Stadtverwaltung prüft die Identität im RP.
 
-Bei einem Account mit Status `active` darf der Bürger seine **Telefonnummer weiterhin selbst ändern oder entfernen**.
+Berechtigte Verwaltung darf während `pending` Vorname, Nachname, Geburtsdatum und auf Wunsch Telefonnummer korrigieren.
 
-Vorname, Nachname und Geburtsdatum können nach der Freischaltung nicht mehr selbst geändert werden. Spätere Korrekturen dieser Identitätsdaten laufen über die dafür berechtigte Stelle.
+Bei Freischaltung entstehen:
 
-Bei `suspended`, `rejected` oder `disabled` können eigene Profildaten nicht geändert werden.
+- Nexus-ID, z. B. `NX-000001`
+- interne Nexus-Mail, z. B. `lennox.davis@nexus.ls`
 
-### Sichtbarkeit der Telefonnummer
+Die Nexus-ID bleibt stabil.
 
-Ob und für wen die hinterlegte Telefonnummer sichtbar ist, entscheidet der Bürger selbst über eine eigene Privatsphäre-Einstellung.
+## Namensänderung nach Freischaltung
 
-Die Telefonnummer darf deshalb nicht automatisch für alle Nutzer sichtbar gemacht werden. LG Nexus prüft beim Anzeigen eines Profils oder einer Kontaktdarstellung immer die vom Bürger gewählte Sichtbarkeitsstufe.
+Der RP-Charaktername kann nach Aktivierung geändert werden, aber **nicht direkt durch den Bürger**.
 
-Auswählbare Sichtbarkeitsstufen:
+Ablauf:
 
-- Niemand
-- Nur freigeschaltete Nexus-Bürger
-- Nur Behörden / staatliche Stellen
-- Bürger + Behörden
-- Nur eigene Firma / Organisation
-- Alle
+1. Bürger stellt einen Namensänderungsantrag bei der Stadtverwaltung.
+2. Berechtigte Verwaltung prüft/genehmigt.
+3. Der aktuelle RP-Name wird geändert.
+4. Der vorherige RP-Name bleibt im internen Identitätsverlauf dauerhaft nachvollziehbar.
 
-Standardmäßig ist die Telefonnummer für **Niemanden** sichtbar, bis der Bürger selbst eine andere Einstellung auswählt.
+Der unveränderliche Login-Benutzername wird dadurch nicht geändert.
 
-Bei **„Nur eigene Firma / Organisation“** gilt die Freigabe für **alle aktiven Organisationen**, denen der Bürger angehört. Ist ein Bürger beispielsweise gleichzeitig Mitglied eines Unternehmens und einer staatlichen Organisation, dürfen berechtigte Mitglieder beider Organisationen die Telefonnummer sehen. Es gibt dafür keine einzelne Hauptorganisation.
+## Korrektur des RP-Geburtsdatums
 
-Die gewählte Sichtbarkeitsstufe gilt **immer**, auch gegenüber Behörden und staatlichen Stellen. Es gibt keinen pauschalen Behörden-Override. PD, Medical, Fire & Rescue, Stadtverwaltung oder andere staatliche Organisationen dürfen die im Nexus-Profil hinterlegte Telefonnummer nur sehen, wenn die vom Bürger gewählte Sichtbarkeitsstufe dies ausdrücklich erlaubt.
+Nach Freischaltung kann das RP-Geburtsdatum nur administrativ korrigiert werden.
 
-Die Telefonnummer selbst bleibt weiterhin optional und kann vom Bürger jederzeit entfernt werden, solange sein Account `active` ist.
+- manuelle berechtigte Aktion
+- Änderung wird vollständig protokolliert
+- Bürger wird bei relevanter Korrektur informiert
+- bei technischem Widerspruch wird die Änderung blockiert
 
-Ein Account mit Status `disabled` gilt aus Nutzersicht als endgültig gelöscht. Er kann nicht wieder auf `pending`, `active`, `suspended` oder `rejected` gesetzt werden und erhält keinen Zugriff mehr auf LG Nexus. Dieser Status ist für endgültige Fälle gedacht, beispielsweise wenn ein Charakter dauerhaft ausgereist oder gelöscht wurde.
+## Doppelaccounts zusammenführen
 
-Der technische Account-Datensatz bleibt intern erhalten, damit unter anderem der bereits verwendete Benutzername dauerhaft blockiert bleibt und nicht von einem anderen Charakter übernommen werden kann.
+Versehentlich doppelte Accounts können durch berechtigte Administration manuell zusammengeführt werden.
 
-Eine abgelehnte Registrierung ist nicht endgültig verloren. Ein Mitarbeiter der Stadtverwaltung mit dem entsprechenden Recht darf einen Account von `rejected` wieder auf `pending` setzen. Danach läuft die normale Prüfung und Freischaltung erneut durch.
+- keine automatische Zusammenführung
+- vollständige Protokollierung
+- Bürger wird informiert
+- bei Konflikt/Fehler wird abgebrochen
 
-### Vorübergehende Sperre
+Die konkrete Merge-Strategie für Fachreferenzen wird technisch festgelegt; historische Fall-/Aktenreferenzen dürfen nicht verloren gehen.
 
-Ein Account mit Status `suspended` kann sich weiterhin anmelden, erhält jedoch keinen Zugriff auf das eigentliche Nexus-System. Stattdessen wird nur folgende Meldung angezeigt:
+## Eigene Daten bei aktivem Account
 
-> Dein Nexus-Zugang wurde vorübergehend gesperrt.  
-> Bitte wende dich an die Stadtverwaltung.
+Telefonnummer darf weiterhin selbst geändert/entfernt werden.
 
-Ein Sperrgrund wird dem Bürger nicht angezeigt.
+Vorname, Nachname und Geburtsdatum nicht direkt selbst änderbar.
 
-Beim Suspendieren ist intern ein Grund Pflicht.
+Privatsphäre für Telefon/Nexus-Mail und Profilfelder wird separat geregelt.
 
-Ein berechtigter Mitarbeiter der Stadtverwaltung darf einen `suspended` Account jederzeit wieder direkt auf `active` setzen. Eine erneute Freischaltungsprüfung ist dafür nicht erforderlich.
+## Suspended
 
-### Ablehnung einer Registrierung
+Ein `suspended` Account kann sich anmelden, erhält aber keinen Zugriff auf Nexus-Inhalte und sieht nur die Sperrstatus-Seite.
 
-Eine Registrierung darf nur mit einem angegebenen Ablehnungsgrund auf `rejected` gesetzt werden.
+- interner Sperrgrund Pflicht
+- Grund wird Bürger nicht angezeigt
+- berechtigte Verwaltung kann zurück auf `active` setzen
 
-Der Bürger kann sich weiterhin mit Benutzername und Passwort anmelden, erhält jedoch keinen Zugriff auf das eigentliche Nexus-System. Stattdessen wird eine Statusseite mit dem Ablehnungsgrund angezeigt.
+## Rejected
 
-Beispiel:
+Ablehnung benötigt einen sichtbaren Ablehnungsgrund.
 
-> Deine Registrierung wurde von der Stadtverwaltung abgelehnt.  
-> Grund: Geburtsdatum stimmt nicht mit den vorgelegten Unterlagen überein.
+`rejected` kann durch berechtigte Verwaltung wieder auf `pending` gesetzt werden. Kein Self-Service-Button; erneute Prüfung erfolgt IC.
 
-Der Ablehnungsgrund wird zusammen mit Zeitpunkt und bearbeitendem Mitarbeiter gespeichert.
+## Disabled und Selbstlöschung
 
-Es gibt **keine Schaltfläche für eine erneute Prüfung** im Nexus. Möchte der Bürger eine erneute Prüfung, muss er persönlich IC bei der Stadtverwaltung vorsprechen. Erst dort kann ein berechtigter Mitarbeiter den Account wieder von `rejected` auf `pending` setzen.
+`disabled` ist der endgültige technische Accountzustand.
 
-## Prüfung und Freischaltung durch die Stadtverwaltung
+Zusätzlich darf ein Bürger die Selbstlöschung seines Nexus-Accounts auslösen.
 
-Die Stadtverwaltung ist Betreiber von LG Nexus und übernimmt die Identitätsprüfung im RP.
+Dabei gilt verbindlich:
 
-Solange ein Account den Status `pending` hat, darf ein Mitarbeiter der Stadtverwaltung mit dem entsprechenden Nexus-Recht vor der Freischaltung folgende Charakterdaten korrigieren:
+- Login und normales Bürgerprofil werden entfernt/deaktiviert
+- Account kann danach nicht reaktiviert werden
+- Benutzername bleibt reserviert
+- notwendige historische Fachdatensätze bleiben erhalten
+- PD-/Medical-/Justice-/Verwaltungsreferenzen behalten mindestens Nexus-ID und erforderlichen historischen Namen
+- Selbstlöschung darf keine Akten, Verfahren oder rechtlich/fachlich notwendige Historie beschädigen
 
-- Vorname
-- Nachname
-- Geburtsdatum
-- Telefonnummer, falls der Bürger dies wünscht
+Ein eigener Export aller Nexus-Stammdaten vor der Löschung ist derzeit nicht vorgesehen.
 
-Die Telefonnummer bleibt immer optional. Eine Telefonnummer ist keine Voraussetzung für die Freischaltung und darf von der Stadtverwaltung nur auf Wunsch beziehungsweise mit Zustimmung des Bürgers eingetragen oder korrigiert werden.
+## Accountrechte der Stadtverwaltung
 
-Damit können Tippfehler oder Abweichungen bei der IC-Identitätsprüfung direkt berichtigt werden. Der frei gewählte Benutzername bleibt davon getrennt und darf nicht geändert werden.
-
-Erst nach Abschluss dieser Prüfung wird der Account freigeschaltet. Für die automatische Nexus-Mail werden die **zuletzt von der Stadtverwaltung bestätigten Namen** verwendet.
-
-Bei der Freischaltung werden automatisch vergeben:
-
-- eine Nexus-ID im Format `NX-000001`
-- eine interne Nexus-Mailadresse
-
-Beispiel:
-
-- Charakter: `Lennox Davis`
-- Nexus-ID: `NX-000001`
-- Nexus-Mail: `lennox.davis@nexus.ls`
-
-Existiert dieselbe Mailadresse bereits, wird automatisch hochgezählt:
-
-- `lennox.davis2@nexus.ls`
-- `lennox.davis3@nexus.ls`
-- usw.
-
-Die Nexus-Mail ist ausschließlich für das interne Mailsystem von LG Nexus gedacht und wird **nicht** als Login-Adresse oder zur Passwort-Wiederherstellung verwendet.
-
-## Rollenrechte für Account-Aktionen
-
-Für die Stadtverwaltung werden Account-Aktionen getrennt berechtigt:
+Getrennte Rechte für:
 
 - `Accounts freischalten`
-- eigenes Recht für Suspendieren/Reaktivieren
+- Suspendieren/Reaktivieren
 - `Passwort zurücksetzen`
-- Recht für endgültiges Deaktivieren (`disabled`)
+- endgültiges Deaktivieren
+- Identitätskorrekturen/Namensänderungen
+- Doppelaccount-Zusammenführung
 
-Das endgültige `disabled` benötigt zusätzlich das **Vier-Augen-Prinzip**: zwei dafür berechtigte Verwaltungsmitarbeiter müssen die endgültige Deaktivierung bestätigen.
+Endgültiges `disabled` benötigt weiterhin das Vier-Augen-Prinzip.
 
-## Login
+## Passwort
 
-Der Nutzer meldet sich mit folgendem an:
+Login: Benutzername + Passwort.
 
-- Benutzername
-- Passwort
+Passwort vergessen läuft IC über Stadtverwaltung. `Passwort zurücksetzen` setzt ein temporäres Passwort und `must_change_password`.
 
-Der Charaktername und die Nexus-Mail sind vom Login getrennt.
+Passwort-Reset-Aktionen werden 6 Monate protokolliert.
 
-## Passwort vergessen
+Bei einer Passwortänderung werden bestehende Sitzungen nach der festgelegten Sicherheitsregel invalidiert beziehungsweise gesperrt.
 
-Es gibt keine Wiederherstellung per E-Mail.
+## Sitzungen und Login-Sicherheit
 
-Wer sein Passwort vergessen hat, muss sich IC an die Stadtverwaltung wenden. Ein Mitarbeiter mit dem Rollenrecht `Passwort zurücksetzen` kann ein temporäres neues Passwort setzen.
+- Inaktivitätsablauf: 4 Stunden
+- `angemeldet bleiben`: maximal 90 Tage
+- Bürger sieht eigene Geräte/Sitzungen und kann andere remote beenden
+- Re-Authentifizierung per Passwort für sensible persönliche Aktionen
+- unbekanntes Gerät erzeugt Nexus-Benachrichtigung
+- ungewöhnliche Login-Muster/Orte können zusätzliche Sicherheitsprüfung auslösen
+- 2FA aktuell nicht vorgesehen
 
-Nach einem durch die Stadtverwaltung ausgelösten Passwort-Reset wird `must_change_password` gesetzt. Beim nächsten erfolgreichen Login muss der Bürger zwingend ein eigenes neues Passwort vergeben, bevor er LG Nexus normal weiterverwenden kann. Nach erfolgreichem Passwortwechsel wird die Markierung wieder entfernt.
+Erfolgreiche/fehlgeschlagene Logins werden 30 Tage als Sicherheitsereignisse gespeichert.
 
-Die Stadtverwaltung kann Passwörter nicht einsehen.
-
-Passwort-Reset-Aktionen werden **6 Monate** intern protokolliert.
-
-## Sitzungs- und Login-Sicherheit
-
-Eine normale Nexus-Sitzung läuft nach **4 Stunden Inaktivität** ab.
-
-Mit `angemeldet bleiben` kann eine Sitzung maximal **90 Tage** erhalten bleiben.
-
-Benutzer können ihre eigenen aktiven Geräte/Sitzungen sehen und andere Sitzungen aus der Ferne beenden.
-
-Für sensible persönliche Sicherheitsaktionen wird eine erneute Passwortbestätigung verlangt, mindestens für:
-
-- Passwortänderungen
-- Privatsphäre-Einstellungen
-- Sitzungsverwaltung
-- persönliche Sicherheitsaktionen
-
-Bei einer Anmeldung auf einem unbekannten Gerät erhält der Bürger eine Nexus-Benachrichtigung. Auffällige oder neue Anmeldungen können eine zusätzliche Sicherheitsprüfung auslösen.
-
-Eine Zwei-Faktor-Authentifizierung ist derzeit **nicht vorgesehen**.
-
-## Login-Schutz
-
-Erfolgreiche und fehlgeschlagene Login-Versuche werden als Sicherheitsereignisse für **30 Tage** gespeichert.
-
-Nexus verwendet gegen Login-Missbrauch:
+Schutz:
 
 - Rate Limiting
-- CAPTCHA/Anti-Bot-Schritt nach mehreren Fehlversuchen
+- CAPTCHA/Anti-Bot nach mehreren Fehlversuchen
 - temporäre Login-Sperre nach sehr vielen Fehlversuchen
 
-## Sicherheit
+## Betreiber- und Datenschutzgrenze
 
-Nexus-ID und Nexus-Mail werden erst bei erfolgreicher Aktivierung erzeugt. Ein normaler Nutzer darf seinen eigenen Account-Status nicht ändern und kann sich damit nicht selbst freischalten.
+Stadtverwaltung oder technische Systemadministration erhalten durch ihre Betreiberrolle **keinen automatischen Zugriff** auf vertrauliche Medical-/PD-Inhalte. Justice besitzt nur die separat festgelegte IC-Leseregel der Stadtverwaltung.
 
-Die Korrektur von Vorname, Nachname, Geburtsdatum und der optionalen Telefonnummer vor der Freischaltung wird an ein separates Stadtverwaltungs-Recht gebunden. Dadurch bekommt nicht automatisch jeder Mitarbeiter der Stadtverwaltung diese Berechtigung.
-
-Die Stadtverwaltung erhält durch ihre Betreiberrolle nicht automatisch Zugriff auf sensible Inhalte anderer Module wie Medical- oder Police-Akten. Solche Rechte werden separat geregelt.
-
-Die Stadtverwaltung darf normale Geräte-/Sitzungsdetails eines Bürgers nicht einsehen. Bei einem Sicherheitsfall kann eine dafür berechtigte Funktion jedoch alle aktiven Sitzungen eines Bürgers beenden.
+Technische Account- und Sicherheitsrechte bleiben von fachlichen Fraktionsrechten getrennt.
