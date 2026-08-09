@@ -1,14 +1,16 @@
 # LG Nexus – Privatsphäre-Einstellungen
 
+Dieses Dokument beschreibt den verbindlichen Stand persönlicher Sichtbarkeit und Privatsphäre bis Frage 3410.
+
 ## Grundregel
 
-Persönliche Informationen werden in LG Nexus nicht automatisch für andere Nutzer freigegeben, wenn für das jeweilige Feld eine Sichtbarkeitseinstellung vorgesehen ist.
+Persönliche Daten werden nicht automatisch für andere Nutzer freigegeben, wenn für das Feld eine Sichtbarkeitseinstellung vorgesehen ist.
 
-Die gewählte Sichtbarkeit gilt auch gegenüber Behörden und staatlichen Stellen. Es gibt keinen pauschalen Behörden-Override.
+Die gewählte Sichtbarkeit gilt auch gegenüber Behörden. Es gibt keinen pauschalen Behörden-Override.
 
 ## Sichtbarkeitsstufen
 
-Für Telefonnummer, Nexus-Mail, Profilbild und vollständiges RP-Geburtsdatum stehen dieselben Sichtbarkeitsstufen zur Verfügung:
+Für Telefonnummer, Nexus-Mail, Profilbild und vollständiges RP-Geburtsdatum gelten:
 
 - `nobody` – Niemand
 - `citizens` – Nur freigeschaltete Nexus-Bürger
@@ -17,105 +19,89 @@ Für Telefonnummer, Nexus-Mail, Profilbild und vollständiges RP-Geburtsdatum st
 - `own_organization` – Nur eigene Firma / Organisation
 - `everyone` – Alle
 
-Für Telefonnummer und Nexus-Mail ist Standard jeweils `nobody`. Standardwerte für Profilbild und RP-Geburtsdatum werden bei der technischen Umsetzung separat festgelegt.
+Telefonnummer und Nexus-Mail starten standardmäßig auf `nobody`.
 
-## Eigene Firma / Organisation
-
-Bei `own_organization` gilt die Freigabe für **alle aktiven Organisationen**, denen der Bürger angehört. Es gibt keine einzelne Hauptorganisation.
-
-Ist ein Bürger beispielsweise gleichzeitig Mitglied eines Unternehmens und einer staatlichen Organisation, können Mitglieder beider Organisationen die freigegebene Information sehen, sofern beide Mitgliedschaften aktiv sind.
+Bei `own_organization` gilt die Freigabe für alle aktiven Organisationen, denen der Bürger angehört. Es gibt keine Hauptorganisation.
 
 ## Telefonnummer
 
-Die Telefonnummer ist optional. Ein aktiver Bürger kann seine Telefonnummer selbst ändern oder entfernen und die Sichtbarkeit jederzeit selbst festlegen.
+Telefonnummer ist optional, durch aktiven Bürger änder-/entfernbar und nur gemäß aktueller Sichtbarkeit anzeigbar/suchbar.
 
-Die Sichtbarkeitseinstellung gilt immer. Auch PD, Medical, Fire & Rescue, Stadtverwaltung oder andere staatliche Organisationen sehen die Nummer nur, wenn die gewählte Sichtbarkeitsstufe dies erlaubt.
+Auch PD, Medical, FD und Stadtverwaltung erhalten keinen pauschalen Profil-Telefonzugriff.
 
 ## Nexus-Mail
 
-Die interne Nexus-Mail wird nach erfolgreicher Freischaltung automatisch erzeugt. Der Bürger entscheidet anschließend selbst, wer diese Nexus-Mail sehen darf.
+Die interne Nexus-Mail entsteht bei Freischaltung. Der Bürger steuert ihre Sichtbarkeit.
 
-Für die Nexus-Mail gelten dieselben Sichtbarkeitsstufen und dieselbe Organisationslogik wie für die Telefonnummer. Auch hier gibt es keinen automatischen Behördenzugriff.
+Die Einstellung bestimmt:
 
-Die Sichtbarkeit der Nexus-Mail regelt insbesondere:
+- Anzeige im Profil
+- exakte Suche
+- zulässige Wege der Empfängerauswahl bei Bürger-Mail
 
-- ob die Adresse in Profilen und Suchansichten angezeigt wird
-- ob eine Suche nach der exakten Nexus-Mail einen Treffer liefern darf
-- welche Wege bei der Auswahl eines Empfängers für direkte Bürger-Mails zulässig sind
+Ist die Nexus-Mail für einen Absender verborgen, darf die Empfängerauswahl keine indirekte Offenlegung erzeugen.
 
-Für direkte Bürger-Mail gilt zusätzlich:
+## Neue Direktkontakte
 
-- Ist die Nexus-Mail für einen Absender verborgen, darf der Empfänger nicht allein über seine Nexus-ID ausgewählt werden.
-- Wird ein Empfänger auf einem zulässigen Weg ausgewählt, bleibt seine für den Absender verborgene Nexus-Mail-Adresse verborgen.
-- Eine Blockierung kann die Zustellung direkter Bürger-Mails vollständig verhindern.
+Zusätzlich kann ein Bürger neue direkte Bürgerkontakte über Nexus-Mail durch eine persönliche Privatsphäre-Einstellung sperren.
 
-Die reine technische Existenz einer Nexus-Mail-Adresse darf durch Such- oder Auswahlfunktionen keine versteckten Kontaktdaten offenlegen.
+Diese Sperre gilt für neue direkte Bürger-zu-Bürger-Kontakte. Notwendige interne Organisationskontakte sowie offizielle Stadt-/Systemmeldungen folgen ihren eigenen Sonderregeln.
 
 ## Profilbild
 
-Für Profilbilder gelten ebenfalls die sechs Nexus-Sichtbarkeitsstufen. Die Freigabe wird serverseitig geprüft; ein verborgenes Profilbild darf nicht über direkte Bild- oder API-Antworten offengelegt werden.
+Verwendet dieselben sechs Sichtbarkeitsstufen und eine technische Hoster-Allowlist. Ein verborgenes Bild darf nicht über direkte URLs/API-Antworten durch Nexus offengelegt werden.
 
 ## RP-Geburtsdatum
 
-Das vollständige RP-Geburtsdatum verwendet dieselben sechs Sichtbarkeitsstufen.
+Sechs Sichtbarkeitsstufen. Optional kann nur Tag/Monat freigegeben werden. Bei vollständig sichtbarem Datum darf Nexus das aktuelle RP-Alter berechnen.
 
-Zusätzlich kann ein Bürger alternativ nur **Tag und Monat** seines Geburtstags ohne Geburtsjahr freigeben. Wenn das vollständige Geburtsdatum sichtbar ist, darf Nexus daraus das aktuelle RP-Alter berechnen und anzeigen.
+Geburtstags-Erinnerungen werden nicht automatisch aus diesem Feld erzeugt; persönliche Geburtstage werden manuell im Kalender gepflegt.
 
 ## Nexus-ID
 
-Die Nexus-ID ist **nicht privat** und besitzt keine eigene Sichtbarkeitseinstellung. Sobald ein Account freigeschaltet wurde und eine Nexus-ID erhalten hat, darf diese innerhalb von LG Nexus immer angezeigt und für die Suche verwendet werden.
+Nexus-ID ist nicht privat und besitzt keine eigene Sichtbarkeitseinstellung.
 
-Die Nexus-ID dient als dauerhaft eindeutige Kennung eines Charakters. Dadurch können Nutzer auch bei identischen oder ähnlichen Namen zuverlässig unterschieden und gezielt gesucht werden.
-
-Beispiel:
-
-- Name: `Lennox Davis`
-- Nexus-ID: `NX-000001`
-
-Die Nexus-ID bleibt unverändert und kann vom Bürger nicht ausgeblendet oder geändert werden.
+- stabil
+- sichtbar
+- suchbar
+- nicht änderbar
 
 ## Personensuche
 
-Die Personensuche darf nach folgenden Merkmalen suchen:
+Suchbar nach Name und Nexus-ID. Kontaktfelder nur dann als Suchkriterium, wenn der Suchende das jeweilige Feld auch sehen darf.
 
-- Vorname und Nachname
+Eine Suche darf niemals bestätigen, dass ein verborgenes Telefon-/Mailfeld existiert.
+
+## Organisationszugehörigkeit
+
+Die öffentliche Sichtbarkeit einer Organisationsmitgliedschaft wird von der jeweiligen Organisation festgelegt, nicht individuell vom Mitglied.
+
+Wenn sichtbar:
+
+- aktive Mitgliedschaft
+- Name
 - Nexus-ID
-- Nexus-Mail
-- Telefonnummer
-- Firma / Organisation
+- sichtbare Position/Rolle
 
-Name und Nexus-ID sind grundsätzlich als Suchmerkmale verfügbar, sofern der Account für die jeweilige Ansicht suchbar ist.
+Private Profilfelder werden dadurch nicht automatisch freigegeben.
 
-Die Nexus-Mail darf nur dann als Suchmerkmal verwendet werden, wenn der suchende Nutzer die Nexus-Mail des gesuchten Bürgers gemäß dessen aktueller Sichtbarkeitseinstellung sehen darf. Ist die Nexus-Mail für den Suchenden nicht freigegeben, darf eine Suche nach dieser Mailadresse den Bürger weder als direkten Treffer noch als indirekten Hinweis zurückgeben.
+## Keine zusätzlichen Freigabelisten
 
-Dasselbe gilt für die Telefonnummer. Der Bürger darf über seine Telefonnummer nur von Nutzern gefunden werden, die diese Telefonnummer gemäß der aktuellen Sichtbarkeitseinstellung auch sehen dürfen. Ist die Telefonnummer für den Suchenden verborgen, liefert auch eine exakte Suche nach der Nummer keinen Treffer und keinen Hinweis darauf, welchem Bürger sie gehört.
+Nicht vorgesehen:
 
-Damit schützen die Privatsphäre-Einstellungen nicht nur die Anzeige von Telefonnummer und Nexus-Mail, sondern auch die Auffindbarkeit über diese Kontaktdaten.
+- individuelle persönliche Allowlist pro Profilfeld
+- gruppenspezifische Gesamtprofil-Sichtbarkeit
+- eigenständige Profil-Suchbarkeit unabhängig von Feld-/Account-Sichtbarkeit
+- Blockierung einer ganzen Organisation als Direktkontaktgruppe
 
-### Suche über Firma / Organisation
+Die sechs festen Sichtbarkeitsstufen bleiben das zentrale Modell.
 
-Eine Firma oder Organisation kann ebenfalls als Suchmerkmal beziehungsweise Filter der Personensuche verwendet werden.
+## Blockierungen
 
-Wird beispielsweise nach einem Unternehmen, einer Behörde oder einer anderen Organisation gesucht, darf LG Nexus die Personen anzeigen, die dort aktuell Mitglied sind und deren Mitgliedschaft für den jeweiligen Suchenden in dieser Ansicht sichtbar ist.
+Persönliche Nutzerblockierungen bleiben getrennt von Feldsichtbarkeit.
 
-Die Sichtbarkeit einer Organisationsmitgliedschaft wird **nicht vom einzelnen Bürger**, sondern von der jeweiligen Firma oder Organisation festgelegt. Nur dafür berechtigte Organisationsmitglieder dürfen bestimmen, ob die Mitgliedschaften nach außen sichtbar sind.
+Sie können direkte Bürgerkontakte und öffentliche Sichtbarkeit zwischen zwei Bürgern einschränken, dürfen aber notwendige interne Organisationsarbeit nicht zerstören.
 
-Die Einstellung gilt **einheitlich für alle Mitglieder der jeweiligen Organisation**. Eine Organisation kann also ihre Mitgliederliste insgesamt sichtbar oder verborgen schalten; es gibt keine individuelle Sichtbarkeit pro Mitarbeiter.
+## Technische Durchsetzung
 
-Neue Firmen und Organisationen starten standardmäßig mit **sichtbarer Mitgliederliste**. Eine berechtigte Person der jeweiligen Organisation kann die Mitgliederliste später für die gesamte Organisation ausblenden.
-
-Ist die Mitgliederliste sichtbar, werden bei jedem aktiven Mitglied mindestens folgende Informationen angezeigt:
-
-- Vorname und Nachname
-- Nexus-ID
-- Position / Rolle innerhalb der Organisation, zum Beispiel Geschäftsführer, Mitarbeiter oder Ausbilder
-
-Die jeweilige Organisation kann ihre Positions- und Rollenbezeichnungen selbst frei festlegen. Es gibt keine stadtweit vorgegebene feste Liste.
-
-Telefonnummer, Nexus-Mail, Profilbild und RP-Geburtsdatum werden durch eine sichtbare Mitgliedschaft nicht automatisch freigegeben. Diese Felder richten sich weiterhin nach den persönlichen Privatsphäre-Einstellungen des jeweiligen Bürgers.
-
-Der Bürger kann die von der Organisation festgelegte Sichtbarkeit seiner Mitgliedschaft nicht selbst überschreiben. Persönliche Daten mit eigener Sichtbarkeit bleiben davon getrennt.
-
-Die Organisationssuche darf keine versteckte Mitgliedschaft offenlegen. Ist die Zugehörigkeit eines Bürgers zu einer Organisation für den Suchenden nicht sichtbar, darf dieser Bürger auch über die Suche nach dieser Organisation nicht als Mitglied gefunden oder indirekt bestätigt werden.
-
-Bei mehreren aktiven Organisationen kann ein Bürger entsprechend über jede Organisation gefunden werden, deren Zugehörigkeit für den Suchenden sichtbar ist.
+Privatsphäre wird serverseitig/RLS-seitig geprüft. Versteckte Daten dürfen weder über normale Ansicht, Suche, API, Benachrichtigungen, Favoriten noch indirekte Datensatzreferenzen offengelegt werden.
