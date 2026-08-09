@@ -1,213 +1,185 @@
 # LG Nexus – Justice
 
-Dieses Dokument beschreibt die aktuell festgelegten Regeln für das Justice-Modul.
+Dieses Dokument beschreibt den verbindlichen Stand des Justice-Moduls bis Frage 3410.
 
 ## Personensuche und Verfahren
 
 Justice besitzt eine interne Personensuche nach Name und Nexus-ID.
 
-Justice erhält ein eigenes Fall-/Verfahrenssystem. Jedes Verfahren:
+Jedes Verfahren:
 
-- erhält automatisch eine eindeutige Verfahrensnummer
-- besitzt Titel und Kurzbeschreibung
-- unterstützt die Verfahrensarten `Straf`, `Zivil`, `Verwaltung` und `Sonstige`
-- verwendet die Status `Neu`, `Prüfung`, `Verhandlung`, `Entscheidung`, `Abgeschlossen`, `Archiviert`
-- kann Beteiligte mit Rollen wie `Beschuldigter`, `Kläger`, `Beklagter`, `Zeuge`, `Anwalt` und `Sonstige` führen
-- kann dieselbe Person auch dann verknüpfen, wenn diese bereits in anderen Justice-Verfahren beteiligt ist
-- besitzt keine zusätzlichen internen Kategorien/Tags
+- eindeutige Verfahrensnummer
+- Titel/Kurzbeschreibung
+- Typ `Straf`, `Zivil`, `Verwaltung`, `Sonstige`
+- Status `Neu`, `Prüfung`, `Verhandlung`, `Entscheidung`, `Abgeschlossen`, `Archiviert`
+- Beteiligte mit Rollen wie Beschuldigter, Kläger, Beklagter, Zeuge, Anwalt, Sonstige
+- rollenabhängige Sichtbarkeit
+- optional versiegelt
 
-Neue Verfahren dürfen von berechtigten Justice-Mitgliedern angelegt werden. Dafür wird **kein separates Rollenrecht `Verfahren anlegen`** eingeführt; die Berechtigung wird über das allgemeine passende Justice-Fall-/Verfahrensrecht abgebildet.
+Anlage erfolgt über das passende allgemeine Justice-Verfahrensrecht, nicht über ein separates `Verfahren anlegen`.
 
-Verfahren können abhängig von der Justice-Rolle unterschiedlich sichtbar sein.
+## Verfahrensverknüpfungen
 
-Zusätzlich gibt es besonders geschützte beziehungsweise versiegelte Verfahren. Versiegeln und Freigeben erfolgt über ein eigenes Sonderrecht.
+Zusammenhängende Justice-Verfahren können miteinander verknüpft werden.
 
-## Zuständigkeiten
+Dies ist eine Referenzbeziehung; die Verfahren bleiben eigenständige Akten mit eigener Nummer und Berechtigung.
 
-Einem Verfahren kann zugewiesen werden:
+## Zuständigkeiten und Vertretung
 
-- ein zuständiger Richter
-- ein oder mehrere Staatsanwälte
-- Verteidiger beziehungsweise Anwälte als offizielle Beteiligte
+Ein Verfahren kann besitzen:
 
-## Interne Fristen und Zusammenarbeit
+- zuständigen Richter
+- einen oder mehrere Staatsanwälte
+- Anwälte/Verteidiger
 
-Innerhalb eines Justice-Verfahrens können interne Fristen/Deadlines angelegt werden.
+**Vertretungswechsel bei Anwälten** werden unterstützt und nachvollziehbar festgehalten.
 
-- Zuständige Justice-Mitarbeiter werden vor solchen Fristen automatisch erinnert.
-- Berechtigte Justice-Mitarbeiter können interne Kommentare hinterlegen.
-- In internen Kommentaren sind @-Erwähnungen möglich.
-- Eine @-Erwähnung löst eine Nexus-Benachrichtigung aus.
+**Befangenheits-/Ausschlussvermerke bei Richtern** sind vorgesehen.
 
-Betroffene Bürger sehen interne Justice-Kommentare **nur dann**, wenn ein Kommentar ausdrücklich für sie freigegeben wurde. Nicht freigegebene interne Kommentare bleiben verborgen.
+## Fristen und Zusammenarbeit
 
-## Sichtbarkeit für betroffene Bürger
+- interne Fristen/Deadlines
+- Erinnerungen
+- interne Kommentare
+- @-Erwähnungen + Benachrichtigung
 
-Ein betroffener Bürger darf in Nexus eine Zusammenfassung seines eigenen Justice-Verfahrens sehen.
+Bürger sehen interne Kommentare nur bei ausdrücklicher Freigabe.
 
-Bei Dokumenten gilt:
+## Bürgeransicht
 
-- sichtbar sind nur Dokumente, die ausdrücklich für Beteiligte veröffentlicht wurden
-- interne Justice-Dokumente bleiben verborgen
+Betroffene Bürger sehen eine freigegebene Zusammenfassung ihres Verfahrens sowie ausdrücklich veröffentlichte Dokumente.
 
-## Dokumente und Unterlagen
+Kein automatischer Vollzugriff auf die Justice-Akte.
 
-Jedes Justice-Verfahren besitzt eine eigene Dokument-/Ordnerstruktur.
+## Dokumente
 
-Ein zusätzlicher rollenbasierter Schutz einzelner Dokumente innerhalb eines bereits geschützten Verfahrens ist derzeit nicht vorgesehen; maßgeblich ist der jeweilige Verfahrenszugriff.
+Verfahrensbezogene Dokument-/Ordnerstruktur, externe Links statt direkter Datei-Uploads, Justice-Vorlagen über `Vorlagen verwalten`.
 
-Justice-Dokumentvorlagen werden über das Rollenrecht `Vorlagen verwalten` verwaltet.
+Bürger können Unterlagen/Beweislinks einreichen; Justice muss sie prüfen, bevor sie offizielle Verfahrensunterlagen werden.
 
-Justice-Verfahrensdokumente dürfen externe Links als Anlagen enthalten. Direkte Datei-Uploads sind nicht vorgesehen.
+Zusätzlich vorgesehen:
 
-Beteiligte Bürger dürfen über Nexus Unterlagen beziehungsweise Beweislinks zu ihrem Verfahren einreichen. Diese Einreichungen müssen zunächst durch Justice geprüft und freigegeben werden, bevor sie als offizielle Verfahrensdokumente gelten.
+- interne Beschlussentwürfe
+- Beweisanträge innerhalb eines Verfahrens
 
-## Tatbestände und PD-Verknüpfung
+## PD-Verknüpfung und Beweise
 
-Anklagepunkte beziehungsweise Tatbestände werden strukturiert im Verfahren erfasst.
+Justice-Verfahren können mit mehreren PD-Fällen verknüpft werden.
 
-Ein Justice-Verfahren kann direkt mit einem oder mehreren PD-Fällen verknüpft werden.
+Ausgewählte PD-Beweismittel können lesend übernommen/verknüpft werden.
 
-Justice darf ausgewählte PD-Beweismittel in ein Verfahren übernehmen beziehungsweise verknüpfen.
+- Chain of Custody bleibt lesbar
+- Justice verändert PD-Beweise nicht
+- formelle PD→Justice-Beweisfreigaben sind vorgesehen
 
-Dabei gilt:
+## Bußgeld-Einsprüche
 
-- die PD-Chain-of-Custody bleibt für Justice lesbar
-- Justice darf verknüpfte PD-Beweismittel nicht verändern
-- Justice arbeitet nur lesend beziehungsweise verknüpfend mit den PD-Beweisdaten
+PD-Bußgeld-Einspruch kann automatisch passenden Justice-Vorgang erzeugen. Bußgeldnummer und PD-Fallreferenz bleiben erhalten.
 
-Bei PD-Anträgen können der zugehörige Fall und relevante Beweismittel automatisch verknüpft werden.
+## Befehle / Anordnungen
 
-## Bußgeld-Einsprüche aus Police
+Befehlsarten sind frei definierbar und werden über `Befehlsarten verwalten` gepflegt.
 
-Bürger können im Police-Modul gegen ein eigenes Bußgeld Einspruch einlegen.
+Je Befehlsart eigene Vorlage/Pflichtfelder.
 
-Aus einem solchen Einspruch kann automatisch ein passender Justice-Vorgang beziehungsweise Justice-Antrag erstellt werden. Die ursprüngliche Bußgeld-Vorgangsnummer und gegebenenfalls der verknüpfte PD-Fall sollen dabei als Referenz erhalten bleiben.
+PD-Anträge:
 
-## Durchsuchungs-, Haft- und weitere Befehle
-
-Justice bearbeitet PD-Anträge auf Befehle direkt im Nexus.
-
-Die Befehlsarten sind **frei definierbar** und nicht auf Durchsuchungs- oder Haftbefehle begrenzt.
-
-Neue Befehlsarten werden über das Rollenrecht `Befehlsarten verwalten` angelegt. Jede Befehlsart kann eine eigene Vorlage und eigene Pflichtfelder besitzen.
-
-Für Anträge gilt:
-
-- Justice kann annehmen oder ablehnen
-- bei Ablehnung ist ein Grund Pflicht
-- PD sieht Bearbeitungsstatus und Entscheidung direkt im zugehörigen Fall
-- ein PD-Befehlsantrag kann interne Justice-Kommentare besitzen
-- PD sieht bei einer Entscheidung nur `Justice` als entscheidende Stelle, nicht den konkreten Richter beziehungsweise Mitarbeiter
+- annehmen/ablehnen
+- Ablehnung benötigt Grund
+- Status/Entscheidung im PD-Fall sichtbar
+- interne Justice-Kommentare möglich
+- PD sieht als entscheidende Stelle `Justice`, nicht die konkrete Person
 
 Genehmigte Befehle:
 
-- erhalten automatisch eine eindeutige Dokument-/Befehlsnummer
-- können ein optionales Ablaufdatum besitzen
-- können später durch Justice widerrufen werden
-- beim Widerruf ist ein Grund Pflicht
+- eindeutige Dokument-/Befehlsnummer
+- optionales Ablaufdatum
+- widerrufbar, Widerrufsgrund Pflicht
+- PD wird über Statusänderungen benachrichtigt
 
-PD wird automatisch bei Statusänderung, Genehmigung, Ablehnung oder Widerruf benachrichtigt.
-
-Widerrufene beziehungsweise abgelaufene Befehle bleiben nicht dauerhaft als eigener Langzeitbestand erhalten; nach Ende ihrer Relevanz dürfen sie nach der dafür vorgesehenen Aufbewahrungslogik entfernt werden.
+Abgelaufene/widerrufene Befehle müssen nicht als eigener Langzeitbestand dauerhaft bleiben, sofern ihre relevante Information im dauerhaft gespeicherten Verfahren erhalten ist.
 
 ## Medizinische Berichtsanfragen
 
-Justice kann formelle medizinische Berichtsanfragen an Medical senden.
+Justice kann formelle Anfragen an Medical senden.
 
-- Jede medizinische Justice-Anfrage muss mit einem konkreten Justice-Verfahren verknüpft sein.
-- Medical sieht den konkreten Anfragegrund.
-- Lehnt Medical eine Anfrage ab, ist ein Ablehnungsgrund Pflicht.
-- Eine ausdrücklich richterlich angeordnete medizinische Freigabe kann die normale Patientenzustimmung ersetzen.
-- Der betroffene Bürger sieht nicht automatisch, dass Justice eine medizinische Anfrage gestellt hat.
+- konkrete Justice-Verfahrensverknüpfung Pflicht
+- Medical sieht Anfragegrund
+- Ablehnung benötigt Grund
+- richterliche Anordnung kann die normale Patientenzustimmung für konkret bezeichnete Daten ersetzen
+- kein pauschaler Medical-Zugriff
+- Bürger sieht Anfrage nicht automatisch
 
-Diese richterliche Ausnahme muss technisch als eigener, nachvollziehbarer Freigabegrund behandelt werden und darf kein pauschaler Justice-Zugriff auf Krankenakten sein.
+## Termine, Ladungen und Vorladungen
 
-## Verhandlungstermine
+Verhandlungstermine werden mit Nexus-Kalender verknüpft und können verpflichtend sein.
 
-Verhandlungstermine werden direkt mit dem Nexus-Kalender verknüpft.
+Zusätzlich unterstützt Justice:
 
-- Beteiligte werden bei neuen oder geänderten Terminen automatisch benachrichtigt.
-- Ein Verhandlungstermin kann als verpflichtend markiert werden.
+- **Zeugenladungen**
+- **Vorladungen für Bürger**
+
+Diese werden dem betroffenen Bürger im dafür vorgesehenen freigegebenen Bereich zugestellt/angezeigt und können mit einem konkreten Verfahren und Termin verknüpft werden.
 
 ## Verhandlungsprotokolle
 
-Justice besitzt strukturierte Verhandlungsprotokolle innerhalb des Verfahrens.
-
-Protokolle besitzen während der Bearbeitung einen Versions-/Änderungsverlauf.
-
-Ein Verhandlungsprotokoll kann offiziell finalisiert werden. Nach der Finalisierung ist es **nicht mehr änderbar**.
+Strukturierte Protokolle mit Versionsverlauf während Bearbeitung. Nach Finalisierung unveränderlich.
 
 ## Urteile und Entscheidungen
 
-Justice kann Urteile beziehungsweise Entscheidungen als eigene Nexus-Dokumente erzeugen.
+Strukturiert möglich:
 
-Strukturiert erfasst werden können:
+- Geldstrafe
+- Haftdauer/-maß
+- Führerschein-/Lizenzmaßnahmen
+- weitere Maßnahmen
 
-- Strafen und Maßnahmen
-- Geldstrafen als offener RP-Betrag
-- Haftdauer beziehungsweise Haftmaß
-- Führerschein-/Lizenzentzug und weitere Lizenzmaßnahmen
+Urteile werden für Beteiligte manuell veröffentlicht. Optional öffentliche Veröffentlichung im Justiz-/City-Hub-Kontext; keine eigene nur-Urteile-Suchmaschine.
 
-Lizenzmaßnahmen können mit dem zentralen Lizenz-/Genehmigungssystem der Stadtverwaltung verknüpft werden.
+Zusätzlich vorgesehen:
 
-Ein Urteil wird für betroffene Verfahrensbeteiligte **nicht automatisch** sichtbar. Justice veröffentlicht es manuell für die Beteiligten.
+- **Urteils-Korrekturverfahren**
+- **Vollstreckungsstatus von Urteilen**
 
-Abgeschlossene Urteile können zusätzlich optional öffentlich im City-Hub-/Justizbereich veröffentlicht werden. Eine eigene gesonderte Suche oder Filterfunktion nur für öffentliche Urteile ist derzeit nicht vorgesehen.
+Korrekturen verändern ein endgültiges Urteil nicht stillschweigend, sondern werden als nachvollziehbarer Folge-/Korrekturvorgang geführt.
 
 ## Berufung / Einspruch
 
-Es gibt einen formellen Berufungs-/Einspruchsprozess.
+Formeller Prozess durch betroffenen Bürger oder verknüpften Anwalt.
 
-- Einreichen dürfen der betroffene Bürger oder ein mit dem Verfahren verknüpfter Anwalt.
-- Ein Grund ist Pflicht.
-- Externe Links als Anlagen sind erlaubt.
-- Für Berufung beziehungsweise Einspruch kann eine Frist hinterlegt werden.
-- Ein bereits abgeschlossenes Verfahren darf durch einen gültigen Berufungs-/Einspruchsprozess wieder in Bearbeitung gehen.
+- Grund Pflicht
+- externe Links möglich
+- Frist möglich
+- gültige Berufung kann ein abgeschlossenes Verfahren wieder in Bearbeitung bringen
 
-## Aufbewahrung und Export
+## Präzedenzfälle / Wissenssammlung
 
-Abgeschlossene Justice-Verfahren werden **dauerhaft** gespeichert.
+Justice erhält eine interne Wissenssammlung für Präzedenzfälle beziehungsweise relevante frühere Entscheidungen.
 
-Ein PDF-Export von Justice-Verfahren ist nicht vorgesehen.
+Sie ist ein internes Wissenssystem und kein öffentlicher Urteilssuchdienst.
 
-Wenn ein Nexus-Account später `disabled` wird, bleiben historischer Name und Nexus-ID in alten Justice-Verfahren erhalten.
+## Aufbewahrung
 
-## Zugriff der Stadtverwaltung
+**Abgeschlossene Justice-Verfahren und relevante Verfahrensakten werden dauerhaft gespeichert.**
 
-Die Stadtverwaltung darf interne Justice-Verfahren **immer einsehen**.
+Diese spätere Festlegung überschreibt generische 6-/12-Monats-Antworten aus Vertiefungsfragen.
 
-Dieser Zugriff ist **nur lesend**. Die Stadtverwaltung darf Justice-Verfahren nicht bearbeiten.
+Wenn ein Account später `disabled` wird, bleiben Nexus-ID und historischer Name in alten Verfahren erhalten.
 
-Zugriffe der Stadtverwaltung auf Justice-Verfahren werden derzeit nicht zusätzlich als eigener Zugriffslog protokolliert.
+Kein PDF-Export des gesamten Verfahrens.
 
-Diese Sonderregel darf nicht automatisch auf Medical-, Police- oder andere geschützte Fraktionsdaten übertragen werden.
+## Stadtverwaltung
 
-## Technische Zielstruktur
+Stadtverwaltung darf interne Justice-Verfahren weiterhin **nur lesend** einsehen.
 
-Voraussichtlich benötigt werden:
+- kein Bearbeiten
+- kein automatischer Übergriff auf Medical/PD/FD
+- Zugriff wird derzeit nicht zusätzlich pro Aufruf geloggt
 
-- Justice-Verfahren mit Verfahrensnummer, Typ und Status
-- allgemeines Justice-Fall-/Verfahrensrecht zum Anlegen
-- rollenabhängige Sichtbarkeit und versiegelte Verfahren
-- Richter-/Staatsanwalt-/Anwaltszuweisungen
-- interne Fristen, Erinnerungen, Kommentare und @-Erwähnungen
-- Bürgeransicht mit explizit veröffentlichten Kommentaren/Dokumenten
-- Verfahrensordner und Dokumentvorlagen
-- Bürger-Einreichungen mit Freigabestatus
-- strukturierte Tatbestände
-- PD-Fall- und Beweismittelverknüpfungen
-- Bußgeld-Einsprüche aus PD mit automatischer Justice-Erstellung
-- lesbare Chain-of-Custody
-- frei definierbare Befehlsarten, Pflichtfelder und PD-Antragsworkflow
-- Befehlsnummern, Ablauf und Widerruf
-- medizinische Berichtsanfragen mit zwingender Verfahrensverknüpfung und richterlicher Ausnahme
-- kalenderverknüpfte Verhandlungstermine
-- finalisierbare Verhandlungsprotokolle
-- Urteilsdokumente und strukturierte Maßnahmen
-- optionale öffentliche Urteilsveröffentlichung
-- Berufungs-/Einspruchsworkflow
-- dauerhafte Verfahrensaufbewahrung
-- schreibgeschützter Stadtverwaltungszugriff
+Technische Systemadministration erhält **kein automatisches fachliches Justice-Leserecht** durch die technische Rolle.
 
-Justice-Daten müssen serverseitig strikt nach Verfahren, Rolle, Versiegelung und Beteiligten-Sichtbarkeit abgesichert werden.
+## Technische Leitplanken
+
+Benötigt werden Verfahrensverknüpfungen, Vertretungshistorie, Befangenheitsvermerke, Beweisanträge, Ladungen/Vorladungen, Beschlussentwürfe, Korrekturverfahren, Vollstreckungsstatus und Präzedenzfall-Wissenssammlung.
+
+Justice-Daten werden serverseitig nach Verfahren, Rolle, Versiegelung und Beteiligtenfreigabe geschützt und dauerhaft aufbewahrt.
