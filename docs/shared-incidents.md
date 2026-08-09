@@ -1,87 +1,76 @@
 # LG Nexus – Gemeinsame Einsätze / Vorfälle
 
-Dieses Dokument beschreibt die festgelegten Regeln für fraktionsübergreifende Vorfälle zwischen Police Department, Medical und Fire & Rescue.
+Dieses Dokument beschreibt den verbindlichen Stand des fraktionsübergreifenden Vorfallsystems bis Frage 3410.
 
 ## Grundprinzip
 
-LG Nexus erhält ein gemeinsames Einsatz-/Vorfall-System für PD, Medical und Fire & Rescue.
+Gemeinsame Vorfälle verbinden insbesondere PD, Medical und Fire & Rescue, ohne deren geschützte Fachdaten automatisch zusammenzuführen.
 
-Ein gemeinsamer Vorfall kann von Mitgliedern dieser Organisationen mit passendem Rollenrecht angelegt werden und erhält automatisch eine eindeutige Vorgangsnummer.
+Ein Vorfall:
 
-Beim Anlegen werden PD, Medical und Fire & Rescue grundsätzlich automatisch als beteiligte Fraktionen vorgesehen. Eine neu hinzugefügte Fraktion muss ihre Beteiligung bestätigen, bevor sie als aktiv beteiligt gilt.
-
-Die federführende Organisation darf später weitere Fraktionen hinzufügen. Eine bereits beteiligte Fraktion kann durch die federführende Organisation nicht wieder entfernt werden.
-
-Beim Hinzufügen einer Fraktion erhalten deren dafür berechtigte Mitglieder eine Nexus-Benachrichtigung.
+- eindeutige Vorgangsnummer
+- passende Rollenberechtigung für Anlage
+- PD/Medical/FD bei Anlage grundsätzlich als vorgesehene Beteiligte
+- neue/weitere Fraktion bestätigt Beteiligung
+- federführende Organisation darf weitere Fraktionen hinzufügen
+- bereits beteiligte Fraktion wird nicht einfach durch die Federführung entfernt
+- hinzugefügte Fraktion wird benachrichtigt
 
 ## Gemeinsame Basisdaten
 
-Alle beteiligten Fraktionen sehen gemeinsame Basisdaten:
-
 - Ort
 - Zeit
-- Art des Vorfalls
+- Vorfallsart
 - Status
-- kurze gemeinsame Einsatzbeschreibung
+- kurze gemeinsame Beschreibung
 - beteiligte Bürger mit Name + Nexus-ID
-- interne Priorität
+- Priorität Niedrig/Normal/Hoch/Dringend
 
-Prioritäten:
-
-- Niedrig
-- Normal
-- Hoch
-- Dringend
-
-Die gemeinsame Einsatzbeschreibung darf nachträglich bearbeitet werden. Änderungen besitzen einen Versionsverlauf.
+Beschreibung ist versioniert bearbeitbar.
 
 ## Gemeinsamer Informationsbereich
 
-Der gemeinsame Bereich verwendet eine gemeinsame Einsatznotiz für alle beteiligten Fraktionen.
+Gemeinsame Notizen/Kommentare zeigen Autor, Fraktion und Zeitpunkt.
 
-Jeder Eintrag muss klar anzeigen:
+- gemeinsame Timeline
+- keine fraktionsübergreifenden @-Erwähnungen
+- Autor darf eigenen Eintrag bearbeiten → `Bearbeitet`
+- Eintrag darf mit Recht vollständig entfernt werden; kein `gelöscht`-Platzhalter
 
-- wer ihn geschrieben hat
-- zu welcher Fraktion der Autor gehört
-- Zeitpunkt des Eintrags
+Timeline übernimmt automatisch Status- und Federführungswechsel; manuelle Timeline-Einträge möglich.
 
-Zusätzlich gibt es:
+## Bewusst schlanker gemeinsamer Bereich
 
-- gemeinsame Einsatz-Zeitleiste
-- Kommentare zwischen beteiligten Fraktionen
+Die Vertiefung bis Frage 3410 bestätigt ausdrücklich, dass der gemeinsame Vorfall **kein zweites Komplett-Einsatzleitsystem** wird.
 
-Fraktionsübergreifende @-Erwähnungen sind in diesem Bereich nicht vorgesehen.
+Nicht zusätzlich vorgesehen:
 
-Ein Autor darf seinen eigenen gemeinsamen Notiz-/Kommentar-Eintrag bearbeiten. Bearbeitete Einträge werden mit `Bearbeitet` gekennzeichnet.
+- eigene gemeinsame Einsatzrollen pro Fraktion
+- gemeinsame Lagekarte als separates System
+- gemeinsames Taskboard
+- eigene Statusmeldungen je Fraktion
+- Bürgerbeteiligungsrollen
+- gemeinsame Fahrzeug-/Einheitenliste
+- Freigaben mit eigener Ablaufzeit
+- zusätzliche gemeinsame Abschlusszusammenfassung
+- Vorfall als wiederverwendbare Vorlage
+- bloße Verknüpfung mehrerer Vorfälle ohne Merge
 
-Gemeinsame Notiz-/Kommentar-Einträge dürfen mit passendem Recht gelöscht werden. Nach dem Löschen bleibt kein `gelöscht`-Platzhalter zurück; der Eintrag wird aus der normalen Ansicht vollständig entfernt.
+Fachliche Einheiten, Fahrzeuge, Aufgaben, Karten und Berichte bleiben in den jeweiligen PD-/Medical-/FD-Modulen.
 
-## Gemeinsame Zeitleiste
+## Sensible Daten und Freigaben
 
-Die Zeitleiste übernimmt automatisch wichtige Systemereignisse, insbesondere:
+Interne Fachdaten werden nicht automatisch sichtbar.
 
-- Statuswechsel
-- Wechsel der federführenden Organisation
+Eine Fraktion kann ausgewählte interne Einträge beziehungsweise Dokumente gezielt für andere beteiligte Fraktionen freigeben.
 
-Zusätzlich können berechtigte Nutzer manuell eigene Timeline-Ereignisse anlegen.
-
-## Sensible Fraktionsdaten und Freigaben
-
-Sensible interne Daten einer Fraktion werden **nicht automatisch** für andere Fraktionen sichtbar.
-
-Eine Fraktion kann einzelne interne Einträge gezielt für ausgewählte andere beteiligte Fraktionen freigeben.
-
-- Die freigebende Fraktion wählt die Empfängerfraktionen aus.
-- Eine Freigabe kann später wieder entzogen werden.
-- Nach Entzug verschwindet der Zugriff der anderen Fraktion sofort.
-
-Zusätzlich können einzelne interne Organisationsdokumente gezielt für eine andere beteiligte Fraktion freigegeben werden. Wird eine Dokumentfreigabe entzogen, endet der Zugriff sofort.
-
-Ein allgemeiner Anfrageprozess, mit dem eine andere Fraktion Zugriff auf zusätzlich geschützte Bereiche anfordert, ist nicht vorgesehen.
+- Empfängerfraktionen explizit auswählen
+- Freigabe widerrufbar
+- Widerruf beendet Zugriff sofort
+- kein allgemeiner Anfrageprozess auf zusätzliche geschützte Bereiche
+- keine generische zeitgesteuerte Ablauf-Freigabe
 
 ## Federführung und Status
-
-Jeder gemeinsame Vorfall besitzt eine federführende Organisation.
 
 Status:
 
@@ -90,106 +79,69 @@ Status:
 - Abgeschlossen
 - Archiviert
 
-Nur die federführende Organisation darf:
+Nur Federführung darf Status ändern/abschließen. Abschlussgrund Pflicht. Abgeschlossener Vorfall nicht normal wieder öffnen.
 
-- den Status ändern
-- den gemeinsamen Vorfall abschließen
+Federführung übertragbar; neue Organisation muss bestätigen. Alle Beteiligten werden über Wechsel benachrichtigt.
 
-Beim Abschließen ist ein Abschlussgrund Pflicht.
+## Dubletten / Merge
 
-Ein abgeschlossener gemeinsamer Vorfall kann nicht wieder geöffnet werden.
+Nexus warnt anhand Zeit/Ort vor Dubletten.
 
-Die Federführung kann an eine andere beteiligte Organisation übertragen werden. Die neue Organisation muss die Übernahme bestätigen. Nach einem Federführungswechsel werden alle beteiligten Fraktionen benachrichtigt.
+Zusammenführung:
 
-## Dubletten und Zusammenführung
+- Vorschau vor Merge
+- nur Federführung des Zielvorfalls
+- alte Vorgangsnummer bleibt Referenz/Weiterleitung
 
-Doppelt angelegte Vorfälle können zusammengeführt werden.
-
-Beim Anlegen warnt Nexus anhand von Zeit und Ort vor möglichen bereits vorhandenen Vorfällen.
-
-Vor einer Zusammenführung zeigt Nexus eine Vorschau der zusammenzuführenden Daten.
-
-Zusammenführen darf nur die federführende Organisation des Zielvorfalls.
-
-Die alte Vorgangsnummer wird nicht gelöscht, sondern bleibt als Referenz beziehungsweise Weiterleitung auf den zusammengeführten Zielvorfall erhalten.
+Eine reine `verknüpft, aber nicht zusammengeführt`-Beziehung zwischen Vorfällen ist nicht vorgesehen.
 
 ## Suche
 
-Gemeinsame Vorfälle können gesucht werden nach:
+Suche nach:
 
 - Vorgangsnummer
 - Ort
 - Datum
 - beteiligter Person
 
-Archivierte Vorfälle bleiben bis zum Ende ihrer Aufbewahrungsfrist durchsuchbar.
+Archivierte Vorfälle bleiben während Aufbewahrungsfrist suchbar.
 
-## Kartenverknüpfung
+## Kartenbezug
 
-Ein gemeinsamer Vorfall kann:
+Vorfall kann mehrere LS-Map-Positionen besitzen und mit vorhandenen internen Kartenkontexten der beteiligten Fraktionen arbeiten.
 
-- mehrere LS-Map-Positionen beziehungsweise Orte besitzen
-- mit internen Kartenmarkern beteiligter Organisationen verknüpft werden
+Es gibt jedoch keine eigene zusätzliche gemeinsame Lagekarten-Engine.
 
-Die Kartenpositionen gemeinsamer Vorfälle sind nur intern für die beteiligten Fraktionen sichtbar und nicht öffentlich.
+Positionen bleiben intern und nicht öffentlich.
 
 ## Bürgeransicht
 
-Bürger sehen gemeinsame Einsätze/Vorfälle nicht automatisch vollständig.
-
-Für einen Vorfall kann jedoch eine ausdrücklich veröffentlichte Zusammenfassung für die normale Bürgeransicht freigegeben werden.
+Nur ausdrücklich veröffentlichte Zusammenfassung, kein automatischer Vollzugriff.
 
 ## Anhänge
 
-Der gemeinsame Vorfall besitzt keine eigene Anhangsfunktion.
-
-Falls Informationen über Dokumente geteilt werden sollen, erfolgt dies über die gezielte Freigabe vorhandener interner Organisationsdokumente.
+Keine eigene Anhangsfunktion. Dokumente werden bei Bedarf aus dem jeweiligen Fach-/Organisationsbereich gezielt freigegeben.
 
 ## Protokollierung
 
-Fraktionsübergreifende Zugriffe und Freigaben werden nicht zusätzlich in einem eigenen Zugriffs-/Freigabeprotokoll des Vorfalls protokolliert.
-
-Auch der lesende Stadtverwaltungszugriff auf gemeinsame Vorfälle erhält derzeit keinen separaten Zugriffslog.
+Keine zusätzliche pauschale Zugriffs-/Freigabelog-Tabelle nur für gemeinsame Vorfälle. Normale fachliche Änderungs-/Systemlogs bleiben unberührt.
 
 ## Stadtverwaltung
 
-Die Stadtverwaltung darf gemeinsame Vorfälle grundsätzlich einsehen.
+Stadtverwaltung darf nur den gemeinsamen Vorfallbereich **read-only** sehen.
 
-Dieser Zugriff ist **nur lesend**. Die Stadtverwaltung darf gemeinsame Vorfälle nicht bearbeiten.
+Kein Zugriff dadurch auf Medical-/PD-/FD-Fachdaten.
 
-Dies gilt nur für den gemeinsamen Vorfallbereich. Geschützte Medical-, Police- oder Fire-&-Rescue-Fachdaten bleiben weiterhin nach den Regeln des jeweiligen Moduls geschützt.
+Technische Systemadministration erhält ebenfalls kein fachliches Freigaberecht durch ihre technische Rolle.
 
-## Archivierung und Aufbewahrung
+## Aufbewahrung
 
-Beim Archivieren wird die normale Bearbeitung eines gemeinsamen Vorfalls gesperrt.
+Abgeschlossene/archivierte gemeinsame Vorfälle: grundsätzlich **6 Monate**.
 
-Abgeschlossene beziehungsweise archivierte gemeinsame Vorfälle werden grundsätzlich **6 Monate** gespeichert und können danach automatisch entfernt werden.
+Berechtigte Nutzer können vor automatischer Löschung die Aufbewahrung verlängern.
 
-Vor der automatischen Löschung darf ein berechtigter Nutzer die Aufbewahrung verlängern.
+Archiviert sperrt normale Bearbeitung.
 
-Bis zum Ende der jeweiligen Aufbewahrungsfrist bleibt ein archivierter Vorfall durchsuchbar.
+## Sicherheit
 
-## Technische Zielstruktur
-
-Voraussichtlich benötigt werden:
-
-- gemeinsame Vorfallstabelle mit eindeutiger Vorgangsnummer und Priorität
-- automatisch vorgesehene Beteiligung PD/Medical/FD + bestätigungspflichtige Beteiligungen
-- weitere Fraktionen mit Hinzufüge-Workflow und Benachrichtigung
-- federführende Organisation mit bestätigungspflichtiger Übergabe
-- Status + Abschlussgrund, Statusänderung nur durch Federführung
-- gemeinsame Basisdaten und versionierte Kurzbeschreibung
-- Bürgerbeteiligungen mit Name/Nexus-ID-Referenz
-- gemeinsame Timeline / Kommentare mit Autor und Fraktion
-- editierbare Kommentare mit `Bearbeitet`-Kennzeichnung und vollständiger Löschung bei Berechtigung
-- automatische sowie manuelle Timeline-Ereignisse
-- selektive Freigabe einzelner Fraktionseinträge mit Entzug
-- gezielte Dokumentfreigabe mit sofortigem Entzug
-- mehrere interne Kartenpositionen und Marker-Verknüpfungen
-- Bürger-Zusammenfassung als explizite Veröffentlichung
-- Dublettenwarnung, Merge-Vorschau, Zusammenführung und alte Vorgangsnummer als Referenz
-- Suche nach Vorgangsnummer, Ort, Datum und Person
-- Archiv-Schreibsperre
-- 6-Monats-Aufbewahrung mit verlängerbarer Frist
-
-Die Trennung zwischen gemeinsamem Vorfallbereich und vertraulichen Fraktionsdaten muss serverseitig strikt durchgesetzt werden.
+Die Grenze zwischen gemeinsamem Bereich und Fachdaten wird serverseitig strikt durchgesetzt. Ein Link oder eine Vorfallbeteiligung darf niemals selbst ein fachliches Aktenrecht erzeugen.
