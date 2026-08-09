@@ -1,219 +1,151 @@
 # LG Nexus – Police
 
-Dieses Dokument beschreibt die festgelegten Regeln für das Police-Modul.
+Dieses Dokument beschreibt den verbindlichen Stand des Police-Moduls bis Frage 3410.
 
 ## Personensuche und Fälle
 
-PD besitzt eine interne Personensuche nach Name und Nexus-ID.
-
-PD erhält ein eigenes Fall-/Akten-System.
+PD besitzt eine interne Personensuche nach Name und Nexus-ID sowie ein eigenes Fall-/Aktensystem.
 
 Jeder Fall:
 
-- erhält automatisch eine eindeutige Fallnummer
-- besitzt Titel und Kurzbeschreibung
-- verwendet die Status `Neu / Ermittlung / Prüfung / Abgeschlossen / Archiviert`
-- kann Beteiligte mit Rollen wie `Beschuldigter`, `Opfer`, `Zeuge`, `Sonstige` führen
-- kann einen federführenden Ermittler besitzen
-- kann mehrere weitere Ermittler zugeordnet bekommen
+- eindeutige Fallnummer
+- Titel/Kurzbeschreibung
+- Status `Neu / Ermittlung / Prüfung / Abgeschlossen / Archiviert`
+- Beteiligte mit Rollen wie Beschuldigter, Opfer, Zeuge, Sonstige
+- federführender Ermittler + mehrere weitere Ermittler
 
-Neue Fälle dürfen nur Mitglieder mit einem passenden Rollenrecht anlegen. Für die Bearbeitung existiert das eigene Rollenrecht `Fälle bearbeiten`.
+Neue Fälle nur mit passendem Rollenrecht; Bearbeitung über `Fälle bearbeiten`.
 
-PD-Fälle besitzen außerdem:
+Fälle besitzen interne Ermittlungs-Zeitleiste, Kommentare, @-Erwähnungen und entsprechende Benachrichtigungen.
 
-- interne Ermittlungs-Zeitleiste
-- interne Kommentare
-- @-Erwähnungen in Kommentaren
-- Nexus-Benachrichtigung bei @-Erwähnung
+## Fallbeziehungen und strukturierte Verknüpfungen
 
-## Sichtbarkeit für Fallbeteiligte
+Zusätzlich vorgesehen:
 
-Bürger beziehungsweise Fallbeteiligte sehen nicht automatisch ihre vollständigen PD-Fälle.
+- Beziehungen zwischen mehreren PD-Fällen
+- Personenbeziehungen innerhalb eines Falls
+- Fahrzeugbeziehungen innerhalb eines Falls
+- interne Ermittlungsaufträge
+- Observationen als eigene Vorgangsart
 
-PD kann jedoch eine ausdrücklich veröffentlichte Zusammenfassung eines Falls für berechtigte betroffene Bürger sichtbar machen.
+Diese Inhalte können zusätzlich zum allgemeinen Modulzugriff fall-/vorgangsbezogene Berechtigungen verlangen.
 
-## Sichtbarkeit und geschützte Fälle
+## Bürgeransicht
 
-PD-Fälle können je nach Rolle/Rang unterschiedlich sichtbar sein.
+Bürger sehen PD-Fälle nicht automatisch vollständig. PD kann ausdrücklich eine Zusammenfassung beziehungsweise ausgewählte Inhalte veröffentlichen.
 
-Zusätzlich gibt es besonders geschützte beziehungsweise versiegelte Fälle.
+Die vertieften Fallbeziehungen, Observationen und internen Ermittlungsaufträge bleiben standardmäßig verborgen.
 
-Das Versiegeln oder Freigeben eines Falls erfolgt über ein eigenes Sonderrecht.
+## Geschützte Fälle
 
-Beim Versiegeln gilt:
+Rollen-/rangabhängige Sichtbarkeit und versiegelte Fälle bleiben vorgesehen.
 
-- ein Grund ist Pflicht
-- es wird gespeichert, wer den Fall versiegelt hat
-- für nicht berechtigte Nutzer verschwindet der Fall vollständig aus normalen Suchergebnissen; es wird kein Platzhalter `gesperrt` angezeigt
+Beim Versiegeln:
 
-Die Identität einzelner Opfer oder Zeugen kann innerhalb eines Falls zusätzlich geschützt werden.
+- Sonderrecht
+- Grund Pflicht
+- Versiegeler gespeichert
+- unberechtigte Nutzer sehen den Fall nicht einmal als Suchplatzhalter
 
-## Fallnotizen und Historie
+Opfer-/Zeugenidentitäten können zusätzlich geschützt werden.
 
-Bearbeitungen von Fallnotizen besitzen einen Versions-/Änderungsverlauf.
+## Historie und Abschluss
 
-Beim Abschließen eines Falls ist ein Abschlussgrund Pflicht.
+Fallnotizen besitzen Versionsverlauf. Abschlussgrund Pflicht. Abgeschlossene Fälle werden nicht normal wieder geöffnet.
 
-Ein abgeschlossener PD-Fall kann nicht wieder geöffnet werden.
+Abgeschlossene PD-Fälle: **12 Monate** Aufbewahrung.
 
-Abgeschlossene PD-Fälle werden **12 Monate** gespeichert.
+Bei `disabled` bleiben historischer Name und Nexus-ID in alten Fällen erhalten.
 
-Wenn ein Nexus-Account später `disabled` wird, bleiben Name und Nexus-ID in historischen PD-Fällen erhalten.
-
-Ein PDF-Export von PD-Fällen ist nicht vorgesehen.
+Kein PDF-Export.
 
 ## Beweismittel
 
-PD besitzt ein eigenes Beweismittel-Modul innerhalb von Fällen.
-
 Jedes Beweismittel:
 
-- erhält automatisch eine eindeutige Beweisnummer
-- besitzt einen strukturierten Typ, z. B. Foto / Video / Gegenstand / Dokument / Sonstiges
-- kann einen Lager-/Aufbewahrungsort besitzen
-- besitzt eine protokollierte Übergabe-/Besitzkette (Chain of Custody)
+- eindeutige Beweisnummer
+- Typ Foto/Video/Gegenstand/Dokument/Sonstiges
+- Lager-/Aufbewahrungsort
+- Chain of Custody
+- Grund/Zweck je Übergabe
+- externe Link-Anhänge
+- Korrekturen/Linkänderungen versioniert
 
-Jede Übergabe in der Chain of Custody enthält einen Grund beziehungsweise Zweck.
+Zusätzlich:
 
-Anhänge erfolgen über **externe Links**, nicht über direkte Datei-Uploads.
+- Beweismittel-Gruppierungen
+- digitale Asservaten-/Lagerorte
+- gezielte Beweisfreigaben an Justice
 
-Beweismitteldaten können korrigiert werden; Korrekturen erzeugen einen Versionsverlauf.
+Justice arbeitet mit freigegebenen/verknüpften PD-Beweisen nur lesend und verändert die PD-Chain nicht.
 
-Auch externe Beweislinks dürfen nachträglich geändert werden, jedoch nur mit nachvollziehbarem Versionsverlauf.
+Ein Beweismittel kann mit besonderem Sonderrecht endgültig gelöscht werden; die allgemein beschlossene Medical-Nichtlöschregel gilt nicht für PD-Beweismittel.
 
-Ein Beweismittel darf mit einem besonderen Sonderrecht endgültig gelöscht werden.
+## Aussagen / Vernehmungen
 
-## Aussagen
-
-Fälle unterstützen strukturierte Zeugen-/Aussagen-Einträge.
+Neben strukturierten Aussagen unterstützt PD **Vernehmungsprotokolle** als eigene strukturierte Einträge.
 
 ## BOLO / Fahndung
 
-PD kann BOLO-/Fahndungseinträge erstellen für:
+Personen-/Fahrzeug-BOLOs mit Priorität Niedrig/Normal/Hoch/Dringend, optionalem Ablauf und automatischer Archivierung.
 
-- Personen
-- Fahrzeuge
+Manuelles Beenden benötigt Grund.
 
-BOLOs besitzen die Priorität:
+Gesucht-Status:
 
-- Niedrig
-- Normal
-- Hoch
-- Dringend
+- Pflichtgrund
+- mehrere aktive Gründe
+- Verknüpfung zu einem oder mehreren Fällen
+- Bürger sieht ihn nur bei ausdrücklicher PD-Freigabe
 
-Fahndungseinträge können ein optionales Ablaufdatum besitzen.
-
-- Abgelaufene BOLOs werden automatisch archiviert.
-- Ein BOLO kann vor Ablauf manuell beendet werden.
-- Beim manuellen Beenden ist ein Grund Pflicht.
-
-Eine Person kann zusätzlich einen aktiven `Gesucht`-Status erhalten.
-
-- Ein Grund ist beim Setzen Pflicht.
-- Eine Person kann gleichzeitig mehrere aktive Fahndungs-/Gesucht-Gründe besitzen.
-- Ein aktiver Gesucht-Status kann auf einen oder mehrere konkrete PD-Fälle verlinken.
-- Ein Bürger sieht den eigenen Gesucht-/BOLO-Status im normalen Nexus nur dann, wenn PD ihn ausdrücklich freigibt.
+Zusätzlich können **interne Fahndungsnotizen** geführt werden; sie sind nicht automatisch Bürger-sichtbar.
 
 ## Fahrzeuge
 
-PD besitzt eine interne Fahrzeugsuche nach Kennzeichen.
+Interne Kennzeichensuche kann Halter, Modell und Farbe anzeigen.
 
-Die Suche kann zusätzlich anzeigen:
+Fahrzeugflags mit optionalem Ablauf und eigenem Rollenrecht.
 
-- Fahrzeughalter
-- Fahrzeugmodell
-- Fahrzeugfarbe
-
-Fahrzeuge können interne PD-Warnhinweise beziehungsweise Flags erhalten.
-
-- Fahrzeug-Flags können ein optionales Ablaufdatum besitzen.
-- Setzen und Entfernen erfolgt über ein eigenes Rollenrecht.
+Eine direkte FiveM-/ESX-Synchronisation von Kennzeichen oder Halterdaten ist nach aktuellem Integrationsplan nicht vorgesehen.
 
 ## Verwarnungen und Bußgelder
 
-PD kann Verwarnungen/Bußgelder direkt im Nexus erfassen.
+Bußgelder:
 
-Jedes Bußgeld:
+- eindeutige Vorgangsnummer
+- optional Fallverknüpfung
+- Status Offen/Bezahlt/Erlassen/Storniert
+- Bürger sieht eigene offenen/erledigten Bußgelder
+- Einspruch über Nexus möglich
+- Einspruch kann Justice-Vorgang erzeugen
 
-- erhält automatisch eine eindeutige Vorgangsnummer
-- kann mit einem PD-Fall verknüpft werden
-- besitzt einen der Status `Offen`, `Bezahlt`, `Erlassen`, `Storniert`
-
-Bürger dürfen ihre eigenen offenen und erledigten Bußgelder in Nexus sehen.
-
-Ein Bürger kann über Nexus Einspruch gegen ein Bußgeld einlegen. Aus einem solchen Einspruch kann automatisch ein passender Justice-Vorgang beziehungsweise Justice-Antrag entstehen.
-
-## Tatbestandskatalog
-
-Es gibt einen zentralen pflegbaren Bußgeld-/Tatbestandskatalog.
-
-Verwaltung über das Rollenrecht `Tatbestandskatalog verwalten`.
-
-Ein Tatbestand kann enthalten:
-
-- Standardbetrag
-- optionale Haftwerte
-- optionale weitere Maßnahmenwerte
+Tatbestandskatalog über `Tatbestandskatalog verwalten`, mit Standardbetrag und optionalen Haft-/Maßnahmenwerten.
 
 ## Justice-Anbindung
 
-PD kann Durchsuchungs-, Haft- und weitere von Justice definierte Befehle über Nexus beantragen.
+PD kann von Justice definierte Befehle beantragen. Status im PD-Fall sichtbar.
 
-Der Status eines solchen Justice-Antrags ist direkt im zugehörigen PD-Fall sichtbar.
+Bei Antrag können Fall und relevante Beweise automatisch verknüpft werden.
 
-Bei einem Justice-Antrag können automatisch verknüpft werden:
+Gezielte Beweisfreigaben an Justice sind möglich, ohne Justice Änderungsrechte am PD-Beweis zu geben.
 
-- der zugehörige PD-Fall
-- relevante Beweismittel
+## Gemeinsame Vorfälle
 
-## Verbindung zu gemeinsamen Vorfällen
+PD-Fall kann mit gemeinsamem Vorfall verknüpft sein. Andere Fraktionen sehen nur gemeinsame Basisdaten und ausdrücklich freigegebene PD-Inhalte.
 
-Ein PD-Fall kann mit einem gemeinsamen fraktionsübergreifenden Vorfall verknüpft werden.
+## Externe Freigaben
 
-Medical und Fire & Rescue sehen dort:
+Vertiefte PD-Inhalte werden an andere Fraktionen/Behörden nur gezielt über einen formellen Freigabe-/Verknüpfungsprozess sichtbar. Es gibt keinen allgemeinen fremden Modulleserechts-Override.
 
-- die gemeinsamen Basisdaten
-- zusätzlich ausdrücklich ausgewählte PD-Einträge
+## Stadtverwaltung und Systemadministration
 
-PD-interne Inhalte werden nicht automatisch vollständig freigegeben.
+- Stadtverwaltung: **kein** Zugriff auf interne PD-Fälle
+- technische System-Admins: ebenfalls **kein automatischer fachlicher PD-Zugriff**
 
-## Stadtverwaltung und externe Zugriffe
+Externe Lesezugriffe werden weiterhin nicht pauschal in einem eigenen PD-Zugriffslog protokolliert; Änderungen an vertieften Daten bleiben nachvollziehbar/versioniert.
 
-Die Stadtverwaltung darf interne PD-Fälle **nicht** einsehen.
+## Technische Leitplanken
 
-Es gibt keinen pauschalen Stadtverwaltungs-Override für PD-Fälle.
+Erforderlich sind Fälle, Fallbeziehungen, Beteiligten-/Fahrzeugbeziehungen, Beweisgruppen, Asservatenorte, Vernehmungen, Ermittlungsaufträge, Observationen und formelle Justice-Freigaben.
 
-Zugriffe externer Stellen auf PD-Fälle werden derzeit nicht zusätzlich in einem eigenen Zugriffsprotokoll protokolliert.
-
-## Technische Zielstruktur
-
-Voraussichtlich benötigt werden:
-
-- interne Personensuche
-- Fälle mit Fallnummer, Status, Titel und Kurzbeschreibung
-- Rollenrechte für Fallanlage und `Fälle bearbeiten`
-- federführender Ermittler + weitere Ermittler
-- interne Ermittlungs-Timeline, Kommentare und @-Erwähnungen
-- Fallbeteiligte mit Rollen
-- explizit veröffentlichbare Bürger-Zusammenfassung
-- rollen-/rangbasierte Fallsichtbarkeit
-- versiegelte Fälle + Sonderrecht, Pflichtgrund und vollständiges Search-Hiding
-- geschützte Opfer-/Zeugenidentität
-- Versionshistorie für Notizen
-- Beweismittel mit Typ, Lagerort, Beweisnummer und Chain of Custody
-- Übergabegrund in der Chain of Custody
-- versionierbare externe Beweislinks
-- Sonderrecht für endgültige Beweismittel-Löschung
-- strukturierte Aussagen
-- Personen- und Fahrzeug-BOLOs mit Priorität, Ablauf und Archivierung
-- Gesucht-Status mit mehreren Gründen und Fallverknüpfungen
-- Kennzeichensuche inklusive Halter/Modell/Farbe
-- Fahrzeugflags mit Ablaufdatum und Rollenrecht
-- Bußgelder mit Vorgangsnummer, Status und Bürgeransicht
-- Bußgeld-Einspruch mit optionaler automatischer Justice-Erstellung
-- Tatbestandskatalog mit Rollenrecht, Standardbetrag und optionalen Maßnahmenwerten
-- Justice-Anträge + automatische Fall-/Beweisverknüpfung
-- Verbindung zu gemeinsamen Vorfällen mit selektiver Freigabe
-- 12-Monats-Aufbewahrung abgeschlossener Fälle
-
-PD-Daten müssen serverseitig nach Rollen, Fallfreigaben und Sonderrechten geschützt werden.
+PD-Daten werden serverseitig nach Rolle, Fallzugehörigkeit, Versiegelung und expliziter Freigabe geschützt.
