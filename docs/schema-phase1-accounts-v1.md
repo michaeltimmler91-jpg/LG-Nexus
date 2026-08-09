@@ -36,11 +36,13 @@ Bestehende Kernspalten bleiben erhalten:
 
 Phase-1-Ergänzungen:
 
-- `avatar_visibility text not null default 'citizens'`
+- `avatar_visibility text not null default 'nobody'`
 - `date_of_birth_visibility text not null default 'nobody'`
 - `birthday_day_month_visible boolean not null default false`
 - `allow_new_direct_contacts boolean not null default true`
 - `row_version bigint not null default 1`
+
+Für bisher noch nicht fachlich festgelegte Standard-Sichtbarkeiten verwenden wir technisch zunächst **Least Privilege** (`nobody`). Der Bürger kann sie später selbst ändern.
 
 Erlaubte Sichtbarkeitswerte:
 
