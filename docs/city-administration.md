@@ -1,195 +1,167 @@
 # LG Nexus – Stadtverwaltung
 
-Dieses Dokument beschreibt die aktuell festgelegten Regeln für das interne Stadtverwaltungs-Modul.
+Dieses Dokument beschreibt den verbindlichen Stand des Stadtverwaltungs-Moduls bis Frage 3410.
 
 ## Bürgerverwaltung
 
-Die Stadtverwaltung besitzt ein eigenes internes Bürgerverwaltungs-Modul.
+Interne Suche mindestens nach Name und Nexus-ID. Sichtbar ist der technische Accountstatus `pending`, `active`, `suspended`, `rejected`, `disabled`.
 
-Die Suche erfolgt mindestens nach:
+Account-Freigaben, Sperren und Statusänderungen bleiben dauerhaft nachvollziehbar.
 
-- Name
-- Nexus-ID
-
-Dort ist außerdem der technische Nexus-Accountstatus sichtbar:
-
-- `pending`
-- `active`
-- `suspended`
-- `rejected`
-- `disabled`
-
-Die Historie von Account-Freigaben, Sperren und Statusänderungen wird **dauerhaft** aufbewahrt.
+Eine allgemeine RP-Wohn-/Adressdatenbank ist nicht vorgesehen.
 
 ## Interne Bürgernotizen
 
-Die Stadtverwaltung kann interne Verwaltungsnotizen zu Bürgern hinterlegen. Diese Notizen sind für den betroffenen Bürger **nicht sichtbar**.
+- alle Stadtverwaltungsmitglieder dürfen Notizen sehen
+- Erstellen/Bearbeiten/Löschen nur mit `Bürgernotizen verwalten`
+- Versions-/Änderungsverlauf
+- keine Kategorien/Tags
+- externe Links erlaubt
+- Bürger sieht interne Notizen nicht
 
-Für die Sichtbarkeit gilt:
+Ein zusätzliches separates System `interne Verwaltungsfälle pro Bürger` ist nicht vorgesehen.
 
-- alle Stadtverwaltungsmitglieder dürfen interne Bürgernotizen sehen
-- Erstellen, Bearbeiten und Löschen erfolgt nur über das Rollenrecht `Bürgernotizen verwalten`
-- Änderungen besitzen einen Versions-/Änderungsverlauf
-- Kategorien/Tags für Bürgernotizen sind nicht vorgesehen
-- externe Links innerhalb einer Bürgernotiz sind erlaubt
+## Accountverwaltung
 
-## Accountverwaltung und Rechte
+Getrennte Rollenrechte für:
 
-Account-Aktionen werden rollenbasiert getrennt.
+- `Accounts freischalten`
+- Suspendieren/Reaktivieren
+- `Passwort zurücksetzen`
+- endgültiges `disabled`
+- Identitätskorrekturen/Namensänderungen
+- Doppelaccount-Zusammenführung
 
-- Freischaltung neuer Accounts: eigenes Rollenrecht `Accounts freischalten`
-- Suspendieren und Reaktivieren: eigenes Rollenrecht
-- Passwort zurücksetzen: eigenes Rollenrecht `Passwort zurücksetzen`
-- endgültiges `disabled`: über das normale dafür vorgesehene Account-Verwaltungsrecht, jedoch mit zusätzlicher Sicherheitsbestätigung
+Suspendierung benötigt internen Grund. Endgültiges `disabled` benötigt Vier-Augen-Prinzip.
 
-Beim Suspendieren eines Accounts ist ein interner Grund Pflicht.
+## Namensänderungsanträge
 
-Das endgültige Deaktivieren (`disabled`) benötigt das **Vier-Augen-Prinzip**: zwei dafür berechtigte Verwaltungsmitarbeiter müssen die Aktion bestätigen.
+Bürger können nach Freischaltung einen **Namensänderungsantrag** bei der Stadtverwaltung stellen.
 
-Passwort-Reset-Aktionen werden intern **6 Monate** protokolliert.
+- Bearbeitung nur mit passendem Verwaltungsrecht
+- Bürger sieht den eigenen Vorgang
+- Änderungen am Antrag werden nachvollziehbar geführt
+- abgeschlossener Antrag kann 6 Monate als Verwaltungsantrag gespeichert bleiben
+- nach genehmigter Änderung bleibt der frühere RP-Name getrennt davon **dauerhaft im internen Identitätsverlauf** erhalten
+
+## RP-Geburtsdatum
+
+Korrekturen nach Freischaltung erfolgen ausschließlich durch berechtigte Verwaltung und werden protokolliert.
 
 ## Sitzungen bei Sicherheitsfällen
 
-Die Stadtverwaltung darf aktive Sitzungen/Geräte eines Bürgers **nicht einsehen**.
-
-Bei einem Sicherheitsfall darf eine dafür berechtigte Verwaltungsfunktion dennoch alle aktiven Sitzungen des Bürgers beenden. Das ist eine gezielte Sicherheitsaktion und kein allgemeines Einsichtsrecht in Geräte-/Sitzungsdetails.
+Stadtverwaltung sieht normale Geräte/Sitzungsdetails nicht. Berechtigte Sicherheitsfunktion darf dennoch alle Sitzungen eines Bürgers beenden.
 
 ## Verwaltungs-Dashboard
 
-Die Stadtverwaltung erhält ein internes Dashboard für offene Account-Freigaben und weitere Verwaltungsaufgaben.
+Dashboard für offene Accountfreigaben und relevante Verwaltungsaufgaben.
 
 ## Bürgeranträge / Anliegen
 
-Es gibt einen zentralen Bereich für Bürgeranträge und Anliegen an die Stadtverwaltung.
+Aktive Bürger können Anträge einreichen.
 
-Aktive Bürger dürfen solche Anträge direkt über Nexus einreichen.
+- stadtverwaltete Kategorien
+- dynamische Formulare und Pflichtfragen
+- Status Neu/In Bearbeitung/Rückfrage/Erledigt/Abgelehnt
+- Mehrfachzuweisung
+- interne, für Bürger unsichtbare Kommentare
+- externe Links
+- offizielle Antwort innerhalb des Vorgangs
+- Statusbenachrichtigungen
+- Ablehnungsgrund Pflicht und für Bürger sichtbar
+- Rückziehen offen möglich
+- Bearbeitung durch Bürger nur solange Status `Neu`
+- erledigt nicht wieder öffnen
+- interne Weiterleitung möglich + Benachrichtigung
+- keine generische Bearbeitungsfrist
 
-Die Stadtverwaltung darf eigene Kategorien für Bürgeranträge anlegen.
+Erledigte/abgelehnte Bürgeranträge: 6 Monate.
 
-Jede Kategorie darf ein eigenes Formular besitzen. Pro Kategorie können eigene Fragen definiert und einzelne Fragen als Pflichtfeld markiert werden.
+## Bürgertermine
 
-Status:
+Die Stadtverwaltung unterstützt **Bürgertermine mit Warteschlange**.
 
-- Neu
-- In Bearbeitung
-- Rückfrage
-- Erledigt
-- Abgelehnt
+Dies ergänzt die frühere Regel: Es gibt kein allgemeines frei konfigurierbares Selbstbuchungsportal für jede Verwaltungsleistung. Ausdrücklich aktivierte Verwaltungs-Terminarten dürfen jedoch Terminfenster/Warteschlange verwenden.
 
-Ein Antrag kann mehreren Verwaltungsmitarbeitern gleichzeitig zugewiesen werden.
+Bei vereinbartem Termin:
 
-Interne Kommentare sind möglich und bleiben für den antragstellenden Bürger verborgen.
+- Eintrag im Bürgerkalender möglich
+- Verschiebung durch Verwaltung + Benachrichtigung
+- Absagegrund Pflicht
 
-Anhänge erfolgen ausschließlich über **externe Links**. Auch der antragstellende Bürger darf externe Links hinzufügen.
+## Offizielle Dokumente
 
-Aus einem Antrag heraus kann die Stadtverwaltung direkt eine offizielle Antwort an den Bürger senden.
+Vorlagen über `Dokumentvorlagen verwalten`, Ausstellung über `Dokumente ausstellen`.
 
-### Bearbeitung durch den Bürger
+Jedes Dokument:
 
-- Der Bürger wird bei jeder Statusänderung benachrichtigt.
-- Bei Ablehnung ist ein Grund Pflicht.
-- Der Ablehnungsgrund wird dem Bürger angezeigt.
-- Ein noch offener Antrag darf vom Bürger zurückgezogen werden.
-- Der Bürger darf einen bereits abgesendeten Antrag bearbeiten, solange der Status noch `Neu` ist.
-- Ein erledigter Antrag wird nicht wieder geöffnet; bei neuem Bedarf ist ein neuer Antrag erforderlich.
+- eindeutige Dokumentnummer
+- optionales Ablaufdatum
+- öffentliche Prüfnummer/QR-Verifikation
+- widerrufbar; Widerrufsgrund Pflicht
 
-### Interne Weiterleitung
+Öffentliche Prüfung zeigt nur `gültig`/`ungültig`.
 
-Ein Bürgerantrag kann intern an einen anderen Verwaltungsbereich weitergeleitet werden. Der Bürger wird über die Weiterleitung benachrichtigt.
-
-Eine interne Bearbeitungsfrist für Bürgeranträge ist derzeit nicht vorgesehen. Entsprechend entfällt auch eine automatische Fristerinnerung.
-
-Erledigte und abgelehnte Bürgeranträge werden **6 Monate** gespeichert.
-
-## Terminverwaltung
-
-Eine allgemeine Selbstbuchung freier Termine durch Bürger über Nexus ist derzeit nicht vorgesehen.
-
-Unterschiedliche Verwaltungsbereiche dürfen dennoch eigene interne Termin-Kalender besitzen.
-
-Wenn ein Verwaltungstermin auf anderem Weg vereinbart beziehungsweise angelegt wurde:
-
-- kann er automatisch bestätigt und im Bürgerkalender eingetragen werden
-- darf die Stadtverwaltung ihn verschieben und den Bürger automatisch benachrichtigen
-- beim Absagen ist ein Grund Pflicht
-
-## Offizielle Bescheinigungen und Dokumente
-
-Die Stadtverwaltung kann offizielle Nexus-Dokumente und Bescheinigungen für Bürger erzeugen.
-
-Dafür können Dokumentvorlagen verwendet werden.
-
-- Vorlagen werden über das Rollenrecht `Dokumentvorlagen verwalten` verwaltet.
-- Dokumente werden über das Rollenrecht `Dokumente ausstellen` ausgestellt.
-
-Jedes offizielle Verwaltungsdokument:
-
-- erhält automatisch eine eindeutige Dokumentnummer
-- kann ein optionales Ablaufdatum besitzen
-- kann über eine öffentliche Prüfnummer beziehungsweise QR-Verifikation auf Echtheit geprüft werden
-- kann nachträglich widerrufen werden
-
-Beim Widerruf ist ein Grund Pflicht.
-
-Die öffentliche Verifikation zeigt **nur `gültig` beziehungsweise `ungültig`**. Dokumentart, Ausstellungsdatum oder Name des Inhabers werden dort nicht zusätzlich veröffentlicht.
+Meldebescheinigungen sind nicht als eigener spezieller Dokumenttyp vorgesehen.
 
 ## Lizenzen und Genehmigungen
 
-Die Stadtverwaltung verwaltet Lizenzen und Genehmigungen zentral im Nexus.
+- eigene Lizenzarten
+- erteilen, pausieren, entziehen
+- Entzug Grund Pflicht
+- Bürger sieht eigene aktive/abgelaufene Lizenzen
+- Standardgültigkeitsdauer möglich
+- Ablauf-Erinnerung
+- Antrag über Nexus je Lizenzart konfigurierbar
+- auch Organisations-/Firmenlizenzen
 
-- Die Stadtverwaltung darf eigene Lizenz-/Genehmigungsarten anlegen.
-- Eine Lizenz/Genehmigung kann erteilt, pausiert und entzogen werden.
-- Beim Entzug ist ein Grund Pflicht.
-- Bürger sehen ihre eigenen aktiven und abgelaufenen Lizenzen/Genehmigungen.
-- Lizenz-/Genehmigungsarten können eine Standard-Gültigkeitsdauer besitzen.
-- Bürger werden vor Ablauf automatisch erinnert.
-- Je Lizenzart kann eingestellt werden, ob Bürger sie direkt über Nexus beantragen dürfen.
-- Das System unterstützt zusätzlich Lizenzen/Genehmigungen für Organisationen beziehungsweise Firmen.
+PD sieht nur ausdrücklich freigegebene Lizenzarten. Normale Unternehmen nur nach gezielter Bürgerfreigabe.
 
-### Zugriff durch PD
+## Firmenregister
 
-PD darf nur solche Lizenzarten direkt einsehen, die ausdrücklich für die Polizeiarbeit freigegeben wurden.
+Ein internes/administratives **Firmenregister** ist vorgesehen.
 
-Welche Lizenzarten das sind, legt die **Stadtverwaltung je Lizenzart** fest.
+Es kann relevante Organisations-/Firmenstammdaten enthalten und wird über ein eigenes passendes Verwaltungsrecht gepflegt.
 
-### Zugriff durch normale Unternehmen
+- normale Bürger sehen nicht automatisch den vollständigen Registerdatensatz
+- gezielte Weitergabe an andere Stellen nur, wenn dafür eine fachliche Berechtigung/Einwilligung besteht
+- Registerdaten dürfen als notwendige Verwaltungsstammdaten dauerhaft erhalten bleiben
 
-Normale Unternehmen erhalten keinen pauschalen Zugriff.
+Nicht vorgesehen:
 
-Ein Unternehmen darf eine Bürgerlizenz nur sehen, wenn der Bürger diese gezielt freigibt.
+- öffentliche Registerauszüge als eigener Nexus-Dienst
+- eigener Organisationsgründungsgebühren-Status
 
-## Gebühren / Zahlungsstatus
+## Massenbenachrichtigungen
 
-Die Stadtverwaltung kann Gebühren beziehungsweise Zahlungsstatus zu Anträgen oder Dokumenten als **reinen RP-Status** erfassen.
+Ein neues System für dynamische Massenbenachrichtigungen an frei definierte Bürgergruppen ist nicht vorgesehen.
 
-LG Nexus bleibt dabei bewusst ohne echte Zahlungsanbieter und ohne echtes Geld.
+Die bereits festgelegten gezielten Stadtverwaltungs-/Systemmeldungen an ausgewählte konkrete Empfänger bleiben möglich.
 
-## Technische Zielstruktur
+## Delegierte Verwaltungsbereiche
 
-Voraussichtlich benötigt werden:
+Ein zusätzliches Unterrollensystem `delegierte Verwaltungsbereiche mit eigenen Rechten` ist nicht vorgesehen. Es gelten die normalen Organisationsrollen/-rechte der Stadtverwaltung.
 
-- internes Bürgerverwaltungs-Modul
-- Accountstatus- und dauerhafte Statushistorie
-- interne Bürgernotizen mit Versionshistorie
-- getrennte Account-/Passwort-/Sicherheitsrechte
-- Vier-Augen-Freigabe für `disabled`
-- 6-Monats-Protokoll für Passwort-Resets
-- Sicherheitsaktion zum Beenden aller Sitzungen ohne Sitzungseinsicht
-- Verwaltungs-Dashboard
-- Bürgeranträge mit Kategorien, individuellen Formularen, Pflichtfragen, Status, Mehrfachzuweisung und internen Kommentaren
-- Bürger-Bearbeitung nur im Status `Neu`
-- interne Weiterleitung mit Benachrichtigung
-- externe Link-Anhänge
-- 6-Monats-Aufbewahrung abgeschlossener Bürgeranträge
-- interne Bereichskalender der Stadtverwaltung
-- offizielle Dokumente mit Vorlagen, Dokumentnummern und Widerruf
-- öffentliche Prüfnummer/QR-Verifikation mit minimaler Ausgabe
-- zentrale Lizenz-/Genehmigungsarten und Status
-- Standard-Gültigkeitsdauer und Ablauf-Erinnerungen
-- Lizenzanträge durch Bürger je Lizenzart
-- Organisations-/Firmenlizenzen
-- explizite PD-Freigabe je Lizenzart durch die Stadtverwaltung
-- gezielte Bürgerfreigabe an Unternehmen
-- reine RP-Gebühren-/Zahlungsstatus
+## Gebühren
 
-Interne Verwaltungsnotizen und sensible Verwaltungsdaten müssen serverseitig strikt vor normalen Bürgern und unberechtigten Organisationen geschützt werden.
+Gebühren/Zahlungsstatus bleiben reine RP-Statusfelder ohne echten Zahlungsanbieter.
+
+## Zugriff auf andere Fachmodule
+
+Stadtverwaltung erhält durch Betreiberrolle keinen pauschalen Zugriff auf:
+
+- Medical
+- Police
+- Fire & Rescue
+
+Justice: nur die ausdrücklich festgelegte read-only-Sonderregel.
+
+Gemeinsame Vorfälle: nur gemeinsamer Bereich read-only.
+
+Technische System-/Backuprechte bleiben von IC-Stadtverwaltungsrechten getrennt.
+
+## Technische Leitplanken
+
+Benötigt werden Bürgerverwaltung, Identitätsverlauf, Namensänderungsanträge, dynamische Bürgeranträge, Bürgertermine/Warteschlange, Dokumente/Lizenzen und Firmenregister.
+
+Interne Verwaltungsdaten werden serverseitig strikt vor Bürgern und unberechtigten Organisationen geschützt.
