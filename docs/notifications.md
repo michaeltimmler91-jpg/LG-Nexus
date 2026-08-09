@@ -1,141 +1,118 @@
 # LG Nexus – Benachrichtigungen
 
-Dieses Dokument beschreibt die aktuell festgelegten Regeln für die zentrale Nexus-Benachrichtigungszentrale.
+Dieses Dokument beschreibt den verbindlichen Stand der zentralen Nexus-Benachrichtigungszentrale bis Frage 3410.
 
 ## Zentrale Benachrichtigungszentrale
 
 LG Nexus besitzt eine zentrale Benachrichtigungszentrale.
 
-- Am Navigationssymbol wird die Anzahl ungelesener Benachrichtigungen angezeigt.
-- Benachrichtigungen können nach Kategorien gruppiert werden.
-- Es gibt `Alle als gelesen markieren`.
-- Eine gelesene Benachrichtigung kann wieder als ungelesen markiert werden.
-- Ein Filter `nur ungelesene` ist direkt verfügbar.
-- Einzelne normale Benachrichtigungen können gelöscht werden.
-- Zusätzlich ist ein Archivieren möglich.
-- Suche und Filter sind vorgesehen.
+- Badge mit Anzahl ungelesener Meldungen
+- Gruppierung nach Kategorien
+- `Alle als gelesen markieren`
+- gelesen wieder auf ungelesen setzen
+- Filter `nur ungelesene`
+- normale Meldungen löschen oder archivieren
+- Suche und Filter
 
-## Prioritäten und Sortierung
-
-Benachrichtigungen verwenden die Prioritätsstufen:
+## Prioritäten
 
 - Niedrig
 - Normal
 - Hoch
 - Dringend
 
-Die Standard-Sortierung richtet sich zuerst nach der Priorität. Innerhalb derselben Priorität kann nach Aktualität sortiert werden.
+Standard-Sortierung zuerst nach Priorität, danach Aktualität.
 
-@-Erwähnungen erhalten standardmäßig die Priorität **Dringend**.
+@-Erwähnungen erzeugen weiterhin eine normale Nexus-Benachrichtigung; es gibt kein zweites paralleles Erwähnungs-Workflow-System. Bestehende Standardpriorität für Erwähnungen: Dringend.
 
-## Aufbewahrung, Papierkorb und Archiv
+## Aufbewahrung
 
-Normale Benachrichtigungen werden grundsätzlich **6 Monate** aufbewahrt.
-
-Beim manuellen Löschen einer normalen Benachrichtigung landet sie zunächst **30 Tage im Papierkorb** und wird danach endgültig entfernt.
-
-Archivierte normale Benachrichtigungen dürfen maximal **12 Monate** gespeichert bleiben.
+- normale Benachrichtigungen: 6 Monate
+- manuell gelöscht: 30 Tage Papierkorb
+- archiviert: maximal 12 Monate
 
 ## Pflichtbenachrichtigungen
 
-Wichtige Pflichtbenachrichtigungen können nicht deaktiviert werden.
+Wichtige Pflichtmeldungen können nicht deaktiviert oder manuell gelöscht werden, dürfen aber archiviert werden.
 
-- Pflichtbenachrichtigungen dürfen vom Benutzer nicht manuell gelöscht werden.
-- Sie dürfen jedoch archiviert werden.
-- Dringende Pflichtmeldungen dürfen Ruhezeiten übergehen.
+Dringende Pflichtmeldungen dürfen Ruhezeiten übergehen.
 
-Auch normale Benachrichtigungskategorien können vom Benutzer derzeit nicht vollständig abgeschaltet werden.
+## Nicht stören
 
-Benachrichtigungen bleiben grundsätzlich Bestandteil von Nexus; eine Zustellung per externer E-Mail ist nicht vorgesehen.
+Mehrere Ruhezeitpläne sowie `Nicht stören bis …` sind möglich.
 
-## Ruhezeiten / Nicht stören
+Während DND:
 
-Benutzer können `Nicht stören` verwenden.
+- normale Toasts unterdrückt
+- dringende Pflichtmeldung darf erscheinen
 
-Möglich sind:
-
-- ein täglicher Ruhezeit-Plan
-- mehrere unterschiedliche Pläne, etwa Werktage/Wochenende
-- eine manuelle Aktivierung `Nicht stören bis …`
-
-Während `Nicht stören`:
-
-- normale Toast-Popups werden unterdrückt
-- dringende Pflichtmeldungen dürfen weiterhin als Toast erscheinen
+Ein separates `Snooze` einzelner normaler Benachrichtigungen ist nicht vorgesehen.
 
 ## Gruppierung
 
-Ähnliche Benachrichtigungen können zusammengefasst werden.
+Ähnliche Meldungen können weiterhin zusammengefasst werden.
 
-- Gruppen sind aufklappbar, damit die einzelnen Meldungen sichtbar bleiben.
-- Im Navigations-Badge zählt eine ungelesene Gruppe als **1**, nicht jede enthaltene Einzelmeldung separat.
+- Gruppe aufklappbar
+- Badge zählt eine ungelesene Gruppe als 1
+
+Die spätere Frage `Benachrichtigungs-Bündelung als eigener Workflow` wurde abgelehnt; das hebt diese vorhandene Darstellungsgruppierung nicht auf.
+
+## Keine Digests
+
+Nicht vorgesehen:
+
+- tägliche Benachrichtigungsübersicht/Digest
+- zusätzliches periodisches Zusammenfassungs-System
+
+## Organisationsregeln
+
+Organisationen dürfen eigene Benachrichtigungsregeln für organisationsinterne Funktionen konfigurieren, sofern das Mitglied ein passendes Rollenrecht besitzt.
+
+Diese Regeln dürfen keine systemweiten Pflichtmeldungen oder fachlich zwingenden Sicherheitsmeldungen abschalten.
 
 ## Navigation
 
-Ein Klick auf eine Benachrichtigung führt direkt zum zugehörigen Inhalt, sofern dieser noch vorhanden und für den Benutzer zugänglich ist.
+Klick führt zum zugehörigen Inhalt, sofern weiterhin vorhanden und berechtigt. Danach bleibt Meldung erhalten und wird gelesen markiert.
 
-Nach dem Anklicken bleibt die Benachrichtigung bestehen und wird lediglich als gelesen markiert.
+## Toast, Push und Ton
 
-## Push, Toast und Ton
+- Nexus-Toasts vorgesehen
+- feste Toast-Dauer
+- Browser/Desktop-Push später optional, Opt-in
+- Push separat deaktivierbar
+- kein FiveM-Ingame-Notification-Overlay geplant
+- ein globaler Nexus-Benachrichtigungston
+- Lautstärke einstellbar/stummschaltbar
+- keine unterschiedlichen Töne je Kategorie
 
-- Kleine Popup-/Toast-Hinweise bei neuen Meldungen sind vorgesehen.
-- Die Toast-Anzeigedauer ist eine feste Nexus-Vorgabe.
-- Browser-/Desktop-Push kann später unterstützt werden.
-- Browser-/Desktop-Push muss ausdrücklich durch den Benutzer aktiviert werden.
-- Browser-Push kann separat deaktiviert werden, ohne Nexus-interne Benachrichtigungen abzuschalten.
-- Eine spätere FiveM-Ingame-Anzeige der Nexus-Benachrichtigungen ist derzeit nicht vorgesehen.
-- Es gibt einen einzigen globalen Nexus-Benachrichtigungston.
-- Die Lautstärke dieses Tons ist einstellbar.
-- Der Ton kann vollständig stummgeschaltet werden.
-- Unterschiedliche Töne je Kategorie sind nicht vorgesehen.
+## Mail
 
-## @-Erwähnungen
+Persönliche und Organisations-Mail nutzen Kategorie `Mail`. Persönliche Mail-@mentions erzeugen keine zusätzliche Erwähnungsmeldung.
 
-@-Erwähnungen erzeugen grundsätzlich eine Nexus-Benachrichtigung, sofern der erwähnte Benutzer den betreffenden Inhalt sehen darf.
+## City Hub und Systemmeldungen
 
-Standardpriorität: **Dringend**.
+City-Hub-Push kann zielgruppenbezogen an Rollen/Organisationen gehen.
 
-## City-Hub- und Systemmeldungen
+Stadtverwaltung darf gezielte Systemmeldungen an ausgewählte Bürger senden.
 
-City-Hub-Pushmeldungen können gezielt an bestimmte Rollen oder Organisationen adressiert werden, statt immer an alle aktiven Bürger zu gehen.
+Systemmeldungen können:
 
-Die Stadtverwaltung darf außerdem gezielte Nexus-Systemmeldungen an ausgewählte Bürger senden.
+- Titel/Text
+- Deep-Link
+- Ablaufdatum
+- Lesebestätigung
+- Rückruf
 
-### Stadtverwaltungs-Systemmeldungen
+besitzen.
 
-Für gezielte Systemmeldungen gilt:
+Bei Lesebestätigung darf Stadtverwaltung sehen, wer bestätigt hat. Rückruf informiert Empfänger. Interne Nachvollziehbarkeit: 6 Monate.
 
-- Als Absender wird dem Bürger nur `Stadtverwaltung` angezeigt; der konkrete Mitarbeitername wird nicht offengelegt.
-- Titel und Nachrichtentext sind Pflicht.
-- Eine Meldung darf einen Button beziehungsweise Deep-Link zu einem Nexus-Inhalt enthalten.
-- Eine Meldung darf ein Ablaufdatum besitzen.
-- Die Stadtverwaltung kann eine Lesebestätigung verlangen.
-- Wenn eine Lesebestätigung verlangt wird, darf die Stadtverwaltung sehen, wer bestätigt hat.
-- Bereits versendete Systemmeldungen dürfen zurückgerufen werden.
-- Bei einem Rückruf werden die Empfänger darüber informiert.
-- Die Stadtverwaltung kann versendete Systemmeldungen intern **6 Monate** nachvollziehen.
+Normale wichtige City-Hub-Beiträge benötigen dagegen keine verpflichtende Lesebestätigung.
 
-## Technische Zielstruktur
+## Rechteänderungen und Beitritte
 
-Für die spätere Umsetzung werden voraussichtlich benötigt:
+Es wird kein eigener mehrstufiger Benachrichtigungs-Workflow für Rechteverlust, Organisationsbeitritt oder Inhaltslöschung gebaut. Fachmodule dürfen bei tatsächlich relevanten Ereignissen weiterhin normale Nexus-Benachrichtigungen auslösen.
 
-- zentrale Benachrichtigungstabelle
-- Kategorien
-- Prioritäten `low / normal / high / urgent`
-- gelesen/ungelesen
-- Archivstatus
-- 30-Tage-Papierkorb
-- normale 6-Monats-Aufbewahrung
-- Archiv-Aufbewahrung bis 12 Monate
-- Gruppierungs-/Thread-Logik für ähnliche Meldungen
-- Deep-Links zum jeweiligen Nexus-Inhalt
-- mehrere Ruhezeit-Pläne und temporäres Nicht-stören
-- Kennzeichnung dringender Pflichtmeldungen
-- Toast-Hinweise
-- ein globaler einstellbarer Benachrichtigungston
-- optionaler Browser-/Desktop-Push mit Opt-in
-- zielgruppenbasierte City-Hub-Pushmeldungen
-- gezielte Stadtverwaltungs-Systemmeldungen
-- Lesebestätigungen und Rückrufstatus für Systemmeldungen
+## Sicherheit
 
-Berechtigungen und Zielgruppen müssen serverseitig geprüft werden; eine Benachrichtigung darf niemals auf einen Inhalt verweisen, den der Empfänger nicht sehen darf.
+Berechtigung und Zielgruppe werden serverseitig geprüft. Eine Meldung darf keinen Zugriff auf einen nicht mehr sichtbaren Inhalt erzeugen.
