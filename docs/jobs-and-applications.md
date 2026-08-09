@@ -1,199 +1,175 @@
 # LG Nexus – Stellenangebote und Bewerbungen
 
-Dieses Dokument beschreibt die festgelegten Regeln für öffentliche Stellenangebote und den internen Bewerbungsbereich von Organisationen.
+Dieses Dokument beschreibt den verbindlichen Stand für Stellenangebote und Bewerbungen bis Frage 3410.
 
 ## Stellenangebote
 
-Organisationen dürfen mehrere öffentliche Stellenangebote gleichzeitig veröffentlichen.
+Organisationen dürfen mehrere Stellenangebote gleichzeitig veröffentlichen.
 
-Verwaltung:
-- Stellenangebote werden über das eigene Rollenrecht `Stellenangebote verwalten` erstellt und gepflegt.
-- Stellenangebote können manuell pausiert und später wieder aktiviert werden.
-- Ein Ablaufdatum ist nicht vorgesehen.
-- Ein Stellenangebot kann manuell geschlossen werden, ohne es zu löschen.
-- Geschlossene Stellenangebote verschwinden aus der öffentlichen Suche.
-- Ein Stellenangebot kann eine Anzahl verfügbarer Stellen/Plätze besitzen.
-- Je Angebot kann eingestellt werden, dass es automatisch geschlossen wird, sobald alle vorgesehenen Plätze besetzt sind.
-- Die Zahl eingegangener Bewerbungen wird öffentlich nicht angezeigt.
-- Öffentliche Suche und Filter nach Organisation beziehungsweise Branche sind vorgesehen.
-- Eine Volltextsuche über Stellenangebote ist vorgesehen.
+Verwaltung über `Stellenangebote verwalten`.
 
-Pflicht-/Profilfelder eines Stellenangebots:
+Grundfunktionen:
+
+- pausieren/reaktivieren
+- manuell schließen
+- geschlossen verschwindet aus öffentlicher Suche
+- optionale Anzahl verfügbarer Stellen
+- optional automatisch schließen, wenn alle Plätze besetzt sind
+- Bewerbungszahl nicht öffentlich
+- Suche, Volltextsuche und Filter nach Organisation/Branche
+
+Pflicht-/Profilfelder:
+
 - Titel
 - ausführliche Beschreibung
-- gewünschte Rolle beziehungsweise Position
+- gewünschte Rolle/Position
 - optionaler Ansprechpartner
-- optional auswählbarer Organisationsstandort
+- optionaler Organisationsstandort
 
-### Änderungen nach ersten Bewerbungen
+Ein allgemeines Ablaufdatum ist weiterhin nicht vorgesehen; stattdessen können konkrete **Bewerbungsfristen** verwendet werden.
 
-Sobald Bewerbungen eingegangen sind, dürfen nur noch **nicht wesentliche Felder** des Stellenangebots bearbeitet werden.
+## Öffentliche und interne Stellen
 
-Bei wesentlichen Änderungen erhalten bereits vorhandene Bewerber automatisch eine Nexus-Benachrichtigung.
+Normale öffentliche Stellenangebote bleiben vorgesehen.
 
-## Bewerben über Nexus
+Zusätzlich kann eine Organisation **interne Stellenangebote nur für bestehende Mitglieder** erstellen.
 
-Aktive Bürger dürfen sich direkt über Nexus auf ein öffentliches Stellenangebot bewerben.
+Vertrauliche Stellenangebote als separate geheime Angebotsart sind nicht vorgesehen.
 
-Die Organisation kann pro Stellenangebot eigene Bewerbungsfragen definieren.
+## Änderungen nach Bewerbungseingang
 
-Unterstützte Fragetypen:
+Nach Eingang der ersten Bewerbung dürfen nur nicht wesentliche Felder normal geändert werden. Bei wesentlichen Änderungen werden vorhandene Bewerber benachrichtigt.
+
+## Direktbewerbung
+
+Aktive Bürger dürfen sich über Nexus bewerben.
+
+Je Stelle können eigene Fragen definiert werden:
+
 - Freitext
 - Auswahl
 - Ja/Nein
+- Pflichtfelder
 
-Einzelne Fragen können als Pflichtfeld markiert werden.
+Automatisch übermittelt werden Name und Nexus-ID. Telefonnummer/Nexus-Mail nur, wenn die persönliche Sichtbarkeit dies erlaubt.
 
-Automatisch übermittelte Identität:
-- Name
-- Nexus-ID
+Mit Zustimmung können weitere sichtbare Profildaten übernommen werden.
 
-Kontaktinformationen:
-- Telefonnummer wird nur übermittelt, wenn die persönliche Sichtbarkeitseinstellung des Bewerbers dies gegenüber der Organisation beziehungsweise dem Empfänger erlaubt.
-- Nexus-Mail wird ebenfalls nur übermittelt, wenn die persönliche Sichtbarkeitseinstellung dies erlaubt.
-- Die Bewerbung umgeht diese Privatsphäre-Einstellungen nicht.
+Maximal **5 externe Links** pro Bewerbung. Kein zusätzlicher allgemeiner Bewerbungstext.
 
-Mit ausdrücklicher Zustimmung des Bewerbers dürfen zusätzliche sichtbare Profildaten in die Bewerbung übernommen werden.
+## Mehrfach- und Wiederbewerbung
 
-Ein zusätzlicher allgemeiner Bewerbungstext außerhalb der organisationsspezifischen Fragen ist nicht vorgesehen.
+- keine parallele Doppelbewerbung auf dieselbe aktive Stelle
+- mehrere unterschiedliche Stellen derselben Organisation gleichzeitig möglich
+- Wiederbewerbung nach Ablehnung auf dieselbe offene Stelle erst nach **14 Tagen**
+- Nexus warnt vor offensichtlichen Dubletten
 
-Bewerbungen dürfen externe Links als Anlagen enthalten. Pro Bewerbung sind maximal **5 externe Links** vorgesehen.
+Kein allgemeiner Bewerber-Sperrlisten-Mechanismus.
 
-## Mehrfach- und erneute Bewerbungen
+## Bearbeitung durch Bewerber
 
-- Ein Bürger darf sich nicht mehrfach gleichzeitig auf dasselbe aktuell offene Stellenangebot bewerben.
-- Ein Bürger darf sich gleichzeitig auf mehrere unterschiedliche Stellenangebote derselben Organisation bewerben.
-- Nach einer Ablehnung darf sich der Bürger auf dasselbe noch offene Stellenangebot erneut bewerben, jedoch erst nach einer **Wartezeit von 14 Tagen**.
-- Nexus soll vor offensichtlich doppelten Bewerbungen desselben Bürgers warnen.
+Bis zum Bearbeitungsbeginn darf der Bewerber seine Bewerbung ändern.
 
-## Bearbeitung durch den Bewerber
+- Rückziehen möglich
+- laufender Status sichtbar
+- abgeschlossene Bewerbung für Bewerber danach nicht weiter einsehbar
 
-Nach dem Absenden darf der Bewerber seine Bewerbung bearbeiten, solange sie noch nicht durch die Organisation bearbeitet wurde.
+Zurückgezogene Bewerbungen werden nach den bestehenden Regeln sofort entfernt.
 
-Der Bewerber darf eine Bewerbung zurückziehen.
+## Status
 
-Der Bewerber sieht den aktuellen Bewerbungsstatus während des laufenden Verfahrens.
+Grundstatus:
 
-Nach Abschluss kann der Bewerber die abgeschlossene Bewerbung nicht weiter einsehen.
+- Neu
+- In Prüfung
+- Gespräch
+- Angenommen
+- Abgelehnt
 
-## Bewerbungsstatus
+Organisationen dürfen Zusatzstatus anlegen.
 
-Vorgesehene Grundstatus:
-- `Neu`
-- `In Prüfung`
-- `Gespräch`
-- `Angenommen`
-- `Abgelehnt`
+Bei jeder Statusänderung erhält der Bewerber eine Nexus-Benachrichtigung. Statuswechsel werden nicht als separater zusätzlicher Auditlog geführt.
 
-Organisationen dürfen zusätzliche eigene Status anlegen.
+Ablehnungsgrund optional und intern.
 
-Statusänderungen werden nicht zusätzlich als Audit-Eintrag protokolliert.
-
-Der Bewerber erhält bei jeder Statusänderung eine Nexus-Benachrichtigung.
-
-### Ablehnung
-
-- Ein Ablehnungsgrund ist optional.
-- Der Bewerber sieht den internen Ablehnungsgrund nicht.
-
-### Annahme
-
-Bei angenommener Bewerbung erscheint intern die Aktion `Als Mitglied aufnehmen`.
-
-Wird die Person darüber aufgenommen, gelten die normalen Organisationsregeln:
-- Aufnahme erfolgt als normale Mitgliedsaufnahme.
-- Die aktuelle Standardrolle der Organisation wird zugewiesen.
-- Das Stellenangebot bestimmt nicht automatisch eine abweichende Rolle.
+Bei Annahme: `Als Mitglied aufnehmen`; Aufnahme folgt normalen Mitgliedsregeln und aktueller Standardrolle.
 
 ## Rückfragen
 
-Nach Beginn der Bearbeitung darf die Organisation zusätzliche Informationen vom Bewerber anfordern.
+Organisation darf nach Bearbeitungsbeginn zusätzliche Informationen anfordern. Antwort erfolgt innerhalb der Bewerbung.
 
-Der Bewerber antwortet darauf direkt innerhalb der Bewerbung; ein Wechsel in eine normale Nexus-Mail ist nicht erforderlich.
+## Bewerbungsrunden und Gespräche
 
-## Vorstellungsgespräche
+Bewerbungen dürfen mehrere Gesprächs-/Auswahlstufen besitzen.
 
-Aus einer Bewerbung kann direkt ein Vorstellungsgespräch als Nexus-Termin erstellt werden.
+Vorstellungsgespräch kann als Nexus-Termin angelegt werden:
 
-- Der Termin erscheint automatisch im Kalender des Bewerbers.
-- Der Termin erscheint automatisch in den Kalendern der zuständigen Mitarbeiter.
-- Der Bewerber darf einen Alternativtermin vorschlagen.
-- Das Gesprächsergebnis kann strukturiert erfasst werden als `Geeignet`, `Nicht geeignet` oder `Zurückgestellt`.
+- im Bewerberkalender
+- in Kalendern zuständiger Mitarbeiter
+- Bewerber kann Alternativtermin vorschlagen
 
-Eine zusätzliche interne Punktzahl/Bewertung für Bewerbungen ist nicht vorgesehen.
+Strukturiertes Ergebnis:
 
-Der Bewerber sieht interne Bearbeitungsinformationen beziehungsweise interne Bewertungen nicht.
+- Geeignet
+- Nicht geeignet
+- Zurückgestellt
 
-Interne Bewerbungs-Tags/Markierungen sind derzeit ebenfalls nicht vorgesehen.
+Keine interne numerische Bewertung und keine internen Bewerber-Tags.
 
-## Übertragung auf anderes Stellenangebot
+## Praktische Tests / Probeaufgaben
 
-Eine Bewerbung darf auf ein anderes Stellenangebot derselben Organisation übertragen werden, **wenn der Bewerber zustimmt**.
+Organisationen können im Bewerbungsverfahren Probeaufgaben beziehungsweise praktische Tests vorsehen.
 
-Der Bewerber erhält darüber automatisch eine Nexus-Benachrichtigung.
+Diese gehören zum jeweiligen Bewerbungsprozess und erhalten kein separates organisationsübergreifendes Testsystem.
+
+## Bewerbungsfristen
+
+Stellenangebote können eine Bewerbungsfrist besitzen.
+
+Nach Ablauf können verspätete Bewerbungen automatisch abgelehnt beziehungsweise nicht mehr angenommen werden.
+
+## Empfehlungen
+
+Bestehende Organisationsmitglieder können Bewerber empfehlen. Diese Empfehlung ist Teil des jeweiligen internen Bewerbungsverfahrens.
+
+## Übertragung
+
+Eine Bewerbung darf mit Zustimmung des Bewerbers auf ein anderes Stellenangebot **derselben Organisation** übertragen werden. Bewerber wird benachrichtigt.
+
+Eine Übernahme von Bewerbern aus fremden Organisationen ist nicht vorgesehen.
+
+## Nicht vorgesehen
+
+- Talentpool für frühere Bewerber
+- Bewerber-Sperrlisten
+- vertrauliche/geheime Stellenanzeigen
+- organisationsübergreifende Bewerberübernahme
 
 ## Interner Bewerbungsbereich
 
-Bewerbungen landen in einem eigenen internen Bewerbungsbereich der Organisation.
-
 Rechte:
-- `Bewerbungen ansehen` steuert, wer Bewerbungen lesen darf.
-- `Bewerbungen bearbeiten` steuert, wer Bewerbungsstatus und Bearbeitung ändern darf.
-- Owner besitzen diese Rechte aufgrund ihrer vollständigen Owner-Berechtigungen automatisch.
 
-Bearbeitung:
-- Eine Bewerbung kann intern Mitarbeitern zugewiesen werden.
-- Mehrere Bearbeiter gleichzeitig sind möglich.
-- Zugewiesene Bearbeiter erhalten eine Nexus-Benachrichtigung.
-- Interne Kommentare zur Bewerbung sind möglich.
-- Interne Kommentare sind für den Bewerber nicht sichtbar.
-- Ein Favorisieren/Markieren von Bewerbungen ist nicht vorgesehen.
-- Eine eigene Suche oder Filterfunktion im internen Bewerbungsbereich ist nicht vorgesehen.
-- Es gibt auch keinen separaten Filter nach Stellenangebot.
+- `Bewerbungen ansehen`
+- `Bewerbungen bearbeiten`
+
+Mehrere Bearbeiter möglich; Zuweisung erzeugt Benachrichtigung.
+
+Interne Kommentare sind für Bewerber unsichtbar.
+
+Keine eigene interne Volltextsuche/Filterfunktion und kein separater Stellenfilter im Bewerbungsbereich.
 
 ## Aufbewahrung
 
-- Abgelehnte Bewerbungen: **6 Monate**
-- Angenommene Bewerbungen: **6 Monate**
-- Zurückgezogene Bewerbungen: **sofort löschen**
-
-Nach Ablauf der jeweiligen Aufbewahrungsfrist können die Daten automatisch gelöscht werden.
+- abgelehnt: 6 Monate
+- angenommen: 6 Monate
+- zurückgezogen: sofort entfernen
 
 ## Stadtverwaltung
 
-Dafür berechtigte Personen der Stadtverwaltung dürfen Bewerbungen normaler Organisationen:
-- ansehen
-- bearbeiten
+Dafür berechtigte Stadtverwaltungsmitglieder dürfen Bewerbungen normaler Organisationen ansehen/bearbeiten. Geschützte Fachorganisationen können strengere Sonderregeln besitzen.
 
-Dies ist ein verwaltungsseitiges Aufsichtsrecht. Für fachlich besonders geschützte Organisationen oder Fraktionsmodule können später strengere Sonderregeln festgelegt werden.
+## Technische Leitplanken
 
-## Bezug zu Bewertungen
+Benötigt werden Stellen, interne Stellen, Fragen/Antworten, Fristen, Mehrstufenprozesse, praktische Tests, Empfehlungen, Gesprächstermine, Zuweisungen, Kommentare und 14-Tage-Wiederbewerbungssperre.
 
-Für Organisationsbewertungen gelten zusätzlich folgende Regeln:
-- Mehrere aktive Bewertungen desselben Bürgers sind zwar zulässig.
-- Für die Durchschnittsbewertung zählt pro Bürger jedoch nur dessen **neueste aktive Bewertung**.
-- Owner dürfen ihre eigene Organisation nicht bewerten.
-- Aktuelle Mitarbeiter dürfen ihre eigene Organisation ebenfalls nicht bewerten.
-
-## Technische Zielstruktur
-
-Voraussichtlich benötigt werden unter anderem:
-- `organization_job_postings`
-- verfügbare Plätze und Auto-Schließen
-- Status `pausiert/geschlossen`
-- Regeln für wesentliche/nicht wesentliche Änderungen nach Bewerbungseingang
-- `organization_job_application_questions`
-- `organization_job_applications`
-- `organization_job_application_answers`
-- externe Link-Anlagen
-- Wiederbewerbungs-Sperrfrist von 14 Tagen
-- `organization_job_application_assignments`
-- `organization_job_application_comments`
-- Rückfragen/Antworten innerhalb der Bewerbung
-- Vorstellungsgespräche mit Kalenderverknüpfung und strukturiertem Ergebnis
-- Bewerbungsübertragung mit Zustimmung
-- konfigurierbare zusätzliche Bewerbungsstatus pro Organisation
-- RLS/RPC für Sichtbarkeit, Bearbeitung und Aufnahme als Mitglied
-- automatische Aufbewahrungs-/Löschlogik
-
-Bewerbungs- und Kontaktdaten müssen serverseitig gemäß Rollenrechten und persönlichen Sichtbarkeitseinstellungen geschützt werden.
+Bewerbungs- und Kontaktdaten müssen serverseitig nach Rollenrechten und persönlicher Privatsphäre geschützt werden.
