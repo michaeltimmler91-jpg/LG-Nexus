@@ -1,189 +1,163 @@
 # LG Nexus – Kalender
 
-Dieses Dokument beschreibt die aktuell festgelegten Regeln für den persönlichen Nexus-Kalender, private Termine und interne Organisationstermine.
+Dieses Dokument beschreibt den verbindlichen Stand des Nexus-Kalenders bis Frage 3410.
 
-## Persönlicher Nexus-Kalender
+## Persönlicher Kalender
 
-Jeder aktive Nexus-Bürger besitzt einen persönlichen Kalender.
+Jeder aktive Bürger besitzt einen persönlichen Kalender.
 
-Darin können gemeinsam angezeigt werden:
+Gemeinsam darstellbar:
 
 - öffentliche Events
 - interne Organisationstermine
 - private persönliche Termine
+- manuell gepflegte Geburtstage
 
-Der Benutzer kann diese Kalenderarten über Filter ein- und ausblenden.
+Filter erlauben das Ein-/Ausblenden der Kalenderarten.
 
-Kalenderansichten:
+Ansichten:
 
 - Monat
 - Woche
 - Tag
 
-Eine zusätzliche Agenda-/Listenansicht ist derzeit nicht vorgesehen. Ein ICS-Export des persönlichen Kalenders ist ebenfalls nicht vorgesehen.
+Keine zusätzliche Agenda-/Listenansicht und kein ICS-Export.
 
-Das Nexus-Dashboard zeigt einen kompakten Bereich `Heute / nächste Termine`.
+Dashboard zeigt `Heute / nächste Termine`.
 
-## Öffentliche Events im persönlichen Kalender
+## Events und andere explizite Termine
 
-Öffentliche Events werden automatisch in den persönlichen Kalender übernommen, wenn der Bürger `Teilnehmen` oder `Vielleicht` gewählt hat.
+Öffentliche Events werden bei `Teilnehmen` oder `Vielleicht` automatisch übernommen. Ein Event kann auch manuell ohne Teilnahmestatus in den Kalender aufgenommen werden.
 
-Zusätzlich darf ein Bürger ein öffentliches Event manuell in seinen Kalender übernehmen, ohne dafür einen Teilnahme-Status setzen zu müssen.
+Direkte Kalendereinträge können weiterhin ausdrücklich entstehen aus:
 
-Aus einer City-Hub-News kann direkt ein persönlicher Kalendereintrag erstellt werden. Dasselbe gilt für einen vereinbarten Bewerbungsgesprächstermin.
+- City-Hub-News
+- Bewerbungsgesprächen
+- bestätigten Reservierungen
+- Justice-Verhandlungsterminen
+- anderen Funktionen, die ausdrücklich einen Termin erzeugen
 
-## Private persönliche Termine
+Es gibt **keine pauschale automatische Kalenderübernahme jedes Justice-, Medical- oder PD-Vorgangs**.
 
-Jeder Bürger darf eigene private Termine erstellen.
+## Private Termine
 
 Private Termine können:
 
 - ganztägig sein
-- eine persönliche Notiz enthalten
-- eigene Farben beziehungsweise Kategorien besitzen
-- einen Ort als Freitext enthalten
-- zusätzlich eine LS-Map-Position besitzen
-- einen externen Link enthalten
-- externe Datei-/Bildlinks enthalten
-- eine oder mehrere Erinnerungen besitzen
-- wiederkehrend angelegt werden
+- persönliche Notiz besitzen
+- eigene Farbe/Kategorie besitzen
+- Ort als Freitext und optional LS-Map-Position enthalten
+- externe Links und externe Datei-/Bildlinks enthalten
+- mehrere Erinnerungen besitzen
+- wiederkehrend sein
 - mit anderen Bürgern geteilt werden
 
-Die Stadtverwaltung darf private persönliche Kalendertermine eines Bürgers nicht einsehen. Ebenso dürfen Organisations-Owner private persönliche Termine ihrer Mitglieder nicht einsehen.
+Die generischen späteren `Workflow = Nein`-Antworten zu Terminserien, Links, Notizen, Farben oder Konfliktwarnungen heben diese normalen Kalenderfunktionen **nicht** auf.
 
-### Wiederkehrende private Termine
+Stadtverwaltung und Organisations-Owner sehen private persönliche Termine nicht.
 
-Private Terminserien unterstützen:
+## Wiederkehrende private Termine
+
+Unterstützt:
 
 - täglich
 - wöchentlich
 - monatlich
-- frei definierbare Wiederholungsregeln
+- frei definierte Wiederholungsregeln
+- Bearbeitung nur dieser / dieser und folgende / ganze Serie
+- Serienausnahmen nach der bestehenden Kalenderlogik
 
-Beim Bearbeiten einer Serie kann gewählt werden zwischen:
+## Konfliktwarnung
 
-- nur dieser Termin
-- dieser und folgende Termine
-- ganze Serie
+Bei Überschneidung zeigt Nexus eine Warnung. Speichern bleibt möglich.
 
-### Konfliktwarnungen
+## Erinnerungen
 
-Überschneiden sich Termine, zeigt Nexus eine Konfliktwarnung. Der Benutzer darf den Termin trotzdem speichern; Überschneidungen werden nicht technisch verhindert.
+Private Termine erhalten standardmäßig 30 Minuten vorher eine Erinnerung. Mehrere frei gewählte Erinnerungen möglich.
 
-### Erinnerungen
+## Einladungen und Kalenderfreigaben
 
-Neue private Termine erhalten standardmäßig eine Erinnerung **30 Minuten vorher**.
+Private Termine können mit anderen Bürgern geteilt werden.
 
-- Mehrere Erinnerungen pro Termin sind möglich.
-- Erinnerungszeiten dürfen frei gewählt werden.
+- Eingeladene können zusagen/absagen
+- erst nach Zusage eigener Kalendereintrag beim Empfänger
+- Teilnehmerliste und Status für Eingeladene sichtbar
+- Eingeladene laden nicht selbst weitere Personen ein
+- Ersteller kann Einladung entziehen; Betroffener wird benachrichtigt
+- Änderungen erzeugen Benachrichtigungen
+- bei Serien wird jeder Einzeltermin separat bestätigt
 
-## Einladungen zu privaten Terminen
+Zusätzlich sind **Kalenderfreigaben zwischen Bürgern** und **gemeinsame private Kalender** vorgesehen.
 
-Der Ersteller kann andere Bürger zu einem privaten Termin einladen und auch nachträglich weitere Personen hinzufügen.
+Diese Freigaben müssen ausdrücklich vom betroffenen Bürger ausgehen beziehungsweise bestätigt werden. Sie erzeugen kein Zugriffsrecht für Stadtverwaltung oder Organisationen.
 
-- Eingeladene Personen können zusagen oder absagen.
-- Eine Einladung erscheint erst nach Zusage als eigener Kalendereintrag beim Empfänger.
-- Eingeladene sehen die vollständige Teilnehmerliste sowie die jeweiligen Zusage-/Absagestatus.
-- Eingeladene dürfen selbst keine weiteren Personen einladen.
-- Der Ersteller darf eine Einladung wieder entziehen; die betroffene Person wird darüber benachrichtigt.
-- Änderungen eines geteilten privaten Termins lösen automatisch Benachrichtigungen an die Eingeladenen aus.
+## Geburtstage
 
-Bei wiederkehrenden privaten Terminserien wird jeder einzelne Termin separat bestätigt; eine Zusage gilt nicht automatisch für die gesamte Serie.
+Geburtstage werden **manuell im Kalender eingetragen**.
 
-Wird ein geteilter privater Termin abgesagt, ist kein Absagegrund Pflicht. Wenn freiwillig ein Absagegrund angegeben wird, wird er allen Eingeladenen angezeigt.
+Sie werden nicht automatisch aus dem RP-Geburtsdatum im Personenprofil erzeugt. Dadurch kann ein Bürger selbst entscheiden, welche Geburtstage er persönlich im Kalender pflegt, unabhängig von Profil-Privatsphäre.
 
 ## Interner Organisationskalender
 
-Jede Organisation besitzt einen eigenen internen Kalender. Das Erstellen und Verwalten erfolgt über das Rollenrecht `Kalender verwalten`.
+Jede Organisation besitzt einen internen Kalender. Verwaltung über `Kalender verwalten`.
 
-Ein interner Termin kann:
+Termine können:
 
-- wiederkehrend angelegt werden
-- ganztägig sein
-- an bestimmte Rollen gerichtet werden
-- an einzelne Mitglieder gerichtet werden
-- als verpflichtend markiert werden
-- einen Nexus-Kartenstandort besitzen
-- einen externen Link enthalten
-- eine formatierte Beschreibung enthalten
-- eine eigene Farbe besitzen
-- Kategorien beziehungsweise Tags besitzen
+- wiederkehrend
+- ganztägig
+- rollenspezifisch
+- personenspezifisch
+- verpflichtend
+- mit Map-Position
+- mit externem Link
+- mit formatierter Beschreibung
+- mit Farbe/Kategorie/Tags
 
-Normale Mitglieder sehen nur:
-
-- allgemeine Termine der Organisation
-- Termine für die eigene Rolle
-- Termine, die gezielt an die eigene Person gerichtet sind
-
-Rollenspezifische Termine sind für nicht betroffene Rollen vollständig verborgen.
+Normale Mitglieder sehen nur allgemeine, eigene Rollen- oder eigene Personentermine.
 
 ## Verpflichtende Organisationstermine
 
-Verpflichtende Termine verlangen eine Lesebestätigung beziehungsweise Zusage.
+Verlangen Lesebestätigung/Zusage.
 
-Ein betroffenes Mitglied darf einen verpflichtenden Termin ablehnen, muss dabei jedoch einen Grund angeben.
-
-- Den Ablehnungsgrund sehen nur der Ersteller und Personen mit `Kalender verwalten`.
-- Nach einer Ablehnung erhält die Person keine weiteren Erinnerungen für diesen Termin.
+Ablehnung möglich, aber Grund Pflicht. Ablehnungsgrund sehen nur Ersteller und `Kalender verwalten`. Nach Ablehnung keine weiteren Erinnerungen.
 
 ## Optionale Organisationstermine
 
-Bei optionalen Organisationsterminen werden die Rückmeldungen `Teilnehmen` und `Absagen` verwendet. Ein zusätzlicher Status `Vielleicht` ist nicht vorgesehen.
+Status:
 
-Für optionale Organisationstermine kann eine Zusage-/Absagefrist hinterlegt werden.
+- Teilnehmen
+- Absagen
 
-## Erinnerungen bei Organisationsterminen
+Kein `Vielleicht`.
 
-Organisationstermine verwenden standardmäßig drei feste Nexus-Erinnerungen:
+Optionale Zusage-/Absagefrist möglich.
 
-- 24 Stunden vorher
-- 1 Stunde vorher
+## Erinnerungen Organisation
+
+Feste Erinnerungen:
+
+- 24 Stunden
+- 1 Stunde
 - 30 Minuten vorher
 
-Die Erinnerungszeiten werden nicht individuell durch Teilnehmer bestimmt.
+## Änderungen
 
-## Änderungen und Teilnehmerverwaltung
+Veröffentlichte interne Termine bleiben bearbeitbar.
 
-Ein veröffentlichter interner Organisationstermin darf nachträglich bearbeitet werden.
-
-- Bei Änderungen werden nur Personen benachrichtigt, die dem Termin bereits zugesagt haben.
-- Nach Veröffentlichung können weitere Rollen oder Mitglieder hinzugefügt werden.
-- Einzelne Teilnehmer können nach Veröffentlichung entfernt werden.
-- Beim Entfernen ist ein Grund optional.
-- Entfernte Teilnehmer werden benachrichtigt.
-
-Wird ein interner Organisationstermin vollständig abgesagt:
-
-- ist ein Absagegrund Pflicht
-- alle betroffenen Teilnehmer werden benachrichtigt
+- Änderungen benachrichtigen Personen, die bereits zugesagt haben
+- Rollen/Mitglieder nachträglich ergänzbar
+- Teilnehmer entfernbar; Grund optional
+- entfernte Teilnehmer werden benachrichtigt
+- Komplettabsage: Grund Pflicht + Benachrichtigung aller Betroffenen
 
 ## Aufbewahrung
 
-Vergangene interne Organisationstermine bleiben **6 Monate** gespeichert und können danach automatisch entfernt werden.
+Vergangene interne Organisationstermine werden 6 Monate gespeichert.
 
-## Verknüpfungen
+## Mail-/Vorgangsverknüpfung
 
-Aus einer Nexus-Mail kann direkt ein persönlicher Kalendereintrag erstellt werden.
+Aus einer Nexus-Mail kann ein persönlicher Termin erstellt werden. Direkte Terminaktionen aus konkreten Fachprozessen bleiben möglich, aber es gibt keinen generischen Auto-Kalender für alle Fachvorgänge.
 
-Zusätzlich können persönliche Kalendereinträge aus City-Hub-News und vereinbarten Bewerbungsgesprächen erzeugt werden.
+## Sicherheit
 
-## Technische Zielstruktur
-
-Für die spätere Umsetzung werden voraussichtlich benötigt:
-
-- persönliche Kalendertermine
-- frei definierbare Wiederholungsregeln und Serienausnahmen
-- Konfliktprüfung mit Warnhinweis
-- private Termin-Einladungen und Zusage-/Absagestatus
-- persönliche Farben/Kategorien
-- mehrere frei wählbare Erinnerungen pro privatem Termin
-- externe Link-/Dateilink-Felder
-- Organisationskalender
-- Zielrollen und Zielmitglieder bei Organisationsterminen
-- verpflichtende Termine mit Ablehnungsgrund
-- feste Erinnerungsregeln für Organisationstermine
-- Terminänderungs- und Absagebenachrichtigungen
-- 6-Monats-Aufbewahrung vergangener Organisationstermine
-- Mail-/City-Hub-/Bewerbungs-zu-Kalender-Verknüpfungen
-
-Private Kalendereinträge müssen serverseitig strikt gegen Stadtverwaltung, Organisations-Owner und andere unberechtigte Nutzer abgeschirmt werden.
+Private Termine und gemeinsame private Kalender müssen serverseitig strikt gegen unberechtigte Bürger, Owner und Stadtverwaltung abgeschirmt werden. Freigaben sind widerrufbar und dürfen keine Profil-/Organisationsrechte ersetzen.
