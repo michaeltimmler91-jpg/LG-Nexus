@@ -1,237 +1,173 @@
 # LG Nexus – Events und City Hub
 
-Dieses Dokument beschreibt die festgelegten Regeln für öffentliche Events, Eventserien, Teilnahme, Erinnerungen, Eventbilder und Memories sowie den zentralen City Hub.
+Dieses Dokument beschreibt den verbindlichen Stand für Events und City Hub bis Frage 3410.
 
 ## Events – Grundprinzip
 
-Jede Organisation darf öffentliche Events erstellen.
+Organisationen dürfen Events erstellen. Normale Bürger erstellen keine eigenen Nexus-Events.
 
-- Verwaltung über das Rollenrecht `Events verwalten`.
-- Normale Bürger können keine eigenen Nexus-Events erstellen.
-- Titel ist Pflicht.
-- Beschreibung unterstützt formatierten Text, Überschriften und Listen.
-- Datum und Startzeit sind Pflicht; Endzeit optional.
-- Mehrtägige und wiederkehrende Events sind möglich.
-- Ort als Freitext, Nexus-Kartenposition oder vorhandener Organisationsstandort.
-- Titelbild/Banner möglich.
-- Maximale Teilnehmerzahl optional.
+Verwaltung über `Events verwalten`.
 
-Jedes öffentliche Event verwendet eine Kategorie aus **festen Nexus-Kategorien**.
+Grundfelder:
 
-Die öffentliche Eventsuche kann nach Datum, Kategorie, Ort und Veranstalter filtern.
+- Titel Pflicht
+- formatierte Beschreibung
+- Datum und Startzeit Pflicht
+- Endzeit optional
+- mehrtägig und wiederkehrend möglich
+- Ort als Freitext, Map-Position oder Organisationsstandort
+- Titelbild/Banner
+- optionales Teilnehmerlimit
+- feste Nexus-Eventkategorie
 
-Ist eine Event-Kartenposition hinterlegt, wird automatisch ein öffentlicher LS-Map-Marker erzeugt.
+Öffentliche Suche nach Datum, Kategorie, Ort und Veranstalter. Event-Kartenpositionen erzeugen öffentliche LS-Map-Marker. Öffentliche Events besitzen einen direkten Nexus-Teilen-Link.
 
-Jedes öffentliche Event besitzt einen direkten öffentlichen Nexus-Teilen-Link.
+## Veranstalter und Team
 
-## Veranstalter und Event-Team
+Mehrere Organisationen können Veranstalter sein. Mitveranstalter müssen bestätigen, erhalten dadurch aber kein automatisches Bearbeitungsrecht.
 
-Ein Event kann mehrere Organisationen als gemeinsame Veranstalter besitzen.
+Internes Event-Team kann Rollen wie Leitung, Mitveranstalter und Helfer verwenden.
 
-Eine hinzugefügte Mitveranstalter-Organisation muss ihre Beteiligung bestätigen.
+## Wiederkehrende Events
 
-Ein bestätigter Mitveranstalter erhält dadurch **kein Bearbeitungsrecht am Event**. Die Bearbeitung bleibt beim federführenden Veranstalter beziehungsweise dessen berechtigten Personen.
+Unterstützt werden täglich, wöchentlich, monatlich und frei definierbare Regeln.
 
-Ein Event darf zusätzlich ein internes Organisationsteam aus ausgewählten Mitgliedern besitzen.
+- mehrere Wochentage möglich
+- Enddatum oder Anzahl Wiederholungen
+- Einzeltermin separat änder-/absagbar
+- Bearbeitung: nur dieser / dieser und folgende / ganze Serie
+- Absagegrund Pflicht
+- Teilnahme gilt je Einzeltermin
 
-Im Event-Team können Rollen unterschieden werden, insbesondere:
+## Teilnahme und Warteliste
 
-- Leitung
-- Mitveranstalter
-- Helfer
-
-## Wiederkehrende Events / Eventserien
-
-Wiederholungen können täglich, wöchentlich, monatlich sowie über frei definierbare Regeln angelegt werden.
-
-- Bei wöchentlichen Serien mehrere Wochentage möglich.
-- Enddatum oder feste Anzahl an Wiederholungen möglich.
-- Einzeltermine können separat geändert werden.
-- Bearbeitung: `nur dieser Termin`, `dieser und folgende`, `gesamte Serie`.
-- Einzeltermine können separat abgesagt werden.
-- Absagegrund ist Pflicht.
-- Teilnahme gilt je Einzeltermin, nicht automatisch für die Serie.
-
-## Teilnahme
-
-Status:
+Teilnahmestatus:
 
 - Teilnehmen
 - Vielleicht
 - Absagen
 
-Öffentlich sind weder konkrete Teilnehmer noch Teilnehmerzahl sichtbar.
+Teilnehmer und Teilnehmerzahl sind öffentlich nicht sichtbar.
 
-Intern sehen Veranstalter beziehungsweise Berechtigte Teilnehmer, Status und Warteliste.
+Bei vollem Event Warteliste; erste Person rückt automatisch nach und wird benachrichtigt. Wartelistenposition selbst bleibt verborgen.
 
-### Anmeldefrist und Teilnehmerlimit
+Kein manuelles Check-in-/Anwesenheitssystem.
 
-- Optionale Anmeldefrist.
-- Änderung der eigenen Rückmeldung bis zur Frist.
-- Veranstalter kann die Anmeldung nicht vor der Frist manuell schließen.
-- Bei vollem Event Warteliste.
-- Wird ein Platz frei, rückt die erste Person automatisch nach und wird benachrichtigt.
-- Wartelistenpersonen erhalten keine normalen Event-Erinnerungen.
-- Eine Person auf der Warteliste sieht ihre konkrete Wartelistenposition **nicht**.
-
-### Manuelles Entfernen
-
-Der Veranstalter darf Teilnehmer entfernen.
-
-- Entfernungsgrund optional; wenn vorhanden, für Betroffenen sichtbar.
-- Betroffener wird benachrichtigt.
-- Danach keine automatische Neuanmeldung möglich, bis Veranstalter wieder freigibt.
-- Veranstalter kann Teilnehmer nicht manuell hinzufügen.
-
-Ein manuelles `eingecheckt/anwesend`-System für Teilnehmer ist derzeit nicht vorgesehen.
-
-## Erinnerungen und Änderungen
+## Erinnerungen
 
 Feste Erinnerungen:
 
-- 24 Stunden vorher
-- 1 Stunde vorher
+- 24 Stunden
+- 1 Stunde
 - 30 Minuten vorher
 
-Teilnehmer können diese Zeiten nicht individuell ändern oder deaktivieren.
-
-Auch `Vielleicht` erhält Erinnerungen.
-
-Bei kurzfristig erstellten Events werden nur noch zeitlich mögliche Erinnerungen gesendet; unter 30 Minuten keine nachträgliche Erinnerung.
-
-Startzeitänderungen berechnen Erinnerungen neu.
-
-Teilnehmer werden über Eventänderung und Absage benachrichtigt. Bei Absage ist ein sichtbarer Grund Pflicht.
+`Vielleicht` erhält ebenfalls Erinnerungen. Bei kurzfristig erstellten Events werden nur noch mögliche Erinnerungen gesendet. Startzeitänderungen berechnen Erinnerungen neu.
 
 ## Eventverwaltung
 
-- Veröffentlichte Events sind bearbeitbar.
-- Größere Änderungen zeigen `Event geändert`.
-- Kein endgültiges Löschen; Absage/Archivierung.
-- Nach Ende automatische Archivierung.
-- Vergangene Events bleiben 6 Monate abrufbar.
+- veröffentlichte Events bearbeitbar
+- größere Änderung zeigt `Event geändert`
+- kein endgültiges Löschen, sondern Absage/Archivierung
+- nach Ende automatische Archivierung
+- vergangene Events 6 Monate abrufbar
 
-## Eventbilder und Memories
+## Erweiterte Eventfunktionen
 
-Bilder werden über externe Bildlinks eingebunden.
+Zusätzlich vorgesehen:
 
-Vor dem Event:
-- Titelbild/Banner als externer Bildlink.
-- mehrere zusätzliche Bilder möglich.
+- kostenlose Ticket-/Platzcodes ohne echtes Bezahlsystem
+- Gästelisten für eingeladene Personen
+- private Organisations-Events
+- Zugang nur für ausgewählte Organisationen/Rollen
+- Alters-/Zugangshinweise
+- Event-Regeln und Teilnahmebedingungen
+- Programmabläufe
+- mehrere Orte pro Veranstaltung
+- Helfer-Schichten ohne Dienstplancharakter
+- Sponsoren/Partner
 
-Nach dem Event:
-- unbegrenzt weitere Bildlinks.
-- Teilnehmer dürfen Bilder vorschlagen.
-- Veranstalter muss Teilnehmer-Vorschläge freigeben.
-- Bildunterschrift möglich.
-- Ersteller/Vorschlagender wird gespeichert.
-- Aufgenommene Bildlinks werden über die normale Oberfläche nicht wieder entfernt.
+Diese Inhalte werden über passende Eventrechte verwaltet, besitzen je Eintrag konfigurierbare Sichtbarkeit, lösen nur bei wesentlichen Änderungen Benachrichtigungen aus und verwenden bei Entfernung grundsätzlich 30 Tage Papierkorb, soweit sie nicht mit dem gesamten Event archiviert werden.
 
-Sobald für ein vergangenes Event Bilder existieren, entsteht automatisch ein öffentliches Memories-Album mit Eventtitel und Datum. Weitere Bilder können später ergänzt werden.
+## Eventbilder / Memories
+
+Eventbilder werden über externe Links eingebunden. Teilnehmer dürfen Bilder vorschlagen; Veranstalter müssen Vorschläge freigeben.
+
+Nach dem Event können Event-Memories entstehen. Das eigenständige Memories-Modul ist in `docs/memories.md` beschrieben und darf pro Event mehrere Memories-Alben unterstützen.
 
 ## Event-Feedback
 
-Nach einem Event kann eine eigene Teilnehmer-Feedback-/Bewertungsfunktion verwendet werden.
+Teilnehmerfeedback ist möglich. Öffentlich sichtbar ist nur die Durchschnittsbewertung, nicht die einzelnen Bewertungen.
 
-Öffentlich sichtbar ist **nur die Durchschnittsbewertung** des Events; einzelne Bewertungen werden nicht öffentlich dargestellt.
+# City Hub
 
-## City Hub
+Der City Hub enthält offizielle stadtweite Informationen. Normale Organisationen veröffentlichen keine allgemeinen City-Hub-News.
 
-Der City Hub enthält offizielle Meldungen der Stadtverwaltung.
+Verwaltung über `City Hub verwalten`; Kategorien bleiben strukturell Stadtverwaltungs-Ownern vorbehalten.
 
-Organisationen veröffentlichen keine eigenen allgemeinen City-Hub-News.
+## Beiträge
 
-Verwaltung über `City Hub verwalten`; strukturelle Aktionen wie Kategorien bleiben Stadtverwaltungs-Ownern vorbehalten.
+- Entwürfe
+- geplante Veröffentlichung
+- nach Veröffentlichung bearbeitbar mit `Bearbeitet`
+- Änderungsverlauf
+- Löschen → 30 Tage Papierkorb
+- optionales Ablaufdatum
+- Titelbild
+- Verlinkung zu Event, Organisation oder LS-Map-Position
+- Volltextsuche
+- Archivfilter nach Kategorie und Datum
 
-### Beiträge
+## Kategorien
 
-- Entwürfe möglich.
-- Veröffentlichung planbar mit Datum/Uhrzeit.
-- Veröffentlichte Beiträge bearbeitbar, Kennzeichnung `Bearbeitet`.
-- Änderungsverlauf wird gespeichert.
-- Löschen durch `City Hub verwalten`, danach 30 Tage Papierkorb.
-- Optionales Ablaufdatum.
-- Titelbild möglich.
-- Ein Beitrag kann direkt auf ein Event, eine Organisation oder eine LS-Map-Position verlinken.
+- nur Stadtverwaltungs-Owner
+- Farbe/Icon
+- mehrere Kategorien pro Beitrag
+- geschützte Systemkategorien nicht löschbar
 
-Der City Hub besitzt eine Volltextsuche über veröffentlichte Meldungen.
+## Kommentare und Reaktionen
 
-Das Archiv kann nach Kategorie und Datum gefiltert werden.
+Kommentare je Beitrag aktivierbar/deaktivierbar. Zielgruppe kann alle aktiven Bürger oder ausgewählte Rollen/Organisationen sein.
 
-### Kategorien
+- eigene Kommentare bearbeit-/löschbar
+- Moderation durch `City Hub verwalten`
+- Moderationsgrund Pflicht und intern
+- Kommentare meldbar
 
-- Kategorien nur durch Stadtverwaltungs-Owner.
-- Farbe und Icon möglich.
-- Mehrere Kategorien pro News.
-- Geschützte Systemkategorien nicht löschbar.
-- Keine Deaktivierungsfunktion für Kategorien.
+Emoji-Reaktionen aus fester Nexus-Auswahl, mehrere Reaktionen pro Bürger möglich, öffentliche Reaktionszahlen.
 
-## City-Hub-Kommentare
+## Eilmeldungen und Warnungen
 
-Kommentarfunktion kann je Beitrag aktiviert/deaktiviert und nach Veröffentlichung geändert werden.
+Nexus unterstützt:
 
-Je Beitrag kann festgelegt werden, ob alle aktiven Bürger oder nur ausgewählte Rollen/Organisationen kommentieren dürfen.
+- stadtweite Eilmeldungen mit Prioritätsstufen
+- regionale Warnmeldungen für bestimmte Kartenbereiche
+- eigenen stadtweiten Warn-/Notfallbanner
 
-- Eigene Kommentare bearbeitbar (`Bearbeitet`).
-- Eigene Kommentare löschbar.
-- `City Hub verwalten` darf moderieren/löschen.
-- Moderationsgrund Pflicht und nur intern sichtbar.
-- Bürger dürfen Kommentare melden.
-- Stadtverwaltung besitzt eine Übersicht gemeldeter Kommentare.
+Das Sonderrecht `Stadtwarnung auslösen` bleibt getrennt vom normalen City-Hub-Recht.
 
-## Reaktionen
+Warnbanner können je Fall entweder bis zur manuellen Aufhebung bestehen oder mit einer festgelegten Zeit automatisch ablaufen.
 
-- Mehrere Emoji-Reaktionen aus fester Nexus-Auswahl.
-- Mehrere Reaktionen desselben Bürgers gleichzeitig möglich.
-- Änderung/Entfernung möglich.
-- Reaktionszahlen öffentlich sichtbar.
+## Presse und Korrekturen
 
-## Wichtige Meldungen
+Vorgesehen:
 
-Wichtige Meldungen können im City Hub angepinnt werden.
+- offizielle Pressemitteilungen einzelner Behörden
+- öffentliche Korrekturhinweise für fehlerhafte Meldungen
+- öffentliche FAQ der Stadtverwaltung
+- öffentliche Nexus-Changelogs
 
-Die Stadtverwaltung entscheidet je Beitrag, ob zusätzlich eine Nexus-Benachrichtigung versendet wird.
+## Nicht vorgesehen
 
-## Stadtweiter Warn-/Notfallbanner
+- öffentliche City-Hub-Umfragen
+- zeitlich begrenzte Abstimmungen
+- Pflicht-Lesebestätigung für normale wichtige City-Hub-Beiträge
 
-Zusätzlich zu normalen City-Hub-Meldungen besitzt Nexus einen eigenen stadtweiten Warn-/Notfallbanner.
+Die bereits getrennt geregelten Stadtverwaltungs-/System-Pflichtmeldungen können weiterhin eine Lesebestätigung verlangen.
 
-- Der Banner kann bis zur manuellen Aufhebung dauerhaft oben im Nexus angezeigt werden.
-- Das Auslösen erfolgt **nicht** über das normale Recht `City Hub verwalten`.
-- Dafür existiert das eigene Sonderrecht `Stadtwarnung auslösen`.
+## Kalender
 
-## Kalenderbezug
+Bei `Teilnehmen` oder `Vielleicht` wird ein öffentliches Event automatisch in den persönlichen Kalender eingetragen.
 
-Öffentliche Events werden bei `Teilnehmen` oder `Vielleicht` automatisch in den persönlichen Nexus-Kalender eingetragen.
+## Technische Leitplanken
 
-Grundansichten:
-- Monat
-- Woche
-- Tag
-
-Organisationen besitzen zusätzlich einen internen Kalender; Verwaltung über `Kalender verwalten`.
-
-## Technische Zielstruktur
-
-Voraussichtlich benötigt werden:
-
-- Events und Eventserien
-- feste Nexus-Eventkategorien
-- mehrere Veranstalterorganisationen mit Bestätigungsstatus
-- federführender Veranstalter
-- internes Event-Team mit Rollen
-- Eventorte und automatische öffentliche Map-Marker
-- öffentlicher Teilen-Link
-- Teilnahmen, Limits und Warteliste ohne öffentliche Wartelistenposition
-- Erinnerungen und Änderungsbenachrichtigungen
-- Eventarchivierung und 6-Monats-Aufbewahrung
-- externe Eventbilder und Memories
-- Event-Feedback mit öffentlicher Durchschnittsbewertung
-- City-Hub-Beiträge, Kategorien, Suche und Archivfilter
-- Kommentare, Meldungen und Moderationsübersicht
-- Emoji-Reaktionen
-- Pin-/Wichtig-Markierung
-- Verlinkungen zu Event/Organisation/Map
-- stadtweiter Warnbanner mit Sonderrecht `Stadtwarnung auslösen`
-
-Alle Berechtigungen und Sichtbarkeiten müssen serverseitig durchgesetzt werden.
+Events, private Events, Zugangsbeschränkungen, Gästelisten und Helferinformationen müssen serverseitig nach Sichtbarkeit geschützt werden. Warnungen und amtliche Veröffentlichungen benötigen klar getrennte Verwaltungsrechte.
