@@ -1,155 +1,144 @@
 # LG Nexus – Personenprofile
 
-Dieses Dokument beschreibt die aktuell festgelegten Regeln für öffentliche Nexus-Personenprofile und persönliche Profil-Einstellungen.
+Dieses Dokument beschreibt den verbindlichen Stand der Personenprofile und persönlichen Profilfunktionen bis Frage 3410.
 
 ## Profilbild
 
-Jeder Bürger darf ein Profilbild hinterlegen.
+Jeder Bürger darf ein Profilbild über einen externen Bildlink hinterlegen.
 
-- Das Bild wird über einen externen Bildlink eingebunden, nicht als direkter Nexus-Dateiupload.
-- Nexus soll im Profil-Editor Hinweise auf geeignete kostenlose Bildhoster anbieten.
-- Profilbild-URLs werden nur von ausdrücklich erlaubten Bildhostern akzeptiert.
-- Ist kein Profilbild gesetzt, zeigt Nexus automatisch einen Avatar mit den Initialen des Bürgers.
-- Für die Sichtbarkeit des Profilbilds gelten dieselben sechs Sichtbarkeitsstufen wie für Telefonnummer und Nexus-Mail.
-- Die Stadtverwaltung darf unangemessene öffentliche Profilbilder moderieren beziehungsweise entfernen.
-- Wird ein Profilbild durch die Stadtverwaltung moderiert oder entfernt, wird der betroffene Bürger benachrichtigt.
+- nur erlaubte Bildhoster
+- Initialen-Fallback ohne Bild
+- sechs Sichtbarkeitsstufen wie Telefon/Nexus-Mail
+- Stadtverwaltung darf unangemessene öffentliche Profilbilder moderieren
+- Betroffener wird bei Moderation/Entfernung benachrichtigt
 
-## Öffentliche Bio
+Temporäre Profilbilder sind nicht vorgesehen.
 
-Ein Bürger darf eine öffentliche Profilbeschreibung/Bio hinterlegen.
+## Bio und Statustext
 
-- Maximale Länge: **300 Zeichen**.
-- Einfache Formatierung beziehungsweise Markdown ist erlaubt.
-- Die Stadtverwaltung darf unangemessene Bio-Inhalte moderieren beziehungsweise entfernen.
-- Wird eine Bio durch die Stadtverwaltung moderiert oder entfernt, wird der betroffene Bürger benachrichtigt.
+Öffentliche Bio:
 
-## Persönlicher Statustext
+- maximal 300 Zeichen
+- einfache Formatierung/Markdown
+- moderierbar
 
-Zusätzlich darf ein eigener kurzer Statustext gesetzt werden.
+Persönlicher Statustext:
 
-- Maximale Länge: **60 Zeichen**.
-- Der Benutzer entscheidet selbst über die Sichtbarkeit.
-- Ein Statustext kann automatisch nach einer vom Benutzer gewählten Zeit ablaufen.
-
-Die genaue Zielgruppen-Auswahl für den Statustext wird separat festgelegt.
+- maximal 60 Zeichen
+- eigene Sichtbarkeit
+- optionaler automatischer Ablauf
 
 ## Name und Nexus-ID
 
-Der Name im Nexus-Personenprofil kann nicht verborgen werden.
+Name und Nexus-ID bleiben die stabilen sichtbaren Identifikationsmerkmale nach den festgelegten Such-/Accountregeln.
 
-Die Nexus-ID bleibt nach den bestehenden Nexus-Regeln ebenfalls die stabile, sichtbare Kennung des Bürgers.
+RP-Namensänderungen laufen über Stadtverwaltungsantrag. Frühere RP-Namen bleiben nur intern im Identitätsverlauf nachvollziehbar.
 
-## RP-Geburtsdatum
+## Geburtsdatum
 
-Für das RP-Geburtsdatum gelten dieselben sechs Sichtbarkeitsstufen wie für Telefonnummer und Nexus-Mail.
+RP-Geburtsdatum verwendet die sechs Sichtbarkeitsstufen. Optional kann nur Tag/Monat freigegeben werden. Wenn das vollständige Datum sichtbar ist, darf Nexus das RP-Alter berechnen.
 
-Zusätzlich kann der Bürger alternativ nur **Tag und Monat** seines Geburtstags freigeben, ohne das Geburtsjahr sichtbar zu machen.
-
-Wenn das vollständige Geburtsdatum für einen Betrachter sichtbar ist, darf Nexus automatisch das aktuelle RP-Alter berechnen und anzeigen.
+Geburtstage im Kalender werden **nicht automatisch aus diesem Profilfeld erzeugt**. Geburtstage werden manuell als Kalendereinträge gepflegt.
 
 ## Organisationsmitgliedschaften
 
-Sichtbare Organisationsmitgliedschaften werden **nicht automatisch als Liste im Personenprofil eingeblendet**.
-
-Die bereits festgelegten organisationsbezogenen Sichtbarkeits- und Suchregeln bleiben davon unberührt.
+Mitgliedschaften werden nicht automatisch als eigene Profilliste eingeblendet. Organisationsbezogene Sichtbarkeit und Suche richten sich nach den Organisationsregeln.
 
 ## Bewertungen
 
-Vom Bürger abgegebene Organisationsbewertungen werden im öffentlichen Personenprofil angezeigt mit:
+Öffentliche vom Bürger abgegebene Organisationsbewertungen können im Profil erscheinen mit Sternezahl, Organisation und Text.
 
-- Sternebewertung
-- Organisation
-- Bewertungstext
+Eine aktive öffentliche Bewertung kann nicht nur für das Profil ausgeblendet werden. Wird sie gelöscht, verschwindet sie auch aus dem Profil.
 
-Ein Bürger kann einzelne eigene Bewertungen nicht nur für sein Personenprofil ausblenden, solange die Bewertung selbst öffentlich besteht.
+## Profil-Badges
 
-Wird eine eigene Bewertung gelöscht, verschwindet sie automatisch auch aus dem Personenprofil.
+Nexus unterstützt zwei getrennte Badge-Arten.
 
-## Online-/Offline-Status
+### Frei wählbare verliehene Badges
 
-Ein späterer aus FiveM übernommener Online-/Offline-Status im Personenprofil ist derzeit nicht vorgesehen.
+- werden durch die Stadtverwaltung erstellt/verliehen
+- Bürger kann nur aus tatsächlich erhaltenen Badges wählen
+- Bürger entscheidet selbst, welche erhaltenen Badges im Profil angezeigt werden
+- sichtbare Badges sind öffentlich
+- Badges sind kein Suchkriterium
+- die Stadtverwaltung kann ein verliehenes Badge wieder entziehen/deaktivieren
 
-## Favoriten
+### Offizielle verifizierte Rollen-Badges
 
-Private Organisations-Favoriten bleiben privat und erscheinen nicht im Personenprofil.
+Offizielle Rollen-/Funktionsbadges können beispielsweise eine verifizierte Zugehörigkeit/Funktion darstellen.
+
+- werden durch die zuständige Organisations-/Leitungslogik erzeugt
+- öffentlich sichtbar
+- kein Suchkriterium
+- verschwinden automatisch, sobald die notwendige Rolle oder Organisationszugehörigkeit verloren geht
+
+Game-Achievements sind **keine Profil-Badges** und erscheinen nicht im Personenprofil.
+
+## Favorisierte Personenprofile
+
+Bürger dürfen Personenprofile privat favorisieren.
+
+- nur der favoritisierende Bürger sieht diese Favoriten
+- Favorisieren erzeugt keine Benachrichtigung beim favorisierten Bürger
+- bei nicht mehr zugänglichem Profil entsteht kein Berechtigungs-Override
+
+## Nicht vorgesehen
+
+- Pronomen-/Anredefeld im RP-Profil
+- Profilbanner
+- temporäre Profilbilder
+- gruppenspezifische Gesamtprofil-Sichtbarkeit
+- individuelle Freigabelisten pro Profilfeld
+- Profil-Suchbarkeit unabhängig von der Feldsichtbarkeit
+- Ausblenden einzelner öffentlicher Bewertungen nur aus Suchansichten
+- öffentliche Game-Achievements im Profil
+- öffentliche Favoritenlisten
 
 ## Externe Profil-Links
 
-Ein Personenprofil darf maximal **3 externe Links** enthalten.
+Maximal 3 externe Links.
 
-- Jeder Link darf eine eigene sichtbare Bezeichnung besitzen.
-- Erlaubt sind nur HTTP-/HTTPS-Adressen.
-- Externe Profil-Links müssen vor ihrer öffentlichen Anzeige durch die Stadtverwaltung freigegeben werden.
+- HTTP/HTTPS
+- sichtbare Bezeichnung
+- öffentliche Anzeige erst nach Stadtfreigabe
 
-## Aktivitätschronik und Profilaufrufe
+## Online-/Offline
 
-- Es gibt keine öffentliche Aktivitätschronik eines Bürgers.
-- Ein Bürger sieht nicht, wer sein Profil angesehen hat.
+Ein aus FiveM synchronisierter persönlicher Online-/Offline-Status ist nicht vorgesehen.
 
 ## Blockieren
 
-Bürger können andere Nexus-Benutzer blockieren.
+Bürger können andere Nutzer blockieren.
 
-Aktuell gilt:
+- direkte Bürger-Mails werden während Blockierung nicht zugestellt und nach Entblocken gemäß bestehender Mailregel nachgeliefert
+- vorhandene Threads bleiben lesbar
+- blockierter Nutzer sieht Profil/öffentliche Kommentare/Bewertungen des Blockierenden nicht
+- notwendige gemeinsame Organisationsarbeit bleibt möglich
+- Stadt-/Systemmeldungen umgehen Benutzerblockierung
+- Blockierung bleibt für blockierten Nutzer verborgen
 
-- Während einer Blockierung werden neue direkte Bürger-zu-Bürger-Nexus-Mails des blockierten Benutzers nicht zugestellt.
-- Bereits bestehende gemeinsame Mailthreads bleiben lesbar.
-- Wird die Blockierung aufgehoben, werden während der Blockzeit zurückgehaltene Mails nachträglich zugestellt.
-- Der blockierte Benutzer kann das öffentliche Profil des Blockierenden nicht mehr sehen.
-- Der blockierte Benutzer sieht öffentliche Kommentare und Bewertungen des Blockierenden nicht mehr.
-- Wenn beide Personen derselben Organisation angehören, bleiben notwendige interne Organisationskontakte weiterhin möglich.
-- Offizielle Stadtverwaltungs- und Nexus-Systemmeldungen umgehen eine Benutzer-Blockierung immer.
-- Der blockierte Benutzer wird nicht darüber informiert, dass er blockiert wurde.
-- Die eigene Blockierliste ist ausschließlich für den jeweiligen Benutzer selbst sichtbar.
-- Eine Blockierung kann jederzeit wieder aufgehoben werden.
-
-Die genaue Mail-Zustelllogik ist im Konzept `personal-mail.md` festgelegt.
+Ein komplettes Blockieren einer gesamten Organisation für Direktkontakt ist nicht vorgesehen.
 
 ## Profil melden und Moderation
 
-Ein Bürger darf ein anderes Personenprofil melden.
+Profile können mit festen Meldegründen und optionalem Freitext gemeldet werden.
 
-Eine Profilmeldung verwendet:
-
-- feste Meldegründe
-- optionalen Freitext
-
-Die Identität des Meldenden bleibt gegenüber dem gemeldeten Bürger verborgen.
-
-Der gemeldete Bürger wird unmittelbar darüber benachrichtigt, dass sein Profil gemeldet wurde, jedoch ohne die Identität des Meldenden offenzulegen.
-
-Die Stadtverwaltung darf öffentliche Profilinhalte wie Profilbild und Bio moderieren beziehungsweise entfernen und informiert den betroffenen Bürger über die Maßnahme.
+Identität des Meldenden bleibt gegenüber dem Gemeldeten verborgen. Öffentliche Profilinhalte dürfen moderiert werden.
 
 ## Personalisierung
 
-Jeder Benutzer darf innerhalb von Nexus ein persönliches Farbschema auswählen.
+- Hell-/Dunkelmodus, Standard Dunkel
+- persönliche Akzentfarbe
+- High-Contrast-Modus als persönliche Einstellung
 
-Zusätzlich kann der Benutzer gemäß dem Systemkonzept zwischen hellem und dunklem Grunddesign wählen. Für neue Nutzer ist das dunkle Grunddesign Standard. Persönliche Farben wirken als Akzente für Buttons, aktive Elemente und Highlights.
+V1 ist primär auf feste Desktop-/Tablet-Darstellung ausgelegt; eine spezielle Smartphone-Navigation ist nicht vorgesehen.
 
-## Sprache, Zeit- und Datumsformat
+## Sprache und Formate
 
-Aktuell gilt:
+- Deutsch
+- 24-Stunden-Format
+- `TT.MM.JJJJ`
 
-- Sprache: nur Deutsch
-- Zeitformat: 24-Stunden-Format
-- Datumsformat: `TT.MM.JJJJ`
+## Sicherheit
 
-## Technische Zielstruktur
-
-Für die spätere Umsetzung werden voraussichtlich benötigt:
-
-- externe Profilbild-URL mit Hoster-Allowlist
-- Profilbild-Sichtbarkeit über die sechs Nexus-Stufen
-- Initialen-Fallback-Avatar
-- Bio mit 300-Zeichen-Limit und einfacher Formatierung
-- Statustext mit Sichtbarkeit und optionalem Ablauf
-- RP-Geburtsdatum-Sichtbarkeit über die sechs Nexus-Stufen
-- optional Tag/Monat-only-Freigabe
-- externe Profil-Links mit Freigabestatus
-- veröffentlichte abgegebene Organisationsbewertungen
-- Benutzer-Blockierungen einschließlich Mail-Zurückhaltung und Nachzustellung
-- Profilmeldungen und Moderationsstatus
-- persönliche Farbschema-Einstellung
-- Hell-/Dunkelmodus
-
-Profilbezogene Sichtbarkeitsentscheidungen müssen serverseitig durchgesetzt werden; versteckte Daten dürfen weder direkt noch über Suche/API-Nebenwege offengelegt werden.
+Profil- und Privatsphäreentscheidungen werden serverseitig durchgesetzt. Versteckte Daten dürfen nicht über Suche, APIs, Favoriten oder direkte Bild-/Datensatz-IDs offengelegt werden.
