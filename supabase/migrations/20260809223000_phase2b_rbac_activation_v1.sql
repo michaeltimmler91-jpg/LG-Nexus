@@ -27,7 +27,6 @@ drop policy if exists managers_can_remove_members on public.organization_members
 drop policy if exists managers_can_update_members on public.organization_members;
 drop policy if exists members_can_read_own_membership on public.organization_members;
 
--- Direct writes are no longer part of the browser contract for protected RBAC data.
 revoke insert, update, delete on public.organizations from anon, authenticated;
 revoke insert, update, delete on public.organization_members from anon, authenticated;
 revoke insert, update, delete on public.organization_roles from anon, authenticated;
@@ -42,7 +41,6 @@ revoke insert, update, delete on public.permissions from anon, authenticated;
 -- Read policies
 -- -----------------------------------------------------------------------------
 
--- Public organization cards remain readable through the existing public policy.
 drop policy if exists org_members_can_read_own_organizations on public.organizations;
 create policy org_members_can_read_own_organizations
 on public.organizations
@@ -50,7 +48,6 @@ for select
 to authenticated
 using ((select private.is_active_org_member(id)));
 
--- Active permission catalogue is visible to signed-in users. It contains no secrets.
 drop policy if exists authenticated_can_read_active_permissions on public.permissions;
 create policy authenticated_can_read_active_permissions
 on public.permissions
@@ -58,7 +55,6 @@ for select
 to authenticated
 using (is_active = true);
 
--- A member may always see their own membership. Full member lists require permission.
 drop policy if exists members_can_read_allowed_memberships on public.organization_members;
 create policy members_can_read_allowed_memberships
 on public.organization_members
@@ -69,7 +65,6 @@ using (
   or (select private.has_org_permission(organization_id, 'org.members.view'))
 );
 
--- Roles and their permission layout are internal, but visible to active members of that org.
 drop policy if exists active_members_can_read_org_roles on public.organization_roles;
 create policy active_members_can_read_org_roles
 on public.organization_roles
@@ -91,7 +86,6 @@ using (
   )
 );
 
--- Public map-enabled locations can be read by everyone; internal locations by org members.
 drop policy if exists public_or_members_can_read_org_locations on public.organization_locations;
 create policy public_or_members_can_read_org_locations
 on public.organization_locations
@@ -102,7 +96,6 @@ using (
   or (select private.is_active_org_member(organization_id))
 );
 
--- Membership history is available to authorized organization leadership only.
 drop policy if exists authorized_can_read_membership_history on public.organization_membership_history;
 create policy authorized_can_read_membership_history
 on public.organization_membership_history
@@ -110,7 +103,6 @@ for select
 to authenticated
 using ((select private.has_org_permission(organization_id, 'org.members.view')));
 
--- Internal member notes are more sensitive than the ordinary member list.
 drop policy if exists authorized_can_read_member_notes on public.organization_member_notes;
 create policy authorized_can_read_member_notes
 on public.organization_member_notes
@@ -118,7 +110,6 @@ for select
 to authenticated
 using ((select private.has_org_permission(organization_id, 'org.members.manage')));
 
--- Audit log is owner-visible by default; explicit audit permission can also grant access.
 drop policy if exists authorized_can_read_org_audit on public.organization_audit_log;
 create policy authorized_can_read_org_audit
 on public.organization_audit_log
@@ -133,17 +124,6 @@ using (
 -- Frontend-safe RBAC helpers
 -- -----------------------------------------------------------------------------
 
-create or replace function public.has_my_org_permission(target_org uuid, requested_permission text)
-returns boolean
-language sql
-stable
-security definer
-set search_path = ''
-as $$
-  select public.coalesce((select private.has_org_permission(target_org, requested_permission)), false);
-$$;
-
--- public.coalesce does not exist; replace the helper with the direct boolean expression.
 create or replace function public.has_my_org_permission(target_org uuid, requested_permission text)
 returns boolean
 language sql
@@ -355,10 +335,9 @@ begin
   end if;
 
   insert into public.organization_status_history (
-    organization_id, old_status, new_status, old_message, new_message, changed_by
+    organization_id, status, status_message, changed_by
   ) values (
-    target_org, old_status, new_status, old_message,
-    nullif(trim(coalesce(new_status_message, '')), ''), auth.uid()
+    target_org, new_status, nullif(trim(coalesce(new_status_message, '')), ''), auth.uid()
   );
 
   insert into public.organization_audit_log (
@@ -500,7 +479,6 @@ grant execute on function public.assign_organization_member_role(uuid, uuid, uui
 
 -- -----------------------------------------------------------------------------
 -- Protected Owner assignment for emergency/bootstrap administration.
--- This does not give the technical role any Fachaktenzugriff.
 -- -----------------------------------------------------------------------------
 
 create or replace function public.assign_organization_owner(
