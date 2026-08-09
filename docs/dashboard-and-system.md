@@ -1,31 +1,23 @@
 # LG Nexus – Dashboard & System
 
-Dieses Dokument beschreibt die aktuell festgelegten Regeln für das persönliche Dashboard und grundlegende Nexus-System- und Sicherheitsfunktionen.
+Dieses Dokument beschreibt den verbindlichen Stand des persönlichen Dashboards und grundlegender Systemfunktionen bis Frage 3410.
 
 ## Persönliches Dashboard
 
-Das persönliche Dashboard unterstützt frei auswählbare Widgets.
+Dashboard unterstützt frei auswählbare Widgets.
 
 Benutzer dürfen:
 
 - Widgets per Drag & Drop anordnen
-- einzelne normale Widgets vollständig ein- oder ausblenden
+- normale Widgets ein-/ausblenden
 
-Organisationen dürfen eigene interne Dashboard-Widgets für ihre Mitglieder bereitstellen.
+Organisationen dürfen interne Widgets bereitstellen und einzelne Widgets verpflichtend machen. Verpflichtende Widgets können vom betroffenen Mitglied nicht verborgen werden.
 
-Rollen können automatisch passende Schnellzugriffe auf dem Dashboard erhalten.
-
-Neue Nutzer starten jedoch **nicht automatisch mit rollenabhängig vorausgefüllten Standard-Widgets**; das normale persönliche Widget-Layout beginnt leer beziehungsweise ohne erzwungene Standardauswahl.
-
-Organisationen dürfen einzelne interne Widgets als **verpflichtend** markieren. Solche verpflichtenden Widgets können vom betroffenen Mitglied nicht ausgeblendet werden.
+Rollen können passende Schnellzugriffe erhalten; neue Nutzer starten nicht mit einem erzwungenen rollenabhängigen Widget-Preset.
 
 ## Globale Suche
 
-LG Nexus besitzt eine globale Suche.
-
-Die globale Suche durchsucht derzeit **nur öffentliche Bereiche**. Berechtigte interne Inhalte wie Dokumente, Fälle oder Vorfälle werden nicht über die globale Suche durchsucht.
-
-Mindestens durchsuchbar sind:
+Globale Suche durchsucht nur öffentliche Bereiche, mindestens:
 
 - Personen
 - Organisationen
@@ -34,159 +26,148 @@ Mindestens durchsuchbar sind:
 - Jobs
 - öffentliche Map-Inhalte
 
-Persönliche Privatsphäre-Regeln für Telefon, Nexus-Mail, Profilfelder und andere geschützte Daten müssen serverseitig vollständig berücksichtigt werden. Ein Suchindex darf keine versteckten Daten indirekt offenlegen.
+Interne Fälle/Akten/Dokumente werden nicht über die globale Suche durchsucht.
 
-## Zuletzt geöffnet
+Nicht vorgesehen:
 
-Eine persönliche Liste zuletzt geöffneter Inhalte ist derzeit nicht vorgesehen.
+- gespeicherte globale Suchanfragen
+- Suchverlauf
+- gespeicherte zuletzt verwendete Filter
 
-## Systemweite Favoriten
+Privacy muss im Suchindex serverseitig eingehalten werden.
 
-Benutzer können systemweite persönliche Favoriten für geeignete Nexus-Inhalte verwenden, zum Beispiel:
+## Favoriten
 
-- Seiten
-- Dokumente
-- Fälle
-- Marker
+Favoriten sind **modulspezifisch** und nicht automatisch für jeden Inhaltstyp verfügbar.
 
-Favoriten können eigene persönliche Ordner/Kategorien besitzen und werden auf allen Geräten des Nexus-Benutzers synchronisiert.
+Aktuell ausdrücklich vorgesehen:
 
-Die jeweilige Sichtbarkeit und Berechtigung des Inhalts bleibt maßgeblich; ein Favorit darf keinen Zugriff auf später nicht mehr berechtigte Inhalte erhalten.
+- Organisationen
+- Unternehmensangebote
+- private Personenprofil-Favoriten
+- Dokumentfavoriten innerhalb des vorhandenen Dokumentbereichs
 
-## Tastaturkürzel
+Nicht vorgesehen:
 
-Tastaturkürzel für häufige Nexus-Aktionen sind derzeit nicht vorgesehen.
+- Kartenmarker-Favoriten
+- City-Hub-Favoriten
+- Event-Favoriten
+- angepinnte Seiten
+- persönliche Schnellzugriffe in der linken Seitenleiste
+
+Ein Favorit gewährt niemals Zugriff auf einen später nicht mehr berechtigten Inhalt.
 
 ## Visuelles Grunddesign
 
-Benutzer können zwischen **hellem und dunklem Grunddesign** wählen.
+- Hell und Dunkel; Standard Dunkel
+- Theme accountweit synchronisiert
+- persönliche Akzentfarbe für Buttons/aktive Elemente/Highlights
+- einstellbare Schriftgröße
+- kompakte oder komfortable Inhaltsdichte nach bestehender Grundregel
+- High-Contrast-Modus als persönliche Einstellung
 
-Für neue Nutzer ist standardmäßig **Dunkel** aktiv.
+Nicht als eigene Zusatzfunktionen vorgesehen:
 
-Die Hell-/Dunkel-Einstellung wird im Nexus-Benutzerprofil gespeichert und auf allen Geräten synchronisiert.
+- reduzierte Animationen
+- spezieller Tastatur-only-Modus
+- eigener Screenreader-Modus
+- größere Klickflächen als Einstellung
+- benutzerdefinierte Tabellenspalten
+- gespeicherte Tabellensortierung
+- Druckansichten
 
-Persönliche Akzentfarben verändern:
+## Zielgeräte / Responsive Verhalten
 
-- Buttons
-- aktive Elemente
-- Highlights
+V1 ist bewusst primär für **Desktop und feste Ingame-/Tablet-Darstellung** ausgelegt.
 
-Sie verändern nicht die komplette Oberfläche oder sämtliche Karten/Widgets.
+Eine vollständig responsive Smartphone-Oberfläche und spezielle mobile Navigation sind **keine V1-Anforderung**.
 
-Zusätzlich unterstützt Nexus:
+## Sitzungen
 
-- eine einstellbare Schriftgröße
-- wählbare kompakte oder komfortable Inhaltsdichte
+- Inaktivitätsablauf 4 Stunden
+- `angemeldet bleiben` maximal 90 Tage
+- eigene Geräte/Sitzungen einsehbar
+- andere eigene Sitzungen remote abmeldbar
+- Anzeige Gerät/Browser, letzte Aktivität, ungefähre Region
+- genaue IP nur für ausdrücklich berechtigte technische Sicherheitsadministration
 
-## Sitzungen und Geräte
+Bei Passwortänderung werden bestehende Sitzungen entsprechend der Sicherheitsregel invalidiert/gesperrt.
 
-Eine normale Nexus-Sitzung läuft nach **4 Stunden Inaktivität** automatisch ab.
+## Re-Authentifizierung
 
-Die Option `angemeldet bleiben` kann eine Anmeldung maximal **90 Tage** aufrechterhalten.
+Passwortbestätigung mindestens für:
 
-Ein Benutzer kann:
-
-- seine aktiven Nexus-Sitzungen beziehungsweise Geräte einsehen
-- andere aktive Sitzungen aus der Ferne abmelden
-
-Die eigene Sitzungs-/Geräteübersicht zeigt:
-
-- Gerät beziehungsweise Browser
-- letzte Aktivität
-- ungefähre Region
-
-Die genaue IP-Adresse wird in normalen Benutzeroberflächen nicht dem Bürger angezeigt. Dafür ausdrücklich berechtigte Sicherheitsadministratoren dürfen die genaue IP-Adresse für Sicherheitszwecke einsehen.
-
-## Erneute Passwortbestätigung
-
-Für besonders sensible persönliche Sicherheitsaktionen verlangt Nexus eine erneute Passwortbestätigung.
-
-Mindestens betroffen sind:
-
-- Passwortänderungen
-- Privatsphäre-Einstellungen
+- Passwortänderung
+- Privatsphäre
 - Sitzungsverwaltung
 - persönliche Sicherheitsaktionen
 
-Eine pauschale zusätzliche Passwortabfrage für jede sensible Fraktions-/Adminaktion ist damit nicht automatisch festgelegt.
+## Login-Sicherheit
 
-## Neue und auffällige Anmeldungen
+- unbekanntes Gerät → Nexus-Benachrichtigung
+- ungewöhnliche Login-Orte/-Muster können zusätzliche Sicherheitsprüfung auslösen
+- erfolgreiche/fehlgeschlagene Logins 30 Tage protokolliert
+- Rate Limiting
+- CAPTCHA nach mehreren Fehlversuchen
+- temporäre Login-Sperre bei massivem Fehlversuchsmuster
+- 2FA aktuell nicht vorgesehen
 
-Bei einer neuen Anmeldung auf einem unbekannten Gerät erhält der Bürger eine Nexus-Benachrichtigung.
+## Systemadministration
 
-Bei auffälligen beziehungsweise neuen Anmeldungen darf Nexus eine zusätzliche Sicherheitsprüfung verlangen.
+Nexus besitzt eine eigene technische System-Admin-Rolle außerhalb normaler Organisationsrollen.
 
-## Zwei-Faktor-Authentifizierung
+- Vergabe durch bestehende System-Admins
+- getrennt von IC-Stadtverwaltung
+- **kein automatischer Zugriff auf vertrauliche Medical-/PD-/Justice-Daten**
+- sensible Systemaktionen landen im technischen Auditlog
+- technischer Auditlog: 12 Monate
 
-Eine 2FA-Funktion ist derzeit **nicht vorgesehen**.
+System-Admins können Feature-Schalter und Systemdiagnose verwenden.
 
-Daher entfallen aktuell:
+## Systemdiagnose
 
-- 2FA für normale Bürger
-- Backup-/Recovery-Codes
-- verpflichtende 2FA für Stadtverwaltungsmitglieder
-- verpflichtende 2FA für Organisations-Owner
+Berechtigte technische Admins erhalten eine Diagnoseansicht für getrennte Zustände von:
 
-## Login-Sicherheitsereignisse
+- Datenbank
+- API
+- Storage
 
-Erfolgreiche und fehlgeschlagene Login-Versuche werden als Sicherheitsereignisse protokolliert.
+Fehler können eine eindeutige Fehler-ID besitzen.
 
-Aufbewahrung: **30 Tage**.
+Diagnosedaten dürfen keine geschützten Fachinhalte offenlegen.
 
-Zum Schutz gegen Login-Missbrauch werden vorgesehen:
+## Feature-Schalter / Staging
 
-- technisches Rate Limiting bei fehlgeschlagenen Login-Versuchen
-- CAPTCHA/Anti-Bot-Schritt nach mehreren Fehlversuchen
-- temporäre Login-Sperre eines Accounts nach sehr vielen Fehlversuchen
+- Module können per Feature-Schalter freigegeben werden
+- Freischaltung kann pro Organisation erfolgen
+- getrennte Staging-/Testumgebung vorgesehen
 
-## Wartungsmodus
+## Wartungsmodus und Statusseite
 
-LG Nexus besitzt einen globalen Wartungsmodus.
+Globaler Wartungsmodus mit öffentlicher Wartungsseite. Nur berechtigte technische Administration kann trotz Wartung ins eigentliche System.
 
-Im Wartungsmodus:
+Zusätzlich globaler Hinweis-/Wartungsbanner.
 
-- wird eine öffentliche Wartungsseite angezeigt
-- nur dafür berechtigte Administratoren können das eigentliche Nexus weiterhin betreten
+Öffentliche Nexus-Statusseite mit Komponentenstatus.
 
-Zusätzlich darf die Stadtverwaltung beziehungsweise systemberechtigte Administration einen globalen Wartungs-/Hinweisbanner schalten.
+## Backups und technische Betriebsrolle
 
-## Öffentliche Statusseite
+Backups werden **alle 6 Stunden** eingeplant.
 
-Es gibt eine öffentliche Nexus-Statusseite für Störungen und Wartungen.
+Für Backup/Restore und ausgewählte Betriebsaufgaben gibt es eine **eigene technische Backup-/Betriebsrolle**, damit diese Aufgaben nicht an einer einzelnen Person hängen.
 
-## Backups
+Diese Rolle ist von IC-Stadtverwaltung getrennt und erzeugt kein fachliches Akten-Leserecht.
 
-Als Zielvorgabe werden automatische Datenbank-Backups **alle 6 Stunden** eingeplant.
+Weitere Details: `docs/operations-and-backups.md`.
 
-Die konkrete technische Backup-/Restore-Umsetzung richtet sich später nach der eingesetzten Supabase-/Hosting-Infrastruktur.
+## FiveM-Grenze V1
 
-## Technische Zielstruktur
+V1 funktioniert **vollständig ohne direkte FiveM-Verbindung**.
 
-Voraussichtlich benötigt werden:
+Auch `/nexus`, Ingame-Tablet, Wegpunkt und Job-/Dienststatus-Sync kommen erst nach V1. Die Architektur bereitet spätere Integrationen lediglich vor.
 
-- persönliches Widget-Layout pro Benutzer
-- Drag-&-Drop-Reihenfolge
-- sichtbare/verborgene Widgets
-- verpflichtende Organisationswidgets
-- rollenbasierte Schnellzugriffe
-- öffentliche globale Suche mit serverseitiger Privacy-Filterung
-- systemweite persönliche Favoriten mit Ordnern und Gerätesynchronisierung
-- Hell-/Dunkelmodus mit Standard `Dunkel`
-- synchronisierte Anzeigeeinstellungen
-- Akzentfarben für Buttons/aktive Elemente/Highlights
-- Schriftgrößen- und Inhaltsdichte-Einstellung
-- Sitzungsverwaltung mit 4-Stunden-Inaktivitätsablauf
-- `angemeldet bleiben` bis 90 Tage
-- Geräte-/Sitzungsübersicht und Remote-Abmeldung
-- Sicherheitsadministrationsrecht für genaue IP-Einsicht
-- Re-Authentifizierung mit Passwort für persönliche Sicherheitsaktionen
-- Benachrichtigung bei unbekannten Geräten
-- zusätzliche Sicherheitsprüfung bei auffälligen Logins
-- Login-Sicherheitsereignisse mit 30-Tage-Aufbewahrung
-- Rate Limit, CAPTCHA und temporäre Login-Sperre
-- globaler Wartungsmodus
-- Wartungs-/Hinweisbanner
-- öffentliche Statusseite
-- Backup-Ziel alle 6 Stunden
+## Sicherheit
 
-Interne Daten dürfen durch Widgets, Favoriten, Suchindizes oder Systemfunktionen niemals Berechtigungsgrenzen umgehen.
+Zusätzliche technische Standards stehen in `docs/security.md`, darunter CSRF, CSP, Rate Limits, Hoster-Allowlist und Schutz gegen massenhafte Datenabfragen.
+
+Interne Daten dürfen durch Widgets, Favoriten, Suchindizes, Diagnose oder Systemadministration niemals Berechtigungsgrenzen umgehen.
