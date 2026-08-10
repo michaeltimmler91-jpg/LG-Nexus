@@ -1,0 +1,235 @@
+.medical-clinical-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.medical-clinical-card {
+  align-self: start;
+}
+
+.medical-clinical-create,
+.medical-allergy-create {
+  display: grid;
+  gap: 9px;
+  padding: 11px;
+  margin-bottom: 13px;
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 12px;
+  background: rgba(0,0,0,.11);
+}
+
+.medical-clinical-create {
+  grid-template-columns: minmax(0,.85fr) minmax(0,1.15fr) auto;
+  align-items: end;
+}
+
+.medical-clinical-create label,
+.medical-allergy-create label {
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.medical-clinical-create label > span,
+.medical-allergy-create label > span {
+  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: .03em;
+}
+
+.medical-clinical-create input,
+.medical-clinical-create select,
+.medical-allergy-create input,
+.medical-allergy-create select {
+  box-sizing: border-box;
+  width: 100%;
+  height: 37px;
+  padding: 0 10px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  outline: 0;
+  color: var(--text);
+  background: rgba(0,0,0,.16);
+  font: inherit;
+}
+
+.medical-clinical-create select option,
+.medical-allergy-create select option {
+  color: #f3f3f5;
+  background: #181b22;
+}
+
+.medical-clinical-create > button,
+.medical-allergy-create > button,
+.medical-clinical-row > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 37px;
+  padding: 0 11px;
+  border: 1px solid rgba(142,119,255,.22);
+  border-radius: 10px;
+  color: var(--text);
+  background: rgba(123,95,255,.1);
+  font-size: 10px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.medical-clinical-create > button:disabled,
+.medical-allergy-create > button:disabled,
+.medical-clinical-row > button:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+.medical-allergy-create-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 9px;
+}
+
+.medical-allergy-create > button {
+  justify-self: end;
+}
+
+.medical-clinical-list {
+  display: grid;
+  gap: 8px;
+}
+
+.medical-clinical-row {
+  position: relative;
+  display: grid;
+  gap: 7px;
+  padding: 11px;
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 12px;
+  background: rgba(255,255,255,.022);
+}
+
+.medical-clinical-row.resolved,
+.medical-clinical-row.inactive {
+  opacity: .64;
+}
+
+.medical-clinical-row-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.medical-clinical-row-head > div {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.medical-clinical-row-head strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+}
+
+.medical-clinical-row-head small,
+.medical-clinical-meta,
+.medical-clinical-row p {
+  color: var(--text-muted);
+  font-size: 9px;
+}
+
+.medical-clinical-row p {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.medical-clinical-row p b {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.medical-clinical-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.medical-clinical-row > button {
+  justify-self: end;
+  min-height: 30px;
+  border-color: rgba(255,255,255,.08);
+  background: rgba(255,255,255,.035);
+}
+
+.medical-clinical-status,
+.medical-allergy-severity {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 22px;
+  padding: 0 7px;
+  border-radius: 999px;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.medical-clinical-status.active {
+  color: #ffc985;
+  border: 1px solid rgba(255,188,86,.16);
+  background: rgba(255,188,86,.06);
+}
+
+.medical-clinical-status.resolved {
+  color: #7ce0ad;
+  border: 1px solid rgba(84,213,150,.16);
+  background: rgba(84,213,150,.06);
+}
+
+.medical-allergy-severity.severity-low {
+  color: #9adcbc;
+  border: 1px solid rgba(84,213,150,.14);
+  background: rgba(84,213,150,.05);
+}
+
+.medical-allergy-severity.severity-medium {
+  color: #ffd18d;
+  border: 1px solid rgba(255,188,86,.16);
+  background: rgba(255,188,86,.06);
+}
+
+.medical-allergy-severity.severity-high {
+  color: #ffb095;
+  border: 1px solid rgba(255,130,91,.18);
+  background: rgba(255,130,91,.07);
+}
+
+.medical-allergy-severity.severity-critical {
+  color: #ff9c9c;
+  border: 1px solid rgba(255,99,99,.2);
+  background: rgba(255,99,99,.08);
+}
+
+.medical-clinical-row.allergy.severity-critical.active {
+  border-color: rgba(255,99,99,.16);
+  background: linear-gradient(135deg, rgba(255,99,99,.055), rgba(255,255,255,.018));
+}
+
+@media (max-width: 1120px) {
+  .medical-clinical-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 860px) {
+  .medical-clinical-create { grid-template-columns: 1fr; }
+  .medical-allergy-create-row { grid-template-columns: 1fr; }
+  .medical-clinical-create > button,
+  .medical-allergy-create > button { justify-self: stretch; }
+}
