@@ -1,0 +1,62 @@
+/* Injected V1 service navigation for City Hall and Justice. */
+.nav-stack > .nav-item-wrap:has(.nav-button[aria-label='Medical']) { order: 21; }
+.nav-stack > .nav-item-wrap:has(.nav-button[aria-label='Police']) { order: 22; }
+.nav-stack > .nav-item-wrap:has(.nav-button[aria-label='Fire & Rescue']) { order: 23; }
+.nav-stack > .nexus-city-nav { order: 20; }
+.nav-stack > .nexus-justice-nav { order: 24; }
+.nav-stack > .nav-item-wrap:has(.nav-button[aria-label='Account']) { order: 40; }
+
+body:not([data-nexus-city='true']) .nexus-city-nav,
+body:not([data-nexus-justice='true']) .nexus-justice-nav {
+  display: none;
+}
+
+body[data-nexus-external-page] .main-area > :not(.topbar):not(.nexus-service-page-slot) {
+  display: none !important;
+}
+
+.nexus-service-page-slot {
+  min-width: 0;
+}
+
+.nexus-service-page {
+  animation: nexus-service-in .16s ease-out;
+}
+
+@keyframes nexus-service-in {
+  from { opacity: .35; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.nexus-city-grid {
+  margin-bottom: 16px;
+}
+
+.nexus-city-focus-card {
+  border-color: rgba(139,120,255,.22);
+  background: linear-gradient(145deg, rgba(123,95,255,.09), rgba(22,25,32,.78));
+}
+
+.nexus-live-pill {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  min-height: 27px;
+  padding: 0 9px;
+  border: 1px solid rgba(84,213,150,.2);
+  border-radius: 999px;
+  color: #72dca8;
+  background: rgba(84,213,150,.07);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.nexus-city-admin-target {
+  margin-top: 16px;
+}
+
+.nexus-city-admin-target:empty {
+  display: none;
+}
