@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { Building2, ChevronRight, FileText, Landmark, LockKeyhole, Scale, ShieldCheck, UserCheck } from 'lucide-react'
+import { Building2, ChevronRight, FileText, Landmark, LockKeyhole, Scale, ShieldCheck, UserCheck, Users } from 'lucide-react'
+import CityOrganizationAdminPanel from './CityOrganizationAdminPanel'
 
 type ServicePage = 'city' | 'justice'
 
@@ -124,7 +125,7 @@ function CityAdministrationPage() {
         <div>
           <span className="eyebrow">STADTHALLE · INTERN</span>
           <h2>Stadtverwaltung</h2>
-          <p>Accountfreischaltungen, Bürgeranträge, Register und interne Verwaltungsaufgaben.</p>
+          <p>Accountfreischaltungen, Bürgeranträge, Organisationsaufsicht und interne Verwaltungsaufgaben.</p>
         </div>
         <span className="permission-pill"><LockKeyhole size={14} /> Rechtebasiert</span>
       </section>
@@ -136,14 +137,20 @@ function CityAdministrationPage() {
           <p>Neue Bürgerkonten prüfen, freischalten oder mit Begründung ablehnen.</p>
           <span className="nexus-live-pill">Live verbunden</span>
         </article>
+        <article className="protected-card nexus-city-focus-card">
+          <div><span>02</span><Users size={20} /></div>
+          <h3>Mitarbeiter & Rollen</h3>
+          <p>Mitarbeiter aufnehmen, normale Rollen zuweisen und Mitglieder verwalten.</p>
+          <span className="nexus-live-pill">Live verbunden</span>
+        </article>
         <article className="protected-card">
-          <div><span>02</span><FileText size={20} /></div>
+          <div><span>03</span><FileText size={20} /></div>
           <h3>Namensänderungen</h3>
           <p>Anträge prüfen und genehmigte Änderungen mit interner Historie verwalten.</p>
           <button>Wird als Nächstes gebaut <ChevronRight size={15} /></button>
         </article>
         <article className="protected-card">
-          <div><span>03</span><Building2 size={20} /></div>
+          <div><span>04</span><Building2 size={20} /></div>
           <h3>Unternehmensregister</h3>
           <p>Unternehmen, Registerdaten und Verwaltungsfreigaben zentral bearbeiten.</p>
           <button>Vorschau <ChevronRight size={15} /></button>
@@ -151,12 +158,13 @@ function CityAdministrationPage() {
       </div>
 
       <div id="city-account-admin-target" className="nexus-city-admin-target" />
+      <CityOrganizationAdminPanel />
 
       <div className="permission-note">
         <ShieldCheck size={18} />
         <div>
           <strong>Stadthallenrechte bleiben von Fachakten getrennt.</strong>
-          <span>Ein Mitarbeiter der Stadtverwaltung erhält dadurch keinen automatischen Zugriff auf Medical-, Police- oder Justice-Inhalte.</span>
+          <span>Auch Organisationsaufsicht oder Owner-Zuweisung geben keinen pauschalen Einblick in fremde Fachakten.</span>
         </div>
       </div>
     </div>
