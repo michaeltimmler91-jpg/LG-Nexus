@@ -55,7 +55,9 @@ export default function ServiceNavigationMount() {
 
     if (activePage) {
       document.body.dataset.nexusExternalPage = activePage
-      document.querySelectorAll('.nav-button.is-active').forEach((button) => button.classList.remove('is-active'))
+      document
+        .querySelectorAll('.nav-button.is-active:not(.nexus-service-nav-button)')
+        .forEach((button) => button.classList.remove('is-active'))
       const title = document.querySelector('.topbar-title h1')
       if (title) title.textContent = pageTitles[activePage]
     } else {
