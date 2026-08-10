@@ -1,0 +1,48 @@
+/* Account page layout corrections for the live Nexus account overlay. */
+body.nexus-auth-live .profile-header-card {
+  display: flex;
+  align-items: center;
+  min-height: 190px;
+}
+
+body.nexus-auth-live .profile-header-card .real-account-overlay {
+  width: 100%;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 17px;
+}
+
+body.nexus-auth-live .real-account-main {
+  min-width: 0;
+}
+
+body.nexus-auth-live .real-account-main h2 {
+  margin: 5px 0 4px;
+  font-size: 27px;
+  line-height: 1.05;
+  letter-spacing: -.04em;
+  white-space: normal;
+}
+
+body.nexus-auth-live .real-account-main p {
+  max-width: 620px;
+  line-height: 1.45;
+}
+
+body.nexus-auth-live .real-account-overlay > .secondary-button {
+  min-width: 145px;
+  white-space: nowrap;
+}
+
+@media (max-width: 820px) {
+  body.nexus-auth-live .profile-header-card .real-account-overlay {
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+
+  body.nexus-auth-live .real-account-overlay > .secondary-button {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}
