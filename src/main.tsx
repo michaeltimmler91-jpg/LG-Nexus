@@ -13,6 +13,7 @@ import './permission-navigation.css'
 import './service-navigation.css'
 import './city-organization-admin.css'
 import './medical-module.css'
+import './medical-clinical.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
