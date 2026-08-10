@@ -5,6 +5,7 @@ import AccountAdminMount from './AccountAdminMount'
 import PermissionNavigationGuard from './PermissionNavigationGuard'
 import ServiceNavigationMount from './ServiceNavigationMount'
 import MedicalModuleMount from './MedicalModuleMount'
+import MedicalMedicationMount from './MedicalMedicationMount'
 import './styles.css'
 import './auth.css'
 import './account-layout-fix.css'
@@ -14,6 +15,7 @@ import './service-navigation.css'
 import './city-organization-admin.css'
 import './medical-module.css'
 import './medical-clinical.css'
+import './medical-medications.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -22,5 +24,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <PermissionNavigationGuard />
     <ServiceNavigationMount />
     <MedicalModuleMount />
+    <MedicalMedicationMount />
   </React.StrictMode>,
 )
