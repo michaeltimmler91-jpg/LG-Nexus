@@ -124,13 +124,16 @@ export default function PermissionNavigationGuard() {
     })
 
     const onFocus = () => void refresh()
+    const onPermissionsChanged = () => void refresh()
     window.addEventListener('focus', onFocus)
+    window.addEventListener('nexus:permissions-changed', onPermissionsChanged)
 
     return () => {
       disposed = true
       observer.disconnect()
       authListener.subscription.unsubscribe()
       window.removeEventListener('focus', onFocus)
+      window.removeEventListener('nexus:permissions-changed', onPermissionsChanged)
       delete document.body.dataset.nexusPermissionsReady
       delete document.body.dataset.nexusCity
       delete document.body.dataset.nexusMedical
