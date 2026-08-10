@@ -8,6 +8,7 @@ import MedicalSimpleMount from './MedicalSimpleMount'
 import MedicalTreatmentEditMount from './MedicalTreatmentEditMount'
 import PoliceEasyMount from './PoliceEasyMount'
 import PoliceCitizenHistoryMount from './PoliceCitizenHistoryMount'
+import PoliceQuickToolsMount from './PoliceQuickToolsMount'
 import './styles.css'
 import './auth.css'
 import './account-layout-fix.css'
@@ -20,6 +21,7 @@ import './medical-simple.css'
 import './medical-treatment-edit.css'
 import './police-easy.css'
 import './police-citizen-history.css'
+import './police-quick-tools.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -31,5 +33,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <MedicalTreatmentEditMount />
     <PoliceEasyMount />
     <PoliceCitizenHistoryMount />
+    <PoliceQuickToolsMount />
   </React.StrictMode>,
 )
