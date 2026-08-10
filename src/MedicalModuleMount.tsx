@@ -22,6 +22,8 @@ type MedicalContext = {
   can_edit_records: boolean
   can_create_treatments: boolean
   can_edit_treatments: boolean
+  can_manage_diagnoses: boolean
+  can_manage_allergies: boolean
 }
 
 type PatientSearchResult = {
@@ -44,6 +46,41 @@ type MedicalTreatment = {
   row_version: number
 }
 
+type DiagnosisCatalogItem = {
+  id: string
+  code: string
+  name: string
+  description: string | null
+}
+
+type MedicalDiagnosis = {
+  id: string
+  catalog_id: string
+  code: string
+  name: string
+  status: 'active' | 'resolved'
+  notes: string | null
+  diagnosed_by_name: string | null
+  diagnosed_at: string
+  resolved_at: string | null
+  row_version: number
+}
+
+type AllergySeverity = 'low' | 'medium' | 'high' | 'critical'
+
+type MedicalAllergy = {
+  id: string
+  allergen: string
+  severity: AllergySeverity
+  reaction: string | null
+  notes: string | null
+  status: 'active' | 'inactive'
+  recorded_by_name: string | null
+  recorded_at: string
+  inactivated_at: string | null
+  row_version: number
+}
+
 type PatientOverview = {
   profile_id: string
   display_name: string
@@ -62,6 +99,8 @@ type PatientOverview = {
     row_version: number
   }
   treatments: MedicalTreatment[]
+  diagnoses: MedicalDiagnosis[]
+  allergies: MedicalAllergy[]
 }
 
 const dateFormatter = new Intl.DateTimeFormat('de-DE')
@@ -74,6 +113,19 @@ const dateTimeFormatter = new Intl.DateTimeFormat('de-DE', {
 })
 
 const bloodGroups = ['', '0+', '0-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-']
+const allergySeverityOptions: Array<{ value: AllergySeverity; label: string }> = [
+  { value: 'low', label: 'Leicht' },
+  { value: 'medium', label: 'Mittel' },
+  { value: 'high', label: 'Schwer' },
+  { value: 'critical', label: 'Lebensbedrohlich' },
+]
+
+const allergySeverityLabels: Record<AllergySeverity, string> = {
+  low: 'Leicht',
+  medium: 'Mittel',
+  high: 'Schwer',
+  critical: 'Lebensbedrohlich',
+}
 
 function formatDate(value: string | null) {
   if (!value) return 'Nicht angegeben'
@@ -154,6 +206,19 @@ function MedicalWorkspace() {
   const [creatingTreatment, setCreatingTreatment] = useState(false)
   const [workingTreatment, setWorkingTreatment] = useState<string | null>(null)
 
+  const [diagnosisCatalog, setDiagnosisCatalog] = useState<DiagnosisCatalogItem[]>([])
+  const [diagnosisCatalogId, setDiagnosisCatalogId] = useState('')
+  const [diagnosisNotes, setDiagnosisNotes] = useState('')
+  const [addingDiagnosis, setAddingDiagnosis] = useState(false)
+  const [workingDiagnosis, setWorkingDiagnosis] = useState<string | null>(null)
+
+  const [allergyName, setAllergyName] = useState('')
+  const [allergySeverity, setAllergySeverity] = useState<AllergySeverity>('medium')
+  const [allergyReaction, setAllergyReaction] = useState('')
+  const [allergyNotes, setAllergyNotes] = useState('')
+  const [addingAllergy, setAddingAllergy] = useState(false)
+  const [workingAllergy, setWorkingAllergy] = useState<string | null>(null)
+
   const loadContext = useCallback(async () => {
     setContextLoading(true)
     const { data, error: contextError } = await supabase.rpc('medical_get_my_context')
@@ -172,8 +237,30 @@ function MedicalWorkspace() {
     void loadContext()
   }, [loadContext])
 
+  useEffect(() => {
+    if (!context?.can_view_records) {
+      setDiagnosisCatalog([])
+      return
+    }
+
+    const loadCatalog = async () => {
+      const { data, error: catalogError } = await supabase.rpc('medical_list_diagnosis_catalog')
+      if (catalogError) return
+      const entries = Array.isArray(data) ? (data as DiagnosisCatalogItem[]) : []
+      setDiagnosisCatalog(entries)
+      setDiagnosisCatalogId((current) => current || entries[0]?.id || '')
+    }
+
+    void loadCatalog()
+  }, [context?.can_view_records])
+
   const applyOverview = (overview: PatientOverview) => {
-    setSelected(overview)
+    setSelected({
+      ...overview,
+      treatments: Array.isArray(overview.treatments) ? overview.treatments : [],
+      diagnoses: Array.isArray(overview.diagnoses) ? overview.diagnoses : [],
+      allergies: Array.isArray(overview.allergies) ? overview.allergies : [],
+    })
     setBloodGroup(overview.record.blood_group ?? '')
     setEmergencyNotes(overview.record.emergency_notes ?? '')
     setInternalWarning(overview.record.internal_warning ?? '')
@@ -303,6 +390,107 @@ function MedicalWorkspace() {
     await loadPatient(selected.profile_id)
   }
 
+  const addDiagnosis = async () => {
+    if (!selected || !context?.can_manage_diagnoses || !diagnosisCatalogId) return
+    setAddingDiagnosis(true)
+    setError('')
+    setNotice('')
+
+    const { error: diagnosisError } = await supabase.rpc('medical_add_diagnosis', {
+      target_profile: selected.profile_id,
+      target_catalog: diagnosisCatalogId,
+      diagnosis_notes: diagnosisNotes.trim() || null,
+    })
+
+    setAddingDiagnosis(false)
+    if (diagnosisError) {
+      setError('Die Diagnose konnte nicht eingetragen werden.')
+      return
+    }
+
+    const label = diagnosisCatalog.find((entry) => entry.id === diagnosisCatalogId)?.name ?? 'Diagnose'
+    setDiagnosisNotes('')
+    setNotice(`${label} wurde in die Krankenakte eingetragen.`)
+    await loadPatient(selected.profile_id)
+  }
+
+  const resolveDiagnosis = async (diagnosis: MedicalDiagnosis) => {
+    if (!selected || !context?.can_manage_diagnoses) return
+    setWorkingDiagnosis(diagnosis.id)
+    setError('')
+    setNotice('')
+
+    const { error: diagnosisError } = await supabase.rpc('medical_resolve_diagnosis', {
+      target_diagnosis: diagnosis.id,
+      expected_row_version: diagnosis.row_version,
+    })
+
+    setWorkingDiagnosis(null)
+    if (diagnosisError) {
+      setError('Die Diagnose konnte nicht abgeschlossen werden. Die Akte wird neu geladen.')
+      await loadPatient(selected.profile_id)
+      return
+    }
+
+    setNotice(`${diagnosis.name} wurde als abgeschlossen markiert.`)
+    await loadPatient(selected.profile_id)
+  }
+
+  const addAllergy = async () => {
+    if (!selected || !context?.can_manage_allergies) return
+    if (allergyName.trim().length < 2) {
+      setError('Bitte gib das Allergen an.')
+      return
+    }
+
+    setAddingAllergy(true)
+    setError('')
+    setNotice('')
+
+    const { error: allergyError } = await supabase.rpc('medical_add_allergy', {
+      target_profile: selected.profile_id,
+      allergy_name: allergyName.trim(),
+      allergy_severity: allergySeverity,
+      allergy_reaction: allergyReaction.trim() || null,
+      allergy_notes: allergyNotes.trim() || null,
+    })
+
+    setAddingAllergy(false)
+    if (allergyError) {
+      setError('Die Allergie konnte nicht eingetragen werden.')
+      return
+    }
+
+    setNotice(`${allergyName.trim()} wurde als Allergie eingetragen.`)
+    setAllergyName('')
+    setAllergyReaction('')
+    setAllergyNotes('')
+    setAllergySeverity('medium')
+    await loadPatient(selected.profile_id)
+  }
+
+  const deactivateAllergy = async (allergy: MedicalAllergy) => {
+    if (!selected || !context?.can_manage_allergies) return
+    setWorkingAllergy(allergy.id)
+    setError('')
+    setNotice('')
+
+    const { error: allergyError } = await supabase.rpc('medical_deactivate_allergy', {
+      target_allergy: allergy.id,
+      expected_row_version: allergy.row_version,
+    })
+
+    setWorkingAllergy(null)
+    if (allergyError) {
+      setError('Die Allergie konnte nicht inaktiv gesetzt werden. Die Akte wird neu geladen.')
+      await loadPatient(selected.profile_id)
+      return
+    }
+
+    setNotice(`${allergy.allergen} wurde als nicht mehr aktiv markiert.`)
+    await loadPatient(selected.profile_id)
+  }
+
   return (
     <div className="page-content nexus-medical-workspace">
       <section className="medical-hero">
@@ -310,7 +498,7 @@ function MedicalWorkspace() {
         <div>
           <span className="eyebrow">LSMC · INTERN</span>
           <h2>Medical</h2>
-          <p>Patientensuche, zentrale Krankenakten und Behandlungsvorgänge.</p>
+          <p>Patientensuche, zentrale Krankenakten, Diagnosen, Allergien und Behandlungsvorgänge.</p>
         </div>
         <span className="medical-live-pill"><ShieldCheck size={14} /> Live & rechtebasiert</span>
       </section>
@@ -349,7 +537,7 @@ function MedicalWorkspace() {
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
                   onKeyDown={(event) => { if (event.key === 'Enter') void searchPatients() }}
-                  placeholder="z. B. Lennox Davis, NX-000001 oder 10.08.1985"
+                  placeholder="z. B. Lennox Davis, NX-000001 oder 15.04.1985"
                 />
               </label>
               <button onClick={() => void searchPatients()} disabled={searching}>
@@ -477,8 +665,125 @@ function MedicalWorkspace() {
                 </article>
               </div>
 
+              <div className="medical-clinical-grid">
+                <article className="medical-card medical-clinical-card">
+                  <div className="medical-card-head">
+                    <div><span className="eyebrow">DIAGNOSEN</span><h4>Diagnosen & Verlauf</h4></div>
+                    <Stethoscope size={20} />
+                  </div>
+
+                  {context.can_manage_diagnoses ? (
+                    <div className="medical-clinical-create">
+                      <label>
+                        <span>Diagnose</span>
+                        <select value={diagnosisCatalogId} onChange={(event) => setDiagnosisCatalogId(event.target.value)}>
+                          {diagnosisCatalog.map((entry) => <option value={entry.id} key={entry.id}>{entry.name}</option>)}
+                        </select>
+                      </label>
+                      <label>
+                        <span>Zusatz / Befund</span>
+                        <input value={diagnosisNotes} onChange={(event) => setDiagnosisNotes(event.target.value)} placeholder="Optionaler Zusatz …" />
+                      </label>
+                      <button disabled={addingDiagnosis || !diagnosisCatalogId} onClick={() => void addDiagnosis()}>
+                        <ClipboardPlus size={14} /> {addingDiagnosis ? 'Wird eingetragen …' : 'Diagnose eintragen'}
+                      </button>
+                    </div>
+                  ) : null}
+
+                  <div className="medical-clinical-list">
+                    {selected.diagnoses.length === 0 ? (
+                      <div className="medical-empty compact">Noch keine Diagnosen dokumentiert.</div>
+                    ) : selected.diagnoses.map((diagnosis) => (
+                      <div className={`medical-clinical-row diagnosis ${diagnosis.status}`} key={diagnosis.id}>
+                        <div className="medical-clinical-row-head">
+                          <div>
+                            <span className={`medical-clinical-status ${diagnosis.status}`}>{diagnosis.status === 'active' ? 'Aktiv' : 'Abgeschlossen'}</span>
+                            <strong>{diagnosis.name}</strong>
+                          </div>
+                          <small>{diagnosis.code}</small>
+                        </div>
+                        {diagnosis.notes ? <p>{diagnosis.notes}</p> : null}
+                        <div className="medical-clinical-meta">
+                          <span>{dateTimeFormatter.format(new Date(diagnosis.diagnosed_at))}</span>
+                          <span>{diagnosis.diagnosed_by_name ?? 'Medical'}</span>
+                        </div>
+                        {diagnosis.status === 'active' && context.can_manage_diagnoses ? (
+                          <button disabled={workingDiagnosis === diagnosis.id} onClick={() => void resolveDiagnosis(diagnosis)}>
+                            <CheckCircle2 size={14} /> Abschließen
+                          </button>
+                        ) : null}
+                      </div>
+                    ))}
+                  </div>
+                </article>
+
+                <article className="medical-card medical-clinical-card">
+                  <div className="medical-card-head">
+                    <div><span className="eyebrow">ALLERGIEN</span><h4>Allergien & Risiken</h4></div>
+                    <AlertTriangle size={20} />
+                  </div>
+
+                  {context.can_manage_allergies ? (
+                    <div className="medical-allergy-create">
+                      <div className="medical-allergy-create-row">
+                        <label>
+                          <span>Allergen</span>
+                          <input value={allergyName} onChange={(event) => setAllergyName(event.target.value)} placeholder="z. B. Penicillin" />
+                        </label>
+                        <label>
+                          <span>Schweregrad</span>
+                          <select value={allergySeverity} onChange={(event) => setAllergySeverity(event.target.value as AllergySeverity)}>
+                            {allergySeverityOptions.map((option) => <option value={option.value} key={option.value}>{option.label}</option>)}
+                          </select>
+                        </label>
+                      </div>
+                      <div className="medical-allergy-create-row">
+                        <label>
+                          <span>Reaktion</span>
+                          <input value={allergyReaction} onChange={(event) => setAllergyReaction(event.target.value)} placeholder="Optional …" />
+                        </label>
+                        <label>
+                          <span>Notiz</span>
+                          <input value={allergyNotes} onChange={(event) => setAllergyNotes(event.target.value)} placeholder="Optional …" />
+                        </label>
+                      </div>
+                      <button disabled={addingAllergy || allergyName.trim().length < 2} onClick={() => void addAllergy()}>
+                        <ClipboardPlus size={14} /> {addingAllergy ? 'Wird eingetragen …' : 'Allergie eintragen'}
+                      </button>
+                    </div>
+                  ) : null}
+
+                  <div className="medical-clinical-list">
+                    {selected.allergies.length === 0 ? (
+                      <div className="medical-empty compact">Keine Allergien dokumentiert.</div>
+                    ) : selected.allergies.map((allergy) => (
+                      <div className={`medical-clinical-row allergy ${allergy.status} severity-${allergy.severity}`} key={allergy.id}>
+                        <div className="medical-clinical-row-head">
+                          <div>
+                            <span className={`medical-allergy-severity severity-${allergy.severity}`}>{allergySeverityLabels[allergy.severity]}</span>
+                            <strong>{allergy.allergen}</strong>
+                          </div>
+                          <small>{allergy.status === 'active' ? 'Aktiv' : 'Inaktiv'}</small>
+                        </div>
+                        {allergy.reaction ? <p><b>Reaktion:</b> {allergy.reaction}</p> : null}
+                        {allergy.notes ? <p>{allergy.notes}</p> : null}
+                        <div className="medical-clinical-meta">
+                          <span>{dateTimeFormatter.format(new Date(allergy.recorded_at))}</span>
+                          <span>{allergy.recorded_by_name ?? 'Medical'}</span>
+                        </div>
+                        {allergy.status === 'active' && context.can_manage_allergies ? (
+                          <button disabled={workingAllergy === allergy.id} onClick={() => void deactivateAllergy(allergy)}>
+                            <Check size={14} /> Nicht mehr aktiv
+                          </button>
+                        ) : null}
+                      </div>
+                    ))}
+                  </div>
+                </article>
+              </div>
+
               <div className="medical-next-grid">
-                {['Diagnosen & Allergien', 'Medikamente', 'Rezepte & Bescheinigungen', 'Ausbildung & Wissen'].map((title) => (
+                {['Medikamente', 'Rezepte & Bescheinigungen', 'Ausbildung & Wissen'].map((title) => (
                   <div className="medical-next-card" key={title}>
                     <strong>{title}</strong>
                     <span>Wird als nächster Medical-Baustein verbunden.</span>
