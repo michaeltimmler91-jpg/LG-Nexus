@@ -11,6 +11,11 @@ body:not([data-nexus-justice='true']) .nexus-justice-nav {
   display: none;
 }
 
+/* When City Hall is the first visible service module, it provides the service divider itself. */
+body[data-nexus-city='true'] .nav-item-wrap:has(.nav-button[aria-label='Medical']) > .nav-divider {
+  display: none;
+}
+
 body[data-nexus-external-page] .main-area > :not(.topbar):not(.nexus-service-page-slot) {
   display: none !important;
 }
