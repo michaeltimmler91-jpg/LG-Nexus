@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { ChevronDown, ChevronRight, Search, UserRound } from 'lucide-react'
+import { BadgeDollarSign, ChevronDown, ChevronRight, FileWarning, Search, Siren, UserRound } from 'lucide-react'
 import { supabase } from './lib/supabase'
 
 type PersonResult = {
@@ -24,11 +24,39 @@ type CitizenCase = {
   roles: PersonRole[]
 }
 
+type CitizenWanted = {
+  wanted_number: string
+  reason: string
+  note: string | null
+  priority: 'low' | 'normal' | 'high' | 'urgent'
+  created_at: string
+}
+
+type CitizenWarrant = {
+  warrant_number: string
+  reason: string
+  note: string | null
+  case_number: string | null
+  issued_at: string
+}
+
+type CitizenFine = {
+  fine_number: string
+  reason: string
+  amount: number
+  status: 'open' | 'paid' | 'waived' | 'cancelled'
+  case_number: string | null
+  issued_at: string
+}
+
 type CitizenHistory = {
   profile_id: string
   display_name: string
   nexus_id: string | null
   date_of_birth: string | null
+  active_wanted: CitizenWanted[]
+  active_warrants: CitizenWarrant[]
+  fines: CitizenFine[]
   cases: CitizenCase[]
 }
 
@@ -39,9 +67,27 @@ const roleLabels: Record<PersonRole, string> = {
   other: 'Sonstige',
 }
 
+const fineStatusLabels: Record<CitizenFine['status'], string> = {
+  open: 'Offen',
+  paid: 'Bezahlt',
+  waived: 'Erlassen',
+  cancelled: 'Storniert',
+}
+
+const priorityLabels: Record<CitizenWanted['priority'], string> = {
+  low: 'Niedrig',
+  normal: 'Normal',
+  high: 'Hoch',
+  urgent: 'Dringend',
+}
+
 const dateFormatter = new Intl.DateTimeFormat('de-DE', {
   day: '2-digit', month: '2-digit', year: 'numeric',
 })
+
+function money(value: number) {
+  return `$${Number(value).toLocaleString('de-DE', { maximumFractionDigits: 2 })}`
+}
 
 export default function PoliceCitizenHistoryMount() {
   const [slot, setSlot] = useState<HTMLDivElement | null>(null)
@@ -132,7 +178,13 @@ function CitizenLookup() {
     }
 
     const next = data as CitizenHistory
-    setHistory({ ...next, cases: Array.isArray(next?.cases) ? next.cases : [] })
+    setHistory({
+      ...next,
+      active_wanted: Array.isArray(next?.active_wanted) ? next.active_wanted : [],
+      active_warrants: Array.isArray(next?.active_warrants) ? next.active_warrants : [],
+      fines: Array.isArray(next?.fines) ? next.fines : [],
+      cases: Array.isArray(next?.cases) ? next.cases : [],
+    })
     setQuery(person.display_name)
   }
 
@@ -142,7 +194,7 @@ function CitizenLookup() {
         <div>
           <span className="eyebrow">BÜRGERSUCHE</span>
           <h3>Was ist über die Person bekannt?</h3>
-          <p>Name oder Nexus-ID suchen und bisherige Vorgänge direkt ansehen.</p>
+          <p>Name oder Nexus-ID suchen und alles Relevante direkt sehen.</p>
         </div>
         <UserRound size={20} />
       </div>
@@ -185,6 +237,31 @@ function CitizenLookup() {
             </div>
             <div className="police-citizen-count"><strong>{history.cases.length}</strong><span>{caseCountLabel}</span></div>
           </div>
+
+          {(history.active_wanted.length > 0 || history.active_warrants.length > 0 || history.fines.length > 0) ? (
+            <div className="police-citizen-status-grid">
+              {history.active_wanted.length > 0 ? (
+                <div className="police-citizen-status-card is-alert">
+                  <div><Siren size={16} /><strong>Aktive Fahndung</strong></div>
+                  {history.active_wanted.map((item) => <p key={item.wanted_number}><b>{item.wanted_number}</b> · {item.reason}<small>{priorityLabels[item.priority]}{item.note ? ` · ${item.note}` : ''}</small></p>)}
+                </div>
+              ) : null}
+
+              {history.active_warrants.length > 0 ? (
+                <div className="police-citizen-status-card is-alert">
+                  <div><FileWarning size={16} /><strong>Aktiver Haftbefehl</strong></div>
+                  {history.active_warrants.map((item) => <p key={item.warrant_number}><b>{item.warrant_number}</b> · {item.reason}<small>{item.case_number ?? 'Ohne Vorgangsverknüpfung'}{item.note ? ` · ${item.note}` : ''}</small></p>)}
+                </div>
+              ) : null}
+
+              {history.fines.length > 0 ? (
+                <div className="police-citizen-status-card">
+                  <div><BadgeDollarSign size={16} /><strong>Bußgelder</strong></div>
+                  {history.fines.slice(0, 5).map((item) => <p key={item.fine_number}><b>{item.fine_number}</b> · {money(item.amount)} · {fineStatusLabels[item.status]}<small>{item.reason}{item.case_number ? ` · ${item.case_number}` : ''}</small></p>)}
+                </div>
+              ) : null}
+            </div>
+          ) : null}
 
           {history.cases.length === 0 ? (
             <div className="police-citizen-history-empty">Zu dieser Person gibt es keine bisherigen Vorgänge.</div>
