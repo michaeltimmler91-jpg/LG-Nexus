@@ -1,8 +1,8 @@
 # LG Nexus – Supabase Deployment-Status
 
-## Stand 09.08.2026
+## Stand 10.08.2026
 
-Die technische V1-Grundlage für Accounts, Organisationen und das neue RBAC-Modell ist auf dem Supabase-Projekt `lg_nexus` aktiv.
+Die technische V1-Grundlage für Accounts, Organisationen, RBAC und die erste echte Registrierung ist auf dem Supabase-Projekt `lg_nexus` aktiv.
 
 ## Angewandte Migrationen
 
@@ -75,7 +75,7 @@ Neu aktiv:
 - alte `is_manager`-Schreib-Policies entfernt
 - geschützte Organisationstabellen nicht mehr direkt vom Browser beschreibbar
 - RLS-Leseregeln für Mitgliedschaften, Rollen, Standorte, Historie, interne Notizen und Auditlog
-- `get_my_organization_context()` für den späteren Frontend-Rechtekontext
+- `get_my_organization_context()` für den Frontend-Rechtekontext
 - `has_my_org_permission(...)` als Frontend-Helfer
 - sichere Profiländerung über `update_organization_profile(...)`
 - sichere Statusänderung über `update_organization_status(...)`
@@ -84,7 +84,7 @@ Neu aktiv:
 - optimistische Konfliktprüfung über `row_version`
 - Audit-/History-Einträge bei relevanten Änderungen
 
-Der Permission-Katalog enthält jetzt **24 aktive Kernberechtigungen**.
+Der Permission-Katalog enthält **24 aktive Kernberechtigungen**.
 
 ### Phase 2C – RLS-/Index-Härtung
 
@@ -102,16 +102,51 @@ Enthalten sind:
 - fehlende Foreign-Key-Indizes aus dem Supabase Performance Advisor
 - Vorbereitung für Rollen-, Historien-, Security- und Audit-Abfragen unter Last
 
-## Aktueller Datenbestand beim ersten Rollout
+### Phase 3 – echte Account-Registrierung
 
-Zum Zeitpunkt der ersten Phase-1/2-Migration waren vorhanden:
+GitHub-Quellmigration:
 
+- `supabase/migrations/20260810074500_phase3_auth_registration_foundation_v1.sql`
+
+Aktiv sind jetzt:
+
+- automatische Anlage eines `profiles`-Datensatzes bei neuem Supabase-Auth-Benutzer
+- neue Accounts starten immer als `pending`
+- Nexus-ID und Nexus-Mail werden weiterhin erst bei Freischaltung auf `active` erzeugt
+- serverseitiger Registrierungs-Throttle mit gehashter Client-IP
+- öffentliche Edge Function `register-user`
+- Registrierung mit Vorname, Nachname, Benutzername, Geburtsdatum und Passwort
+- Anmeldung nach außen ausschließlich mit Benutzername + Passwort; die technische Auth-Mail bleibt für den Nutzer unsichtbar
+- keine Service-/Secret-Keys im Browser
+
+Die Edge Function `register-user` ist aktiv und verwendet serverseitig den Supabase Secret Key. Der Browser nutzt ausschließlich den Publishable Key.
+
+## Frontend-Status
+
+Die GitHub-Pages-Vorschau ist seit Phase 3 direkt mit dem echten `lg_nexus`-Projekt verbunden.
+
+Neu im sichtbaren Frontend:
+
+- echter Login mit Benutzername + Passwort
+- echte Registrierung
+- Supabase-Session bleibt im Browser erhalten
+- eigener Profil-/Accountstatus wird aus `profiles` geladen
+- `pending`, `active`, `suspended`, `rejected` und `disabled` werden sichtbar unterschieden
+- nach Freischaltung werden Nexus-ID und Nexus-Mail angezeigt
+- `get_my_organization_context()` wird für aktive Accounts geladen
+- der bisherige Demo-Account oben rechts wird durch den echten Accountstatus überlagert
+- die sichtbare Account-Seite zeigt nicht mehr das Demo-Profil, sobald die neue Auth-Schicht aktiv ist
+
+Die sichtbare Oberfläche verwendet weiterhin keine Begriffe wie `RP`, `IC` oder `OOC`.
+
+## Datenbestand vor Phase 3
+
+Vor Aktivierung der echten Registrierung waren vorhanden:
+
+- `0` Auth-Benutzer
 - `0` Profile
-- `0` Organisationen
-- `0` Organisationsmitgliedschaften
-- `0` Legacy-Manager
 
-Damit konnte die Struktur ohne Migration bestehender Bürger-/Organisationsdaten eingeführt werden.
+Damit konnte der neue Auth-Trigger ohne Bestandsmigration aktiviert werden.
 
 ## Tests nach dem Rollout
 
@@ -125,12 +160,17 @@ Geprüft wurde:
 - Phase 2B und Phase 2C in der Supabase-Migrationshistorie vorhanden
 - Foreign-Key-Warnungen des Performance Advisors beseitigt
 - keine doppelte permissive Organisations-SELECT-Policy mehr
+- Phase-3-Registrierungsmigration erfolgreich angewendet
+- Edge Function `register-user` erfolgreich deployed und aktiv
+- Frontend-Build nach Auth-Integration erfolgreich
+- GitHub-Pages-Build erfolgreich
+- GitHub-Pages-Deployment erfolgreich
 
 ## Security Advisor
 
 Einige Foundation-Tabellen melden weiterhin `RLS Enabled No Policy`. Das ist momentan beabsichtigt: Tabellen wie Security-/System-Audit oder bestimmte Identitätshistorien sollen nicht pauschal direkt vom Client lesbar sein. Zugriff wird erst über die dafür vorgesehenen Adminfunktionen freigeschaltet.
 
-Der Advisor kennzeichnet außerdem unsere öffentlichen `SECURITY DEFINER`-RPCs als Warnung. Diese RPCs sind **absichtlich** für `authenticated` aufrufbar, führen aber jeweils intern Authentifizierung, Account-/Organisationsstatus, Permission- bzw. Systemrollenprüfung und bei Änderungen zusätzlich Hierarchie-/Konfliktprüfungen durch. Direkte Tabellen-Schreibrechte sind dem Browser entzogen.
+Der Advisor kennzeichnet außerdem unsere öffentlichen `SECURITY DEFINER`-RPCs als Warnung. Diese RPCs sind **absichtlich** für bestimmte Rollen aufrufbar, führen aber intern Authentifizierung, Account-/Organisationsstatus, Permission- bzw. Systemrollenprüfung und bei Änderungen zusätzlich Hierarchie-/Konfliktprüfungen durch. Direkte Tabellen-Schreibrechte sind dem Browser entzogen.
 
 Supabase-Hinweise:
 
@@ -139,7 +179,7 @@ Supabase-Hinweise:
 
 ## Performance Advisor
 
-Die zuvor gemeldeten fehlenden Foreign-Key-Indizes wurden ergänzt. Der Advisor meldet aktuell im Wesentlichen `Unused Index`-Hinweise. Bei einem noch leeren bzw. kaum genutzten Projekt ist das erwartbar; die vorgesehenen Indizes werden deshalb nicht vorschnell entfernt.
+Die zuvor gemeldeten fehlenden Foreign-Key-Indizes wurden ergänzt. `Unused Index`-Hinweise sind bei einem noch praktisch leeren Projekt erwartbar; die vorgesehenen Indizes werden deshalb nicht vorschnell entfernt.
 
 Supabase-Hinweis:
 
@@ -147,12 +187,11 @@ Supabase-Hinweis:
 
 ## Nächster technischer Schritt
 
-Als Nächstes wird die Account-/Frontend-Schicht an die echte Grundlage angeschlossen:
+Als Nächstes folgt die echte Freischaltungs- und Berechtigungsschicht im Frontend:
 
-1. sichere Registrierung mit Status `pending`
-2. Anmeldung mit Benutzername + Passwort
-3. Freischaltungs-/Ablehnungsablauf für Stadt-/Accountverwaltung
-4. Profil und Accountstatus aus Supabase laden
-5. `get_my_organization_context()` ins Frontend integrieren
-6. Organisationsmodule nur anhand echter Permissions anzeigen
-7. danach `is_manager` und `role_title` als Berechtigungsquelle vollständig außer Betrieb nehmen
+1. Freischaltungs-/Ablehnungsablauf für Stadt-/Accountverwaltung
+2. ersten verwaltenden Account kontrolliert bootstrappen
+3. geschützte Navigation anhand echter Organisations-Permissions ein-/ausblenden
+4. `Medical`, `Police`, `Fire & Rescue`, `Justice` und Stadtverwaltung mit eigenen Modulrechten versehen
+5. Account-/Privatsphäre-Einstellungen aus der Demoansicht in echte Supabase-Daten überführen
+6. danach `is_manager` und `role_title` auch als reine Legacy-Anzeigefelder vollständig aus dem aktiven Frontend entfernen
