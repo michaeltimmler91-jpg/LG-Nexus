@@ -10,6 +10,7 @@ import './account-layout-fix.css'
 import './account-admin.css'
 import './permission-navigation.css'
 import './service-navigation.css'
+import './city-organization-admin.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
