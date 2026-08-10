@@ -2,9 +2,9 @@
 
 ## Stand 10.08.2026
 
-Die technische V1-Grundlage für Accounts, Organisationen, RBAC, Registrierung, Accountfreischaltung und die erste echte Rechte-Navigation ist auf dem Supabase-Projekt `lg_nexus` aktiv.
+Die technische V1-Grundlage für Accounts, Organisationen, RBAC, Registrierung, Accountfreischaltung, rechtegesteuerte Navigation sowie die fünf Behörden-/Fachorganisationen ist auf dem Supabase-Projekt `lg_nexus` aktiv.
 
-## Angewandte Migrationen
+## Angewandte Phasen
 
 ### Phase 1 – Accounts / Identität
 
@@ -29,14 +29,14 @@ Enthalten sind unter anderem:
 - System-Audit-Grundlage
 - Security-Events
 
-Die technischen Systemrollen sind:
+Technische Systemrollen:
 
 - `system_admin`
 - `security_admin`
 - `backup_operator`
 - `moderator`
 
-Keine dieser Rollen erhält automatisch Medical-, Police- oder Justice-Fachzugriff.
+Keine dieser Rollen erhält automatisch Medical-, Police-, Fire- oder Justice-Fachzugriff.
 
 ### Phase 2 – Organisationen / Rollen / RBAC-Grundlage
 
@@ -77,10 +77,9 @@ Neu aktiv:
 - RLS-Leseregeln für Mitgliedschaften, Rollen, Standorte, Historie, interne Notizen und Auditlog
 - `get_my_organization_context()` für den Frontend-Rechtekontext
 - `has_my_org_permission(...)` als Frontend-Helfer
-- sichere Profiländerung über `update_organization_profile(...)`
-- sichere Statusänderung über `update_organization_status(...)`
-- Rollenwechsel mit Hierarchieprüfung über `assign_organization_member_role(...)`
-- Owner-Zuweisung nur über geschützten System-Admin-Weg
+- sichere Organisationsprofil-/Statusänderungen
+- Rollenwechsel mit Hierarchieprüfung
+- geschützter Owner-Weg
 - optimistische Konfliktprüfung über `row_version`
 - Audit-/History-Einträge bei relevanten Änderungen
 
@@ -96,7 +95,7 @@ GitHub-Quellmigration:
 
 Enthalten sind:
 
-- zusammengeführte SELECT-Policy für öffentliche bzw. eigene Organisationen
+- zusammengeführte SELECT-Policy für öffentliche beziehungsweise eigene Organisationen
 - fehlende Foreign-Key-Indizes aus dem Supabase Performance Advisor
 - Vorbereitung für Rollen-, Historien-, Security- und Audit-Abfragen unter Last
 
@@ -108,13 +107,13 @@ GitHub-Quellmigration:
 
 Aktiv sind:
 
-- automatische Anlage eines `profiles`-Datensatzes bei neuem Supabase-Auth-Benutzer
+- automatische Profilanlage bei neuem Supabase-Auth-Benutzer
 - neue Accounts starten als `pending`
-- Nexus-ID und Nexus-Mail werden erst bei Freischaltung erzeugt
-- serverseitiger Registrierungs-Throttle mit gehashter Client-IP
-- öffentliche Edge Function `register-user`
+- Nexus-ID und Nexus-Mail erst bei Freischaltung
+- serverseitiger Registrierungs-Throttle
+- Edge Function `register-user`
 - Registrierung mit Vorname, Nachname, Benutzername, Geburtsdatum und Passwort
-- Anmeldung nach außen ausschließlich mit Benutzername + Passwort
+- sichtbare Anmeldung ausschließlich mit Benutzername + Passwort
 - keine Service-/Secret-Keys im Browser
 
 ### Phase 3B – Freischaltung durch die Stadthalle
@@ -133,8 +132,8 @@ Neu aktiv:
 - `review_pending_account(...)`
 - eindeutige Nexus-ID-Vergabe über `nexus_id_seq`
 - automatische Nexus-Mail-Vergabe bei Freischaltung
-- permanente Accountstatus-Historie bei Freischaltung/Ablehnung
-- System-Audit-Einträge für Freischaltung und Ablehnung
+- permanente Accountstatus-Historie
+- System-Audit bei Freischaltung/Ablehnung
 - Ablehnung nur mit Begründung
 
 ### Phase 3C – Modulrechte und sichtbare Rechte-Navigation
@@ -151,13 +150,12 @@ Neu aktiv:
 - `police.access`
 - `fire.access`
 - `justice.access`
-- Owner erhalten automatisch alle normalen `org.*`-Rechte, aber Fachmodulrechte nur für das eigene `service_module`
+- Owner erhalten normale `org.*`-Rechte sowie nur Fachrechte ihres eigenen `service_module`
 - Rollen können keine Fachrechte eines fremden Moduls erhalten
-- technische Systemrollen zählen ausdrücklich nicht als Fachmodulzugriff
-- Medical-, Police- und Fire-&-Rescue-Symbole werden im Frontend nur noch bei echter Berechtigung angezeigt
-- nicht angemeldete, noch nicht freigeschaltete oder unberechtigte Benutzer sehen diese geschützten Navigationseinträge nicht
+- technische Systemrollen zählen nicht als Fachmodulzugriff
+- geschützte Navigation wird anhand der echten Organisationsrechte ein-/ausgeblendet
 
-Der Permission-Katalog enthält jetzt **32 aktive Berechtigungen**.
+Der Permission-Katalog enthält aktuell **32 aktive Berechtigungen**.
 
 ### Phase 3D – echte Stadtverwaltung / Stadthalle
 
@@ -165,41 +163,66 @@ GitHub-Quellmigration:
 
 - `supabase/migrations/20260810170500_phase3d_city_hall_bootstrap_v1.sql`
 
-Neu aktiv:
+Aktiv:
 
 - reale Organisation `Stadtverwaltung Los Santos`
 - Slug `stadtverwaltung-los-santos`
-- internes Modul `city`
-- geschützte Owner-Rolle `Leitung`
+- Modul `city`
+- Owner-Rolle `Leitung`
 - Standardrolle `Mitarbeiter`
-- Mitarbeiter erhalten nicht pauschal Verwaltungsrechte; Rechte werden über Rollen gezielt vergeben
-- der erste Entwicklungsaccount ist jetzt regulär Mitglied der Stadtverwaltung und besitzt dort die Rolle `Leitung`
-- die vorübergehende technische `system_admin`-Zuweisung des Entwicklungsaccounts wurde wieder entfernt
-- Accountfreischaltungen funktionieren weiterhin über die echten `city.accounts.*`-Rechte der Stadtverwaltung
+- der erste Entwicklungsaccount ist regulär Mitglied der Stadtverwaltung als `Leitung`
+- die temporäre technische `system_admin`-Zuweisung wurde wieder entfernt
+- Accountfreischaltungen funktionieren über echte `city.accounts.*`-Rechte
+
+### Phase 3E – Medical / Police / Fire & Rescue / Justice als echte Organisationen
+
+GitHub-Quellmigration:
+
+- `supabase/migrations/20260810171600_phase3e_service_organizations_v1.sql`
+
+Auf Supabase aktiv angelegt:
+
+- `Los Santos Medical Center` / `LSMC` / Modul `medical`
+- `Los Santos Police Department` / `LSPD` / Modul `police`
+- `Los Santos Fire & Rescue` / `LSFR` / Modul `fire`
+- `Justiz Los Santos` / `Justice` / Modul `justice`
+
+Jede Organisation besitzt zunächst:
+
+- geschützte Owner-Rolle `Leitung`
+- eine konservative Standardrolle
+- ausschließlich die zum eigenen Modul passende Einstiegsberechtigung für die Standardrolle
+
+Standardrollen:
+
+- Medical: `Medizinischer Dienst` → `medical.access`
+- Police: `Polizeidienst` → `police.access`
+- Fire & Rescue: `Einsatzdienst` → `fire.access`
+- Justice: `Justizdienst` → `justice.access`
+
+Es wurden bewusst noch keine erfundenen Detailrollen oder pauschalen Fachaktenrechte vergeben. Feinere Fachrechte folgen getrennt und werden später durch RLS abgesichert.
 
 ## Frontend-Status
 
-Die GitHub-Pages-Vorschau ist direkt mit dem echten `lg_nexus`-Projekt verbunden.
+Die GitHub-Pages-Vorschau ist direkt mit `lg_nexus` verbunden.
 
 Aktiv im sichtbaren Frontend:
 
-- echter Login mit Benutzername + Passwort
-- echte Registrierung
-- Supabase-Session bleibt im Browser erhalten
-- eigener Profil-/Accountstatus wird aus `profiles` geladen
-- `pending`, `active`, `suspended`, `rejected` und `disabled` werden sichtbar unterschieden
-- nach Freischaltung werden Nexus-ID und Nexus-Mail angezeigt
-- `get_my_organization_context()` wird für aktive Accounts geladen
-- der Demo-Account wird durch den echten Accountstatus überlagert
-- Accountseite zeigt echte Accountdaten
-- berechtigte Mitarbeiter sehen auf der Accountseite zusätzlich **Accountfreischaltungen**
-- offene Registrierungen zeigen Name, Benutzername, Geburtsdatum und Registrierungszeit
-- Freischalten und Ablehnen sind direkt in Nexus möglich
-- bei Ablehnung ist eine Begründung Pflicht
-- geschützte Medical-/Police-/Fire-Navigation wird anhand echter Organisations-Permissions eingeblendet
-- ein technischer Administrator ohne entsprechende Fachmitgliedschaft sieht diese Bereiche nicht
+- echter Login und echte Registrierung
+- persistente Supabase-Session
+- echter Profil-/Accountstatus
+- Nexus-ID und Nexus-Mail nach Freischaltung
+- echte Organisationskontexte über `get_my_organization_context()`
+- Accountfreischaltungen mit Freischalten/Ablehnen
+- rechtegesteuerte Medical-/Police-/Fire-Navigation
+- eigener rechtegesteuerter Navigationseintrag **Stadtverwaltung**
+- eigener rechtegesteuerter Navigationseintrag **Justice**
+- eigener interner Stadtverwaltungsbereich
+- Accountfreischaltungs-Panel wird beim Öffnen der Stadtverwaltung direkt dort eingebunden
+- Justice besitzt bereits eine interne Vorschauseite für Verfahren, Anhörungen, Entscheidungen und Beweismittel
+- unberechtigte Benutzer sehen die jeweiligen Fachbereiche nicht
 
-Die sichtbare Oberfläche verwendet weiterhin keine Begriffe wie `RP`, `IC` oder `OOC`.
+Die sichtbare Nexus-Oberfläche verwendet keine Begriffe wie `RP`, `IC` oder `OOC`.
 
 ## Erster Testaccount
 
@@ -212,42 +235,35 @@ Der erste registrierte Testaccount ist aktiv:
 - Organisation: `Stadtverwaltung Los Santos`
 - Rolle: `Leitung`
 
-Der Account besitzt **keine technische `system_admin`-Zuweisung mehr**. Die Freischaltungsrechte kommen jetzt regulär aus der Stadtverwaltungsmitgliedschaft. Dadurch bleibt die technische Administration von den fachlichen Stadt- und Behördenrechten getrennt.
+Der Account besitzt keine technische `system_admin`-Zuweisung. Seine Verwaltungsrechte stammen regulär aus der Stadtverwaltungsmitgliedschaft. Er besitzt dadurch aktuell keinen automatischen Zugriff auf Medical, Police, Fire & Rescue oder Justice.
 
 ## Tests nach dem Rollout
 
 Geprüft wurde:
 
-- Phase-1- und Phase-2-Tabellen vorhanden
-- RLS auf geschützten Tabellen aktiv
-- technische Systemrollen vorhanden
+- RLS/RBAC-Grundlage aktiv
 - 32 aktive Permissions vorhanden
-- RBAC-RPCs vorhanden
-- Foreign-Key-Warnungen des Performance Advisors beseitigt
-- echte Registrierungsmigration erfolgreich angewendet
-- Edge Function `register-user` aktiv
-- sichere Freischaltungs-RPCs erfolgreich angelegt
-- erster Testaccount erfolgreich mit `NX-000001` aktiviert
-- Stadtverwaltung als echte Organisation angelegt
-- erster Testaccount besitzt dort die Owner-Rolle `Leitung`
-- `city.accounts.approve` und `city.accounts.reject` wirken über die Stadtverwaltungsrolle
-- temporäre `system_admin`-Zuweisung des Testaccounts ist entfernt
-- effektive Owner-Rechte der Stadtverwaltung enthalten `city.*` und `org.*`, aber keine `medical.*`, `police.*`, `fire.*` oder `justice.*`-Rechte
-- Frontend-Build nach Rechte-Navigation erfolgreich
-- GitHub-Pages-Build und Deployment erfolgreich
+- Registrierung und Freischaltungs-RPCs aktiv
+- Stadtverwaltung als echte Organisation aktiv
+- City-Hall-Owner-Rechte enthalten `city.*` und `org.*`, aber keine fremden Fachmodulrechte
+- Medical-, Police-, Fire-&-Rescue- und Justice-Organisationen vorhanden
+- jede Fachorganisation besitzt Owner- und Standardrolle
+- jede Fach-Standardrolle besitzt nur die eigene `*.access`-Berechtigung
+- Frontend-Build nach City-/Justice-Navigation erfolgreich
+- GitHub-Pages-Build erfolgreich
+- GitHub-Pages-Deployment erfolgreich
 
-## Security Advisor
+## Security-Hinweis
 
-Einige Foundation-Tabellen melden weiterhin `RLS Enabled No Policy`. Das ist momentan beabsichtigt: Tabellen wie Security-/System-Audit oder bestimmte Identitätshistorien sollen nicht pauschal direkt vom Client lesbar sein. Zugriff wird über vorgesehene Adminfunktionen freigeschaltet.
+Einige Foundation-Tabellen melden weiterhin `RLS Enabled No Policy`. Das ist beabsichtigt: Security-/System-Audit und bestimmte Identitätshistorien werden nicht pauschal direkt für den Client geöffnet.
 
-Öffentliche `SECURITY DEFINER`-RPCs sind nur für `authenticated` ausführbar und prüfen intern Authentifizierung, aktiven Accountstatus, Organisationsrechte beziehungsweise gezielt vorgesehene technische Rollen. Direkte Fachaktenrechte entstehen dadurch nicht.
+Öffentliche `SECURITY DEFINER`-RPCs sind nur für vorgesehene Rollen aufrufbar und prüfen intern Authentifizierung, aktiven Accountstatus sowie Organisations- beziehungsweise Systemrechte. Fachaktenzugriffe entstehen daraus nicht automatisch.
 
 ## Nächster technischer Schritt
 
-Als Nächstes folgt die Vertiefung der Fachmodule und der echten Account-Einstellungen:
-
-1. Stadtverwaltung und Justice als eigene sichtbare, rechtegesteuerte Navigationseinträge ergänzen
-2. Medical-, Police-, Fire-&-Rescue- und Justice-Organisationen mit ihrem jeweiligen `service_module` vorbereiten
-3. erste Fachrollen und feinere Modulrechte ergänzen
+1. Mitglieder-/Rollenverwaltung als echte Nexus-Oberfläche bauen
+2. damit Benutzer kontrolliert Medical, Police, Fire & Rescue, Justice oder Stadtverwaltung zugewiesen werden können
+3. danach feinere Fachberechtigungen pro Modul definieren und technisch absichern
 4. Account-/Privatsphäre-Einstellungen aus der Demoansicht in echte Supabase-Daten überführen
-5. `is_manager` und `role_title` vollständig aus dem aktiven Frontend entfernen
+5. verbliebene Legacy-Felder `is_manager` und `role_title` aus dem aktiven Frontend entfernen
+6. erst danach die eigentlichen Fachdatentabellen und RLS-Regeln für Medical, Police, Fire und Justice schrittweise umsetzen
