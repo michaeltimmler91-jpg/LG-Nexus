@@ -314,7 +314,7 @@ function RealAuthModal({
             {profile?.account_status === 'pending' ? (
               <div className="real-auth-info">
                 <strong>Deine Registrierung ist eingegangen.</strong>
-                <span>Der Account muss noch durch die Stadtverwaltung freigeschaltet werden. Bis dahin bleiben geschützte Bereiche gesperrt.</span>
+                <span>Bitte wende dich zur Freischaltung an einen Mitarbeiter der Stadthalle. Bis zur Freigabe bleiben geschützte Bereiche gesperrt.</span>
               </div>
             ) : null}
 
