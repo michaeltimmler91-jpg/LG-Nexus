@@ -1,0 +1,107 @@
+.medical-treatment-edit-slot {
+  margin-top: 11px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,.055);
+}
+
+.medical-treatment-edit-actions,
+.medical-treatment-edit-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.medical-treatment-edit-actions {
+  justify-content: flex-end;
+}
+
+.medical-treatment-edit-button,
+.medical-treatment-edit-form-actions button {
+  min-height: 34px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 10px;
+  padding: 0 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.medical-treatment-edit-button,
+.medical-treatment-edit-form-actions button.secondary {
+  background: rgba(255,255,255,.035);
+  color: var(--text);
+}
+
+.medical-treatment-edit-form-actions button:not(.secondary) {
+  background: rgba(116,87,255,.2);
+  color: #ddd6ff;
+}
+
+.medical-treatment-edit-button:disabled,
+.medical-treatment-edit-form-actions button:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+.medical-treatment-edit-form {
+  display: grid;
+  gap: 9px;
+}
+
+.medical-treatment-edit-form label {
+  display: grid;
+  gap: 6px;
+}
+
+.medical-treatment-edit-form label > span {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.medical-treatment-edit-form textarea {
+  width: 100%;
+  min-height: 110px;
+  box-sizing: border-box;
+  resize: vertical;
+  border: 1px solid rgba(255,255,255,.09);
+  background: rgba(8,11,16,.6);
+  color: var(--text);
+  border-radius: 11px;
+  padding: 10px 11px;
+  font: inherit;
+}
+
+.medical-treatment-edit-message {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.medical-treatment-edit-message.is-success {
+  color: #8bdab0;
+}
+
+.medical-treatment-edit-message.is-error {
+  color: #ff9f9f;
+}
+
+@media (max-width: 720px) {
+  .medical-treatment-edit-actions,
+  .medical-treatment-edit-form-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .medical-treatment-edit-button,
+  .medical-treatment-edit-form-actions button {
+    width: 100%;
+  }
+}
