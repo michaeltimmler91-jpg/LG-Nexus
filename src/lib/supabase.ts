@@ -1,13 +1,20 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined
-const supabasePublishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined
+const defaultSupabaseUrl = 'https://pfbjblrtwpnhsuvshpcc.supabase.co'
+const defaultSupabasePublishableKey = 'sb_publishable_-UD_eG0phDb3tXpaudPpVA_kNCFukOy'
 
-// Runtime may intentionally be null in preview/demo mode. App.tsx guards the
-// value before use. The explicit client type keeps TypeScript from losing that
-// narrowing inside the async/realtime callbacks created after the guard.
-export const supabase = (
-  supabaseUrl && supabasePublishableKey
-    ? createClient(supabaseUrl, supabasePublishableKey)
-    : null
-) as SupabaseClient
+const supabaseUrl = (import.meta.env.VITE_SUPABASE_URL as string | undefined) ?? defaultSupabaseUrl
+const supabasePublishableKey =
+  (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined) ?? defaultSupabasePublishableKey
+
+// The publishable key is intentionally safe for browser use. All protected data
+// remains guarded by Supabase Auth, RLS and permission-checked RPCs.
+export const supabase = createClient(supabaseUrl, supabasePublishableKey, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: true,
+  },
+}) as SupabaseClient
+
+export const nexusAuthEmail = (username: string) => `${username.trim().toLowerCase()}@auth.nexus.ls`
