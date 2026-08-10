@@ -1,0 +1,246 @@
+.medical-medication-section {
+  border: 1px solid rgba(255,255,255,.07);
+  background: rgba(18,21,28,.76);
+  border-radius: 18px;
+  padding: 17px;
+}
+
+.medical-medication-heading {
+  margin-bottom: 14px;
+}
+
+.medical-medication-heading p {
+  margin: 5px 0 0;
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.medical-medication-message {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 11px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+}
+
+.medical-medication-message.is-error {
+  color: #ffb4b4;
+  border: 1px solid rgba(255,99,99,.18);
+  background: rgba(255,99,99,.07);
+}
+
+.medical-medication-message.is-success {
+  color: #83e1b2;
+  border: 1px solid rgba(84,213,150,.18);
+  background: rgba(84,213,150,.07);
+}
+
+.medical-medication-create {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 9px;
+  padding: 12px;
+  margin-bottom: 13px;
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 13px;
+  background: rgba(0,0,0,.1);
+}
+
+.medical-medication-create label {
+  display: grid;
+  gap: 6px;
+}
+
+.medical-medication-create label > span {
+  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .03em;
+}
+
+.medical-medication-create input,
+.medical-medication-stop-form input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 37px;
+  padding: 0 10px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  outline: 0;
+  color: var(--text);
+  background: rgba(0,0,0,.14);
+  font: inherit;
+}
+
+.medical-medication-create > button,
+.medical-medication-stop-button,
+.medical-medication-stop-form button {
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 10px;
+  color: var(--text);
+  background: rgba(123,95,255,.11);
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.medical-medication-create > button {
+  grid-column: 1 / -1;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-color: rgba(142,119,255,.24);
+}
+
+.medical-medication-create > button:disabled,
+.medical-medication-stop-form button:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+.medical-medication-list {
+  display: grid;
+  gap: 8px;
+}
+
+.medical-medication-row {
+  position: relative;
+  padding: 11px;
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 12px;
+  background: rgba(255,255,255,.022);
+}
+
+.medical-medication-row.active {
+  border-color: rgba(84,213,150,.13);
+}
+
+.medical-medication-row.stopped {
+  opacity: .72;
+}
+
+.medical-medication-row-head,
+.medical-medication-row-head > div,
+.medical-medication-meta,
+.medical-medication-stop-form {
+  display: flex;
+  align-items: center;
+}
+
+.medical-medication-row-head {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.medical-medication-row-head > div {
+  gap: 8px;
+  min-width: 0;
+}
+
+.medical-medication-row-head strong {
+  font-size: 12px;
+}
+
+.medical-medication-row-head > b {
+  color: #d9d2ff;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.medical-medication-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 0 7px;
+  border-radius: 999px;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.medical-medication-status.active {
+  color: #7ce0ad;
+  border: 1px solid rgba(84,213,150,.16);
+  background: rgba(84,213,150,.06);
+}
+
+.medical-medication-status.stopped {
+  color: #b6b6bf;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.035);
+}
+
+.medical-medication-details {
+  display: grid;
+  gap: 4px;
+  margin-top: 9px;
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.medical-medication-details b,
+.medical-medication-stop-note b {
+  color: var(--text);
+}
+
+.medical-medication-meta {
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin-top: 9px;
+  color: var(--text-muted);
+  font-size: 9px;
+}
+
+.medical-medication-stop-note {
+  margin-top: 8px;
+  padding: 8px 9px;
+  border-radius: 9px;
+  color: var(--text-muted);
+  background: rgba(0,0,0,.12);
+  font-size: 9px;
+}
+
+.medical-medication-stop-button {
+  margin-top: 9px;
+  min-height: 30px;
+  padding: 0 10px;
+  background: rgba(255,255,255,.035);
+}
+
+.medical-medication-stop-form {
+  gap: 7px;
+  margin-top: 9px;
+}
+
+.medical-medication-stop-form input {
+  min-width: 0;
+  flex: 1;
+  height: 32px;
+}
+
+.medical-medication-stop-form button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 32px;
+  padding: 0 9px;
+}
+
+.medical-medication-stop-form button.secondary {
+  background: rgba(255,255,255,.035);
+}
+
+/* Medikamente sind jetzt live; die alte Platzhalter-Karte wird ausgeblendet. */
+.medical-next-grid .medical-next-card:first-child {
+  display: none;
+}
+
+.medical-next-grid {
+  grid-template-columns: repeat(2, minmax(0,1fr));
+}
