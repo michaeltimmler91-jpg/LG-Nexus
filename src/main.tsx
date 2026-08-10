@@ -4,8 +4,7 @@ import NexusRoot from './NexusRoot'
 import AccountAdminMount from './AccountAdminMount'
 import PermissionNavigationGuard from './PermissionNavigationGuard'
 import ServiceNavigationMount from './ServiceNavigationMount'
-import MedicalModuleMount from './MedicalModuleMount'
-import MedicalMedicationMount from './MedicalMedicationMount'
+import MedicalSimpleMount from './MedicalSimpleMount'
 import './styles.css'
 import './auth.css'
 import './account-layout-fix.css'
@@ -14,8 +13,7 @@ import './permission-navigation.css'
 import './service-navigation.css'
 import './city-organization-admin.css'
 import './medical-module.css'
-import './medical-clinical.css'
-import './medical-medications.css'
+import './medical-simple.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -23,7 +21,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <AccountAdminMount />
     <PermissionNavigationGuard />
     <ServiceNavigationMount />
-    <MedicalModuleMount />
-    <MedicalMedicationMount />
+    <MedicalSimpleMount />
   </React.StrictMode>,
 )
