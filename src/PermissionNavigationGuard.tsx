@@ -6,15 +6,20 @@ type OrganizationContext = {
 }
 
 const protectedNavigation = [
+  { label: 'Stadtverwaltung', permission: 'city.access', bodyKey: 'city' },
   { label: 'Medical', permission: 'medical.access', bodyKey: 'medical' },
   { label: 'Police', permission: 'police.access', bodyKey: 'police' },
   { label: 'Fire & Rescue', permission: 'fire.access', bodyKey: 'fire' },
+  { label: 'Justice', permission: 'justice.access', bodyKey: 'justice' },
 ] as const
+
+function dataKey(bodyKey: string) {
+  return `nexus${bodyKey.charAt(0).toUpperCase()}${bodyKey.slice(1)}`
+}
 
 function setPermissionState(permissions: Set<string>) {
   for (const item of protectedNavigation) {
-    document.body.dataset[`nexus${item.bodyKey.charAt(0).toUpperCase()}${item.bodyKey.slice(1)}`] =
-      permissions.has(item.permission) ? 'true' : 'false'
+    document.body.dataset[dataKey(item.bodyKey)] = permissions.has(item.permission) ? 'true' : 'false'
   }
   document.body.dataset.nexusPermissionsReady = 'true'
 }
@@ -24,10 +29,7 @@ function syncServiceDivider() {
     node.classList.remove('nexus-live-first-service')
   })
 
-  const firstVisible = protectedNavigation.find((item) =>
-    document.body.dataset[`nexus${item.bodyKey.charAt(0).toUpperCase()}${item.bodyKey.slice(1)}`] === 'true',
-  )
-
+  const firstVisible = protectedNavigation.find((item) => document.body.dataset[dataKey(item.bodyKey)] === 'true')
   if (!firstVisible || firstVisible.label === 'Medical') return
 
   const button = document.querySelector(`.nav-button[aria-label="${firstVisible.label}"]`)
@@ -130,9 +132,11 @@ export default function PermissionNavigationGuard() {
       authListener.subscription.unsubscribe()
       window.removeEventListener('focus', onFocus)
       delete document.body.dataset.nexusPermissionsReady
+      delete document.body.dataset.nexusCity
       delete document.body.dataset.nexusMedical
       delete document.body.dataset.nexusPolice
       delete document.body.dataset.nexusFire
+      delete document.body.dataset.nexusJustice
     }
   }, [])
 
