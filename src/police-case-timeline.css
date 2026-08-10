@@ -1,0 +1,180 @@
+.police-case-timeline-slot {
+  margin-top: 16px;
+}
+
+.police-case-timeline {
+  border-top: 1px solid rgba(255,255,255,.06);
+  padding-top: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.police-case-timeline-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.police-case-timeline-head h3 {
+  margin: 3px 0 0;
+}
+
+.police-case-timeline-head > button,
+.police-case-note-form > button {
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 10px;
+  min-height: 36px;
+  padding: 0 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.police-case-timeline-head > button {
+  background: rgba(255,255,255,.035);
+  color: var(--text);
+}
+
+.police-case-note-form {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  gap: 9px;
+  align-items: end;
+  border: 1px solid rgba(76,126,255,.12);
+  background: rgba(76,126,255,.035);
+  border-radius: 13px;
+  padding: 12px;
+}
+
+.police-case-note-form label {
+  display: grid;
+  gap: 6px;
+}
+
+.police-case-note-form label > span {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.police-case-note-form textarea {
+  width: 100%;
+  min-height: 78px;
+  box-sizing: border-box;
+  resize: vertical;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(8,11,16,.55);
+  color: var(--text);
+  border-radius: 11px;
+  padding: 10px 11px;
+  font: inherit;
+}
+
+.police-case-note-form > button {
+  background: rgba(76,126,255,.18);
+  color: #d8e3ff;
+}
+
+.police-case-timeline-head > button:disabled,
+.police-case-note-form > button:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+.police-case-timeline-message,
+.police-case-timeline-closed,
+.police-case-timeline-empty {
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 11px;
+  padding: 10px 11px;
+}
+
+.police-case-timeline-message,
+.police-case-timeline-closed {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.police-case-timeline-message.is-error {
+  color: #ff9f9f;
+  background: rgba(210,70,70,.06);
+}
+
+.police-case-timeline-message.is-success {
+  color: #8bdab0;
+  background: rgba(70,190,127,.06);
+}
+
+.police-case-timeline-closed,
+.police-case-timeline-empty {
+  color: var(--text-muted);
+  background: rgba(255,255,255,.02);
+}
+
+.police-case-timeline-list {
+  display: grid;
+  gap: 8px;
+}
+
+.police-case-timeline-list article {
+  display: grid;
+  grid-template-columns: auto minmax(0,1fr);
+  gap: 10px;
+  border: 1px solid rgba(255,255,255,.06);
+  background: rgba(255,255,255,.02);
+  border-radius: 12px;
+  padding: 11px;
+}
+
+.police-case-timeline-list article.is-note {
+  border-color: rgba(76,126,255,.12);
+}
+
+.police-case-timeline-marker {
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  background: rgba(76,126,255,.08);
+}
+
+.police-case-timeline-entry-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.police-case-timeline-entry-head span,
+.police-case-timeline-list small {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.police-case-timeline-list p {
+  margin: 6px 0;
+  white-space: pre-wrap;
+  line-height: 1.45;
+}
+
+@media (max-width: 720px) {
+  .police-case-timeline-head,
+  .police-case-note-form,
+  .police-case-timeline-entry-head {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .police-case-timeline-head > button,
+  .police-case-note-form > button {
+    width: 100%;
+  }
+}
