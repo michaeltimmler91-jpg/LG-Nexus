@@ -1,0 +1,14 @@
+/* Protected Nexus modules are hidden unless the live organization context grants access. */
+body:not([data-nexus-medical='true']) .nav-item-wrap:has(.nav-button[aria-label='Medical']),
+body:not([data-nexus-police='true']) .nav-item-wrap:has(.nav-button[aria-label='Police']),
+body:not([data-nexus-fire='true']) .nav-item-wrap:has(.nav-button[aria-label='Fire & Rescue']) {
+  display: none;
+}
+
+.nav-item-wrap.nexus-live-first-service::before {
+  content: '';
+  width: 33px;
+  height: 1px;
+  margin: 6px 0 11px;
+  background: rgba(255,255,255,.075);
+}
