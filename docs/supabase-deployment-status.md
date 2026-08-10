@@ -2,7 +2,7 @@
 
 ## Stand 10.08.2026
 
-Die technische V1-Grundlage für Accounts, Organisationen, RBAC, Registrierung und Accountfreischaltung ist auf dem Supabase-Projekt `lg_nexus` aktiv.
+Die technische V1-Grundlage für Accounts, Organisationen, RBAC, Registrierung, Accountfreischaltung und die erste echte Rechte-Navigation ist auf dem Supabase-Projekt `lg_nexus` aktiv.
 
 ## Angewandte Migrationen
 
@@ -75,7 +75,7 @@ Neu aktiv:
 - alte `is_manager`-Schreib-Policies entfernt
 - geschützte Organisationstabellen nicht mehr direkt vom Browser beschreibbar
 - RLS-Leseregeln für Mitgliedschaften, Rollen, Standorte, Historie, interne Notizen und Auditlog
-- `get_my_organization_context()` für den späteren Frontend-Rechtekontext
+- `get_my_organization_context()` für den Frontend-Rechtekontext
 - `has_my_org_permission(...)` als Frontend-Helfer
 - sichere Profiländerung über `update_organization_profile(...)`
 - sichere Statusänderung über `update_organization_status(...)`
@@ -136,10 +136,46 @@ Neu aktiv:
 - permanente Accountstatus-Historie bei Freischaltung/Ablehnung
 - System-Audit-Einträge für Freischaltung und Ablehnung
 - Ablehnung nur mit Begründung
-- normale Stadthallenmitarbeiter erhalten Zugriff später ausschließlich über ihre Organisationsrolle und die passenden Rechte
-- `system_admin` dient nur als technischer Bootstrap-/Notfallzugang und erhält dadurch keine Fachaktenrechte
 
-Der Permission-Katalog enthält jetzt **27 aktive Kernberechtigungen**.
+### Phase 3C – Modulrechte und sichtbare Rechte-Navigation
+
+GitHub-Quellmigration:
+
+- `supabase/migrations/20260810165500_phase3c_module_navigation_permissions_v1.sql`
+
+Neu aktiv:
+
+- `organizations.service_module` für `city`, `medical`, `police`, `fire` und `justice`
+- `city.access`
+- `medical.access`
+- `police.access`
+- `fire.access`
+- `justice.access`
+- Owner erhalten automatisch alle normalen `org.*`-Rechte, aber Fachmodulrechte nur für das eigene `service_module`
+- Rollen können keine Fachrechte eines fremden Moduls erhalten
+- technische Systemrollen zählen ausdrücklich nicht als Fachmodulzugriff
+- Medical-, Police- und Fire-&-Rescue-Symbole werden im Frontend nur noch bei echter Berechtigung angezeigt
+- nicht angemeldete, noch nicht freigeschaltete oder unberechtigte Benutzer sehen diese geschützten Navigationseinträge nicht
+
+Der Permission-Katalog enthält jetzt **32 aktive Berechtigungen**.
+
+### Phase 3D – echte Stadtverwaltung / Stadthalle
+
+GitHub-Quellmigration:
+
+- `supabase/migrations/20260810170500_phase3d_city_hall_bootstrap_v1.sql`
+
+Neu aktiv:
+
+- reale Organisation `Stadtverwaltung Los Santos`
+- Slug `stadtverwaltung-los-santos`
+- internes Modul `city`
+- geschützte Owner-Rolle `Leitung`
+- Standardrolle `Mitarbeiter`
+- Mitarbeiter erhalten nicht pauschal Verwaltungsrechte; Rechte werden über Rollen gezielt vergeben
+- der erste Entwicklungsaccount ist jetzt regulär Mitglied der Stadtverwaltung und besitzt dort die Rolle `Leitung`
+- die vorübergehende technische `system_admin`-Zuweisung des Entwicklungsaccounts wurde wieder entfernt
+- Accountfreischaltungen funktionieren weiterhin über die echten `city.accounts.*`-Rechte der Stadtverwaltung
 
 ## Frontend-Status
 
@@ -160,19 +196,23 @@ Aktiv im sichtbaren Frontend:
 - offene Registrierungen zeigen Name, Benutzername, Geburtsdatum und Registrierungszeit
 - Freischalten und Ablehnen sind direkt in Nexus möglich
 - bei Ablehnung ist eine Begründung Pflicht
+- geschützte Medical-/Police-/Fire-Navigation wird anhand echter Organisations-Permissions eingeblendet
+- ein technischer Administrator ohne entsprechende Fachmitgliedschaft sieht diese Bereiche nicht
 
 Die sichtbare Oberfläche verwendet weiterhin keine Begriffe wie `RP`, `IC` oder `OOC`.
 
-## Erster Testaccount / Bootstrap
+## Erster Testaccount
 
-Der erste registrierte Testaccount wurde für die Entwicklung kontrolliert aktiviert:
+Der erste registrierte Testaccount ist aktiv:
 
 - Benutzername: `admin`
 - Nexus-ID: `NX-000001`
 - Nexus-Mail: `lennox.davis@nexus.ls`
 - Status: `active`
+- Organisation: `Stadtverwaltung Los Santos`
+- Rolle: `Leitung`
 
-Der Account besitzt vorübergehend die technische Rolle `system_admin`, damit die Freischaltungsoberfläche getestet und weitere Accounts freigeschaltet werden können. Diese technische Rolle verleiht ausdrücklich keinen Medical-, Police-, Fire- oder Justice-Fachzugriff und kann entfernt werden, sobald ein echter Stadthallen-Administrator eingerichtet ist.
+Der Account besitzt **keine technische `system_admin`-Zuweisung mehr**. Die Freischaltungsrechte kommen jetzt regulär aus der Stadtverwaltungsmitgliedschaft. Dadurch bleibt die technische Administration von den fachlichen Stadt- und Behördenrechten getrennt.
 
 ## Tests nach dem Rollout
 
@@ -181,31 +221,33 @@ Geprüft wurde:
 - Phase-1- und Phase-2-Tabellen vorhanden
 - RLS auf geschützten Tabellen aktiv
 - technische Systemrollen vorhanden
-- 27 aktive Kern-Permissions vorhanden
+- 32 aktive Permissions vorhanden
 - RBAC-RPCs vorhanden
-- Phase 2B und Phase 2C in der Supabase-Migrationshistorie vorhanden
 - Foreign-Key-Warnungen des Performance Advisors beseitigt
 - echte Registrierungsmigration erfolgreich angewendet
 - Edge Function `register-user` aktiv
 - sichere Freischaltungs-RPCs erfolgreich angelegt
 - erster Testaccount erfolgreich mit `NX-000001` aktiviert
-- technischer Bootstrap-Zugriff erfolgreich zugewiesen
-- Frontend-Build nach Freischaltungsoberfläche erfolgreich
-- GitHub-Pages-Build erfolgreich
-- GitHub-Pages-Deployment erfolgreich
+- Stadtverwaltung als echte Organisation angelegt
+- erster Testaccount besitzt dort die Owner-Rolle `Leitung`
+- `city.accounts.approve` und `city.accounts.reject` wirken über die Stadtverwaltungsrolle
+- temporäre `system_admin`-Zuweisung des Testaccounts ist entfernt
+- effektive Owner-Rechte der Stadtverwaltung enthalten `city.*` und `org.*`, aber keine `medical.*`, `police.*`, `fire.*` oder `justice.*`-Rechte
+- Frontend-Build nach Rechte-Navigation erfolgreich
+- GitHub-Pages-Build und Deployment erfolgreich
 
 ## Security Advisor
 
 Einige Foundation-Tabellen melden weiterhin `RLS Enabled No Policy`. Das ist momentan beabsichtigt: Tabellen wie Security-/System-Audit oder bestimmte Identitätshistorien sollen nicht pauschal direkt vom Client lesbar sein. Zugriff wird über vorgesehene Adminfunktionen freigeschaltet.
 
-Öffentliche `SECURITY DEFINER`-RPCs sind nur für `authenticated` ausführbar und prüfen intern Authentifizierung, aktiven Accountstatus, Stadthallen-Permission bzw. technische Systemrolle. Direkte fachliche Tabellenrechte entstehen dadurch nicht.
+Öffentliche `SECURITY DEFINER`-RPCs sind nur für `authenticated` ausführbar und prüfen intern Authentifizierung, aktiven Accountstatus, Organisationsrechte beziehungsweise gezielt vorgesehene technische Rollen. Direkte Fachaktenrechte entstehen dadurch nicht.
 
 ## Nächster technischer Schritt
 
-Als Nächstes folgt die echte sichtbare Rechte-Navigation:
+Als Nächstes folgt die Vertiefung der Fachmodule und der echten Account-Einstellungen:
 
-1. geschützte Navigation anhand echter Organisations-Permissions ein-/ausblenden
-2. Stadtverwaltung als reale Organisation mit Rollen und Accountverwaltungsrechten anlegen
-3. `Medical`, `Police`, `Fire & Rescue`, `Justice` und Stadtverwaltung mit eigenen Modulrechten versehen
+1. Stadtverwaltung und Justice als eigene sichtbare, rechtegesteuerte Navigationseinträge ergänzen
+2. Medical-, Police-, Fire-&-Rescue- und Justice-Organisationen mit ihrem jeweiligen `service_module` vorbereiten
+3. erste Fachrollen und feinere Modulrechte ergänzen
 4. Account-/Privatsphäre-Einstellungen aus der Demoansicht in echte Supabase-Daten überführen
 5. `is_manager` und `role_title` vollständig aus dem aktiven Frontend entfernen
