@@ -36,16 +36,19 @@ begin
     raise exception 'missing permission: medical.treatments.edit';
   end if;
 
-  select t.*,
-         p.display_name,
-         tpl.name
-    into treatment_row, actor_name, template_name
-  from public.medical_treatments t
-  left join public.profiles p on p.id = t.responsible_profile_id
-  left join public.medical_treatment_templates tpl on tpl.id = t.template_id
-  where t.treatment_number = trim(coalesce(target_treatment_number, ''));
+  select * into treatment_row
+  from public.medical_treatments
+  where treatment_number = trim(coalesce(target_treatment_number, ''));
 
   if treatment_row.id is null then raise exception 'treatment not found'; end if;
+
+  select display_name into actor_name
+  from public.profiles
+  where id = treatment_row.responsible_profile_id;
+
+  select name into template_name
+  from public.medical_treatment_templates
+  where id = treatment_row.template_id;
 
   return jsonb_build_object(
     'id', treatment_row.id,
