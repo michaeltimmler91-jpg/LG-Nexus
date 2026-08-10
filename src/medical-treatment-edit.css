@@ -4,6 +4,11 @@
   border-top: 1px solid rgba(255,255,255,.055);
 }
 
+.medical-treatment-edit-block {
+  display: grid;
+  gap: 8px;
+}
+
 .medical-treatment-edit-actions,
 .medical-treatment-edit-form-actions {
   display: flex;
@@ -58,17 +63,17 @@
   gap: 6px;
 }
 
-.medical-treatment-edit-form label > span {
+.medical-treatment-edit-form label > span,
+.medical-followup-edit-dates label > span {
   color: var(--text-muted);
   font-size: 11px;
   font-weight: 700;
 }
 
-.medical-treatment-edit-form textarea {
+.medical-treatment-edit-form textarea,
+.medical-followup-edit-dates input {
   width: 100%;
-  min-height: 110px;
   box-sizing: border-box;
-  resize: vertical;
   border: 1px solid rgba(255,255,255,.09);
   background: rgba(8,11,16,.6);
   color: var(--text);
@@ -77,7 +82,13 @@
   font: inherit;
 }
 
-.medical-treatment-edit-message {
+.medical-treatment-edit-form textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.medical-treatment-edit-message,
+.medical-treatment-attendance-meta {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -85,7 +96,8 @@
   font-weight: 700;
 }
 
-.medical-treatment-edit-message.is-success {
+.medical-treatment-edit-message.is-success,
+.medical-treatment-attendance-meta {
   color: #8bdab0;
 }
 
@@ -93,15 +105,58 @@
   color: #ff9f9f;
 }
 
+.medical-treatment-attendance-meta {
+  width: fit-content;
+  border-radius: 9px;
+  padding: 6px 8px;
+  background: rgba(70,190,127,.07);
+}
+
+.medical-followup-edit-form {
+  border: 1px solid rgba(130,105,255,.12);
+  background: rgba(110,82,255,.035);
+  border-radius: 12px;
+  padding: 11px;
+}
+
+.medical-followup-edit-mode,
+.medical-followup-edit-dates {
+  display: flex;
+  align-items: end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.medical-followup-edit-mode label {
+  display: flex;
+  grid-template-columns: none;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+}
+
+.medical-followup-edit-mode input {
+  width: auto;
+  margin: 0;
+}
+
+.medical-followup-edit-dates label {
+  display: grid;
+  gap: 6px;
+  min-width: 180px;
+}
+
 @media (max-width: 720px) {
   .medical-treatment-edit-actions,
-  .medical-treatment-edit-form-actions {
+  .medical-treatment-edit-form-actions,
+  .medical-followup-edit-dates {
     align-items: stretch;
     flex-direction: column;
   }
 
   .medical-treatment-edit-button,
-  .medical-treatment-edit-form-actions button {
+  .medical-treatment-edit-form-actions button,
+  .medical-followup-edit-dates label {
     width: 100%;
   }
 }
