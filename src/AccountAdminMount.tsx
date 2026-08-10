@@ -7,8 +7,9 @@ export default function AccountAdminMount() {
 
   useEffect(() => {
     const syncTarget = () => {
-      const header = document.querySelector('.profile-header-card')
-      const nextTarget = header?.parentElement ?? null
+      const cityTarget = document.querySelector('#city-account-admin-target')
+      const accountHeader = document.querySelector('.profile-header-card')
+      const nextTarget = cityTarget ?? accountHeader?.parentElement ?? null
       setTarget((current) => current === nextTarget ? current : nextTarget)
     }
 
