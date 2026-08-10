@@ -6,6 +6,7 @@ import PermissionNavigationGuard from './PermissionNavigationGuard'
 import ServiceNavigationMount from './ServiceNavigationMount'
 import MedicalSimpleMount from './MedicalSimpleMount'
 import MedicalTreatmentEditMount from './MedicalTreatmentEditMount'
+import PoliceSimpleMount from './PoliceSimpleMount'
 import './styles.css'
 import './auth.css'
 import './account-layout-fix.css'
@@ -16,6 +17,7 @@ import './city-organization-admin.css'
 import './medical-module.css'
 import './medical-simple.css'
 import './medical-treatment-edit.css'
+import './police-simple.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -25,5 +27,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <ServiceNavigationMount />
     <MedicalSimpleMount />
     <MedicalTreatmentEditMount />
+    <PoliceSimpleMount />
   </React.StrictMode>,
 )
