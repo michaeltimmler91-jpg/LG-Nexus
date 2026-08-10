@@ -111,7 +111,9 @@ export default function MedicalModuleMount() {
     if (active) document.body.dataset.nexusMedicalWorkspace = 'true'
     else delete document.body.dataset.nexusMedicalWorkspace
 
-    return () => delete document.body.dataset.nexusMedicalWorkspace
+    return () => {
+      delete document.body.dataset.nexusMedicalWorkspace
+    }
   }, [active])
 
   useEffect(() => {
