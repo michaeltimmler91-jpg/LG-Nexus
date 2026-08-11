@@ -1,0 +1,595 @@
+.medical-workspace {
+  display: grid;
+  gap: 16px;
+  padding-bottom: 34px;
+}
+
+.medical-workspace-hero {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 22px;
+  border: 1px solid rgba(95, 220, 188, .12);
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(43, 144, 126, .10), rgba(16, 24, 32, .76));
+}
+
+.medical-workspace-hero-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  background: rgba(65, 214, 180, .12);
+  color: #82e7cf;
+}
+
+.medical-workspace-hero h2,
+.medical-workspace-card h3,
+.medical-workspace-search-card h3,
+.medical-workspace-patient-head h3,
+.medical-workspace-followup-head h3 {
+  margin: 2px 0 4px;
+}
+
+.medical-workspace-hero p,
+.medical-workspace-patient-head p,
+.medical-workspace-followup-head p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.medical-workspace-count {
+  min-width: 130px;
+  display: grid;
+  text-align: right;
+}
+
+.medical-workspace-count strong {
+  font-size: 28px;
+  line-height: 1;
+  color: #8ce8d2;
+}
+
+.medical-workspace-count span {
+  margin-top: 5px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.medical-workspace-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid rgba(255,255,255,.065);
+  border-radius: 15px;
+  background: rgba(10, 15, 21, .72);
+}
+
+.medical-workspace-nav button {
+  min-height: 40px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.medical-workspace-nav button:hover,
+.medical-workspace-nav button.is-active {
+  color: #dffaf3;
+  border-color: rgba(99, 225, 193, .13);
+  background: rgba(66, 190, 160, .09);
+}
+
+.medical-workspace-nav button b {
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(80, 220, 183, .16);
+  color: #a6f0dd;
+  font-size: 10px;
+}
+
+.medical-workspace-message {
+  min-height: 38px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 11px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.medical-workspace-message.is-error {
+  background: rgba(255, 92, 92, .08);
+  color: #ffabab;
+  border: 1px solid rgba(255, 92, 92, .13);
+}
+
+.medical-workspace-message.is-success {
+  background: rgba(69, 201, 145, .08);
+  color: #9be5bf;
+  border: 1px solid rgba(69, 201, 145, .13);
+}
+
+.medical-workspace-tab {
+  display: grid;
+  gap: 15px;
+}
+
+.medical-workspace-search-card,
+.medical-workspace-card,
+.medical-workspace-patient-panel,
+.medical-workspace-treatment-panel,
+.medical-workspace-followup-list > article {
+  border: 1px solid rgba(255,255,255,.065);
+  border-radius: 16px;
+  background: rgba(13, 18, 25, .72);
+}
+
+.medical-workspace-search-card,
+.medical-workspace-card {
+  padding: 17px;
+}
+
+.medical-workspace-section-head,
+.medical-workspace-followup-head,
+.medical-workspace-patient-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.medical-workspace-search-row {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.medical-workspace-search-row label,
+.medical-workspace-inline-search {
+  flex: 1;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 11px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 11px;
+  background: rgba(6, 10, 14, .55);
+}
+
+.medical-workspace-search-row input,
+.medical-workspace-inline-search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+}
+
+.medical-workspace-search-row button,
+.medical-workspace-inline-search button,
+.medical-workspace-secondary,
+.medical-workspace-primary {
+  min-height: 38px;
+  border-radius: 10px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid rgba(255,255,255,.08);
+  font: inherit;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.medical-workspace-search-row button,
+.medical-workspace-primary {
+  background: rgba(60, 197, 164, .15);
+  color: #b6f2e2;
+  border-color: rgba(75, 220, 185, .16);
+}
+
+.medical-workspace-search-row button.secondary,
+.medical-workspace-inline-search button,
+.medical-workspace-secondary {
+  background: rgba(255,255,255,.035);
+  color: var(--text);
+}
+
+.medical-workspace-search-row button:disabled,
+.medical-workspace-primary:disabled,
+.medical-workspace-secondary:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+.medical-workspace-results {
+  margin-top: 10px;
+  display: grid;
+  gap: 6px;
+}
+
+.medical-workspace-results > button,
+.medical-workspace-knowledge-list > button {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,.055);
+  border-radius: 11px;
+  padding: 10px 11px;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  background: rgba(255,255,255,.02);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.medical-workspace-results > button:hover,
+.medical-workspace-knowledge-list > button:hover {
+  background: rgba(74, 203, 171, .055);
+  border-color: rgba(74, 203, 171, .11);
+}
+
+.medical-workspace-results strong,
+.medical-workspace-results small,
+.medical-workspace-knowledge-list strong,
+.medical-workspace-knowledge-list small {
+  display: block;
+}
+
+.medical-workspace-results small,
+.medical-workspace-knowledge-list small {
+  margin-top: 3px;
+  color: var(--text-muted);
+}
+
+.medical-workspace-avatar,
+.medical-workspace-patient-avatar {
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(61, 205, 170, .10);
+  color: #8be6cf;
+}
+
+.medical-workspace-avatar {
+  width: 36px;
+  height: 36px;
+}
+
+.medical-workspace-record-number {
+  color: #89dbc8;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.medical-workspace-patient-panel,
+.medical-workspace-treatment-panel {
+  padding: 18px;
+  display: grid;
+  gap: 16px;
+}
+
+.medical-workspace-patient-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.medical-workspace-patient-avatar {
+  width: 48px;
+  height: 48px;
+  font-weight: 850;
+}
+
+.medical-workspace-two-col,
+.medical-workspace-knowledge-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 14px;
+}
+
+.medical-workspace-fields,
+.medical-workspace-editor {
+  display: grid;
+  gap: 10px;
+}
+
+.medical-workspace-fields label,
+.medical-workspace-editor label,
+.medical-workspace-date-row label {
+  display: grid;
+  gap: 6px;
+}
+
+.medical-workspace-fields label > span,
+.medical-workspace-editor label > span,
+.medical-workspace-date-row label > span {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.medical-workspace-fields input,
+.medical-workspace-fields select,
+.medical-workspace-fields textarea,
+.medical-workspace-editor input,
+.medical-workspace-editor textarea,
+.medical-workspace-date-row input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  background: rgba(6, 10, 14, .55);
+  color: var(--text);
+  padding: 9px 10px;
+  font: inherit;
+}
+
+.medical-workspace-fields textarea,
+.medical-workspace-editor textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+
+.medical-workspace-fields textarea.large,
+.medical-workspace-editor textarea.large {
+  min-height: 150px;
+}
+
+.medical-workspace-fields select:disabled,
+.medical-workspace-fields textarea:disabled {
+  opacity: .75;
+}
+
+.medical-workspace-card > .medical-workspace-primary,
+.medical-workspace-editor > .medical-workspace-primary {
+  margin-top: 10px;
+  width: fit-content;
+}
+
+.medical-workspace-history {
+  margin-top: 8px;
+  display: grid;
+  gap: 9px;
+}
+
+.medical-workspace-history > article {
+  padding: 11px;
+  border: 1px solid rgba(255,255,255,.055);
+  border-radius: 11px;
+  background: rgba(255,255,255,.02);
+}
+
+.medical-simple-history-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.medical-simple-history-head small {
+  color: var(--text-muted);
+}
+
+.medical-workspace-history > article > p {
+  margin: 9px 0 0;
+  white-space: pre-wrap;
+}
+
+.medical-simple-followup-status {
+  width: fit-content;
+  margin-top: 9px;
+  padding: 6px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 9px;
+  background: rgba(244, 184, 72, .08);
+  color: #f3d38b;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.medical-simple-followup-status.done {
+  background: rgba(61, 195, 137, .08);
+  color: #8eddb5;
+}
+
+.medical-workspace-treatment-card {
+  max-width: 880px;
+}
+
+.medical-workspace-check,
+.medical-workspace-radio-row label {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.medical-workspace-check input,
+.medical-workspace-radio-row input {
+  width: auto;
+}
+
+.medical-workspace-followup-form {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid rgba(108, 218, 190, .10);
+  border-radius: 12px;
+  background: rgba(67, 189, 158, .035);
+}
+
+.medical-workspace-radio-row,
+.medical-workspace-date-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.medical-workspace-date-row label {
+  min-width: 180px;
+}
+
+.medical-workspace-followup-list {
+  display: grid;
+  gap: 10px;
+}
+
+.medical-workspace-followup-list > article {
+  padding: 16px;
+}
+
+.medical-workspace-followup-treatment {
+  margin: 12px 0;
+  white-space: pre-wrap;
+}
+
+.medical-workspace-checkpoints {
+  display: grid;
+  gap: 6px;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.025);
+}
+
+.medical-workspace-checkpoints strong {
+  margin-bottom: 2px;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.medical-workspace-checkpoints span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.medical-workspace-card-actions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.medical-workspace-inline-search {
+  margin: 10px 0;
+}
+
+.medical-workspace-inline-search button {
+  min-height: 30px;
+  padding: 0 9px;
+}
+
+.medical-workspace-knowledge-list {
+  display: grid;
+  gap: 6px;
+}
+
+.medical-workspace-knowledge-list > button {
+  grid-template-columns: 1fr auto;
+}
+
+.medical-workspace-knowledge-list small {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.medical-workspace-editor {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+.medical-workspace-empty {
+  min-height: 120px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 7px;
+  padding: 18px;
+  border: 1px dashed rgba(255,255,255,.08);
+  border-radius: 14px;
+  color: var(--text-muted);
+}
+
+.medical-workspace-muted {
+  margin: 8px 0;
+  color: var(--text-muted);
+}
+
+@media (max-width: 980px) {
+  .medical-workspace-two-col,
+  .medical-workspace-knowledge-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .medical-workspace-hero {
+    grid-template-columns: auto 1fr;
+  }
+
+  .medical-workspace-count {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+
+  .medical-workspace-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .medical-workspace-nav button {
+    width: 100%;
+  }
+
+  .medical-workspace-search-row,
+  .medical-workspace-patient-head,
+  .medical-workspace-section-head,
+  .medical-workspace-card-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .medical-workspace-results > button {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .medical-workspace-record-number {
+    display: none;
+  }
+
+  .medical-workspace-search-row > button,
+  .medical-workspace-secondary,
+  .medical-workspace-primary {
+    width: 100%;
+  }
+}
