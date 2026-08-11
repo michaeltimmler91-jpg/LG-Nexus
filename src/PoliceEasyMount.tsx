@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { Check, ChevronRight, Plus, RefreshCw, Search, Shield, Trash2, UserPlus, UserRound } from 'lucide-react'
+import { Check, ChevronRight, Plus, RefreshCw, Search, Shield, Trash2, UserPlus, UserRound, X } from 'lucide-react'
 import { supabase } from './lib/supabase'
 
 type PoliceContext = {
@@ -108,6 +108,7 @@ function PoliceEasyWorkspace() {
   const [context, setContext] = useState<PoliceContext | null>(null)
   const [cases, setCases] = useState<PoliceCase[]>([])
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [showNewCase, setShowNewCase] = useState(false)
   const [query, setQuery] = useState('')
   const [loading, setLoading] = useState(true)
   const [message, setMessage] = useState('')
@@ -168,6 +169,17 @@ function PoliceEasyWorkspace() {
     setNewPersonQuery('')
   }
 
+  const resetNewCase = () => {
+    setNewTitle('')
+    setNewSummary('')
+    setNewActions('')
+    setNewEvidence('')
+    setNewPeople([])
+    setNewPersonQuery('')
+    setNewPersonResults([])
+    setNewPersonRole('accused')
+  }
+
   const createCase = async () => {
     if (!context?.can_create_cases || newTitle.trim().length < 3) return
     setBusy(true); setError(''); setMessage('')
@@ -182,7 +194,8 @@ function PoliceEasyWorkspace() {
     if (createError) return setError('Der Vorgang konnte nicht gespeichert werden.')
     const result = data as { id?: string; case_number?: string } | null
     setMessage(result?.case_number ? `${result.case_number} wurde gespeichert.` : 'Vorgang wurde gespeichert.')
-    setNewTitle(''); setNewSummary(''); setNewActions(''); setNewEvidence(''); setNewPeople([])
+    resetNewCase()
+    setShowNewCase(false)
     await loadCases('')
     if (result?.id) setSelectedId(result.id)
   }
@@ -194,62 +207,72 @@ function PoliceEasyWorkspace() {
     <div className="page-content police-easy-workspace">
       <section className="police-easy-hero">
         <div className="police-easy-hero-icon"><Shield size={28} /></div>
-        <div><span className="eyebrow">LSPD · INTERN</span><h2>Police</h2><p>Schnell Person finden, Vorgang schreiben, fertig.</p></div>
-        <div className="police-easy-count"><strong>{openCount}</strong><span>offen</span></div>
+        <div><span className="eyebrow">LSPD · INTERN</span><h2>Police</h2><p>Bürger prüfen, Vorgänge führen und wichtige Einträge schnell finden.</p></div>
+        <div className="police-easy-count"><strong>{openCount}</strong><span>offene Vorgänge</span></div>
       </section>
 
       {error ? <div className="police-easy-message is-error">{error}</div> : null}
       {message ? <div className="police-easy-message is-success"><Check size={15} />{message}</div> : null}
 
-      <section className="police-easy-searchbar">
-        <Search size={17} />
-        <input value={query} onChange={(event) => setQuery(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter') void loadCases(query) }} placeholder="Person, Nexus-ID, Vorgangsnummer oder Titel" />
-        <button type="button" onClick={() => void loadCases(query)}>Suchen</button>
-        <button type="button" className="secondary" onClick={() => { setQuery(''); void loadCases('') }}><RefreshCw size={14} /> Alle</button>
-      </section>
-
-      <div className="police-easy-grid">
-        <section className="police-easy-card">
-          <div className="police-easy-card-head"><div><span className="eyebrow">VORGÄNGE</span><h3>Übersicht</h3></div></div>
-          <div className="police-easy-case-list">
-            {loading ? <p>Lädt …</p> : cases.length === 0 ? <p>Keine Vorgänge gefunden.</p> : cases.map((entry) => (
-              <button key={entry.id} type="button" className={selectedId === entry.id ? 'is-active' : ''} onClick={() => setSelectedId(entry.id)}>
-                <span><strong>{entry.case_number} · {entry.title}</strong><small>{entry.state === 'open' ? 'Offen' : 'Erledigt'} · {entry.people.map((person) => person.display_name).join(', ') || 'ohne Beteiligte'}</small></span>
-                <ChevronRight size={15} />
-              </button>
-            ))}
-          </div>
+      <div className="police-easy-cases-view">
+        <section className="police-easy-searchbar">
+          <Search size={17} />
+          <input value={query} onChange={(event) => setQuery(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter') void loadCases(query) }} placeholder="Vorgangsnummer, Titel oder Beteiligte" />
+          <button type="button" onClick={() => void loadCases(query)}>Suchen</button>
+          <button type="button" className="secondary" onClick={() => { setQuery(''); void loadCases('') }}><RefreshCw size={14} /> Alle</button>
         </section>
 
-        {context.can_create_cases ? (
-          <section className="police-easy-card">
-            <div className="police-easy-card-head"><div><span className="eyebrow">NEUER VORGANG</span><h3>Eintragen</h3></div><Plus size={18} /></div>
-            <div className="police-easy-form">
-              <label><span>Titel</span><input value={newTitle} onChange={(e) => setNewTitle(e.target.value)} placeholder="z. B. Schlägerei am Pier" /></label>
-
-              {context.can_search_people ? (
-                <div className="police-easy-people-picker">
-                  <span className="field-label">Beteiligte</span>
-                  {newPeople.length > 0 ? <div className="police-easy-chips">{newPeople.map((person) => <button type="button" key={`${person.profile_id}-${person.person_role}`} onClick={() => setNewPeople((current) => current.filter((entry) => !(entry.profile_id === person.profile_id && entry.person_role === person.person_role)))}>{person.display_name} · {roleLabels[person.person_role]} ×</button>)}</div> : null}
-                  <div className="police-easy-person-search">
-                    <select value={newPersonRole} onChange={(e) => setNewPersonRole(e.target.value as PersonRole)}>{Object.entries(roleLabels).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select>
-                    <input value={newPersonQuery} onChange={(e) => setNewPersonQuery(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') void searchNewPerson() }} placeholder="Name oder Nexus-ID" />
-                    <button type="button" onClick={() => void searchNewPerson()}><Search size={14} /></button>
-                  </div>
-                  {newPersonResults.length > 0 ? <div className="police-easy-person-results">{newPersonResults.map((person) => <button type="button" key={person.profile_id} onClick={() => addDraftPerson(person)}><span><strong>{person.display_name}</strong><small>{person.nexus_id ?? 'Keine Nexus-ID'}</small></span><UserPlus size={14} /></button>)}</div> : null}
-                </div>
-              ) : null}
-
-              <label><span>Sachverhalt</span><textarea value={newSummary} onChange={(e) => setNewSummary(e.target.value)} placeholder="Kurz beschreiben, was passiert ist …" /></label>
-              <label><span>Maßnahmen</span><textarea value={newActions} onChange={(e) => setNewActions(e.target.value)} placeholder={'- Person kontrolliert\n- Aussage aufgenommen\n- Platzverweis ausgesprochen'} /></label>
-              <label><span>Beweise / Links <small>optional</small></span><textarea value={newEvidence} onChange={(e) => setNewEvidence(e.target.value)} placeholder={'- Foto vom Tatort: https://…\n- Dashcam vorhanden'} /></label>
-              <button className="police-easy-primary" type="button" onClick={() => void createCase()} disabled={busy || newTitle.trim().length < 3}>{busy ? 'Speichert …' : 'Speichern'}</button>
+        <div className="police-easy-grid">
+          <section className="police-easy-card police-easy-list-card">
+            <div className="police-easy-card-head">
+              <div><span className="eyebrow">VORGÄNGE</span><h3>{cases.length} gefunden</h3></div>
+              {context.can_create_cases ? <button type="button" className="police-easy-new-button" onClick={() => { setShowNewCase(true); setSelectedId(null) }}><Plus size={15} /> Neuer Vorgang</button> : null}
+            </div>
+            <div className="police-easy-case-list">
+              {loading ? <p>Lädt …</p> : cases.length === 0 ? <p>Keine Vorgänge gefunden.</p> : cases.map((entry) => (
+                <button key={entry.id} type="button" className={selectedId === entry.id ? 'is-active' : ''} onClick={() => { setSelectedId(entry.id); setShowNewCase(false) }}>
+                  <span><strong>{entry.case_number} · {entry.title}</strong><small>{entry.state === 'open' ? 'Offen' : 'Erledigt'} · {entry.people.map((person) => person.display_name).join(', ') || 'ohne Beteiligte'}</small></span>
+                  <ChevronRight size={15} />
+                </button>
+              ))}
             </div>
           </section>
-        ) : null}
-      </div>
 
-      {selectedCase ? <CaseView policeCase={selectedCase} context={context} reload={() => loadCases(query)} /> : null}
+          {showNewCase && context.can_create_cases ? (
+            <section className="police-easy-card police-easy-create-card">
+              <div className="police-easy-card-head"><div><span className="eyebrow">NEUER VORGANG</span><h3>Vorgang anlegen</h3></div><button type="button" className="police-easy-icon-button" onClick={() => { setShowNewCase(false); resetNewCase() }} title="Schließen"><X size={15} /></button></div>
+              <div className="police-easy-form">
+                <label><span>Titel</span><input value={newTitle} onChange={(e) => setNewTitle(e.target.value)} placeholder="z. B. Schlägerei am Pier" /></label>
+
+                {context.can_search_people ? (
+                  <div className="police-easy-people-picker">
+                    <span className="field-label">Beteiligte</span>
+                    {newPeople.length > 0 ? <div className="police-easy-chips">{newPeople.map((person) => <button type="button" key={`${person.profile_id}-${person.person_role}`} onClick={() => setNewPeople((current) => current.filter((entry) => !(entry.profile_id === person.profile_id && entry.person_role === person.person_role)))}>{person.display_name} · {roleLabels[person.person_role]} ×</button>)}</div> : null}
+                    <div className="police-easy-person-search">
+                      <select value={newPersonRole} onChange={(e) => setNewPersonRole(e.target.value as PersonRole)}>{Object.entries(roleLabels).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select>
+                      <input value={newPersonQuery} onChange={(e) => setNewPersonQuery(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') void searchNewPerson() }} placeholder="Name oder Nexus-ID" />
+                      <button type="button" onClick={() => void searchNewPerson()}><Search size={14} /></button>
+                    </div>
+                    {newPersonResults.length > 0 ? <div className="police-easy-person-results">{newPersonResults.map((person) => <button type="button" key={person.profile_id} onClick={() => addDraftPerson(person)}><span><strong>{person.display_name}</strong><small>{person.nexus_id ?? 'Keine Nexus-ID'}</small></span><UserPlus size={14} /></button>)}</div> : null}
+                  </div>
+                ) : null}
+
+                <label><span>Sachverhalt</span><textarea value={newSummary} onChange={(e) => setNewSummary(e.target.value)} placeholder="Kurz beschreiben, was passiert ist …" /></label>
+                <label><span>Maßnahmen</span><textarea value={newActions} onChange={(e) => setNewActions(e.target.value)} placeholder={'- Person kontrolliert\n- Aussage aufgenommen\n- Platzverweis ausgesprochen'} /></label>
+                <label><span>Beweise / Links <small>optional</small></span><textarea value={newEvidence} onChange={(e) => setNewEvidence(e.target.value)} placeholder={'- Foto vom Tatort: https://…\n- Dashcam vorhanden'} /></label>
+                <button className="police-easy-primary" type="button" onClick={() => void createCase()} disabled={busy || newTitle.trim().length < 3}>{busy ? 'Speichert …' : 'Vorgang speichern'}</button>
+              </div>
+            </section>
+          ) : selectedCase ? (
+            <CaseView policeCase={selectedCase} context={context} reload={() => loadCases(query)} />
+          ) : (
+            <section className="police-easy-card police-easy-placeholder">
+              <div><span className="eyebrow">DETAILS</span><h3>Vorgang auswählen</h3><p>Links einen Vorgang öffnen oder einen neuen Vorgang anlegen.</p></div>
+              {context.can_create_cases ? <button type="button" className="police-easy-primary" onClick={() => setShowNewCase(true)}><Plus size={15} /> Neuer Vorgang</button> : null}
+            </section>
+          )}
+        </div>
+      </div>
     </div>
   )
 }
@@ -332,15 +355,18 @@ function CaseView({ policeCase, context, reload }: { policeCase: PoliceCase; con
     <section className="police-easy-detail">
       <div className="police-easy-detail-head">
         <div><span className="eyebrow">{policeCase.case_number}</span><h3>{policeCase.title}</h3><small>{policeCase.lead_name ?? 'Police'} · {dateTimeFormatter.format(new Date(policeCase.created_at))}</small></div>
-        <div className="police-easy-state-actions">
-          <button type="button" className={policeCase.state === 'open' ? 'is-active' : ''} disabled={busy || !context.can_edit_cases} onClick={() => void setState('open')}>Offen</button>
-          <button type="button" className={policeCase.state === 'done' ? 'is-done' : ''} disabled={busy || !context.can_edit_cases} onClick={() => void setState('done')}>Erledigt</button>
+        <div className="police-easy-detail-actions">
+          {context.can_edit_cases && policeCase.state === 'open' && !editing ? <button type="button" onClick={() => setEditing(true)}>Bearbeiten</button> : null}
+          <div className="police-easy-state-actions">
+            <button type="button" className={policeCase.state === 'open' ? 'is-active' : ''} disabled={busy || !context.can_edit_cases} onClick={() => void setState('open')}>Offen</button>
+            <button type="button" className={policeCase.state === 'done' ? 'is-done' : ''} disabled={busy || !context.can_edit_cases} onClick={() => void setState('done')}>Erledigt</button>
+          </div>
         </div>
       </div>
 
       <div className="police-easy-detail-grid">
-        <div className="police-easy-block">
-          <div className="police-easy-block-head"><span>Beteiligte</span>{context.can_edit_cases && policeCase.state === 'open' ? <button type="button" onClick={() => setEditing(true)}>Bearbeiten</button> : null}</div>
+        <div className="police-easy-block police-easy-block-wide">
+          <div className="police-easy-block-head"><span>Beteiligte</span></div>
           {policeCase.people.length === 0 ? <p>Keine Beteiligten eingetragen.</p> : <div className="police-easy-person-list">{policeCase.people.map((person) => <div key={`${person.profile_id}-${person.person_role}`}><UserRound size={14} /><span><strong>{person.display_name}</strong><small>{roleLabels[person.person_role]} · {person.nexus_id ?? 'Keine Nexus-ID'}</small></span>{editing ? <button type="button" title="Entfernen" onClick={() => void removePerson(person)}><Trash2 size={13} /></button> : null}</div>)}</div>}
 
           {editing && context.can_search_people ? <div className="police-easy-inline-person">
@@ -350,8 +376,8 @@ function CaseView({ policeCase, context, reload }: { policeCase: PoliceCase; con
           </div> : null}
         </div>
 
-        <div className="police-easy-block">
-          <div className="police-easy-block-head"><span>Sachverhalt</span>{context.can_edit_cases && policeCase.state === 'open' && !editing ? <button type="button" onClick={() => setEditing(true)}>Bearbeiten</button> : null}</div>
+        <div className="police-easy-block police-easy-block-wide">
+          <div className="police-easy-block-head"><span>Sachverhalt</span></div>
           {editing ? <textarea value={summary} onChange={(e) => setSummary(e.target.value)} /> : <p>{policeCase.summary || 'Nicht eingetragen.'}</p>}
         </div>
         <div className="police-easy-block">
@@ -364,11 +390,11 @@ function CaseView({ policeCase, context, reload }: { policeCase: PoliceCase; con
         </div>
       </div>
 
-      {editing ? <div className="police-easy-edit-actions"><label><span>Titel</span><input value={title} onChange={(e) => setTitle(e.target.value)} /></label><div><button type="button" onClick={() => setEditing(false)}>Abbrechen</button><button type="button" className="primary" disabled={busy || title.trim().length < 3} onClick={() => void save()}>Speichern</button></div></div> : null}
+      {editing ? <div className="police-easy-edit-actions"><label><span>Titel</span><input value={title} onChange={(e) => setTitle(e.target.value)} /></label><div><button type="button" onClick={() => setEditing(false)}>Abbrechen</button><button type="button" className="primary" disabled={busy || title.trim().length < 3} onClick={() => void save()}>Änderungen speichern</button></div></div> : null}
 
       <div className="police-easy-history">
         <div className="police-easy-block-head"><span>Verlauf</span></div>
-        {context.can_edit_cases && policeCase.state === 'open' ? <div className="police-easy-note-row"><input value={note} onChange={(e) => setNote(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') void addNote() }} placeholder="Kurzen Verlauf hinzufügen …" /><button type="button" onClick={() => void addNote()} disabled={busy || note.trim().length < 2}><Plus size={14} /> Hinzufügen</button></div> : null}
+        {context.can_edit_cases && policeCase.state === 'open' ? <div className="police-easy-note-row"><input value={note} onChange={(e) => setNote(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') void addNote() }} placeholder="Kurze Ergänzung …" /><button type="button" onClick={() => void addNote()} disabled={busy || note.trim().length < 2}><Plus size={14} /> Hinzufügen</button></div> : null}
         <div className="police-easy-history-list">
           {policeCase.timeline.length === 0 ? <p>Noch kein Verlauf.</p> : policeCase.timeline.map((entry) => <div key={entry.id}><span>{dateTimeFormatter.format(new Date(entry.created_at))}</span><strong>{entry.entry_type === 'created' ? 'Vorgang angelegt' : entry.entry_type === 'status' ? (entry.to_status === 'completed' ? 'Als erledigt markiert' : 'Wieder geöffnet') : entry.body}</strong><small>{entry.author_name ?? 'Police'}</small></div>)}
         </div>
