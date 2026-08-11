@@ -10,6 +10,7 @@ import PoliceEasyMount from './PoliceEasyMount'
 import PoliceCitizenHistoryMount from './PoliceCitizenHistoryMount'
 import PoliceQuickToolsMount from './PoliceQuickToolsMount'
 import PoliceWorkspaceNavMount from './PoliceWorkspaceNavMount'
+import FireSimpleMount from './FireSimpleMount'
 import './styles.css'
 import './auth.css'
 import './account-layout-fix.css'
@@ -24,6 +25,7 @@ import './police-easy.css'
 import './police-citizen-history.css'
 import './police-quick-tools.css'
 import './police-workspace-nav.css'
+import './fire-simple.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -37,5 +39,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <PoliceWorkspaceNavMount />
     <PoliceCitizenHistoryMount />
     <PoliceQuickToolsMount />
+    <FireSimpleMount />
   </React.StrictMode>,
 )
