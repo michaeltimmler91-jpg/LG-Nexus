@@ -61,6 +61,10 @@ function initials(name: string) {
     .join('') || 'NX'
 }
 
+function setText(element: Element | null | undefined, value: string) {
+  if (element && element.textContent !== value) element.textContent = value
+}
+
 function openNavigation(label: string) {
   const button = document.querySelector<HTMLButtonElement>(`.nav-button[aria-label="${label}"]`)
   button?.click()
@@ -92,18 +96,18 @@ export default function DashboardLiveMount() {
       const avatar = chip?.querySelector('.user-avatar')
       const name = chip?.querySelector('strong')
       const nexusId = chip?.querySelector('small')
+
       if (nextProfile) {
-        if (avatar) avatar.textContent = initials(nextProfile.display_name)
-        if (name) name.textContent = nextProfile.display_name
-        if (nexusId) nexusId.textContent = nextProfile.nexus_id ?? 'Nexus-ID folgt'
+        setText(avatar, initials(nextProfile.display_name))
+        setText(name, nextProfile.display_name)
+        setText(nexusId, nextProfile.nexus_id ?? 'Nexus-ID folgt')
       } else {
-        if (avatar) avatar.textContent = 'NX'
-        if (name) name.textContent = 'Nicht angemeldet'
-        if (nexusId) nexusId.textContent = 'Anmelden'
+        setText(avatar, 'NX')
+        setText(name, 'Nicht angemeldet')
+        setText(nexusId, 'Anmelden')
       }
 
-      const eyebrow = document.querySelector('.topbar-title .eyebrow')
-      if (eyebrow) eyebrow.textContent = 'LG NEXUS'
+      setText(document.querySelector('.topbar-title .eyebrow'), 'LG NEXUS')
     }
 
     const refresh = async () => {
@@ -132,20 +136,16 @@ export default function DashboardLiveMount() {
     document.body.dataset.nexusLiveShell = 'true'
     void refresh()
 
-    const shellObserver = new MutationObserver(() => updateShell(profile))
-    shellObserver.observe(document.body, { childList: true, subtree: true })
-
     const { data: authListener } = supabase.auth.onAuthStateChange(() => {
       window.setTimeout(() => void refresh(), 0)
     })
 
     return () => {
       disposed = true
-      shellObserver.disconnect()
       authListener.subscription.unsubscribe()
       delete document.body.dataset.nexusLiveShell
     }
-  }, [profile?.id, profile?.display_name, profile?.nexus_id])
+  }, [])
 
   useEffect(() => {
     if (active) document.body.dataset.nexusDashboardWorkspace = 'true'
