@@ -7,6 +7,7 @@ import ServiceNavigationMount from './ServiceNavigationMount'
 import DashboardLiveMount from './DashboardLiveMount'
 import BusinessesLiveMount from './BusinessesLiveMount'
 import OrganizationManagementMount from './OrganizationManagementMount'
+import OrganizationExternalMediaMount from './OrganizationExternalMediaMount'
 import GlobalAdminMount from './GlobalAdminMount'
 import GlobalOrganizationRegistryMount from './GlobalOrganizationRegistryMount'
 import MedicalWorkspaceMount from './MedicalWorkspaceMount'
@@ -28,6 +29,7 @@ import './city-organization-admin.css'
 import './dashboard-live.css'
 import './businesses-live.css'
 import './organization-control.css'
+import './organization-external-media.css'
 import './global-admin.css'
 import './global-organization-registry.css'
 import './medical-module.css'
@@ -50,6 +52,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <DashboardLiveMount />
     <BusinessesLiveMount />
     <OrganizationManagementMount />
+    <OrganizationExternalMediaMount />
     <GlobalAdminMount />
     <GlobalOrganizationRegistryMount />
     <MedicalWorkspaceMount />
