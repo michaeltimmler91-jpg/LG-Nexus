@@ -1,0 +1,157 @@
+.org-control-panel {
+  margin-top: 18px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px;
+  background: rgba(13,17,25,.88);
+  overflow: hidden;
+}
+
+.org-control-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 20px 22px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.org-control-heading,
+.org-control-head-actions,
+.org-control-heading > div,
+.org-member-actions,
+.org-search-row,
+.org-control-actions,
+.org-permission-title,
+.org-member-main > div {
+  display: flex;
+  align-items: center;
+}
+
+.org-control-heading { gap: 13px; }
+.org-control-heading > div { align-items: flex-start; flex-direction: column; gap: 3px; }
+.org-control-heading h3 { margin: 0; font-size: 19px; }
+.org-control-heading p { margin: 0; color: var(--muted); font-size: 13px; }
+.org-control-icon {
+  width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08);
+}
+.org-control-head-actions { gap: 8px; }
+.org-control-head-actions > button,
+.org-control-select {
+  min-height: 38px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.045);
+  color: inherit; border-radius: 11px;
+}
+.org-control-head-actions > button { padding: 0 12px; display: inline-flex; gap: 7px; align-items: center; cursor: pointer; }
+.org-control-select { position: relative; display: flex; align-items: center; }
+.org-control-select select { appearance: none; border: 0; outline: 0; background: transparent; color: inherit; padding: 0 35px 0 12px; height: 38px; min-width: 210px; }
+.org-control-select svg { position: absolute; right: 11px; pointer-events: none; }
+
+.org-control-global { margin: 14px 22px 0; display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border-radius: 999px; background: rgba(100,170,255,.1); border: 1px solid rgba(100,170,255,.18); font-size: 12px; }
+.org-control-message { margin: 14px 22px 0; padding: 10px 12px; border-radius: 11px; font-size: 13px; display: flex; align-items: center; gap: 7px; }
+.org-control-message.is-error { background: rgba(255,90,90,.09); border: 1px solid rgba(255,90,90,.18); }
+.org-control-message.is-success { background: rgba(90,220,145,.08); border: 1px solid rgba(90,220,145,.17); }
+.org-control-empty { padding: 28px; text-align: center; color: var(--muted); }
+
+.org-control-tabs { display: flex; gap: 7px; padding: 16px 22px 0; overflow-x: auto; }
+.org-control-tabs button { white-space: nowrap; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.035); color: var(--muted); border-radius: 10px; padding: 9px 12px; cursor: pointer; }
+.org-control-tabs button.is-active { color: inherit; background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.15); }
+.org-control-tab { padding: 20px 22px 24px; }
+
+.org-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 13px; }
+.org-form-grid label { display: grid; gap: 7px; }
+.org-form-grid label > span,
+.org-status-message > span { color: var(--muted); font-size: 12px; display: flex; align-items: center; gap: 6px; }
+.org-form-grid input,
+.org-form-grid textarea,
+.org-status-message input,
+.org-search-row input,
+.org-member-role select,
+.org-role-editor input {
+  width: 100%; box-sizing: border-box; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04); color: inherit;
+  border-radius: 11px; padding: 10px 11px; outline: none;
+}
+.org-form-grid textarea { resize: vertical; min-height: 110px; }
+.org-form-wide { grid-column: 1 / -1; }
+.org-control-toggle { margin-top: 14px; display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 13px; }
+.org-control-toggle input { accent-color: currentColor; }
+.org-control-actions { justify-content: flex-end; margin-top: 18px; }
+
+.org-status-options { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.org-status-options button { border: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.035); color: inherit; border-radius: 13px; padding: 14px; display: flex; align-items: center; gap: 9px; cursor: pointer; }
+.org-status-options button > span { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,.25); }
+.org-status-options button.is-active { background: rgba(255,255,255,.075); border-color: rgba(255,255,255,.18); }
+.org-status-options .is-open > span { background: #57d68d; }
+.org-status-options .is-limited > span { background: #f0c05a; }
+.org-status-options .is-closed > span { background: #ee6c72; }
+.org-status-message { display: grid; gap: 7px; margin-top: 14px; }
+
+.org-media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.org-media-card { border: 1px solid rgba(255,255,255,.08); border-radius: 15px; padding: 14px; background: rgba(255,255,255,.025); display: grid; gap: 12px; }
+.org-media-preview { height: 150px; border-radius: 13px; background: rgba(255,255,255,.045) center/cover no-repeat; display: grid; place-items: center; color: var(--muted); }
+.org-media-preview:not(.is-banner) { max-width: 180px; width: 100%; aspect-ratio: 1; height: auto; }
+.org-media-card > div:nth-child(2) { display: grid; gap: 3px; }
+.org-media-card span { color: var(--muted); font-size: 12px; }
+.org-upload-button { width: fit-content; display: inline-flex; align-items: center; gap: 7px; padding: 9px 11px; border-radius: 10px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.045); cursor: pointer; font-size: 13px; }
+.org-upload-button input { display: none; }
+
+.org-member-search { border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.025); border-radius: 14px; padding: 14px; display: grid; gap: 12px; }
+.org-member-search > div:first-child { display: grid; gap: 3px; }
+.org-member-search > div:first-child span { color: var(--muted); font-size: 12px; }
+.org-search-row { gap: 8px; }
+.org-search-row label { flex: 1; position: relative; }
+.org-search-row label svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+.org-search-row input { padding-left: 34px; }
+.org-search-row button,
+.org-search-results button,
+.org-member-actions button { border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.045); color: inherit; border-radius: 10px; padding: 9px 11px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.org-search-results { display: grid; gap: 7px; }
+.org-search-results > div { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; padding: 9px; background: rgba(255,255,255,.025); border-radius: 11px; }
+.org-search-results > div > div { display: grid; gap: 2px; }
+.org-search-results small, .org-member-main small { color: var(--muted); }
+.org-avatar { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: rgba(255,255,255,.07); font-size: 11px; font-weight: 700; }
+
+.org-member-list { margin-top: 14px; display: grid; gap: 8px; }
+.org-member-row { display: grid; grid-template-columns: auto minmax(170px,1fr) minmax(150px,.55fr) auto; gap: 12px; align-items: center; border: 1px solid rgba(255,255,255,.07); border-radius: 13px; padding: 11px 12px; background: rgba(255,255,255,.02); }
+.org-member-main { min-width: 0; display: grid; gap: 3px; }
+.org-member-main > div { gap: 7px; }
+.org-owner-pill { display: inline-flex; align-items: center; gap: 4px; padding: 3px 6px; border-radius: 999px; border: 1px solid rgba(255,210,90,.18); background: rgba(255,210,90,.08); font-size: 10px; }
+.org-member-role select { padding: 8px 9px; }
+.org-member-actions { justify-content: flex-end; gap: 6px; flex-wrap: wrap; }
+.org-member-actions button.is-danger { border-color: rgba(255,95,95,.16); background: rgba(255,95,95,.06); }
+
+.org-role-layout { display: grid; grid-template-columns: 230px minmax(0,1fr); gap: 15px; }
+.org-role-list { display: grid; align-content: start; gap: 7px; }
+.org-role-list button,
+.org-role-fixed { border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.025); color: inherit; border-radius: 12px; padding: 10px; text-align: left; display: flex; align-items: center; gap: 9px; }
+.org-role-list button { cursor: pointer; }
+.org-role-list button.is-active { background: rgba(255,255,255,.075); border-color: rgba(255,255,255,.16); }
+.org-role-list span { display: grid; gap: 2px; }
+.org-role-list small { color: var(--muted); }
+.org-role-new { justify-content: center; color: var(--muted) !important; }
+.org-role-editor { min-width: 0; border: 1px solid rgba(255,255,255,.07); border-radius: 14px; padding: 14px; background: rgba(255,255,255,.018); }
+.org-permission-groups { display: grid; gap: 12px; margin-top: 18px; }
+.org-permission-groups section { border: 1px solid rgba(255,255,255,.07); border-radius: 13px; overflow: hidden; }
+.org-permission-title { justify-content: space-between; padding: 10px 12px; background: rgba(255,255,255,.035); }
+.org-permission-title span { color: var(--muted); font-size: 11px; }
+.org-permission-groups section > label { display: grid; grid-template-columns: auto 1fr; gap: 9px; align-items: start; padding: 10px 12px; border-top: 1px solid rgba(255,255,255,.05); }
+.org-permission-groups section > label:first-of-type { border-top: 0; }
+.org-permission-groups label > span { display: grid; gap: 2px; }
+.org-permission-groups small { color: var(--muted); }
+.org-permission-groups .is-sensitive { background: rgba(255,180,70,.025); }
+
+@media (max-width: 900px) {
+  .org-control-head { flex-direction: column; }
+  .org-control-head-actions { justify-content: space-between; }
+  .org-control-select { flex: 1; }
+  .org-control-select select { width: 100%; }
+  .org-form-grid, .org-media-grid, .org-role-layout { grid-template-columns: 1fr; }
+  .org-member-row { grid-template-columns: auto 1fr; }
+  .org-member-role, .org-member-actions { grid-column: 2; }
+  .org-member-actions { justify-content: flex-start; }
+}
+
+@media (max-width: 600px) {
+  .org-control-head, .org-control-tab { padding-left: 15px; padding-right: 15px; }
+  .org-control-tabs { padding-left: 15px; padding-right: 15px; }
+  .org-status-options { grid-template-columns: 1fr; }
+  .org-search-row { flex-direction: column; align-items: stretch; }
+}
