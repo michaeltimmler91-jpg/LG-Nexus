@@ -1,4 +1,5 @@
-/* Keep the new Medical workspace visible while the legacy host page is hidden. */
-body[data-nexus-medical-workspace='true'] .main-area > .medical-workspace {
+/* Keep the new Medical workspace visible while the legacy host page is hidden.
+   Match the legacy selector specificity so this later import wins. */
+body[data-nexus-medical-workspace='true'] .main-area > .page-content.medical-workspace {
   display: grid !important;
 }
