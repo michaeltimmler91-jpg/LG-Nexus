@@ -1,0 +1,4 @@
+/* Keep the new Medical workspace visible while the legacy host page is hidden. */
+body[data-nexus-medical-workspace='true'] .main-area > .medical-workspace {
+  display: grid !important;
+}
