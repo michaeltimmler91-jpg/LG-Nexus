@@ -1,133 +1,91 @@
 # LG Nexus – Fire & Rescue
 
-Dieses Dokument beschreibt den verbindlichen Stand des Fire-&-Rescue-Moduls bis Frage 3410.
+Fire & Rescue ist bewusst als schneller Arbeitsbereich aufgebaut. Im Einsatz sollen nur die Informationen erfasst werden, die später wirklich nützlich sind.
 
-## Einsatzberichte
+## Aktuelle Bereiche
 
-FD führt eigene Einsatzberichte mit strukturierter Einsatzart, eindeutiger Einsatznummer und Status:
+Die Oberfläche besitzt vier Bereiche:
 
-- Entwurf
-- Laufend
-- Abgeschlossen
-- Archiviert
+- **Einsätze**
+- **Objekte**
+- **Fahrzeuge / Geräte**
+- **Wissen**
 
-Neue Berichte nur mit passendem Rollenrecht; Bearbeitung über `Einsatzberichte bearbeiten`.
+## Einsätze
 
-Abgeschlossene Berichte nur über Korrekturversion änderbar. Abschlussfazit Pflicht.
+Ein neuer Einsatz benötigt nur:
 
-Ein Einsatz kann mit einem gemeinsamen fraktionsübergreifenden Vorfall verknüpft werden und enthält Incident Commander, eingesetzte FD-Mitglieder sowie Fahrzeuge/Einheiten.
+- Einsatzart
+- Ort
+- Einheiten optional
+- Fahrzeuge optional
+- kurze Lage
+- Maßnahmen
 
-## Einsatzabschnitte und Ressourcen
+Jeder Einsatz erhält automatisch eine eindeutige Nummer im Format `FD-000001`.
 
-Zusätzlich unterstützt Nexus:
+Status:
 
-- **Einsatzabschnitte innerhalb eines FD-Einsatzes**
-- **Ressourcenanforderungen zwischen FD-Einheiten**
+- Offen
+- Erledigt
 
-Diese Informationen sind geschützte FD-Fachdaten und können fall-/vorgangsbezogene Zugriffsregeln besitzen.
+Während ein Einsatz offen ist, können die Daten bearbeitet und kurze Verlaufseinträge ergänzt werden. Ein erledigter Einsatz kann bei Bedarf wieder geöffnet werden.
 
-## Einsatzdokumentation
+Nicht Bestandteil der einfachen Version sind zusätzliche Einsatzabschnitte, komplexe Führungsstrukturen, Ressourcenanforderungen oder separate Abschlussformulare.
 
-- chronologische Timeline mit Autor
-- Gefahren/Hinweise
-- externe Links
-- interne Kommentare
-- @-Erwähnungen + Nexus-Benachrichtigung
+## Objekte
 
-Keine direkten Datei-Uploads.
+Die Objektübersicht dient als schnelle Hilfe vor oder während eines Einsatzes.
 
-## Objekt-, Gefahrstoff- und Plandaten
+Pro Objekt können gepflegt werden:
 
-FD besitzt eine interne Objekt-/Gebäude-Gefahrendatenbank über `Objektdaten verwalten`.
+- Name
+- Adresse / Ort
+- Zufahrt
+- Hydrant / Wasser
+- besondere Gefahren
+- weitere Hinweise
 
-Objekte können feste LS-Map-Positionen und externe Pläne/Bilder besitzen.
+Es gibt bewusst keine separate Gefahrstoff-, Plan-, Prüf- oder Hydrantenverwaltung. Solche Informationen können bei Bedarf direkt im Objekt vermerkt werden.
 
-Zusätzlich vorgesehen:
+## Fahrzeuge / Geräte
 
-- **Gefahrstoff-Datensätze**
-- **Objektpläne mit Versionsstand**
+Fahrzeuge und wichtige Geräte können gemeinsam gepflegt werden.
 
-Ausgewählte Informationen können gezielt/formell an PD oder Medical freigegeben und wieder entzogen werden.
+Je Eintrag:
 
-## Hydranten und interne Marker
+- Art: Fahrzeug oder Gerät
+- Name
+- Kennung optional
+- Status
+- kurzer Hinweis
+- einfache Checkliste
 
-Interne Marker für Hydranten, Zufahrten, Gefahrenpunkte und spezielle temporäre Gefahrenbereiche bleiben vorgesehen.
-
-Hydranten besitzen Typ, Status und Notiz; unbrauchbar/defekt kann über Status markiert werden.
-
-Ein separates zusätzliches `Hydranten-Wartungszustände`-Workflow-System ist nicht vorgesehen. Die vorhandene Status-/Objektlogik reicht aus.
-
-## Zusammenarbeit
-
-- kleine Patienten-/Einsatz-Zusammenfassung gezielt an Medical
-- Brand-/Ursachenermittlung kann an PD übergeben/verknüpft werden
-- externe Freigaben nur gezielt, nicht automatisch durch fremde Organisationsrechte
-
-## Nachbesprechung
-
-Optionaler interner After-Action-Bericht bleibt möglich.
-
-## Wissensdatenbank und Ausbildung
-
-- eigene Wissensdatenbank
-- Ausbildungspläne
-- Wissenstests
-- ein oder mehrere feste Ausbilder je Azubi
-
-Die allgemeinen Dokument-/Wissensregeln gelten ergänzend.
-
-## Geräte, Fahrzeuge und Checklisten
-
-Bestehende interne Geräte-/Ausrüstungs-Checklisten bleiben.
-
-Zusätzlich sind **Fahrzeug-Checklisten vor Einsatz** vorgesehen.
-
-Geräte können Inventar-ID und Status besitzen:
+Status:
 
 - Einsatzbereit
-- In Wartung
 - Defekt
+- In Wartung
 - Außer Dienst
 
-Mangelpriorität:
+Eine umfangreiche Lager-, Ausgabe- oder Wartungshistorie ist für die aktuelle Version nicht vorgesehen.
 
-- Niedrig
-- Normal
-- Hoch
-- Kritisch
+## Wissen
 
-Fällige Wartung erzeugt Erinnerung. Wartungshistorie bleibt dauerhaft.
+Die interne Wissenssammlung enthält kurze praktische Einträge mit:
 
-Nicht als zusätzliche Systeme vorgesehen:
+- Titel
+- Kategorie optional
+- Inhalt
 
-- Geräteausgabe an einzelne Mitglieder
-- allgemeine Mängelmeldungen durch alle FD-Mitglieder
+Sie ist für Anleitungen und wichtige interne Informationen gedacht. Ausbildungstests und umfangreiche Lernverwaltung sind nicht Teil der aktuellen Fire-Version.
 
-## Brandschutz-/Objektprüfungen
+## Rechte
 
-Prüfergebnisse:
+Fire & Rescue besitzt getrennte Rechte für Anzeigen und Bearbeiten der vier Bereiche. Der Standardrang `Einsatzdienst` sowie die `Leitung` erhalten die aktuellen Fire-Rechte.
 
-- Bestanden
-- Mängel
-- Nachprüfung nötig
+Eine Mitgliedschaft bei einer anderen Organisation oder technische Administration gewährt keinen automatischen Zugriff auf Fire & Rescue.
 
-Nachprüfungsfrist möglich. Betroffene Organisation kann einen ausdrücklich freigegebenen Bericht sehen. Nach bestandener Prüfung kann Bescheinigung erzeugt werden.
+## Technische Umsetzung
 
-Ein automatisches separates Task-System für Nachprüfungen wird nicht zusätzlich erzeugt.
-
-## Öffentliche Sicherheitsinformationen
-
-Ein eigenes zusätzliches FD-Untermodul für öffentliche Sicherheitsinformationen ist nicht vorgesehen. Öffentliche Warnungen/Gefahrenhinweise laufen über die bestehenden City-Hub-/LS-Map-Mechanismen mit passenden Rechten.
-
-## Aufbewahrung
-
-Abgeschlossene FD-Einsatzberichte werden **12 Monate** gespeichert. Dauerhafte Wartungshistorien bleiben davon getrennt.
-
-## Stadtverwaltung und technische Admins
-
-- Stadtverwaltung darf interne FD-Einsatzberichte nicht einsehen
-- technische Systemadministration erhält ebenfalls kein automatisches fachliches FD-Zugriffsrecht
-
-## Technische Leitplanken
-
-FD-Daten müssen nach Rollen, Einsatzbezug, Objektfreigabe und externen Freigaben serverseitig getrennt werden. Gemeinsame Vorfälle gewähren keinen automatischen Zugang zu internen FD-Fachdaten.
+Die Fachdaten liegen in eigenen Fire-Tabellen. Direkter Browserzugriff auf diese Tabellen ist gesperrt. Die Oberfläche arbeitet ausschließlich über geprüfte Funktionen, die die Fire-Berechtigungen des angemeldeten Benutzers serverseitig kontrollieren.
