@@ -76,7 +76,17 @@ body[data-nexus-events-workspace='true'] .main-area > :not(.topbar):not(.nexus-e
   background: rgba(255,255,255,.035); color: #aeb8c6;
 }
 
-.live-event-detail { max-width: 1180px; width: 100%; margin: 0 auto; gap: 22px; }
+.live-event-detail {
+  max-width: 1180px;
+  width: 100%;
+  margin: 0 auto;
+  gap: 22px;
+  padding: 24px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(25,31,44,.96), rgba(16,21,31,.97));
+  box-shadow: 0 18px 48px rgba(0,0,0,.2);
+}
 .live-event-detail-actions {
   display: flex;
   align-items: flex-start;
@@ -206,6 +216,7 @@ body[data-nexus-events-workspace='true'] .main-area > :not(.topbar):not(.nexus-e
   .live-events-search { min-width: 0; }
   .live-events-hero { grid-template-columns: auto 1fr; }
   .live-events-hero-stats, .live-events-refresh { grid-column: 1 / -1; }
+  .live-event-detail { padding: 16px; border-radius: 16px; }
   .live-event-detail-actions { align-items: stretch; flex-direction: column; }
   .live-event-calendar-button-wrap { justify-items: stretch; }
   .live-event-calendar-button { width: 100%; }
