@@ -7,6 +7,7 @@ import ServiceNavigationMount from './ServiceNavigationMount'
 import DashboardLiveMount from './DashboardLiveMount'
 import BusinessesLiveMount from './BusinessesLiveMount'
 import EventsLiveMount from './EventsLiveMount'
+import CalendarLiveMount from './CalendarLiveMount'
 import OrganizationManagementMount from './OrganizationManagementMount'
 import OrganizationExternalMediaMount from './OrganizationExternalMediaMount'
 import OrganizationEventsMount from './OrganizationEventsMount'
@@ -32,6 +33,8 @@ import './city-organization-admin.css'
 import './dashboard-live.css'
 import './businesses-live.css'
 import './events-live.css'
+import './event-calendar-action.css'
+import './calendar-live.css'
 import './organization-control.css'
 import './organization-external-media.css'
 import './organization-events.css'
@@ -58,6 +61,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <DashboardLiveMount />
     <BusinessesLiveMount />
     <EventsLiveMount />
+    <CalendarLiveMount />
     <OrganizationManagementMount />
     <OrganizationExternalMediaMount />
     <OrganizationEventsMount />
