@@ -211,8 +211,16 @@ function BusinessDirectory() {
           <div className="live-businesses-empty">Keine passenden Einträge gefunden.</div>
         ) : filtered.map((organization) => (
           <button type="button" className="live-business-card" key={organization.id} onClick={() => setSelected(organization)}>
-            <div className="live-business-card-top">
-              <div className="live-business-monogram">{initials(organization)}</div>
+            <div
+              className={`live-business-card-top ${organization.banner_url ? 'has-image' : ''}`}
+              style={organization.banner_url ? { backgroundImage: `linear-gradient(180deg, rgba(8,12,18,.12), rgba(8,12,18,.7)), url(${organization.banner_url})` } : undefined}
+            >
+              <div
+                className={`live-business-monogram ${organization.logo_url ? 'has-logo' : ''}`}
+                style={organization.logo_url ? { backgroundImage: `url(${organization.logo_url})` } : undefined}
+              >
+                {!organization.logo_url ? initials(organization) : null}
+              </div>
               <span className={`live-business-status is-${organization.status}`}>{statusLabels[organization.status]}</span>
             </div>
             <div className="live-business-card-body">
@@ -238,8 +246,16 @@ function OrganizationDetail({ organization, onBack }: { organization: DirectoryO
     <div className="page-content live-business-detail">
       <button type="button" className="live-business-back" onClick={onBack}><ArrowLeft size={16} /> Zurück zum Verzeichnis</button>
 
-      <section className="live-business-detail-hero">
-        <div className="live-business-detail-monogram">{initials(organization)}</div>
+      <section
+        className={`live-business-detail-hero ${organization.banner_url ? 'has-image' : ''}`}
+        style={organization.banner_url ? { backgroundImage: `linear-gradient(90deg, rgba(10,14,22,.94), rgba(10,14,22,.48)), url(${organization.banner_url})` } : undefined}
+      >
+        <div
+          className={`live-business-detail-monogram ${organization.logo_url ? 'has-logo' : ''}`}
+          style={organization.logo_url ? { backgroundImage: `url(${organization.logo_url})` } : undefined}
+        >
+          {!organization.logo_url ? initials(organization) : null}
+        </div>
         <div className="live-business-detail-title">
           <span className="eyebrow">{organizationKind(organization).toUpperCase()}</span>
           <h2>{organization.name}</h2>
