@@ -4,6 +4,7 @@ import NexusRoot from './NexusRoot'
 import AccountAdminMount from './AccountAdminMount'
 import PermissionNavigationGuard from './PermissionNavigationGuard'
 import ServiceNavigationMount from './ServiceNavigationMount'
+import DashboardLiveMount from './DashboardLiveMount'
 import MedicalWorkspaceMount from './MedicalWorkspaceMount'
 import MedicalTreatmentEditMount from './MedicalTreatmentEditMount'
 import PoliceEasyMount from './PoliceEasyMount'
@@ -19,6 +20,7 @@ import './account-admin.css'
 import './permission-navigation.css'
 import './service-navigation.css'
 import './city-organization-admin.css'
+import './dashboard-live.css'
 import './medical-module.css'
 import './medical-workspace.css'
 import './medical-workspace-visibility-fix.css'
@@ -36,6 +38,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <AccountAdminMount />
     <PermissionNavigationGuard />
     <ServiceNavigationMount />
+    <DashboardLiveMount />
     <MedicalWorkspaceMount />
     <MedicalTreatmentEditMount />
     <PoliceEasyMount />
