@@ -169,18 +169,24 @@ body[data-nexus-businesses-workspace="true"] .main-area > .page-content {
 }
 
 .live-business-card-top {
-  min-height: 92px;
+  min-height: 112px;
   padding: 16px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   background: radial-gradient(circle at 15% 20%, rgba(71,129,214,.22), transparent 46%), rgba(255,255,255,.02);
+  background-position: center;
+  background-size: cover;
+}
+
+.live-business-card-top.has-image {
+  min-height: 135px;
 }
 
 .live-business-monogram,
 .live-business-detail-monogram {
-  border: 1px solid rgba(255,255,255,.1);
-  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.13);
+  background: rgba(13,18,28,.74);
   border-radius: 14px;
   min-width: 52px;
   height: 52px;
@@ -189,6 +195,16 @@ body[data-nexus-businesses-workspace="true"] .main-area > .page-content {
   place-items: center;
   font-weight: 800;
   letter-spacing: .05em;
+  box-shadow: 0 8px 24px rgba(0,0,0,.18);
+}
+
+.live-business-monogram.has-logo,
+.live-business-detail-monogram.has-logo {
+  padding: 0;
+  background-color: rgba(13,18,28,.82);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .live-business-card-body {
@@ -243,26 +259,36 @@ body[data-nexus-businesses-workspace="true"] .main-area > .page-content {
   padding: 6px 9px;
   font-size: 11px;
   white-space: nowrap;
+  backdrop-filter: blur(8px);
 }
 
-.live-business-status.is-open { color: #83e2ad; background: rgba(47,167,99,.11); border-color: rgba(69,190,117,.22); }
-.live-business-status.is-limited { color: #ffd582; background: rgba(210,148,35,.11); border-color: rgba(224,167,57,.24); }
-.live-business-status.is-closed { color: #ff9a9a; background: rgba(203,68,68,.11); border-color: rgba(218,82,82,.22); }
+.live-business-status.is-open { color: #83e2ad; background: rgba(28,88,55,.68); border-color: rgba(69,190,117,.28); }
+.live-business-status.is-limited { color: #ffd582; background: rgba(95,68,20,.68); border-color: rgba(224,167,57,.28); }
+.live-business-status.is-closed { color: #ffaaaa; background: rgba(93,31,31,.68); border-color: rgba(218,82,82,.28); }
 
 .live-business-back { justify-self: start; }
 
 .live-business-detail-hero {
   justify-content: flex-start;
+  background-position: center;
+  background-size: cover;
+  min-height: 150px;
+}
+
+.live-business-detail-hero.has-image {
+  min-height: 210px;
 }
 
 .live-business-detail-monogram {
   min-width: 82px;
+  width: 82px;
   height: 82px;
   border-radius: 20px;
   font-size: 18px;
 }
 
 .live-business-detail-title { flex: 1; }
+.live-business-detail-hero.has-image .live-business-detail-title p { color: #d1d9e6; }
 
 .live-business-detail-status {
   border: 1px solid rgba(100,174,255,.16);
