@@ -26,6 +26,7 @@ type OrganizationContext = {
   can_members: boolean
   can_roles: boolean
   can_assign_roles: boolean
+  can_events: boolean
 }
 
 const services: ServiceConfig[] = [
@@ -76,6 +77,7 @@ function hasManagementAccess(context: OrganizationContext) {
     || context.can_members
     || context.can_roles
     || context.can_assign_roles
+    || context.can_events
 }
 
 export default function ServiceOrganizationAdminMount() {
