@@ -6,8 +6,10 @@ import PermissionNavigationGuard from './PermissionNavigationGuard'
 import ServiceNavigationMount from './ServiceNavigationMount'
 import DashboardLiveMount from './DashboardLiveMount'
 import BusinessesLiveMount from './BusinessesLiveMount'
+import EventsLiveMount from './EventsLiveMount'
 import OrganizationManagementMount from './OrganizationManagementMount'
 import OrganizationExternalMediaMount from './OrganizationExternalMediaMount'
+import OrganizationEventsMount from './OrganizationEventsMount'
 import ServiceOrganizationAdminMount from './ServiceOrganizationAdminMount'
 import GlobalAdminMount from './GlobalAdminMount'
 import GlobalOrganizationRegistryMount from './GlobalOrganizationRegistryMount'
@@ -29,8 +31,10 @@ import './service-navigation.css'
 import './city-organization-admin.css'
 import './dashboard-live.css'
 import './businesses-live.css'
+import './events-live.css'
 import './organization-control.css'
 import './organization-external-media.css'
+import './organization-events.css'
 import './service-organization-admin.css'
 import './global-admin.css'
 import './global-organization-registry.css'
@@ -53,8 +57,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <ServiceNavigationMount />
     <DashboardLiveMount />
     <BusinessesLiveMount />
+    <EventsLiveMount />
     <OrganizationManagementMount />
     <OrganizationExternalMediaMount />
+    <OrganizationEventsMount />
     <ServiceOrganizationAdminMount />
     <GlobalAdminMount />
     <GlobalOrganizationRegistryMount />
