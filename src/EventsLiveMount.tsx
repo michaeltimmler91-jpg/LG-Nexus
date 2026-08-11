@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { ArrowLeft, Building2, CalendarDays, Clock3, MapPin, RefreshCw, Search, Ticket } from 'lucide-react'
+import { ArrowLeft, Building2, CalendarCheck2, CalendarDays, CalendarPlus, Clock3, MapPin, RefreshCw, Search, Ticket } from 'lucide-react'
 import { supabase } from './lib/supabase'
 
 type EventStatus = 'planned' | 'live' | 'finished' | 'cancelled'
@@ -67,6 +67,10 @@ function formatTimeRange(event: PublicEvent) {
   if (!event.ends_at) return `${start} Uhr`
   const end = timeFormatter.format(new Date(event.ends_at))
   return `${start} – ${end} Uhr`
+}
+
+function openAccount() {
+  document.querySelector<HTMLButtonElement>('.nav-button[aria-label="Account"]')?.click()
 }
 
 export default function EventsLiveMount() {
@@ -249,6 +253,14 @@ function EventDetail({ event, onBack }: { event: PublicEvent; onBack: () => void
         </div>
       </section>
 
+      <section className="live-event-calendar-action">
+        <div>
+          <strong>Persönlicher Kalender</strong>
+          <span>Speichere dieses Event. Änderungen an Zeit, Ort oder Status werden beim Laden deines Kalenders automatisch übernommen.</span>
+        </div>
+        <PersonalCalendarButton eventId={event.id} />
+      </section>
+
       <div className="live-event-detail-grid">
         <article><CalendarDays size={22} /><span>Datum</span><strong>{formatDate(event.starts_at)}</strong></article>
         <article><Clock3 size={22} /><span>Uhrzeit</span><strong>{formatTimeRange(event)}</strong></article>
@@ -263,4 +275,62 @@ function EventDetail({ event, onBack }: { event: PublicEvent; onBack: () => void
       </div>
     </div>
   )
+}
+
+function PersonalCalendarButton({ eventId }: { eventId: string }) {
+  const [signedIn, setSignedIn] = useState<boolean | null>(null)
+  const [saved, setSaved] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [working, setWorking] = useState(false)
+  const [message, setMessage] = useState('')
+
+  const refresh = useCallback(async () => {
+    setLoading(true)
+    const { data: sessionData } = await supabase.auth.getSession()
+    const hasSession = Boolean(sessionData.session)
+    setSignedIn(hasSession)
+    if (!hasSession) {
+      setSaved(false)
+      setLoading(false)
+      return
+    }
+    const { data, error } = await supabase.rpc('calendar_event_is_saved', { target_event: eventId })
+    setSaved(!error && Boolean(data))
+    setLoading(false)
+  }, [eventId])
+
+  useEffect(() => {
+    void refresh()
+    const { data: listener } = supabase.auth.onAuthStateChange(() => {
+      window.setTimeout(() => void refresh(), 0)
+    })
+    return () => listener.subscription.unsubscribe()
+  }, [refresh])
+
+  const toggle = async () => {
+    if (!signedIn) {
+      openAccount()
+      return
+    }
+    setWorking(true)
+    setMessage('')
+    const { data, error } = await supabase.rpc('calendar_set_event_saved', { target_event: eventId, should_save: !saved })
+    setWorking(false)
+    if (error) {
+      setMessage('Kalender konnte nicht geändert werden.')
+      return
+    }
+    const next = Boolean(data)
+    setSaved(next)
+    setMessage(next ? 'Im Kalender gespeichert.' : 'Aus dem Kalender entfernt.')
+    window.dispatchEvent(new CustomEvent('nexus:calendar-changed'))
+  }
+
+  return <div className="live-event-calendar-button-wrap">
+    <button type="button" className={`live-event-calendar-button ${saved ? 'is-saved' : ''}`} onClick={() => void toggle()} disabled={loading || working} aria-pressed={saved}>
+      {saved ? <CalendarCheck2 size={17} /> : <CalendarPlus size={17} />}
+      {loading ? 'Kalender wird geprüft …' : working ? 'Bitte warten …' : !signedIn ? 'Anmelden & speichern' : saved ? 'Aus meinem Kalender entfernen' : 'In meinen Kalender'}
+    </button>
+    {message ? <small>{message}</small> : null}
+  </div>
 }
