@@ -5,6 +5,7 @@ import AccountAdminMount from './AccountAdminMount'
 import PermissionNavigationGuard from './PermissionNavigationGuard'
 import ServiceNavigationMount from './ServiceNavigationMount'
 import DashboardLiveMount from './DashboardLiveMount'
+import BusinessesLiveMount from './BusinessesLiveMount'
 import MedicalWorkspaceMount from './MedicalWorkspaceMount'
 import MedicalTreatmentEditMount from './MedicalTreatmentEditMount'
 import PoliceEasyMount from './PoliceEasyMount'
@@ -21,6 +22,7 @@ import './permission-navigation.css'
 import './service-navigation.css'
 import './city-organization-admin.css'
 import './dashboard-live.css'
+import './businesses-live.css'
 import './medical-module.css'
 import './medical-workspace.css'
 import './medical-workspace-visibility-fix.css'
@@ -39,6 +41,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <PermissionNavigationGuard />
     <ServiceNavigationMount />
     <DashboardLiveMount />
+    <BusinessesLiveMount />
     <MedicalWorkspaceMount />
     <MedicalTreatmentEditMount />
     <PoliceEasyMount />
