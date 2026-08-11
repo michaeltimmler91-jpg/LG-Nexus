@@ -53,13 +53,12 @@ function effectiveStatus(event: PublicEvent): EventStatus {
   return 'planned'
 }
 
-function initials(event: PublicEvent) {
-  if (event.organization_short_name?.trim()) return event.organization_short_name.trim().slice(0, 5).toUpperCase()
-  return event.organization_name.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]?.toUpperCase() ?? '').join('') || 'LS'
-}
-
 function formatDate(value: string) {
   return dateFormatter.format(new Date(value))
+}
+
+function formatTime(value: string) {
+  return `${timeFormatter.format(new Date(value))} Uhr`
 }
 
 function formatTimeRange(event: PublicEvent) {
@@ -235,44 +234,51 @@ function EventsDirectory() {
 
 function EventDetail({ event, onBack }: { event: PublicEvent; onBack: () => void }) {
   const status = effectiveStatus(event)
+
   return (
     <div className="page-content live-event-detail">
-      <button type="button" className="live-event-back" onClick={onBack}><ArrowLeft size={16} /> Zurück zu Events</button>
-
-      <section
-        className={`live-event-detail-hero ${event.image_url ? 'has-image' : ''}`}
-        style={event.image_url ? { backgroundImage: `linear-gradient(90deg, rgba(8,12,18,.96), rgba(8,12,18,.44)), url(${event.image_url})` } : undefined}
-      >
-        <div className="live-event-detail-copy">
-          <div className="live-event-detail-tags">
-            <span className={`live-event-status is-${status}`}>{statusLabels[status]}</span>
-            {event.category ? <span className="live-event-category">{event.category}</span> : null}
-          </div>
-          <h2>{event.title}</h2>
-          <p>{event.description.trim() || 'Für diese Veranstaltung wurde noch keine Beschreibung hinterlegt.'}</p>
-        </div>
-      </section>
-
-      <section className="live-event-calendar-action">
-        <div>
-          <strong>Persönlicher Kalender</strong>
-          <span>Speichere dieses Event. Änderungen an Zeit, Ort oder Status werden beim Laden deines Kalenders automatisch übernommen.</span>
-        </div>
+      <div className="live-event-detail-actions">
+        <button type="button" className="live-event-back" onClick={onBack}><ArrowLeft size={16} /> Zurück zu Events</button>
         <PersonalCalendarButton eventId={event.id} />
+      </div>
+
+      <section className="live-event-detail-title">
+        <div className="live-event-detail-tags">
+          <span className={`live-event-status is-${status}`}>{statusLabels[status]}</span>
+          {event.category ? <span className="live-event-category">{event.category}</span> : null}
+        </div>
+        <span className="eyebrow">EVENT</span>
+        <h2>{event.title}</h2>
       </section>
 
-      <div className="live-event-detail-grid">
-        <article><CalendarDays size={22} /><span>Datum</span><strong>{formatDate(event.starts_at)}</strong></article>
-        <article><Clock3 size={22} /><span>Uhrzeit</span><strong>{formatTimeRange(event)}</strong></article>
-        <article><MapPin size={22} /><span>Ort</span><strong>{event.location_label || 'Noch nicht angegeben'}</strong></article>
-        <article>
-          <div
-            className={`live-event-org-logo ${event.organization_logo_url ? 'has-logo' : ''}`}
-            style={event.organization_logo_url ? { backgroundImage: `url(${event.organization_logo_url})` } : undefined}
-          >{!event.organization_logo_url ? initials(event) : null}</div>
-          <span>Veranstalter</span><strong>{event.organization_name}</strong>
-        </article>
-      </div>
+      {event.image_url ? (
+        <div className="live-event-detail-image" style={{ backgroundImage: `url(${event.image_url})` }} aria-label={`Titelbild zu ${event.title}`} />
+      ) : null}
+
+      <section className="live-event-facts">
+        <div className="live-event-fact">
+          <span>Start</span>
+          <strong>{formatDate(event.starts_at)}</strong>
+          <small>{formatTime(event.starts_at)}</small>
+        </div>
+        <div className="live-event-fact">
+          <span>Ort</span>
+          <strong>{event.location_label || 'Noch nicht angegeben'}</strong>
+        </div>
+        <div className="live-event-fact">
+          <span>Ende</span>
+          {event.ends_at ? <><strong>{formatDate(event.ends_at)}</strong><small>{formatTime(event.ends_at)}</small></> : <strong>Nicht angegeben</strong>}
+        </div>
+        <div className="live-event-fact">
+          <span>Veranstalter</span>
+          <strong>{event.organization_name}</strong>
+        </div>
+      </section>
+
+      <section className="live-event-description">
+        <span className="eyebrow">BESCHREIBUNG</span>
+        <p>{event.description.trim() || 'Für diese Veranstaltung wurde noch keine Beschreibung hinterlegt.'}</p>
+      </section>
     </div>
   )
 }
@@ -327,9 +333,9 @@ function PersonalCalendarButton({ eventId }: { eventId: string }) {
   }
 
   return <div className="live-event-calendar-button-wrap">
-    <button type="button" className={`live-event-calendar-button ${saved ? 'is-saved' : ''}`} onClick={() => void toggle()} disabled={loading || working} aria-pressed={saved}>
+    <button type="button" className={`live-event-calendar-button ${saved ? 'is-saved' : ''}`} onClick={() => void toggle()} disabled={loading || working} aria-pressed={saved} title={saved ? 'Aus meinem Kalender entfernen' : undefined}>
       {saved ? <CalendarCheck2 size={17} /> : <CalendarPlus size={17} />}
-      {loading ? 'Kalender wird geprüft …' : working ? 'Bitte warten …' : !signedIn ? 'Anmelden & speichern' : saved ? 'Aus meinem Kalender entfernen' : 'In meinen Kalender'}
+      {loading ? 'Kalender wird geprüft …' : working ? 'Bitte warten …' : !signedIn ? 'Anmelden & speichern' : saved ? 'Im Kalender' : 'In meinen Kalender'}
     </button>
     {message ? <small>{message}</small> : null}
   </div>
