@@ -15,6 +15,7 @@ type NexusProfile = {
   account_status: AccountStatus
   nexus_id: string | null
   nexus_email: string | null
+  must_change_password: boolean
 }
 
 type OrganizationContext = {
@@ -61,7 +62,7 @@ export default function NexusRoot() {
     setAuthLoading(true)
     const { data, error } = await supabase
       .from('profiles')
-      .select('id,display_name,username,first_name,last_name,account_status,nexus_id,nexus_email')
+      .select('id,display_name,username,first_name,last_name,account_status,nexus_id,nexus_email,must_change_password')
       .eq('id', activeSession.user.id)
       .maybeSingle()
 
@@ -116,6 +117,26 @@ export default function NexusRoot() {
     }
   }, [])
 
+  useEffect(() => {
+    const userId = session?.user?.id
+    if (!userId) return
+
+    const refresh = () => void loadAccount(session)
+    const channel = supabase
+      .channel(`nexus-own-profile-${userId}`)
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'profiles', filter: `id=eq.${userId}` }, refresh)
+      .subscribe()
+
+    window.addEventListener('focus', refresh)
+    const interval = window.setInterval(refresh, 30000)
+
+    return () => {
+      window.removeEventListener('focus', refresh)
+      window.clearInterval(interval)
+      void supabase.removeChannel(channel)
+    }
+  }, [session?.user?.id])
+
   const accountLabel = useMemo(() => {
     if (authLoading) return 'Account wird geladen'
     if (!session) return 'Anmelden / Registrieren'
@@ -124,6 +145,9 @@ export default function NexusRoot() {
       ? profile.nexus_id ?? statusLabels.active
       : statusLabels[profile.account_status]
   }, [authLoading, profile, session])
+
+  const blocked = Boolean(profile && ['suspended', 'rejected', 'disabled'].includes(profile.account_status))
+  const passwordChangeRequired = Boolean(profile?.account_status === 'active' && profile.must_change_password)
 
   return (
     <>
@@ -151,7 +175,7 @@ export default function NexusRoot() {
         accountTarget,
       ) : null}
 
-      {authOpen ? (
+      {authOpen && !blocked && !passwordChangeRequired ? (
         <RealAuthModal
           session={session}
           profile={profile}
@@ -160,7 +184,85 @@ export default function NexusRoot() {
           onClose={() => setAuthOpen(false)}
         />
       ) : null}
+
+      {blocked && profile ? <AccountBlockedGate profile={profile} /> : null}
+      {!blocked && passwordChangeRequired && profile ? <PasswordChangeGate profile={profile} onCompleted={() => void loadAccount(session)} /> : null}
     </>
+  )
+}
+
+function AccountBlockedGate({ profile }: { profile: NexusProfile }) {
+  const [signingOut, setSigningOut] = useState(false)
+
+  const signOut = async () => {
+    setSigningOut(true)
+    await supabase.auth.signOut()
+    setSigningOut(false)
+  }
+
+  const heading = profile.account_status === 'suspended'
+    ? 'Dieser Nexus-Account ist gesperrt.'
+    : profile.account_status === 'disabled'
+      ? 'Dieser Nexus-Account ist deaktiviert.'
+      : 'Dieser Nexus-Account wurde nicht freigegeben.'
+
+  return (
+    <div className="nexus-account-gate">
+      <div className="nexus-account-gate-card">
+        <span className="nexus-account-gate-mark">N</span>
+        <span className="eyebrow">LG NEXUS</span>
+        <h2>{heading}</h2>
+        <p>{profile.display_name} · {profile.nexus_id ?? profile.username ?? 'Nexus Account'}</p>
+        <div className="nexus-account-gate-status">Status: {statusLabels[profile.account_status]}</div>
+        <button type="button" onClick={() => void signOut()} disabled={signingOut}>{signingOut ? 'Abmeldung läuft …' : 'Abmelden'}</button>
+      </div>
+    </div>
+  )
+}
+
+function PasswordChangeGate({ profile, onCompleted }: { profile: NexusProfile; onCompleted: () => void }) {
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState('')
+
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setError('')
+    const form = new FormData(event.currentTarget)
+    const password = String(form.get('password') ?? '')
+    const repeat = String(form.get('passwordRepeat') ?? '')
+    if (password.length < 8) { setError('Das neue Passwort muss mindestens 8 Zeichen lang sein.'); return }
+    if (password !== repeat) { setError('Die beiden Passwörter stimmen nicht überein.'); return }
+
+    setSubmitting(true)
+    const { error: passwordError } = await supabase.auth.updateUser({ password })
+    if (passwordError) {
+      setSubmitting(false)
+      setError('Das Passwort konnte nicht geändert werden.')
+      return
+    }
+
+    const { error: completionError } = await supabase.rpc('complete_forced_password_change')
+    setSubmitting(false)
+    if (completionError) {
+      setError('Das Passwort wurde geändert, der Vorgang konnte aber nicht abgeschlossen werden. Bitte erneut anmelden.')
+      return
+    }
+    onCompleted()
+  }
+
+  return (
+    <div className="nexus-account-gate">
+      <form className="nexus-account-gate-card nexus-password-gate" onSubmit={submit}>
+        <span className="nexus-account-gate-mark">N</span>
+        <span className="eyebrow">SICHERHEIT</span>
+        <h2>Passwort ändern</h2>
+        <p>{profile.display_name}, für deinen Account wurde ein neues Passwort angefordert.</p>
+        <label>Neues Passwort<input name="password" required minLength={8} type="password" autoComplete="new-password" /></label>
+        <label>Passwort wiederholen<input name="passwordRepeat" required minLength={8} type="password" autoComplete="new-password" /></label>
+        {error ? <div className="nexus-account-gate-error">{error}</div> : null}
+        <button type="submit" disabled={submitting}>{submitting ? 'Wird gespeichert …' : 'Neues Passwort speichern'}</button>
+      </form>
+    </div>
   )
 }
 
@@ -328,7 +430,7 @@ function RealAuthModal({
 
             {profile && ['suspended', 'rejected', 'disabled'].includes(profile.account_status) ? (
               <div className="real-auth-info warning">
-                <strong>Der Account kann derzeit nicht vollständig genutzt werden.</strong>
+                <strong>Der Account kann derzeit nicht genutzt werden.</strong>
                 <span>Der aktuelle Status lautet „{statusLabels[profile.account_status]}“.</span>
               </div>
             ) : null}
