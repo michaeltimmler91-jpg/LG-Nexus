@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { ArrowLeft, Building2, CalendarCheck2, CalendarDays, CalendarPlus, Clock3, MapPin, RefreshCw, Search, Ticket } from 'lucide-react'
+import { ArrowLeft, Building2, CalendarCheck2, CalendarDays, CalendarPlus, MapPin, RefreshCw, Search, Ticket } from 'lucide-react'
+import NexusOrbitMark from './NexusOrbitMark'
 import { supabase } from './lib/supabase'
 
 type EventStatus = 'planned' | 'live' | 'finished' | 'cancelled'
@@ -51,6 +52,11 @@ function effectiveStatus(event: PublicEvent): EventStatus {
   if (start <= now && end !== null && end <= now) return 'finished'
   if (start <= now && (end === null || end > now)) return 'live'
   return 'planned'
+}
+
+function initials(event: PublicEvent) {
+  if (event.organization_short_name?.trim()) return event.organization_short_name.trim().slice(0, 5).toUpperCase()
+  return event.organization_name.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]?.toUpperCase() ?? '').join('') || 'LS'
 }
 
 function formatDate(value: string) {
@@ -167,18 +173,20 @@ function EventsDirectory() {
 
   return (
     <div className="page-content live-events">
-      <section className="live-events-hero">
-        <div className="live-events-hero-icon"><Ticket size={30} /></div>
-        <div>
-          <span className="eyebrow">LOS SANTOS · VERANSTALTUNGEN</span>
+      <section className="live-events-hero nexus-brand-hero">
+        <div className="live-events-hero-copy nexus-brand-hero-copy">
+          <span className="eyebrow">LG NEXUS · VERANSTALTUNGEN</span>
           <h2>Events</h2>
-          <p>Was in der Stadt ansteht – direkt von den Veranstaltern veröffentlicht.</p>
+          <p>Was in Los Santos ansteht – direkt von den Veranstaltern veröffentlicht.</p>
+          <div className="live-events-hero-actions">
+            <div className="live-events-hero-stats">
+              <span><strong>{upcomingCount}</strong> kommende</span>
+              <span><strong>{liveCount}</strong> laufen gerade</span>
+            </div>
+            <button type="button" className="live-events-refresh" onClick={() => void load()} disabled={loading}><RefreshCw size={15} /> Aktualisieren</button>
+          </div>
         </div>
-        <div className="live-events-hero-stats">
-          <span><strong>{upcomingCount}</strong> kommende</span>
-          <span><strong>{liveCount}</strong> laufen gerade</span>
-        </div>
-        <button type="button" className="live-events-refresh" onClick={() => void load()} disabled={loading}><RefreshCw size={15} /> Aktualisieren</button>
+        <NexusOrbitMark className="nexus-brand-hero-logo" />
       </section>
 
       <section className="live-events-toolbar">
@@ -236,19 +244,27 @@ function EventDetail({ event, onBack }: { event: PublicEvent; onBack: () => void
   const status = effectiveStatus(event)
 
   return (
-    <div className="page-content live-event-detail">
+    <div className="page-content live-event-detail nexus-brand-hero">
       <div className="live-event-detail-actions">
         <button type="button" className="live-event-back" onClick={onBack}><ArrowLeft size={16} /> Zurück zu Events</button>
         <PersonalCalendarButton eventId={event.id} />
       </div>
 
-      <section className="live-event-detail-title">
-        <div className="live-event-detail-tags">
-          <span className={`live-event-status is-${status}`}>{statusLabels[status]}</span>
-          {event.category ? <span className="live-event-category">{event.category}</span> : null}
+      <section className="live-event-detail-title-row">
+        <div className="live-event-detail-title nexus-brand-hero-copy">
+          <div className="live-event-detail-tags">
+            <span className={`live-event-status is-${status}`}>{statusLabels[status]}</span>
+            {event.category ? <span className="live-event-category">{event.category}</span> : null}
+          </div>
+          <span className="eyebrow">EVENT</span>
+          <h2>{event.title}</h2>
         </div>
-        <span className="eyebrow">EVENT</span>
-        <h2>{event.title}</h2>
+        {event.organization_logo_url ? (
+          <div className="live-event-detail-org-brand">
+            <div className="live-event-detail-org-logo" style={{ backgroundImage: `url(${event.organization_logo_url})` }} />
+            <span>{event.organization_short_name || event.organization_name}</span>
+          </div>
+        ) : <NexusOrbitMark className="live-event-detail-nexus-mark" labels={false} />}
       </section>
 
       {event.image_url ? (
