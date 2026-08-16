@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { Building2, ChevronRight, Flame, HeartPulse, Landmark, MapPin, RefreshCw, Scale, Shield, UserRound } from 'lucide-react'
+import { Building2, ChevronRight, Flame, HeartPulse, Landmark, MapPin, RefreshCw, Scale, Shield } from 'lucide-react'
+import NexusOrbitMark from './NexusOrbitMark'
 import { supabase } from './lib/supabase'
 
 type Profile = {
@@ -199,14 +200,17 @@ function LiveDashboard({ profile }: { profile: Profile | null }) {
 
   return (
     <div className="page-content live-dashboard">
-      <section className="live-dashboard-hero">
-        <div className="live-dashboard-person"><UserRound size={27} /></div>
-        <div>
-          <span className="eyebrow">WILLKOMMEN</span>
-          <h2>{profile ? profile.display_name : 'LG Nexus'}</h2>
-          <p>{profile ? `${profile.nexus_id ?? 'Nexus-ID folgt'} · Deine Stadt auf einen Blick.` : 'Melde dich an, um deine persönlichen Bereiche und Organisationen zu sehen.'}</p>
+      <section className="live-dashboard-hero nexus-brand-hero">
+        <div className="live-dashboard-hero-copy nexus-brand-hero-copy">
+          <span className="eyebrow">LG NEXUS · CONNECTING LOS SANTOS</span>
+          <h2>{profile ? `Willkommen, ${profile.display_name}.` : 'Deine Stadt. Ein System.'}</h2>
+          <p>{profile ? `${profile.nexus_id ?? 'Nexus-ID folgt'} · Unternehmen finden, Termine verwalten und deine freigeschalteten Bereiche direkt öffnen.` : 'Unternehmen finden, Termine verwalten und alles Wichtige in einer gemeinsamen Nexus-Oberfläche.'}</p>
+          <div className="live-dashboard-hero-actions">
+            <button type="button" className="primary-button" onClick={() => openNavigation('Unternehmen')}>Unternehmen entdecken <ChevronRight size={15} /></button>
+            <button type="button" className="live-dashboard-refresh" onClick={() => void load()} disabled={loading}><RefreshCw size={15} /> Aktualisieren</button>
+          </div>
         </div>
-        <button type="button" className="live-dashboard-refresh" onClick={() => void load()} disabled={loading}><RefreshCw size={15} /> Aktualisieren</button>
+        <NexusOrbitMark className="nexus-brand-hero-logo" />
       </section>
 
       {error ? <div className="live-dashboard-message">{error}</div> : null}
