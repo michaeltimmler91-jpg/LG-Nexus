@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { ArrowLeft, Building2, ChevronRight, Mail, MapPin, Phone, RefreshCw, Search, ShieldCheck } from 'lucide-react'
+import NexusOrbitMark from './NexusOrbitMark'
 import { supabase } from './lib/supabase'
 
 type OrganizationStatus = 'open' | 'limited' | 'closed'
@@ -167,15 +168,21 @@ function BusinessDirectory() {
 
   return (
     <div className="page-content live-businesses">
-      <section className="live-businesses-hero">
-        <div>
-          <span className="eyebrow">STADTVERZEICHNIS</span>
+      <section className="live-businesses-hero nexus-brand-hero">
+        <div className="live-businesses-hero-copy nexus-brand-hero-copy">
+          <span className="eyebrow">LG NEXUS · STADTVERZEICHNIS</span>
           <h2>Unternehmen & Einrichtungen</h2>
           <p>Öffnungsstatus, Standort und Kontaktdaten direkt aus Nexus.</p>
+          <div className="live-businesses-hero-actions">
+            <div className="live-businesses-stats is-hero">
+              <span><strong>{organizations.length}</strong> Einträge</span>
+              <span><strong>{openCount}</strong> geöffnet</span>
+              <span><strong>{businessCount}</strong> Unternehmen</span>
+            </div>
+            <button type="button" className="live-businesses-refresh" onClick={() => void load()} disabled={loading}><RefreshCw size={15} /> Aktualisieren</button>
+          </div>
         </div>
-        <button type="button" className="live-businesses-refresh" onClick={() => void load()} disabled={loading}>
-          <RefreshCw size={15} /> Aktualisieren
-        </button>
+        <NexusOrbitMark className="nexus-brand-hero-logo" />
       </section>
 
       <section className="live-businesses-toolbar">
@@ -183,11 +190,6 @@ function BusinessDirectory() {
           <Search size={17} />
           <input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Name, Standort oder Bereich suchen …" />
         </label>
-        <div className="live-businesses-stats">
-          <span><strong>{organizations.length}</strong> Einträge</span>
-          <span><strong>{openCount}</strong> geöffnet</span>
-          <span><strong>{businessCount}</strong> Unternehmen</span>
-        </div>
       </section>
 
       <div className="live-businesses-filters">
