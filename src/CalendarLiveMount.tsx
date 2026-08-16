@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Building2, CalendarDays, ChevronLeft, ChevronRight, Clock3, MapPin, RefreshCw, Ticket, Trash2 } from 'lucide-react'
+import NexusOrbitMark from './NexusOrbitMark'
 import { supabase } from './lib/supabase'
 
 type EventStatus = 'planned' | 'live' | 'finished' | 'cancelled'
@@ -172,9 +173,9 @@ function CalendarWorkspace() {
   if (!signedIn) {
     return (
       <div className="page-content live-calendar">
-        <section className="live-calendar-hero">
-          <div className="live-calendar-hero-icon"><CalendarDays size={30} /></div>
-          <div><span className="eyebrow">PERSÖNLICHER BEREICH</span><h2>Mein Kalender</h2><p>Speichere Veranstaltungen und behalte deine Termine an einem Ort.</p></div>
+        <section className="live-calendar-hero nexus-brand-hero">
+          <div className="live-calendar-hero-copy nexus-brand-hero-copy"><span className="eyebrow">LG NEXUS · PERSÖNLICHER BEREICH</span><h2>Mein Kalender</h2><p>Speichere Veranstaltungen und behalte deine Termine an einem Ort.</p></div>
+          <NexusOrbitMark className="nexus-brand-hero-logo" />
         </section>
         <div className="live-calendar-empty is-login">
           <CalendarDays size={34} />
@@ -191,11 +192,14 @@ function CalendarWorkspace() {
 
   return (
     <div className="page-content live-calendar">
-      <section className="live-calendar-hero">
-        <div className="live-calendar-hero-icon"><CalendarDays size={30} /></div>
-        <div><span className="eyebrow">PERSÖNLICHER BEREICH</span><h2>Mein Kalender</h2><p>Gespeicherte Events bleiben mit dem Original verknüpft und zeigen immer die aktuellen Angaben.</p></div>
-        <div className="live-calendar-count"><strong>{events.length}</strong><span>gespeicherte Events</span></div>
-        <button type="button" className="live-calendar-refresh" onClick={() => void load()} disabled={loading}><RefreshCw size={15} /> Aktualisieren</button>
+      <section className="live-calendar-hero nexus-brand-hero">
+        <div className="live-calendar-hero-copy nexus-brand-hero-copy">
+          <span className="eyebrow">LG NEXUS · PERSÖNLICHER BEREICH</span>
+          <h2>Mein Kalender</h2>
+          <p>Gespeicherte Events bleiben mit dem Original verknüpft und zeigen immer die aktuellen Angaben.</p>
+          <div className="live-calendar-hero-actions"><div className="live-calendar-count"><strong>{events.length}</strong><span>gespeicherte Events</span></div><button type="button" className="live-calendar-refresh" onClick={() => void load()} disabled={loading}><RefreshCw size={15} /> Aktualisieren</button></div>
+        </div>
+        <NexusOrbitMark className="nexus-brand-hero-logo" />
       </section>
 
       {error ? <div className="live-calendar-message">{error}</div> : null}
